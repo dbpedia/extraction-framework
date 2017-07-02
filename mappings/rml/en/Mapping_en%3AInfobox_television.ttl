@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -39,19 +40,15 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap> ;
         rr:predicate  dbo:voice .
 
+<./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "network" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runtime" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -68,31 +65,23 @@
         a              rr:ObjectMap ;
         rml:reference  "producer" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfSeasons" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingTheme" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "network" .
 
+<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subsequentWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format>
@@ -100,10 +89,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap> ;
         rr:predicate  dbo:format .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -124,12 +109,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "producer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap>
@@ -138,7 +123,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "endingTheme" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue>
@@ -146,10 +131,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -167,7 +148,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap>
@@ -186,14 +167,6 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap> ;
         rr:predicate  dbo:director .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endingTheme" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "format" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "show_name" .
@@ -204,25 +177,13 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfSeasons" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "executiveProducer" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -231,12 +192,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -249,20 +206,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "related" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap>
@@ -276,12 +225,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue>
@@ -294,30 +243,18 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "composer" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
@@ -340,13 +277,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "storyEditor" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue>
@@ -355,23 +288,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "creator" .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Time" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "channel" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfSeasons" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -379,7 +304,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme>
@@ -395,12 +320,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue>
@@ -415,25 +340,13 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap> ;
         rr:predicate  dbo:runtime .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "creator" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "narrator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue>
@@ -454,12 +367,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runtime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -468,12 +381,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "person" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue>
@@ -486,26 +399,14 @@
         a              rr:ObjectMap ;
         rml:reference  "endtheme" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "editor" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "network" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue>
@@ -524,7 +425,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -534,7 +435,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue>
@@ -561,10 +462,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -576,7 +473,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "creator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run>
@@ -591,19 +488,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "format" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
@@ -622,10 +511,6 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -634,7 +519,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "imdbId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue>
@@ -669,7 +554,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
@@ -680,36 +565,32 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "format" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "creativeDirector" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "editor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "storyEditor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
@@ -730,23 +611,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired> , <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network> , <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons> , <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format> , <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography> , <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices> , <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor> , <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run> , <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter> , <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme> , <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by> , <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme> , <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator> , <./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id> , <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website> , <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2> , <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring> , <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status> , <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime> , <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format> , <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series> , <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel> , <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated> , <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director> , <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by> , <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor> , <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired> , <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre> , <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id> , <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company> , <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer> , <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director> , <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -758,26 +631,14 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap> ;
         rr:predicate  dbo:numberOfEpisodes .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -796,7 +657,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "executiveProducer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -826,41 +687,25 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap> ;
         rr:predicate  dbo:subsequentWork .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "author" .
-
 <./Mapping_en:Infobox_television/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , wikidata:Q15416 , dbo:TelevisionShow ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "composer" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "starring" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "followed_by" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -870,16 +715,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -894,7 +735,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfEpisodes" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -903,7 +744,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -911,18 +752,15 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingTheme" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -930,46 +768,29 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "showJudge" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "presenter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -998,7 +819,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired>
@@ -1006,10 +827,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap> ;
         rr:predicate  dbo:completionDate .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1042,7 +859,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue>
@@ -1059,10 +876,6 @@
         a              rr:ObjectMap ;
         rml:reference  "executive_producer" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1075,17 +888,17 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distributor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "tvComId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1102,7 +915,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap>
@@ -1111,7 +924,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "developer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1119,22 +932,14 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "narrator" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue>
@@ -1143,18 +948,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "composer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1166,22 +967,10 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "showJudge" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1204,14 +993,6 @@
         a              rr:ObjectMap ;
         rml:reference  "related" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1227,19 +1008,11 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "company" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1253,12 +1026,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1304,17 +1073,13 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "completionDate" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1326,27 +1091,15 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "voice" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap> ;
         rr:predicate  dbo:numberOfSeasons .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language>
@@ -1358,10 +1111,6 @@
 <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "cinematography" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1377,10 +1126,6 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subsequentWork" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
@@ -1393,12 +1138,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format>
         a             rr:PredicateObjectMap ;
@@ -1406,9 +1147,9 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap> ;
         rr:predicate  dbo:format .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1416,7 +1157,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company>
@@ -1439,23 +1180,19 @@
         a              rr:ObjectMap ;
         rml:reference  "num_series" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "format" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "company" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1464,17 +1201,21 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "author" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "language" .
+
+<./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "director" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1482,13 +1223,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "director" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap>
@@ -1499,14 +1236,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "tvComId" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1532,10 +1261,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue> .
@@ -1543,10 +1268,6 @@
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "writer" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1559,10 +1280,6 @@
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1580,22 +1297,9 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/audio_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "format" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1603,18 +1307,15 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_television/SimplePropertyMapping/format/picture_format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "format" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director>
         a             rr:PredicateObjectMap ;
@@ -1627,10 +1328,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap> ;
         rr:predicate  dbo:releaseDate .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_series/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1664,21 +1361,13 @@
         a              rr:ObjectMap ;
         rml:reference  "num_seasons" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distributor" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "related" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
@@ -1689,26 +1378,18 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "developer" .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/showJudge/judges/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1716,16 +1397,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue>
@@ -1744,13 +1421,9 @@
         a              rr:ObjectMap ;
         rml:reference  "preceded_by" .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "voice" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1769,20 +1442,16 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "starring" .
+<./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1796,12 +1465,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "channel" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1809,7 +1474,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/editor/editor>
@@ -1830,7 +1495,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "composer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1839,7 +1504,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/creativeDirector/creative_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "creativeDirector" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue>
@@ -1852,14 +1517,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/person/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "person" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/narrator/narrated/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1888,16 +1545,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/theme_music_composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "imdbId" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/location/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1913,14 +1562,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousWork" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/tvComId/tv_com_id/FunctionTermMap/FunctionValue> .
@@ -1931,7 +1572,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1941,12 +1582,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "presenter" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1960,12 +1597,8 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfSeasons" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1977,23 +1610,19 @@
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "composer" .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2001,16 +1630,12 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfEpisodes" .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "completionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -2045,7 +1670,7 @@
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer>
@@ -2058,14 +1683,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2077,8 +1702,4 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Time> .
-
-<./Mapping_en:Infobox_television/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
 

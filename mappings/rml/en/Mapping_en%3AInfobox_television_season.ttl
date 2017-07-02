@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfEpisodes" .
-
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_television_season/LogicalSource> ;
@@ -43,10 +40,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap> ;
         rr:predicate  dbo:firstAirDate .
-
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
@@ -61,12 +54,12 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "network" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -85,10 +78,6 @@
         rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap> ;
         rr:predicate  dbo:network .
 
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -106,7 +95,7 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfEpisodes" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television_season/SubjectMap/Function>
@@ -120,10 +109,6 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_television_season?oldid=20604" .
 
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_television_season/LogicalSource> ;
@@ -136,16 +121,12 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue>
@@ -156,12 +137,12 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -184,17 +165,13 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -203,12 +180,8 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -230,10 +203,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_television_season/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "network" .
-
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "network" .
@@ -246,20 +215,12 @@
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstAirDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_television_season/SimplePropertyMapping/firstAirDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstAirDate" .
 
 <./Mapping_en:Infobox_television_season/SimplePropertyMapping/foaf:name/season_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

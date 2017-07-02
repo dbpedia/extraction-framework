@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hometown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
@@ -41,7 +42,7 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -50,12 +51,8 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -97,25 +94,13 @@
         a              rr:ObjectMap ;
         rml:reference  "birth_place" .
 
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_date" .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
@@ -128,10 +113,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_darts_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_darts_player/LogicalSource> ;
@@ -140,12 +121,8 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -154,17 +131,17 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -193,10 +170,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -214,26 +187,14 @@
         rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
@@ -252,43 +213,31 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_date" .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hometown" .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_darts_player/LogicalSource>
         a                         rml:LogicalSource ;
@@ -324,7 +273,7 @@
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_darts_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
@@ -336,10 +285,6 @@
         rr:class     dul:Agent , dul:NaturalPerson , dbo:Agent , dbo:Athlete , foaf:Person , owl:Thing , dbo:Person , schema:Person , wikidata:Q5 , wikidata:Q215627 , dbo:DartsPlayer ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_darts_player/SimplePropertyMapping/country/homecountry/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_darts_player/SubjectMap/Function>
         a            rr:SubjectMap ;

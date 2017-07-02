@@ -31,7 +31,7 @@ class ModelWrapper() {
 
   def writeAsTurtle(base : String) = {
     val out = new StringWriter()
-    model.write(out, "TURTLE", base)
+    model.write(out, "TTL", base)
     out.toString
   }
 

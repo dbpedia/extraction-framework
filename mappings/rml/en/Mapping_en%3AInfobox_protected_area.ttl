@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -57,7 +58,7 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
@@ -76,26 +77,22 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Area" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -106,18 +103,14 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_d" .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
@@ -157,10 +150,6 @@
         a              rr:ObjectMap ;
         rml:reference  "lat_NS" .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "native_name" .
@@ -170,10 +159,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -195,10 +180,6 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -215,27 +196,19 @@
         a              rr:ObjectMap ;
         rml:reference  "long_s" .
 
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iucnCategory" .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue>
@@ -250,7 +223,7 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city>
@@ -262,10 +235,6 @@
 <./Mapping_en:Infobox_protected_area/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/latitude/FunctionTermMap/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -281,27 +250,15 @@
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -321,19 +278,19 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -354,7 +311,7 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
@@ -397,20 +354,12 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "iucn_category" .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVisitors" .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -431,25 +380,21 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "visitation_num" .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfVisitors" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
@@ -463,7 +408,7 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iucnCategory" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue>
@@ -471,10 +416,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -501,17 +442,13 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -539,7 +476,7 @@
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -552,13 +489,9 @@
         a              rr:ObjectMap ;
         rml:reference  "official_site" .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
-
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
@@ -568,10 +501,6 @@
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -614,10 +543,6 @@
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap> , <./Mapping_en:Infobox_protected_area/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

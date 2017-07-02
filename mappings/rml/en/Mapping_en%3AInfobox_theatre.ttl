@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -69,24 +70,18 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "reopeningYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap> ;
-        rr:predicate  dbo:currentProduction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -94,44 +89,22 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap> ;
+        rr:predicate  dbo:currentProduction .
 
 <./Mapping_en:Infobox_theatre/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "yearsactive" .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "reopeningYear" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "tenant" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -142,23 +115,11 @@
         a            rr:ObjectMap ;
         rr:constant  "activeYearsEndYear" .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rebuildingDate" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "seatingCapacity" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -192,30 +153,22 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operatedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rebuildingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rebuildingYear" .
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "locationCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap>
@@ -224,7 +177,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentProduction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap>
@@ -248,37 +201,21 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentlyUsedFor" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentlyUsedFor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:startDateFunction .
 
 <./Mapping_en:Infobox_theatre/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -288,8 +225,12 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:startDateFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -313,10 +254,6 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -324,7 +261,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rebuildingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect>
@@ -339,21 +276,17 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "tenant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "demolished" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt>
         a             rr:PredicateObjectMap ;
@@ -365,13 +298,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -381,7 +310,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue>
@@ -396,23 +325,15 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap> ;
         rr:predicate  dbo:genre .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -435,7 +356,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "locationCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished>
@@ -446,7 +367,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -456,13 +377,17 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "seatingCapacity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -470,31 +395,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "yearsactive" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demolitionYear" .
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demolitionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
@@ -523,12 +432,8 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architect" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -545,10 +450,6 @@
 <./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "activeYearsStartYear" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operatedBy" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator>
         a             rr:PredicateObjectMap ;
@@ -584,13 +485,9 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap> ;
         rr:predicate  dbo:reopeningYear .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentProduction" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -638,10 +535,6 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap> ;
         rr:predicate  dbo:address .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
@@ -663,10 +556,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_theatre/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "reopened" .
@@ -679,44 +568,32 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:endDateFunction .
 
 <./Mapping_en:Infobox_theatre/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "othernames" .
+<./Mapping_en:Infobox_theatre/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "othernames" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingYear" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_theatre/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -746,10 +623,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -769,7 +642,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -785,16 +658,12 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "locationCity" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue>
@@ -805,16 +674,12 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -844,12 +709,8 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "reopeningDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SubjectMap>
         a            rr:SubjectMap ;
@@ -862,13 +723,9 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap>
@@ -881,18 +738,14 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap> ;
         rr:predicate  dbo:formerName .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country>
@@ -905,13 +758,9 @@
         a              rr:ObjectMap ;
         rml:reference  "website" .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -921,17 +770,13 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demolitionYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -940,10 +785,6 @@
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "architect" .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -967,7 +808,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue>
@@ -975,10 +816,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt>
         a             rr:PredicateObjectMap ;
@@ -995,10 +832,6 @@
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/tenant/tenant/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1006,12 +839,8 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened>
         a             rr:PredicateObjectMap ;
@@ -1036,7 +865,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap>
@@ -1067,20 +896,16 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingYear/opened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1095,7 +920,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningYear/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1108,7 +933,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue>
@@ -1117,9 +942,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/openingDate/opened/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCountry/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "locationCountry" .
+<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1127,15 +954,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_theatre/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_theatre/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1144,12 +965,12 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architect" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingYear/rebuilt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1165,10 +986,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1194,10 +1011,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/reopeningDate/reopened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "reopeningDate" .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentProduction/production/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1205,16 +1018,12 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demolitionDate" .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue>
@@ -1225,7 +1034,7 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/formerName/othernames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed>
@@ -1276,10 +1085,6 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/currentlyUsedFor/currentuse/FunctionTermMap> ;
         rr:predicate  dbo:currentlyUsedFor .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/seatingCapacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/genre/yearsactive/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "yearsactive" .
@@ -1292,12 +1097,8 @@
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_theatre/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_theatre/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1309,16 +1110,8 @@
         rr:objectMap  <./Mapping_en:Infobox_theatre/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_theatre/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_theatre/SimplePropertyMapping/rebuildingDate/rebuilt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

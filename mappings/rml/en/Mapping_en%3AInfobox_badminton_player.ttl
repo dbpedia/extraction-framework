@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue>
@@ -58,19 +59,11 @@
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_badminton_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_badminton_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -79,12 +72,12 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
@@ -93,7 +86,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue>
@@ -101,14 +94,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_badminton_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_badminton_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "event" .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -133,12 +118,8 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death>
         a             rr:PredicateObjectMap ;
@@ -148,12 +129,8 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
 
 <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active>
         a             rr:PredicateObjectMap ;
@@ -167,33 +144,29 @@
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coach" .
 
 <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -204,22 +177,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_badminton_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_badminton_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coach" .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -251,14 +208,6 @@
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -283,17 +232,13 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -312,7 +257,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -334,21 +279,17 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_badminton_player/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -363,10 +304,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_badminton_player/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "place_of_birth" .
@@ -379,7 +316,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/LogicalSource>
@@ -428,10 +365,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:startDateFunction .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -454,10 +387,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -485,7 +414,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue>
@@ -498,10 +427,6 @@
         a              rr:ObjectMap ;
         rml:reference  "playername" .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -512,14 +437,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthPlace/place_of_birth/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathPlace/place_of_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_badminton_player/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -540,24 +457,16 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "height" .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
-
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -572,7 +481,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "event" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap>
@@ -582,7 +491,7 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
@@ -591,13 +500,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_badminton_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -618,12 +523,12 @@
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/birthDate/date_of_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_badminton_player/SimplePropertyMapping/deathDate/date_of_death/FunctionTermMap/FunctionValue>

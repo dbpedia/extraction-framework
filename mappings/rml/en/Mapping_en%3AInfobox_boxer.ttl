@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,8 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -48,12 +45,8 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -69,10 +62,6 @@
         a              rr:ObjectMap ;
         rml:reference  "death_date" .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_boxer/LogicalSource> ;
@@ -82,10 +71,6 @@
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -105,29 +90,17 @@
         a              rr:ObjectMap ;
         rml:reference  "realname" .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_boxer/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date> ;
         rr:subjectMap          <./Mapping_en:Infobox_boxer/SubjectMap> .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -140,21 +113,13 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -163,12 +128,12 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue>
@@ -183,7 +148,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -193,7 +158,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight>
@@ -219,25 +184,13 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -245,28 +198,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_boxer/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -286,26 +227,18 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -326,7 +259,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -341,7 +274,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
@@ -354,18 +287,10 @@
         a              rr:ObjectMap ;
         rml:reference  "weight" .
 
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -374,12 +299,12 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -392,7 +317,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -415,7 +340,7 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
@@ -433,10 +358,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_boxer/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_boxer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_boxer/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_boxer/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -464,35 +385,27 @@
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/realname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_boxer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_boxer/LogicalSource>

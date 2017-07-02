@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue> .
@@ -40,28 +37,16 @@
         a              rr:ObjectMap ;
         rml:reference  "NOC" .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Olympics_Switzerland/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rankInFinalMedalCount" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -78,7 +63,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap>
@@ -87,12 +72,12 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfOfficials" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -101,12 +86,12 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap>
@@ -125,14 +110,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationalOlympicCommittee" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -140,7 +117,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfSilverMedalsWon" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC>
@@ -157,7 +134,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap>
@@ -172,7 +149,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver>
@@ -183,7 +160,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfBronzeMedalsWon" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue>
@@ -194,12 +171,12 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rankInFinalMedalCount" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -220,7 +197,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -235,26 +212,14 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "flagBearer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "otherAppearances" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap> ;
         rr:predicate  dbo:summerAppearances .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -263,7 +228,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "oldcode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -271,13 +236,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "summerAppearances" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze>
@@ -285,10 +246,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap> ;
         rr:predicate  dbo:numberOfBronzeMedalsWon .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances>
         a             rr:PredicateObjectMap ;
@@ -298,7 +255,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfSports" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -309,10 +266,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials>
         a             rr:PredicateObjectMap ;
@@ -325,17 +278,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -366,11 +311,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue> .
@@ -381,9 +321,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap> ;
         rr:predicate  dbo:numberOfSports .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -406,18 +347,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfSilverMedalsWon" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "otherAppearances" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue>
@@ -428,7 +365,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationalOlympicCommittee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -437,16 +374,8 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "games" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "games" .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfCompetitors" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -464,10 +393,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "flagBearer" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Olympics_Switzerland/LogicalSource> ;
@@ -476,7 +401,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap>
@@ -499,12 +424,12 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "winterAppearances" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfGoldMedalsWon" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -513,7 +438,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap>
@@ -522,12 +447,8 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "oldcode" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -539,43 +460,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympics_Switzerland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfGoldMedalsWon" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfBronzeMedalsWon" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationalOlympicCommittee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "winterAppearances" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "otherappearances" .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -621,7 +522,7 @@
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfCompetitors" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/oldcode/oldcode>
@@ -637,14 +538,6 @@
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "flagbearer" .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationalOlympicCommittee" .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -662,26 +555,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap> ;
         rr:predicate  dbo:nationalOlympicCommittee .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfOfficials" .
-
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfSports" .
-
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "summerAppearances" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympics_Switzerland/SimplePropertyMapping/rankInFinalMedalCount/rank>

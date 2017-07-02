@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,77 +29,32 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "hometown" .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "nickname" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:givenName" .
-
-<./Mapping_en:Infobox_poker_player/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lastname" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "firstname" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
+        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown>
         a             rr:PredicateObjectMap ;
@@ -106,72 +62,34 @@
         rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap> ;
         rr:predicate  dbo:hometown .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hometown" .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown> ;
-        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap> .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_poker_player/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_poker_player?oldid=7401" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_poker_player/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dul:Agent , owl:Thing , dul:NaturalPerson , dbo:Person , foaf:Person , dbo:Agent , wikidata:Q215627 , dbo:PokerPlayer , schema:Person , dbo:Athlete , wikidata:Q5 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap> ;
-        rr:predicate  foaf:familyName .
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firstname" .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:familyName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
-        rr:predicate  foaf:nick .
+        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:familyName" .
+<./Mapping_en:Infobox_poker_player/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -179,33 +97,59 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "hometown" .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hometown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_poker_player/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_poker_player?oldid=7401" .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lastname" .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:givenName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname>
         a             rr:PredicateObjectMap ;
@@ -213,13 +157,38 @@
         rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap> ;
         rr:predicate  foaf:givenName .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap> ;
+        rr:predicate  foaf:familyName .
 
-<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_poker_player/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent , owl:Thing , dul:NaturalPerson , dbo:Person , foaf:Person , dbo:Agent , wikidata:Q215627 , dbo:PokerPlayer , schema:Person , dbo:Athlete , wikidata:Q5 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:givenName/firstname> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown> ;
+        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap> .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_poker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_poker_player/SimplePropertyMapping/foaf:familyName/lastname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_poker_player/SubjectMap/Function> .
 

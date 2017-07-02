@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,12 @@
 
 <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue>
@@ -63,19 +64,11 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Distinguish2/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
 
 <./Mapping_en:Distinguish2/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

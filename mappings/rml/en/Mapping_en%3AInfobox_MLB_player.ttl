@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,318 +29,24 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerTeam" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "stat1label" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birthplace" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "statisticYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "statisticYear" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap> ;
-        rr:predicate  dbo:battingSide .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "finalteam" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "teams" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap> ;
-        rr:predicate  dbo:throwingSide .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap> ;
-        rr:predicate  dbo:award .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q10871364 , dbo:Person , wikidata:Q5 , wikidata:Q215627 , schema:Person , foaf:Person , dbo:Agent , owl:Thing , dbo:Athlete , dul:Agent , dbo:BaseballPlayer , dul:NaturalPerson ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerTeam" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "throwingSide" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "positionplain" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "debutteam" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "number" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "statyear" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "awards" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "team" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap> ;
-        rr:predicate  dbo:formerTeam .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap> ;
+        rr:predicate  dbo:team .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number>
         a             rr:PredicateObjectMap ;
@@ -347,46 +54,36 @@
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap> ;
         rr:predicate  dbo:number .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "number" .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -394,36 +91,39 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "deathdate" .
+        rml:reference  "name" .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear>
         a             rr:PredicateObjectMap ;
@@ -431,23 +131,70 @@
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap> ;
         rr:predicate  dbo:statisticYear .
 
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "battingSide" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "bats" .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap> ;
-        rr:predicate  dbo:team .
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue>
@@ -456,199 +203,40 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap> ;
-        rr:predicate  dbo:statisticValue .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "deathplace" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap> ;
-        rr:predicate  dbo:statisticLabel .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap> ;
-        rr:predicate  dbo:team .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "statisticLabel" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace>
         a             rr:PredicateObjectMap ;
@@ -656,46 +244,20 @@
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap> ;
-        rr:predicate  dbo:formerTeam .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "stat1value" .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "throws" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "statisticValue" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "battingSide" .
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace>
         a             rr:PredicateObjectMap ;
@@ -703,98 +265,38 @@
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap> ;
+        rr:predicate  dbo:award .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_MLB_player?oldid=14666" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "statisticLabel" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birthdate" .
-
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -802,26 +304,381 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_MLB_player/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q10871364 , dbo:Person , wikidata:Q5 , wikidata:Q215627 , schema:Person , foaf:Person , dbo:Agent , owl:Thing , dbo:Athlete , dul:Agent , dbo:BaseballPlayer , dul:NaturalPerson ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "statyear" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap> ;
+        rr:predicate  dbo:throwingSide .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stat1label" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap> ;
+        rr:predicate  dbo:statisticValue .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap> ;
+        rr:predicate  dbo:statisticLabel .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debutteam" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "teams" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "statisticValue" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "positionplain" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "finalteam" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stat1value" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_MLB_player?oldid=14666" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "throws" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap> ;
+        rr:predicate  dbo:battingSide .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathplace" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "throwingSide" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+<./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB_player/SubjectMap/Function> .
 

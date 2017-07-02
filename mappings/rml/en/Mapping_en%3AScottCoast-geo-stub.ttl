@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -43,17 +44,13 @@
 <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica/ObjectMap> ;
+        rr:object     dbr-en:Antarctica ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:ScottCoast-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 
 <./Mapping_en:ScottCoast-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -64,10 +61,6 @@
 <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land/ObjectMap> ;
+        rr:object     dbr-en:Victoria_Land ;
         rr:predicate  dbo:location .
-
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Victoria_Land" .
 

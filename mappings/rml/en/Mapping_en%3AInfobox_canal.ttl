@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,17 +34,13 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "maximumBoatLength" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "start" .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maximumBoatLength" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp>
         a             rr:PredicateObjectMap ;
@@ -58,10 +55,6 @@
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -81,7 +74,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -106,7 +99,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "principalEngineer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -122,37 +115,21 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "originalMaximumBoatLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumBoatBeam" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap>
@@ -163,18 +140,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "originalMaximumBoatLength" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -201,17 +166,17 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue>
@@ -226,26 +191,17 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "maximumBoatBeam" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -253,10 +209,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:object     "foot" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use>
         a             rr:PredicateObjectMap ;
@@ -264,21 +220,14 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap> ;
         rr:predicate  dbo:dateUse .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "originalMaximumBoatLength" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateCompleted" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "riverBranch" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -289,14 +238,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap> ;
         rr:predicate  dbo:originalMaximumBoatBeam .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -316,7 +257,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumBoatLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name>
@@ -327,7 +268,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue>
@@ -341,23 +282,19 @@
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "originalStartPoint" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateAct" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -367,7 +304,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateCompleted" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue>
@@ -380,10 +317,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -392,7 +325,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength>
@@ -422,10 +355,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endPoint" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_canal/LogicalSource> ;
@@ -434,17 +363,13 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -456,19 +381,11 @@
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "company" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_canal/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "riverBranchOf" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -484,16 +401,8 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "principalEngineer" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -501,12 +410,12 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -529,7 +438,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateExtended" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -553,12 +462,12 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -572,7 +481,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "originalMaximumBoatBeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -582,12 +491,12 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "originalStartPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue>
@@ -596,10 +505,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -607,22 +512,14 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "restoreDate" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_canal/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -631,7 +528,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateConstruction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -640,7 +537,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company>
@@ -661,8 +558,13 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "originalEndPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -670,43 +572,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateClosed" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "o_start" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "startPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "engineer" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "riverBranch" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -714,17 +591,9 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -758,13 +627,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -788,7 +653,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap>
@@ -801,28 +666,20 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap> ;
         rr:predicate  dbo:dateExtended .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_canal/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateExtended" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "company" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest>
@@ -830,14 +687,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap> ;
         rr:predicate  dbo:restoreDate .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "startPoint" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of>
         a             rr:PredicateObjectMap ;
@@ -875,50 +724,30 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "riverBranchOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateConstruction" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "originalEndPoint" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "engineer" .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maximumBoatBeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "engineer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateAct" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -926,21 +755,13 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "restoreDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateUse" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "originalMaximumBoatBeam" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -959,10 +780,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumBoatLength" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -997,7 +814,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer>
@@ -1006,27 +823,19 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap> ;
         rr:predicate  dbo:engineer .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateUse" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "endPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1046,13 +855,8 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1062,6 +866,11 @@
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "company" .
+
+<./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1073,18 +882,6 @@
         rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasJunctionWith" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_canal/LogicalSource> ;
@@ -1093,16 +890,8 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasJunctionWith" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1114,18 +903,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_canal/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateClosed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1141,7 +922,7 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_canal/LogicalSource>
@@ -1157,12 +938,12 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam>
@@ -1173,6 +954,6 @@
 
 <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

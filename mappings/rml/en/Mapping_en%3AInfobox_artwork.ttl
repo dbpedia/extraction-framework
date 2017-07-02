@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,12 @@
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "museum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_artwork/SubjectMap/Function>
@@ -45,7 +46,7 @@
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue>
@@ -56,7 +57,7 @@
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "author" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue>
@@ -73,7 +74,7 @@
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap>
@@ -90,14 +91,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "museum" .
 
 <./Mapping_en:Infobox_artwork/SubjectMap>
         a            rr:SubjectMap ;
@@ -116,7 +109,7 @@
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
@@ -133,10 +126,6 @@
         rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -146,27 +135,15 @@
         a              rr:ObjectMap ;
         rml:reference  "title" .
 
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "author" .
-
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "artist" .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_artwork/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum> , <./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist> , <./Mapping_en:Infobox_artwork/SimplePropertyMapping/foaf:name/title> ;
         rr:subjectMap          <./Mapping_en:Infobox_artwork/SubjectMap> .
 
-<./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_artwork/SimplePropertyMapping/author/artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "artist" .
 
 <./Mapping_en:Infobox_artwork/SimplePropertyMapping/museum/museum>
         a             rr:PredicateObjectMap ;

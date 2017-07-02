@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -60,7 +57,7 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap>
@@ -79,12 +76,8 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -98,7 +91,7 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -113,12 +106,8 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "graySubject" .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -126,7 +115,7 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dorlandsPrefix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf>
@@ -137,12 +126,8 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meshNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -151,12 +136,8 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dorlandsSuffix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber>
         a             rr:PredicateObjectMap ;
@@ -171,17 +152,17 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meshName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue>
@@ -189,10 +170,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_bone/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_bone/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dorlandsSuffix" .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage>
         a             rr:PredicateObjectMap ;
@@ -216,12 +193,12 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "grayPage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "graySubject" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap>
@@ -234,14 +211,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_bone/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meshNumber" .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dorlandsPrefix" .
-
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -253,10 +222,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_bone/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meshName" .
-
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Name" .
@@ -266,18 +231,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap> ;
         rr:predicate  dbo:graySubject .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "grayPage" .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsPrefix/DorlandsPre>
         a             rr:PredicateObjectMap ;
@@ -302,18 +255,10 @@
         a              rr:ObjectMap ;
         rml:reference  "MeshName" .
 
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -322,7 +267,7 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
@@ -337,7 +282,7 @@
 
 <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_bone/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_bone/LogicalSource>

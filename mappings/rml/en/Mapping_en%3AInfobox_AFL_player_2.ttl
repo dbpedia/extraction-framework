@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -49,7 +50,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue>
@@ -62,17 +63,13 @@
         a              rr:ObjectMap ;
         rml:reference  "College" .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "deathdate" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function>
@@ -82,12 +79,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name>
@@ -108,28 +105,28 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap> ;
         rr:predicate  dbo:position .
 
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -141,10 +138,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "number" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
@@ -154,10 +147,6 @@
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -201,10 +190,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerTeam" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
@@ -212,10 +197,6 @@
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "deathplace" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number>
         a             rr:PredicateObjectMap ;
@@ -225,12 +206,8 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:givenName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -242,23 +219,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birthplace" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap> ;
         rr:predicate  dbo:undraftedYear .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap>
@@ -281,10 +254,6 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -296,35 +265,11 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "debutTeam" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -353,14 +298,6 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:surname" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
@@ -382,36 +319,20 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "debutyear" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -421,12 +342,8 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:givenName" .
 
 <./Mapping_en:Infobox_AFL_player_2/SubjectMap>
         a            rr:SubjectMap ;
@@ -436,26 +353,18 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -463,12 +372,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -490,26 +399,14 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap> ;
         rr:predicate  dbo:position .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "draftPick" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "weight" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -539,7 +436,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -547,17 +444,9 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "number" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
@@ -569,10 +458,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap> ;
         rr:predicate  dbo:draftYear .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -587,36 +472,31 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "playingteams" .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "debutTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school>
@@ -625,14 +505,15 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap> ;
         rr:predicate  dbo:highschool .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -645,27 +526,19 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -685,21 +558,17 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "status" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate>
         a             rr:PredicateObjectMap ;
@@ -709,7 +578,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place>
@@ -725,17 +594,13 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -747,7 +612,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:surname" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -765,10 +630,6 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -777,12 +638,8 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace>
         a             rr:PredicateObjectMap ;
@@ -790,13 +647,9 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "draftRound" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -806,7 +659,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap>
@@ -819,30 +672,14 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap> ;
         rr:predicate  dbo:debutTeam .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "undraftedYear" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname>
         a             rr:PredicateObjectMap ;
@@ -866,18 +703,6 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue> .
@@ -895,16 +720,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "number" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -914,25 +735,17 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "espnId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "espnId" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "currentposition" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team>
         a             rr:PredicateObjectMap ;
@@ -948,12 +761,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue>
@@ -964,12 +777,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place>
@@ -977,14 +790,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "draftRound" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "college" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -997,12 +802,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1016,21 +821,17 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap>
@@ -1047,18 +848,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1066,7 +859,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap>
@@ -1077,10 +870,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
@@ -1089,16 +878,8 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1120,7 +901,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap>
@@ -1129,7 +910,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "undraftedYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1142,18 +923,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "high_school" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "draftYear" .
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "high_school" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1161,26 +938,22 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndYear" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam>
@@ -1208,12 +981,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "draftYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround>
@@ -1222,20 +995,11 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap> ;
         rr:predicate  dbo:draftRound .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap> ;
         rr:predicate  dbo:formerTeam .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College>
         a             rr:PredicateObjectMap ;
@@ -1243,13 +1007,14 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap> ;
         rr:predicate  dbo:college .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "firstname" .
+
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1257,7 +1022,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
@@ -1269,10 +1034,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_AFL_player_2/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highschool" .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1299,7 +1060,7 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "draftPick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1318,32 +1079,16 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber/FunctionTermMap> ;
         rr:predicate  dbo:number .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1370,12 +1115,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "college" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "number" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname/FunctionTermMap>
@@ -1389,12 +1134,12 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1402,13 +1147,9 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick>
@@ -1417,24 +1158,24 @@
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap> ;
         rr:predicate  dbo:draftPick .
 
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birthdate" .
+
+<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "highschool" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname>
         a             rr:PredicateObjectMap ;
@@ -1459,10 +1200,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/playingteams> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftYear/draftyear> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/debutTeam/debutteam> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftPick/draftpick> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/deathplace> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/team> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/deathdate> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/number> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/college/College> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/currentposition> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/position/position> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/formerTeam/pastteams> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:name/full_name> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/currentteam> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/espnId/espn> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/team/teams> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/highschool/high_school> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:surname/lastname> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/foaf:givenName/firstname> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birthdate> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/number/currentnumber> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/draftRound/draftround> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/undraftedYear/undraftedyear> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsEndYear/finalyear> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birthplace> ;
         rr:subjectMap          <./Mapping_en:Infobox_AFL_player_2/SubjectMap> .
 
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
@@ -1473,10 +1210,6 @@
 
 <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_AFL_player_2/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartYear" .
 

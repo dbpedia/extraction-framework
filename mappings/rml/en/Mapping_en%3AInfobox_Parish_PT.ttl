@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -37,18 +38,10 @@
         fnml:functionValue  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -56,7 +49,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -68,10 +61,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -92,28 +81,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
 <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "demonym" .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
@@ -130,8 +105,12 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demonym" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -139,21 +118,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Portugal" .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
+<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -164,22 +137,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
 <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -193,17 +158,13 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighboringMunicipality" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -222,22 +183,17 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue>
@@ -248,7 +204,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m>
@@ -257,42 +213,39 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "demonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "null" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal/ObjectMap> ;
+        rr:object     dbr-en:Portugal ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
@@ -303,10 +256,6 @@
         a              rr:ObjectMap ;
         rml:reference  "lat_EW" .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
@@ -315,16 +264,12 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "neighboringMunicipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_d" .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Parish_PT/SubjectMap>
         a            rr:SubjectMap ;
@@ -345,7 +290,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
@@ -355,7 +300,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/longitude>
@@ -369,10 +314,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -389,30 +330,18 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lowest_m" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym>
@@ -448,7 +377,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
@@ -456,10 +385,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -471,10 +396,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -514,7 +435,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap>
@@ -523,7 +444,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code>
@@ -531,10 +452,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
         rr:predicate  dbo:postalCode .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Parish_PT/LogicalSource>
         a                         rml:LogicalSource ;
@@ -556,18 +473,10 @@
         a              rr:ObjectMap ;
         rml:reference  "elevation" .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Parish_PT/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
@@ -582,27 +491,19 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_Parish_PT/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -618,18 +519,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Parish_PT/longitude> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Parish_PT/latitude> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap> .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -653,10 +550,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -674,7 +567,7 @@
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,26 +29,13 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "governingBody" .
-
-<./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established>
         a             rr:PredicateObjectMap ;
@@ -55,39 +43,32 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
+<./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "designated_other2_name" .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue>
@@ -112,12 +93,8 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -125,12 +102,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -146,7 +123,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue>
@@ -178,10 +155,6 @@
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "built" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -231,12 +204,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architecturalStyle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap>
@@ -249,10 +222,6 @@
         rr:objectMap         <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -262,18 +231,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nrhpType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null>
         a                    rr:PredicateObjectMap ;
@@ -283,22 +248,10 @@
         rr:objectMap         <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -307,7 +260,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue>
@@ -316,30 +269,22 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpReferenceNumber" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap> ;
         rr:predicate  dbo:yearOfConstruction .
 
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NRHP/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -363,7 +308,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -372,7 +317,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
@@ -387,12 +332,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -409,22 +354,18 @@
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , wikidata:Q41176 , dbo:Building .
 
+<./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_seconds" .
+
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_seconds" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap>
@@ -434,10 +375,6 @@
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_degrees" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -459,10 +396,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nrhp_type3" .
@@ -479,7 +412,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -487,17 +420,13 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image>
@@ -511,10 +440,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_NRHP/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVisitorsAsOf" .
 
 <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -530,13 +455,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfVisitors" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/latitude>
@@ -544,10 +465,6 @@
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap> , <./Mapping_en:Infobox_NRHP/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -566,7 +483,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name>
@@ -577,7 +494,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap>
@@ -597,12 +514,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SubjectMap>
@@ -628,10 +545,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -671,40 +584,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name> , <./Mapping_en:Infobox_NRHP/latitude> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect> , <./Mapping_en:Infobox_NRHP/longitude> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "added" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other4_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -712,7 +608,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -720,9 +616,14 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfVisitorsAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
@@ -732,10 +633,6 @@
 <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -755,13 +652,9 @@
         a              rr:ObjectMap ;
         rml:reference  "nrhp_type" .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue>
@@ -775,19 +668,11 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NRHP/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -798,10 +683,6 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
-
 <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -811,27 +692,14 @@
         a              rr:ObjectMap ;
         rml:reference  "area" .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "yearOfConstruction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -839,9 +707,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitorsAsOf/visitation_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
 
 <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -854,7 +723,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap>
@@ -880,12 +749,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architect" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpReferenceNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -903,10 +772,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NRHP/LogicalSource> ;
@@ -915,7 +780,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -944,14 +809,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_NRHP/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architect" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap/FunctionValue> .
@@ -962,16 +819,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap> ;
         rr:predicate  dbo:nrhpType .
+
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_NRHP/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -981,22 +838,14 @@
         a              rr:ObjectMap ;
         rml:reference  "lat_direction" .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "area" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1006,7 +855,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1037,21 +886,17 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "visitation_num" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/yearOfConstruction/built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "yearOfConstruction" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1069,12 +914,12 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/FunctionTermMap/FunctionValue>
@@ -1089,7 +934,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/governingBody/governing_body/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "governingBody" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/ConditionalMapping/built_isSet_null/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -1134,20 +979,8 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVisitors" .
-
-<./Mapping_en:Infobox_NRHP/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "refnum" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture>
         a             rr:PredicateObjectMap ;
@@ -1160,17 +993,17 @@
         rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_NRHP/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NRHP/latitude/ObjectMap/FunctionValue> .
+
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/added/added/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "added" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/architecturalStyle/architecture/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architecturalStyle" .
+<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpReferenceNumber/refnum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "refnum" .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name>
         a             rr:PredicateObjectMap ;
@@ -1190,13 +1023,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NRHP/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nrhpType" .
-
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NRHP/LogicalSource>
@@ -1207,7 +1036,7 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other3_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nrhpType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/nrhp_type2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1229,14 +1058,10 @@
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/area/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "area" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other1_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "designated_other1_name" .
-
-<./Mapping_en:Infobox_NRHP/SimplePropertyMapping/nrhpType/designated_other2_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

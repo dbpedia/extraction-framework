@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -38,7 +39,7 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_standard/SubjectMap/Function>
@@ -54,7 +55,7 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap>
@@ -64,10 +65,6 @@
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lyricist" .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -82,7 +79,7 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -101,7 +98,7 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -119,14 +116,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap> ;
         rr:predicate  dbo:title .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "composer" .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lyrics" .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
@@ -146,14 +135,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title> , <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist> , <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer> , <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title> , <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer> ;
         rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap> .
 
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "english_title" .
@@ -169,14 +150,6 @@
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap> ;
         rr:predicate  dbo:composer .
 
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
@@ -189,16 +162,12 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -207,12 +176,12 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
@@ -239,7 +208,7 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -253,12 +222,8 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "writer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -267,27 +232,19 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lyrics" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap> ;
         rr:predicate  dbo:title .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist>
         a             rr:PredicateObjectMap ;
@@ -302,10 +259,6 @@
 
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "composer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -39,12 +36,8 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nextEvent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "event" .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -54,12 +47,12 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "silverMedalist" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue>
@@ -92,19 +85,11 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap> ;
         rr:predicate  dbo:nextEvent .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -112,7 +97,7 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze>
@@ -120,14 +105,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap> ;
         rr:predicate  dbo:bronzeMedalist .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "goldMedalist" .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -149,14 +126,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousEvent" .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -164,7 +133,7 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bronzeMedalist" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympic_event/SubjectMap>
@@ -180,7 +149,7 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "event" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -190,7 +159,7 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -200,12 +169,8 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousEvent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nextEvent" .
 
 <./Mapping_en:Infobox_Olympic_event/LogicalSource>
         a                         rml:LogicalSource ;
@@ -223,17 +188,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap> ;
         rr:predicate  dbo:event .
 
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bronzeMedalist" .
-
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "silverMedalist" .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -253,21 +210,17 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "games" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -294,10 +247,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap> ;
         rr:predicate  dbo:previousEvent .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -331,7 +280,7 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "goldMedalist" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap>
@@ -340,15 +289,11 @@
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "games" .
 

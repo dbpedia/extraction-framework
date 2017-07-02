@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,13 +43,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -69,10 +66,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cyclist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cyclist/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dul:NaturalPerson , foaf:Person , wikidata:Q5 , dul:Agent , dbo:Athlete , dbo:Person , schema:Person , wikidata:Q215627 , dbo:Cyclist , owl:Thing , dbo:Agent ;
@@ -83,10 +76,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -99,13 +88,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cyclist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername>
@@ -121,12 +106,8 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -140,7 +121,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -148,13 +129,9 @@
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
@@ -163,7 +140,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -172,17 +149,17 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap>
@@ -191,20 +168,12 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -217,26 +186,10 @@
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
@@ -262,7 +215,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place>
@@ -270,10 +223,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath>
         a             rr:PredicateObjectMap ;
@@ -283,24 +232,12 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -314,7 +251,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
@@ -347,7 +284,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
@@ -362,38 +299,28 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
-        rr:predicate  dbo:team .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -402,12 +329,8 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -419,13 +342,15 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
+        rr:predicate  dbo:team .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -433,21 +358,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cyclist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
+<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -456,12 +373,8 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/ridername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -469,12 +382,8 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -492,26 +401,22 @@
         a              rr:ObjectMap ;
         rml:reference  "dateofdeath" .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "currentteam" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "fullname" .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentteam" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -523,10 +428,6 @@
         a              rr:ObjectMap ;
         rml:reference  "ridername" .
 
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -535,7 +436,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -550,7 +451,7 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name>
@@ -576,10 +477,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_cyclist/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cyclist/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -608,12 +505,8 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
@@ -623,10 +516,6 @@
 
 <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cyclist/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cyclist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

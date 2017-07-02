@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,180 +29,16 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latMinutesParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Belgium_Municipality?oldid=14578" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:latFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap> ;
-        rr:predicate  dbo:mayor .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap> ;
         rr:predicate  dbo:postalCode .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
-        rr:predicate  dbo:elevation .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_deg" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "neighboring_municipalities" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap> ;
-        rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDegreesParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "elevation" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "postal-codes" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "null" .
+<./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof>
         a             rr:PredicateObjectMap ;
@@ -209,295 +46,36 @@
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "arrondissement" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lon_deg" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "highest_m" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "population" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Belgium" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "populationof" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
-        rr:predicate  dbo:maximumElevation .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonMinutesParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighboringMunicipality" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
-        rr:predicate  dbo:demonym .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "null" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap> ;
-        rr:predicate  dbo:arrondissement .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latSecondsParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
-        rr:predicate  dbo:areaTotal .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonDegreesParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap> ;
+        rr:predicate  dbo:areaCode .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Belgium_Municipality/longitude> , <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Belgium_Municipality/latitude> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "telephone-area" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
@@ -506,259 +84,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
-        rr:predicate  dbo:neighboringMunicipality .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lowest_m" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "demonym" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonDirectionParameter .
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "null" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "mayor" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap> ;
-        rr:predicate  dbo:areaCode .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_min" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Belgium_Municipality/longitude> , <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Belgium_Municipality/latitude> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "null" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
-        rr:predicate  dbo:minimumElevation .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "arrondissement" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lon_min" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/longitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap> ;
-        rr:predicate  geo:long .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue> .
+        rml:reference  "populationof" .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap>
         a            rr:SubjectMap ;
@@ -766,10 +103,356 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDirectionParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demonym" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "municipality_code" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "telephone-area" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap> ;
+        rr:predicate  dbo:mayor .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "neighboringMunicipality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mayor" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_min" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap> ;
+        rr:predicate  dbo:areaCode .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_deg" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
+        rr:predicate  dbo:minimumElevation .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "neighboring_municipalities" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Belgium_Municipality?oldid=14578" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population>
         a             rr:PredicateObjectMap ;
@@ -777,51 +460,237 @@
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap> ;
+        rr:predicate  dbo:arrondissement .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "arrondissement" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "highest_m" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
+        rr:predicate  dbo:maximumElevation .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mayor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "arrondissement" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonSecondsParameter .
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mayor" .
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "municipality_code" .
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maximumElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area>
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap> ;
-        rr:predicate  dbo:areaCode .
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
+        rr:predicate  dbo:neighboringMunicipality .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:object     dbr-en:Belgium ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lon_min" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lon_deg" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lowest_m" .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
+        rr:predicate  dbo:demonym .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postal-codes" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -31,7 +32,7 @@
 <./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan/ObjectMap> ;
+        rr:object     dbr-en:Japan ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Japan-writer-stub/SubjectMap/Function>
@@ -50,10 +51,6 @@
         rr:class     dbo:Writer , owl:Thing , dbo:Agent , dul:NaturalPerson , dbo:Person , foaf:Person , wikidata:Q5 , wikidata:Q36180 , wikidata:Q215627 , dul:Agent , schema:Person ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;

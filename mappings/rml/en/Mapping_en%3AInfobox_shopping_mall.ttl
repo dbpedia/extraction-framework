@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,13 +35,9 @@
         rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateOfAbandonment" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -54,13 +51,9 @@
         rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "floorArea" .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap>
@@ -89,28 +82,16 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_shopping_mall/longitude/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_shopping_mall/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_shopping_mall/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateOfAbandonment" .
 
 <./Mapping_en:Infobox_shopping_mall/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -122,30 +103,18 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_shopping_mall?oldid=7439" .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -157,21 +126,8 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -198,12 +154,13 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architect" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architect" .
+<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -212,7 +169,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -230,10 +187,6 @@
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "closing_date" .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date>
         a             rr:PredicateObjectMap ;
@@ -254,7 +207,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area>
@@ -270,12 +223,8 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name>
         a             rr:PredicateObjectMap ;
@@ -285,7 +234,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
@@ -299,24 +248,16 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_shopping_mall/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
@@ -360,12 +301,12 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_shopping_mall/latitude/FunctionTermMap/ParameterPOM>
@@ -375,7 +316,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue>
@@ -386,12 +327,8 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -406,7 +343,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -423,13 +360,9 @@
         rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/architect/architect/FunctionTermMap> ;
         rr:predicate  dbo:architect .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -454,7 +387,7 @@
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -466,17 +399,9 @@
         rr:objectMap  <./Mapping_en:Infobox_shopping_mall/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/foaf:name/shopping_mall_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_shopping_mall/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "floorArea" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_shopping_mall/longitude>

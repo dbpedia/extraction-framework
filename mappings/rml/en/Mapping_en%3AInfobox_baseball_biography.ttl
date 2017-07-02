@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -38,10 +39,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_baseball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_baseball_biography/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -50,21 +47,13 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam>
         a             rr:PredicateObjectMap ;
@@ -77,10 +66,6 @@
         rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -89,12 +74,12 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue>
@@ -146,7 +131,7 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -155,16 +140,8 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -174,12 +151,12 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -188,12 +165,12 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place>
@@ -211,10 +188,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_baseball_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_baseball_biography/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -235,12 +208,12 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "debutTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap>
@@ -259,13 +232,9 @@
         rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap> ;
         rr:predicate  dbo:position .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
-
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
@@ -274,7 +243,7 @@
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SubjectMap/Function>
@@ -297,10 +266,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_baseball_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_baseball_biography/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -329,13 +294,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team>
@@ -344,48 +305,24 @@
         rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "debutTeam" .
-
-<./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_baseball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

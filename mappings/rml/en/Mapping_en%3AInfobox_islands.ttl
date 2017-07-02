@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,22 +29,24 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "width" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands>
@@ -52,35 +55,23 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap> ;
         rr:predicate  dbo:numberOfIslands .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "width" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -99,22 +90,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -122,23 +104,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareMetre> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202>
         a             rr:PredicateObjectMap ;
@@ -151,10 +130,6 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -162,24 +137,8 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMetre" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hectare" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -193,7 +152,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -202,22 +161,22 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -229,25 +188,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "majorIsland" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfIslands" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi>
         a             rr:PredicateObjectMap ;
@@ -267,7 +214,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfIslands" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap>
@@ -276,7 +223,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
@@ -285,17 +232,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -303,30 +246,26 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_islands/latitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -358,14 +297,6 @@
         a              rr:ObjectMap ;
         rml:reference  "ethnic groups" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -379,7 +310,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue>
@@ -392,25 +323,21 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "archipelago" .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "archipelago" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -425,24 +352,8 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestCity" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareFoot" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -450,13 +361,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -465,7 +372,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "acre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
@@ -485,10 +392,6 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "archipelago" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
@@ -497,41 +400,21 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_km2" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -540,17 +423,17 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area ha" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/hectare> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area ha" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -565,18 +448,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "acre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -586,28 +465,24 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -639,27 +514,23 @@
         a              rr:ObjectMap ;
         rml:reference  "length_m" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap> ;
         rr:predicate  dbo:ethnicGroup .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -696,10 +567,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Area> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -707,7 +574,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi>
@@ -724,46 +591,38 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -773,30 +632,22 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "country largest city" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -805,12 +656,12 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -820,12 +671,8 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length>
         a             rr:PredicateObjectMap ;
@@ -833,28 +680,16 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap> ;
         rr:predicate  dbo:length .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareMile> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -866,53 +701,29 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareMetre> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "width_km" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -920,16 +731,12 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width>
@@ -965,51 +772,22 @@
         a              rr:ObjectMap ;
         rml:reference  "area_ha" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "length_mi" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "country 2" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area sqmi" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "width" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area_sqft" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1017,13 +795,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_sqft" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft>
         a             rr:PredicateObjectMap ;
@@ -1041,17 +820,13 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_sqmi" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft>
@@ -1062,19 +837,8 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap> ;
-        rr:predicate  dbo:areaTotal .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1090,6 +854,17 @@
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1128,22 +903,18 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km>
         a             rr:PredicateObjectMap ;
@@ -1153,7 +924,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap>
@@ -1161,31 +932,15 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/acre> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "PopulationDensity" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "width" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density>
         a             rr:PredicateObjectMap ;
@@ -1211,16 +966,12 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2>
@@ -1229,14 +980,6 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "acre" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1244,7 +987,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1265,7 +1008,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMetre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location>
@@ -1276,12 +1019,12 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
@@ -1292,7 +1035,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
@@ -1307,10 +1050,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareFoot" .
-
 <./Mapping_en:Infobox_islands/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Island , dbo:PopulatedPlace , dbo:Location , wikidata:Q486972 , schema:Place , dbo:Place , owl:Thing , wikidata:Q23442 ;
@@ -1319,7 +1058,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap>
@@ -1329,7 +1068,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1343,26 +1082,18 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nickname" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1374,49 +1105,29 @@
         a              rr:ObjectMap ;
         rml:reference  "major islands" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1442,28 +1153,12 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationAsOf/population%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area sqft" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city>
         a             rr:PredicateObjectMap ;
@@ -1485,7 +1180,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1493,13 +1188,9 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap>
@@ -1509,7 +1200,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft>
@@ -1520,7 +1211,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "archipelago" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue>
@@ -1547,26 +1238,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "acre" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1594,17 +1269,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1620,47 +1291,31 @@
         a              rr:ObjectMap ;
         rml:reference  "length_km" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMetre" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "capital" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hectare" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1672,13 +1327,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2>
@@ -1687,17 +1338,13 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ethnicGroup" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "total islands" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1711,7 +1358,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap>
@@ -1719,15 +1366,15 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareFoot> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareFoot" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1749,17 +1396,17 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue>
@@ -1776,7 +1423,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue>
@@ -1787,27 +1434,27 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "hectare" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/numberOfIslands/total%20islands/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1817,22 +1464,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/archipelago/archipelago/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/acre> .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi>
         a             rr:PredicateObjectMap ;
@@ -1842,8 +1480,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "hectare" ;
         rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/acre> .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1875,17 +1518,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1893,36 +1532,24 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+        rr:object     "squareMetre" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareFoot" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/majorIsland/major%20islands/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "majorIsland" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap>
@@ -1930,22 +1557,10 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1954,14 +1569,6 @@
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%202/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "capital" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area>
         a             rr:PredicateObjectMap ;
@@ -1975,7 +1582,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ethnicGroup" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap>
@@ -1983,38 +1590,26 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20ha/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
+<./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_acre>
         a             rr:PredicateObjectMap ;
@@ -2025,10 +1620,6 @@
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area km2" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/ethnicGroup/ethnic%20groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2>
         a             rr:PredicateObjectMap ;
@@ -2044,7 +1635,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -2070,7 +1661,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "width" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation>
@@ -2085,17 +1676,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2103,7 +1690,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "PopulationDensity" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_islands/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
@@ -2114,14 +1701,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/capital/country%20capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "width" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20sqmi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_islands/LogicalSource> ;
@@ -2130,12 +1709,8 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "width" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country%201/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2154,42 +1729,33 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_islands/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area acre" .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
@@ -2197,9 +1763,10 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
+<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_islands/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -2211,14 +1778,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "length" .
@@ -2229,21 +1788,13 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20acre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_islands/longitude>
         a             rr:PredicateObjectMap ;
@@ -2261,7 +1812,7 @@
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/largestCity/country%20largest%20city/FunctionTermMap/FunctionValue>
@@ -2275,26 +1826,8 @@
         rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area_ha/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20m2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/length/length%20ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/areaTotal/area%20km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_islands/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 

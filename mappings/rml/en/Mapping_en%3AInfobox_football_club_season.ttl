@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,10 +43,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_football_club_season/LogicalSource> ;
@@ -56,23 +53,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "season" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "homeStadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue>
@@ -85,10 +78,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -100,23 +89,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_football_club_season/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairmanTitle" .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairman" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successor" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -124,20 +105,12 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "homeStadium" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "chairman" .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -152,7 +125,7 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club>
@@ -175,21 +148,13 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "managerTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "season" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -197,13 +162,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_football_club_season/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "successor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -218,21 +179,13 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/homeStadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ground" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -263,10 +216,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "managerTitle" .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -275,16 +224,12 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairmanTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "league" .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -339,13 +284,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_football_club_season?oldid=16613" .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairman" .
-
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -360,12 +301,8 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -408,25 +345,8 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ground" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -440,30 +360,23 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "predecessor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "league" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/chairmanTitle/chrtitle>
         a             rr:PredicateObjectMap ;
@@ -477,7 +390,7 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/successor/nextseason/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue>
@@ -488,7 +401,7 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason>
@@ -505,17 +418,13 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/ground/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/predecessor/prevseason/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "predecessor" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/managerTitle/mgrtitle>
         a             rr:PredicateObjectMap ;
@@ -525,7 +434,7 @@
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/position/league%20result/FunctionTermMap/FunctionValue>
@@ -548,10 +457,6 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/team/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_football_club_season/SimplePropertyMapping/season/season/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

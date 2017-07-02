@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighbourConstellations" .
-
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -44,7 +41,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_constellation/LogicalSource>
@@ -61,12 +58,8 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "declination" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "abbreviation" .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -96,7 +89,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "neighbourConstellations" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -105,7 +98,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "month" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue>
@@ -118,34 +111,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "abbreviation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -163,7 +136,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue>
@@ -200,7 +173,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -210,7 +183,7 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -219,18 +192,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_constellation/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "declination" .
-
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/neighbourConstellations/bordering/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -240,10 +205,6 @@
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/declination/dec/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "dec" .
-
-<./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "month" .
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/month/month>
         a             rr:PredicateObjectMap ;
@@ -263,6 +224,6 @@
 
 <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_constellation/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

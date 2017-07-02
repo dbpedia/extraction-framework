@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -40,8 +41,13 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -49,18 +55,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ski_area/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -77,10 +74,6 @@
         rr:objectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -88,7 +81,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -107,19 +100,11 @@
         rr:objectMap  <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -150,16 +135,12 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_minutes" , "longm" .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -184,7 +165,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue>
@@ -212,10 +193,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ski_area/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
-
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_degrees" , "latd" .
@@ -229,26 +206,18 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue> .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -262,7 +231,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap>
@@ -275,27 +244,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
-
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ski_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ski_area/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
-
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
@@ -305,7 +262,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -329,12 +286,12 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ski_area/latitude>
@@ -342,10 +299,6 @@
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -367,10 +320,6 @@
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
@@ -378,7 +327,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -392,7 +341,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
@@ -405,18 +354,9 @@
         rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDegreesParameter .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -424,9 +364,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation> , <./Mapping_en:Infobox_ski_area/longitude> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_ski_area/latitude> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area> , <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_ski_area/SubjectMap> .
 
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
+<./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
 
 <./Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -444,7 +385,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -453,7 +394,7 @@
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location>
@@ -461,10 +402,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -479,10 +416,6 @@
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

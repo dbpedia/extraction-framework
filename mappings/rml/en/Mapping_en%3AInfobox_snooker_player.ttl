@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -46,8 +47,12 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
 
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1>
         a                    rr:PredicateObjectMap ;
@@ -56,17 +61,9 @@
         rr:objectMap         <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
 <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "activeYearsStartYear" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null>
         a                    rr:PredicateObjectMap ;
@@ -78,7 +75,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -119,10 +116,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking> , <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -155,7 +148,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -172,14 +165,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "otherWins" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rankingWins" .
-
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
@@ -193,12 +178,12 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SubjectMap>
@@ -212,13 +197,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "No." .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "worldChampionTitleYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -226,18 +207,18 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Nickname" .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "No." .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money>
         a             rr:PredicateObjectMap ;
@@ -253,7 +234,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -280,14 +261,6 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "centuryBreaks" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "worldChampionTitleYear" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -296,7 +269,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bestFinish" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
@@ -312,12 +285,8 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
@@ -333,34 +302,22 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_date" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bestFinish" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -378,7 +335,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue>
@@ -415,25 +372,17 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -442,10 +391,6 @@
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentRank" .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -493,7 +438,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -508,12 +453,8 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sportCountry" .
 
 <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional>
         a             rr:PredicateObjectMap ;
@@ -524,12 +465,8 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -553,12 +490,12 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highestRank" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rankingWins" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue>
@@ -572,10 +509,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap> ;
         rr:predicate  dbo:highestBreak .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "gross" .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -592,30 +525,18 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap> ;
         rr:predicate  dbo:worldChampionTitleYear .
 
-<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -647,12 +568,12 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentRank" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -662,7 +583,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap>
@@ -674,13 +595,9 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank>
@@ -689,36 +606,20 @@
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap> ;
         rr:predicate  dbo:currentRank .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "sportCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "centuryBreaks" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "alias" .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -728,7 +629,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "gross" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue>
@@ -797,7 +698,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highestBreak" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap>
@@ -808,27 +709,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highestRank" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -843,7 +732,7 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -861,12 +750,12 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue>
@@ -898,10 +787,6 @@
         a              rr:ObjectMap ;
         rml:reference  "Professional" .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
@@ -912,23 +797,15 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:isSet .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highestBreak" .
-
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "otherWins" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -936,10 +813,6 @@
 
 <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -43,10 +40,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap> ;
         rr:predicate  dbo:populationDensity .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -54,7 +47,7 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -64,16 +57,12 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap>
@@ -91,7 +80,7 @@
 <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:object     dbr-en:Canada ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -100,7 +89,7 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "inhabitantsPerSquareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue>
@@ -109,13 +98,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area>
@@ -130,10 +115,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -145,35 +126,19 @@
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "province" .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "census-date" .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province>
         a             rr:PredicateObjectMap ;
@@ -189,12 +154,8 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "inhabitantsPerSquareKilometre" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop>
         a             rr:PredicateObjectMap ;
@@ -204,16 +165,12 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "pop" .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -227,7 +184,7 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -252,10 +209,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -267,12 +220,12 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -290,14 +243,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Canadian_provincial_riding/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -318,16 +263,12 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "popdens" .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -336,6 +277,6 @@
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "province" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 

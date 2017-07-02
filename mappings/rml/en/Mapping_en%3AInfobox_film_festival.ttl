@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -39,7 +40,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap>
@@ -52,7 +53,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "writer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -61,22 +62,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -88,11 +77,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_film_festival?oldid=7301" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -106,23 +90,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap> .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap> ;
         rr:predicate  dbo:writer .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -136,7 +117,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingFilm" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -156,7 +137,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingFilm" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening>
@@ -164,10 +145,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap> ;
         rr:predicate  dbo:openingFilm .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -186,7 +163,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date>
@@ -195,23 +172,11 @@
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap> ;
         rr:predicate  dbo:startDate .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingFilm" .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "startDate" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -220,17 +185,13 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "starring" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -287,22 +248,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "film" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "starring" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -310,23 +259,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "films" .
+
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_film_festival/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "films" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -339,12 +280,8 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -352,7 +289,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -365,12 +302,12 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap>
@@ -379,7 +316,7 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -403,12 +340,12 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -421,10 +358,6 @@
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap> ;
         rr:predicate  dbo:starring .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -435,10 +368,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "film" .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -462,12 +391,12 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -476,21 +405,17 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/startDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "startDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingFilm" .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/closingFilm/closing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors>
@@ -514,26 +439,14 @@
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -544,17 +457,9 @@
         rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endDate" .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/film/films/FunctionTermMap>
@@ -567,12 +472,12 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/endDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "endDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
@@ -580,10 +485,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_film_festival/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_film_festival/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -593,20 +494,16 @@
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/director/directors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_film_festival/SimplePropertyMapping/openingFilm/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/writer/writers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_film_festival/SimplePropertyMapping/producer/producers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 

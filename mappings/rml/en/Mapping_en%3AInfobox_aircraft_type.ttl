@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -43,9 +44,10 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap> ;
         rr:predicate  dbo:origin .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced>
         a             rr:PredicateObjectMap ;
@@ -56,7 +58,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manufacturer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -79,7 +81,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
@@ -88,7 +90,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "programCost" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/LogicalSource>
@@ -113,12 +115,8 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successor" .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer>
         a             rr:PredicateObjectMap ;
@@ -128,7 +126,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -147,21 +145,17 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "introductionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "predecessor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/OntologyParameterPOM>
@@ -171,7 +165,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap>
@@ -197,10 +191,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue> .
@@ -218,20 +208,12 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -272,14 +254,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "origin" .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -296,10 +270,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap> ;
         rr:predicate  dbo:predecessor .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -337,18 +307,10 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manufacturer" .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -362,13 +324,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -381,10 +343,6 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap> ;
         rr:predicate  dbo:retired .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
@@ -393,27 +351,18 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "retired" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartYear/productionEndYear/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -424,18 +373,15 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "unitCost" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "programCost" .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -444,7 +390,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "successor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
@@ -464,10 +410,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap> ;
         rr:predicate  dbo:programCost .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "designer" .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -496,7 +438,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberBuilt" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -510,10 +452,6 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -526,7 +464,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue>
@@ -534,10 +472,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "introductionDate" .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartDate/productionEndDate/produced>
         a             rr:PredicateObjectMap ;
@@ -559,13 +493,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberBuilt" .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue>
@@ -574,18 +504,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartYear/productionEndYear/produced>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced> ;
         dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartYear/productionEndYear/produced/FunctionTermMap> ;
         rr:predicate   dbo:productionEndYear .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -599,7 +529,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap>
@@ -615,14 +545,6 @@
 <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "produced" .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "retired" .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "predecessor" .
 
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartDate/productionEndDate/produced/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -645,7 +567,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles>
@@ -665,7 +587,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "origin" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue>
@@ -693,7 +615,7 @@
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "designer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function>
@@ -705,10 +627,6 @@
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartDate/productionEndDate/produced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:startDateFunction .
@@ -719,13 +637,9 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap> ;
         rr:predicate  dbo:designer .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "unitCost" .
-
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction>
@@ -734,32 +648,15 @@
         rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap> ;
         rr:predicate  dbo:introductionDate .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost> , <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartDate/productionEndDate/produced> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/successor/variants%20with%20their%20own%20articles> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/predecessor/developed%20from> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/numberBuilt/number%20built> , <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartDate/productionEndDate/produced> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/manufacturer/manufacturer> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/type/type> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/origin/national%20origin> , <./Mapping_en:Infobox_aircraft_type/StartDate/productionStartYear/productionEndYear/produced> , <./Mapping_en:Infobox_aircraft_type/EndDate/productionStartYear/productionEndYear/produced> ;
         rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap> .
 
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/programCost/program%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/introductionDate/introduction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/retired/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_aircraft_type/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_aircraft_type/SimplePropertyMapping/unitCost/unit%20cost/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_aircraft_type/SubjectMap/Function> .
 

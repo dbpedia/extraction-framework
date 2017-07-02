@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,14 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "starring" .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -46,10 +39,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap> ;
         rr:predicate  dbo:creator .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -66,13 +55,9 @@
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap> ;
         rr:predicate  dbo:format .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap>
@@ -103,16 +88,12 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "producer" .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -120,13 +101,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -136,12 +113,12 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -159,10 +136,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_radio_show/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "presenter" .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -191,26 +164,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap> .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "creator" .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "format" .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "starring" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country>
@@ -224,10 +185,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_radio_show/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
@@ -250,7 +207,7 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
@@ -261,20 +218,16 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "presenter" .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -283,16 +236,8 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "producer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -304,38 +249,30 @@
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "presenter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/format/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "format" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "creator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -350,12 +287,12 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "writer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -364,7 +301,7 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:homepage/website>
@@ -389,22 +326,14 @@
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_radio_show/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -429,10 +358,6 @@
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/presenter/presenter/FunctionTermMap> ;
         rr:predicate  dbo:presenter .
 
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -449,19 +374,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_radio_show/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "language" .
-
-<./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_radio_show/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

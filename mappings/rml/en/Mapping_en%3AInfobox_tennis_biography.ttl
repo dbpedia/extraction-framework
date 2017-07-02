@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,12 +43,8 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
@@ -89,14 +86,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "careerPrizeMoney" .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "plays" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_tennis_biography/LogicalSource> ;
@@ -111,10 +100,6 @@
         a              rr:ObjectMap ;
         rml:reference  "birth_date" .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_tennis_biography/LogicalSource> ;
@@ -124,10 +109,6 @@
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "residence" .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -142,12 +123,12 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -156,21 +137,17 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "careerPrizeMoney" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -189,12 +166,12 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue>
@@ -219,7 +196,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro>
@@ -228,14 +205,6 @@
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartDate .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -243,7 +212,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height>
@@ -254,7 +223,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "plays" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/LogicalSource>
@@ -265,17 +234,17 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap>
@@ -284,7 +253,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername>
@@ -303,7 +272,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -324,7 +293,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -333,26 +302,14 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_tennis_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername> ;
         rr:subjectMap          <./Mapping_en:Infobox_tennis_biography/SubjectMap> .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -371,21 +328,17 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/careerPrizeMoney/careerprizemoney/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "residence" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue>
@@ -398,30 +351,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndDate" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
@@ -446,7 +383,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place>
@@ -459,39 +396,15 @@
         a              rr:ObjectMap ;
         rml:reference  "country" .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsEndDate/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/plays/plays/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -540,35 +453,19 @@
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartDate" .
-
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -578,7 +475,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/residence/residence>
@@ -589,7 +486,7 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/activeYearsStartDate/turnedpro/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -621,12 +518,12 @@
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -644,12 +541,4 @@
         rml:logicalSource      <./Mapping_en:Infobox_tennis_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_tennis_biography/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_tennis_biography/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

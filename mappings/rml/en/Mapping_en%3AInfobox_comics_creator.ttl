@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,23 +35,11 @@
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_comics_creator/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_comics_creator/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -61,10 +50,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -79,24 +64,20 @@
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_comics_creator/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_comics_creator/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -106,7 +87,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/LogicalSource>
@@ -121,10 +102,6 @@
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -133,12 +110,12 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -151,7 +128,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -172,30 +149,22 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "award" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue>
@@ -226,7 +195,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -243,10 +212,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_comics_creator/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -255,7 +220,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SubjectMap/Function>
@@ -265,7 +230,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias>
@@ -276,7 +241,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
@@ -295,10 +260,6 @@
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue> .
@@ -308,24 +269,16 @@
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -343,14 +296,6 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
@@ -367,18 +312,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_comics_creator/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -387,7 +320,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -397,7 +330,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -424,7 +357,7 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
@@ -433,17 +366,13 @@
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -451,21 +380,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_comics_creator/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:name/birthname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birthname" .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/birthPlace/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_comics_creator/SimplePropertyMapping/foaf:nick/alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

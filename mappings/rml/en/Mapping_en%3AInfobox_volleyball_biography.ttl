@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SubjectMap>
@@ -38,30 +39,18 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hometown" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:isSet .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/FunctionTermMap/FunctionValue>
@@ -72,7 +61,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/FunctionTermMap>
@@ -81,7 +70,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name>
@@ -96,16 +85,12 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "spike" .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -117,10 +102,6 @@
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coachyears" .
@@ -130,10 +111,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap> ;
         rr:predicate  dbo:spike .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -147,13 +124,9 @@
         rr:objectMap         <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationalTeam" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -178,7 +151,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place>
@@ -196,7 +169,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -210,12 +183,12 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue>
@@ -246,7 +219,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
@@ -255,12 +228,8 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -269,30 +238,18 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spike" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -302,7 +259,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -317,7 +274,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -326,35 +283,23 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "club" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -364,10 +309,6 @@
         a              rr:ObjectMap ;
         rml:reference  "currentteammate" .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -376,10 +317,6 @@
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nationalteam" .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -413,10 +350,6 @@
         a              rr:ObjectMap ;
         rml:reference  "coachteams" .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -427,23 +360,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_place" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_volleyball_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team>
@@ -452,14 +381,14 @@
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
+<./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -492,12 +421,8 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam>
         a             rr:PredicateObjectMap ;
@@ -507,7 +432,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue>
@@ -516,18 +441,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -577,10 +494,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:otherwise .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_volleyball_biography/LogicalSource> ;
@@ -595,7 +508,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -610,20 +523,12 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hometown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbo:VolleyballCoach , foaf:Person , schema:Person , wikidata:Q215627 , wikidata:Q5 , owl:Thing , dul:Agent , dbo:Person , dul:NaturalPerson , dbo:Coach , dbo:Agent .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spike" .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -645,14 +550,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/4>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/4/FunctionTermMap> ;
@@ -668,38 +565,22 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:isSet .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:isSet .
+
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:isSet .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "block" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -757,10 +638,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -781,16 +658,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_volleyball_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -804,12 +681,12 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "block" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap>
@@ -840,7 +717,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -856,10 +733,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -911,7 +784,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2/ObjectMap>
@@ -940,7 +813,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -950,17 +823,13 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/ConditionalMapping/currentteammate_isSet_null/1/2>
         a                    rr:PredicateObjectMap ;
@@ -978,10 +847,6 @@
         a              rr:ObjectMap ;
         rml:reference  "nationality" .
 
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/club/currentclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "club" .
-
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_date" .
@@ -989,10 +854,6 @@
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "hometown" .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/currentcoachteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1003,10 +864,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_volleyball_biography/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_volleyball_biography/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/spike/spike/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/block/block/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1023,7 +880,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/nationalTeam/nationalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationalTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/team/team/FunctionTermMap>
@@ -1042,7 +899,7 @@
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_volleyball_biography/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>

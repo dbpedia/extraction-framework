@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_scientist/LogicalSource> ;
@@ -40,7 +37,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -60,13 +57,9 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -74,18 +67,10 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -124,19 +109,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "residence" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "knownFor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "award" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue>
@@ -163,13 +148,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_name" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place>
@@ -178,19 +159,15 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_name" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_scientist/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -220,25 +197,13 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
 
 <./Mapping_en:Infobox_scientist/LogicalSource>
         a                         rml:LogicalSource ;
@@ -260,24 +225,16 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "doctoralStudent" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_cause" .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spouse" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue>
@@ -292,18 +249,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "influencedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence>
@@ -334,30 +287,26 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathCause" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "influenced" .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "influenced" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -367,7 +316,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap>
@@ -376,7 +325,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -385,16 +334,12 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "field" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date>
@@ -403,13 +348,9 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "academicAdvisor" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -419,17 +360,17 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "field" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "notableStudent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -439,7 +380,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors>
@@ -450,12 +391,12 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "almaMater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap>
@@ -465,10 +406,6 @@
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "known_for" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "influenced" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -483,10 +420,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -507,14 +440,6 @@
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "academic_advisors" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "citizenship" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -537,7 +462,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathCause" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
@@ -548,7 +473,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "citizenship" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -561,7 +486,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "doctoralStudent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue>
@@ -570,16 +495,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralStudent/doctoral_students/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_scientist/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
@@ -597,17 +522,9 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "doctoralAdvisor" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -616,16 +533,12 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spouse" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap>
@@ -637,10 +550,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_scientist/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -654,16 +563,12 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "notableStudent" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
@@ -682,33 +587,21 @@
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap> ;
         rr:predicate  dbo:notableStudent .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_scientist/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/notableStudent/notable_students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap> ;
         rr:predicate  dbo:field .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -738,7 +631,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "doctoralAdvisor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -762,7 +655,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -779,10 +672,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap> ;
         rr:predicate  dbo:influenced .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -814,20 +703,12 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "residence" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -836,7 +717,7 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/prizes/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -847,10 +728,6 @@
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_place" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -880,13 +757,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "field" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/academicAdvisor/academic_advisors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "academicAdvisor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
@@ -894,14 +767,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_scientist/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_scientist/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/fields/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "field" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influenced/influenced/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -923,25 +788,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/doctoralAdvisor/doctoral_advisor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "award" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality>
@@ -949,18 +802,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "influencedBy" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "knownFor" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -996,12 +837,8 @@
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthName" .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1011,32 +848,12 @@
         a              rr:ObjectMap ;
         rml:reference  "doctoral_students" .
 
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "almaMater" .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
-
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_scientist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_scientist/SimplePropertyMapping/field/field/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

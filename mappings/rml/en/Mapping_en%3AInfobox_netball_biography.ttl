@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -49,10 +50,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
-
 <./Mapping_en:Infobox_netball_biography/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -60,7 +57,7 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -70,12 +67,12 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spouse" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
@@ -88,7 +85,7 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date>
@@ -109,20 +106,8 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -151,12 +136,12 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/LogicalSource>
@@ -164,10 +149,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_netball_biography?oldid=26091" .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -186,7 +167,7 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school>
@@ -201,13 +182,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_netball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation>
@@ -219,10 +196,6 @@
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "university" .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -240,10 +213,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_netball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "relative" .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -251,17 +220,17 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "school" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_place" .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -271,7 +240,7 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives>
@@ -286,10 +255,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_netball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "position" .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_netball_biography/LogicalSource> ;
@@ -302,12 +267,8 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "university" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "school" .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -317,10 +278,6 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -328,7 +285,7 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/school/school/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -346,16 +303,8 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spouse" .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -373,21 +322,13 @@
         rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap> ;
         rr:predicate  dbo:university .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "spouse" .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -395,23 +336,15 @@
         rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/relative/relatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "relative" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -419,26 +352,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_netball_biography/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/university/university/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "university" .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/position/positions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -446,12 +367,8 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname>
         a             rr:PredicateObjectMap ;
@@ -464,13 +381,9 @@
         rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name>
@@ -501,16 +414,12 @@
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_netball_biography/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>

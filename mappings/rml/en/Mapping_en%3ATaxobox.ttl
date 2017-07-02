@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -83,7 +84,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38>
@@ -112,10 +113,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -147,7 +144,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "species" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -162,7 +159,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue>
@@ -173,7 +170,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "domain" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -207,7 +204,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -216,7 +213,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum>
@@ -228,10 +225,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q756 , dbo:Plant , dbo:GreenAlga .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -270,12 +263,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genus" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -309,12 +302,8 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -338,12 +327,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -431,26 +420,18 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "domain" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -458,7 +439,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -466,11 +447,11 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
@@ -483,10 +464,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Anthocerotophyta" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -508,10 +485,6 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Lycopodiophyta" .
@@ -525,10 +498,6 @@
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -552,7 +521,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -562,7 +531,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue>
@@ -570,14 +539,6 @@
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kingdom" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -615,17 +576,13 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -670,10 +627,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue> .
@@ -706,7 +659,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "kingdom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -756,10 +709,6 @@
         a              rr:ObjectMap ;
         rml:reference  "image" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue> .
@@ -768,17 +717,13 @@
         a              rr:ObjectMap ;
         rml:reference  "subregnum" .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:contains .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
-        rr:constant  "phylum" .
+        rr:constant  dbf:contains .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -801,7 +746,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -833,7 +778,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -844,10 +789,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -875,38 +816,30 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
+<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kingdom" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "classis" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue>
@@ -939,25 +872,21 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/53/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
+
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -968,14 +897,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "classis" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11>
         a                    rr:PredicateObjectMap ;
@@ -990,7 +911,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -1001,10 +922,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Arachnid" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colourName" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -1033,7 +950,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue>
@@ -1083,10 +1000,6 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "unranked_subclassis" .
@@ -1118,7 +1031,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -1185,10 +1098,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -1232,15 +1141,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "divisio" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "divisio" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1276,7 +1185,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6>
@@ -1317,10 +1226,6 @@
         a              rr:ObjectMap ;
         rml:reference  "classis" .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:contains .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1332,9 +1237,9 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
-        rr:constant  "division" .
+        rr:constant  dbf:contains .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -1348,7 +1253,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue>
@@ -1386,13 +1291,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -1420,10 +1321,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap> ;
@@ -1433,7 +1330,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -1443,7 +1340,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue>
@@ -1469,13 +1366,9 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain>
@@ -1483,10 +1376,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap> ;
         rr:predicate  dbo:domain .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/ObjectMap>
         a            rr:ObjectMap ;
@@ -1502,21 +1391,13 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "classis" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:depiction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -1545,7 +1426,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "binomial" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue>
@@ -1576,22 +1457,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kingdom" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q729 , dbo:Animal , wikidata:Q152 , dbo:Fish .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1602,10 +1475,6 @@
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1635,20 +1504,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "species" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum>
         a             rr:PredicateObjectMap ;
@@ -1717,7 +1578,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue>
@@ -1750,8 +1611,13 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "conservationStatusSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -1764,24 +1630,11 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap> ;
         rr:predicate  dbo:family .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/ObjectMap>
         a            rr:ObjectMap ;
@@ -1801,10 +1654,6 @@
         a              rr:ObjectMap ;
         rml:reference  "superdomain" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap> ;
@@ -1812,21 +1661,13 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -1870,12 +1711,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -1892,7 +1733,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1915,10 +1756,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1931,12 +1768,8 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1949,10 +1782,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q729 , dbo:Animal , dbo:Reptile .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1984,10 +1813,6 @@
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
@@ -2005,7 +1830,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -2023,34 +1848,22 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap> ;
         rr:predicate  dbo:conservationStatusSystem .
 
+<./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "family" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tribus" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/ObjectMap>
@@ -2068,22 +1881,14 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety>
@@ -2101,40 +1906,24 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "binomialAuthority" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -2155,18 +1944,18 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio>
         a             rr:PredicateObjectMap ;
@@ -2178,10 +1967,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/ObjectMap>
         a            rr:ObjectMap ;
@@ -2266,10 +2051,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap> ;
@@ -2288,10 +2069,6 @@
         crml:fallbackMap     <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31> ;
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/ObjectMap> ;
         rr:predicate         rdf:type .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2328,7 +2105,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue>
@@ -2356,10 +2133,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/regnum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2412,7 +2185,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap>
@@ -2450,7 +2223,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -2465,7 +2238,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/ObjectMap>
@@ -2475,10 +2248,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2491,12 +2260,16 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "species" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/FunctionTermMap>
@@ -2505,7 +2278,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -2551,12 +2324,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -2569,25 +2342,20 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Archaea" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap> ;
         rr:predicate  dbo:class .
 
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Archaea" .
+
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2602,12 +2370,13 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2621,21 +2390,17 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "conservationStatus" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2687,10 +2452,6 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -2710,10 +2471,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "conservationStatusSystem" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
@@ -2727,10 +2484,6 @@
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "class" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus>
         a             rr:PredicateObjectMap ;
@@ -2771,10 +2524,6 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -2791,12 +2540,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/phylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap>
@@ -2865,7 +2614,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -2878,10 +2627,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap> ;
         rr:predicate  dbo:phylum .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -2889,7 +2634,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap>
@@ -2917,23 +2662,19 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "classis" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "classis" .
+
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "domain" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2952,7 +2693,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/divisio/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -2964,17 +2705,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/infraordo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "infraordo" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2983,7 +2716,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genus" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -3001,10 +2734,6 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap> ;
@@ -3017,34 +2746,18 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/subregnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "kingdom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Insect" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -3067,16 +2780,16 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap> ;
         rr:predicate  dbo:family .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -3086,7 +2799,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "species" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43>
@@ -3117,7 +2830,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -3179,10 +2892,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/FunctionTermMap/FunctionValue> .
@@ -3194,7 +2903,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -3216,10 +2925,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue> .
@@ -3234,18 +2939,14 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap> ;
         rr:predicate  dbo:species .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "species" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -3257,19 +2958,15 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -3286,10 +2983,6 @@
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genus" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -3310,18 +3003,10 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -3333,12 +3018,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28>
@@ -3358,7 +3043,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -3370,31 +3055,27 @@
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "domain" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "domain" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -3410,17 +3091,13 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap>
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "binomial" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -3452,10 +3129,6 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/FunctionTermMap/FunctionValue> .
@@ -3482,10 +3155,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -3506,10 +3175,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_classis/FunctionTermMap/FunctionValue> .
@@ -3527,10 +3192,6 @@
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22>
         a                    rr:PredicateObjectMap ;
@@ -3567,17 +3228,9 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q756 , dbo:Plant , dbo:Gnetophytes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -3623,50 +3276,30 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap> ;
         rr:predicate  dbo:phylum .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Anapsid" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q729 , dbo:Animal , dbo:Reptile .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap> ;
         rr:predicate  dbo:species .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "phylum" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -3680,10 +3313,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "flowering plant" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/kingdom/unranked_regnum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kingdom" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -3729,7 +3358,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subtribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -3738,7 +3367,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "binomialAuthority" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/classis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -3768,7 +3397,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -3778,7 +3407,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -3795,7 +3424,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/ObjectMap>
@@ -3824,7 +3453,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "domain" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/ObjectMap>
@@ -3857,6 +3486,11 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap> ;
         rr:predicate  dbo:species .
 
+<./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap> ;
@@ -3864,14 +3498,9 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/superphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap>
@@ -3956,7 +3585,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/supertribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -3976,7 +3605,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/parvordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -3992,10 +3621,6 @@
         a            rr:ObjectMap ;
         rr:constant  "Holocephali" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -4003,12 +3628,8 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -4027,17 +3648,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/SimplePropertyMapping/division/unranked_divisio/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "synonym" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/ObjectMap>
@@ -4082,12 +3699,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superregnum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/ObjectMap>
@@ -4106,10 +3723,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -4148,10 +3761,6 @@
         a              rr:ObjectMap ;
         rml:reference  "variety" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Elasmobranchii" .
@@ -4164,14 +3773,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -4204,7 +3805,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/subfamilia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/FunctionTermMap/FunctionValue>
@@ -4215,12 +3816,8 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_infraclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -4231,10 +3828,6 @@
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/subordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "order" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Eukarya" .
@@ -4243,17 +3836,9 @@
         a            rr:ObjectMap ;
         rr:constant  "Crustacea" .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "family" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/unranked_phylum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "unranked_phylum" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatusSystem/status_system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -4295,7 +3880,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue>
@@ -4323,7 +3908,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "species" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -4361,10 +3946,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "divisio" .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:depiction" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/genus/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -4436,10 +4017,6 @@
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q756 , dbo:Plant , dbo:Conifer .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/superfamilia/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
@@ -4460,10 +4037,6 @@
         rr:objectMap         <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
@@ -4479,7 +4052,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/superordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -4507,16 +4080,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "domain" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -4582,7 +4151,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/binomialAuthority/binomial_authority/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -4591,7 +4160,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "domain" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/52/53/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -4606,12 +4175,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genus" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "order" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50>
@@ -4629,7 +4198,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/ordo/FunctionTermMap/FunctionValue>
@@ -4674,23 +4243,18 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ValueParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/microphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "phylum" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/ObjectMap>
@@ -4699,12 +4263,13 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/unranked_subclassis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genus" .
+<./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/46/47/48/49/50/51/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/superclassis>
         a             rr:PredicateObjectMap ;
@@ -4722,10 +4287,6 @@
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Species , wikidata:Q19088 , dbo:Eukaryote , wikidata:Q729 , dbo:Animal , wikidata:Q152 , dbo:Fish .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/genus/unranked_genus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genus" .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "subgenus" .
@@ -4737,7 +4298,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/unranked_superdomain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -4770,6 +4331,12 @@
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
+<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
+
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
@@ -4778,12 +4345,6 @@
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/infraphylum/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -4820,7 +4381,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/variety/FunctionTermMap/FunctionValue>
@@ -4831,7 +4392,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/magnordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue>
@@ -4839,10 +4400,6 @@
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Taxobox/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/family/tribus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/subclassis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -4856,21 +4413,13 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/species/species_complex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
 
 <./Mapping_en:Taxobox/SubjectMap>
         a            rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/domain/superdomain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "domain" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -4916,12 +4465,8 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/conservationStatus/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "conservationStatus" .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -4929,7 +4474,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/superdivisio/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue>
@@ -4959,7 +4504,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/synonym/synonyms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "synonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -4969,7 +4514,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/nanophylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/FunctionTermMap>
@@ -4983,7 +4528,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/domain/domain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "domain" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus>
@@ -4991,10 +4536,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/genus/subgenus/FunctionTermMap> ;
         rr:predicate  dbo:genus .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/binomial/binomial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -5024,7 +4565,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/phylum/subphylum/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap>
@@ -5039,13 +4580,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/species_subgroup/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/unranked_familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45/ObjectMap>
@@ -5064,7 +4601,7 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/family/familia/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "family" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -5121,19 +4658,11 @@
         rr:objectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Taxobox/SimplePropertyMapping/order/unranked_ordo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Taxobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Taxobox/SubjectMap/Function> .
-
-<./Mapping_en:Taxobox/SimplePropertyMapping/species/subspecies/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/42/43/44/45>
         a                    rr:PredicateObjectMap ;
@@ -5149,12 +4678,12 @@
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/class/infraclassis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Taxobox/SimplePropertyMapping/division/subdivisio/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Taxobox/ConditionalMapping/divisio_contains_Magnoliophyta/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>

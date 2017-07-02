@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,24 +29,16 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_international_football_competition/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_international_football_competition?oldid=28710" .
 
-<./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -82,7 +75,7 @@
 
 <./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_international_football_competition/SimplePropertyMapping/foaf:name/tourney_name/FunctionTermMap/FunctionValue/propertyParameterPOM>

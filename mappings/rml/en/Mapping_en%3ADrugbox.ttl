@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -50,25 +47,13 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -86,7 +71,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number>
@@ -94,10 +79,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap> ;
         rr:predicate  dbo:casNumber .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Temperature" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -107,16 +88,8 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "pubchem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "drugbank" .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Temperature" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -126,7 +99,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -135,7 +108,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high>
@@ -143,10 +116,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap> ;
         rr:predicate  dbo:meltingPoint .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -160,21 +129,18 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "boilingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iupacName" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chEBI" .
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "casSupplemental" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -182,32 +148,19 @@
         rr:predicateObjectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Temperature" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue>
@@ -231,20 +184,12 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "CAS_number" .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "boilingPoint" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -268,10 +213,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap> ;
         rr:predicate  dbo:atcSupplemental .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI>
         a             rr:PredicateObjectMap ;
@@ -300,7 +241,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iupacName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name>
@@ -309,27 +250,11 @@
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap> ;
         rr:predicate  dbo:iupacName .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Temperature" .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap> ;
         rr:predicate  dbo:fdaUniiCode .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "atcPrefix" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -343,7 +268,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "drugbank" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -351,17 +276,9 @@
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pubchem" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "UNII" .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental>
         a             rr:PredicateObjectMap ;
@@ -369,18 +286,10 @@
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap> ;
         rr:predicate  dbo:casSupplemental .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "casNumber" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "casSupplemental" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -401,13 +310,9 @@
         fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Temperature> .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bioavailability" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue>
@@ -418,7 +323,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -433,7 +338,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fdaUniiCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -466,12 +371,8 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "casNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -479,7 +380,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SubjectMap/Function>
@@ -489,12 +390,12 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chEBI" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue>
@@ -507,22 +408,14 @@
         a              rr:ObjectMap ;
         rml:reference  "ATC_supplemental" .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "atcSuffix" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point>
@@ -533,7 +426,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability>
@@ -551,14 +444,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Temperature> .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem>
         a             rr:PredicateObjectMap ;
@@ -594,13 +479,9 @@
         rr:predicateObjectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix>
@@ -609,13 +490,9 @@
         rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap> ;
         rr:predicate  dbo:atcSuffix .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fdaUniiCode" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
@@ -630,17 +507,17 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bioavailability" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Temperature" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "atcSupplemental" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix>
@@ -665,12 +542,12 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "atcSuffix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "atcPrefix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue>
@@ -678,10 +555,6 @@
         rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
-
-<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name>
         a             rr:PredicateObjectMap ;
@@ -691,7 +564,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -701,7 +574,7 @@
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap>
@@ -712,17 +585,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "atcSupplemental" .
-
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Temperature" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

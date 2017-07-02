@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,10 +37,6 @@
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "college" .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -73,10 +70,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -94,7 +87,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "award" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb>
@@ -109,27 +102,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "college" .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndYear" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerHighschool" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -180,24 +161,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_place" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NCAA_athlete/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highschool" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey>
         a             rr:PredicateObjectMap ;
@@ -211,30 +188,22 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SubjectMap>
@@ -251,16 +220,12 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highschool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "awards" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -272,26 +237,9 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap> ;
         rr:predicate  dbo:highschool .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport>
         a             rr:PredicateObjectMap ;
@@ -305,9 +253,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap> ;
         rr:predicate  dbo:college .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -316,12 +265,8 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartYear" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
@@ -335,10 +280,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue> .
@@ -350,10 +291,6 @@
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -382,12 +319,12 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)>
@@ -408,18 +345,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/pound> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -431,7 +360,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date>
@@ -452,7 +381,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue>
@@ -460,14 +389,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_NCAA_athlete/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "number" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -497,7 +418,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards>
@@ -506,26 +427,18 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sport" .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "college" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -545,16 +458,12 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -562,17 +471,9 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end>
@@ -587,28 +488,24 @@
         rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -617,30 +514,26 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "sport" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_date" .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/highschool/highschool/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -649,22 +542,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_athlete/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "career_end" .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsEndYear/career_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "career_end" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -672,7 +561,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerHighschool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue>
@@ -685,44 +574,24 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/activeYearsStartYear/career_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/formerHighschool/former_school(s)/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -731,7 +600,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/number/jersey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "number" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/deathDate/death_date>
@@ -742,7 +611,7 @@
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_athlete/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

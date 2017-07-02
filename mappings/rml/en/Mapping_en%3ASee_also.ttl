@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -61,17 +62,9 @@
         rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap> ;
         rr:predicate  rdfs:seeAlso .
 
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
-
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rdfs:seeAlso" .
-
 <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rdfs:seeAlso" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:See_also/LogicalSource>
@@ -82,7 +75,7 @@
 
 <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap>
@@ -91,12 +84,8 @@
 
 <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:See_also/SubjectMap/Function>
         a            rr:SubjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,13 +29,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "musicFusionGenre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -48,20 +45,12 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap>
@@ -78,13 +67,9 @@
         a              rr:ObjectMap ;
         rml:reference  "subgenres" .
 
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "instrument" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_music_genre/SubjectMap>
@@ -118,12 +103,8 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stylisticOrigin" .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives>
         a             rr:PredicateObjectMap ;
@@ -131,17 +112,9 @@
         rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap> ;
         rr:predicate  dbo:derivative .
 
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "instrument" .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -174,7 +147,7 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "musicSubgenre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_music_genre/SubjectMap/Function>
@@ -203,7 +176,7 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "stylisticOrigin" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue>
@@ -211,14 +184,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "derivative" .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres>
         a             rr:PredicateObjectMap ;
@@ -228,16 +193,8 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "musicSubgenre" .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "musicFusionGenre" .
 
 <./Mapping_en:Infobox_music_genre/LogicalSource>
         a                         rml:LogicalSource ;
@@ -263,12 +220,12 @@
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -281,28 +238,24 @@
         a              rr:ObjectMap ;
         rml:reference  "instruments" .
 
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "fusiongenres" .
-
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fusiongenres" .
+
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "derivative" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "stylistic_origins" .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

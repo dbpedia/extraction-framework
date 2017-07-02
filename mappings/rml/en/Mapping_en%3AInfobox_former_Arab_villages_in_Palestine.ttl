@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -41,22 +42,18 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "neighboringMunicipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -69,17 +66,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
@@ -89,21 +78,13 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighboringMunicipality" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_m" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population>
         a             rr:PredicateObjectMap ;
@@ -111,14 +92,14 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_m" .
+
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation>
         a             rr:PredicateObjectMap ;
@@ -142,17 +123,13 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -170,28 +147,20 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
@@ -200,23 +169,19 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
         rr:predicate  dbo:neighboringMunicipality .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
@@ -233,12 +198,8 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -284,7 +245,7 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap>
@@ -296,13 +257,9 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -318,22 +275,14 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -360,10 +309,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -372,7 +317,7 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -380,18 +325,10 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -421,16 +358,12 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -440,18 +373,10 @@
         a              rr:ObjectMap ;
         rml:reference  "long_NS" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude>
         a             rr:PredicateObjectMap ;
@@ -478,13 +403,9 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -494,16 +415,12 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "postal_code" .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -540,13 +457,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
@@ -561,10 +474,6 @@
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "website" .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -589,7 +498,7 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
@@ -603,18 +512,14 @@
         fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -622,7 +527,7 @@
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -636,18 +541,14 @@
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
@@ -659,10 +560,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

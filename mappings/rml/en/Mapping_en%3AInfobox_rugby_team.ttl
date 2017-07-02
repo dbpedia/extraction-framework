@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,14 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coach" .
@@ -45,13 +38,9 @@
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "teamName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue>
@@ -65,10 +54,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_rugby_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rugby_team/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "teamName" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -86,34 +71,26 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "league" .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairman" .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "league" .
+<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname>
         a             rr:PredicateObjectMap ;
@@ -125,22 +102,14 @@
         a              rr:ObjectMap ;
         rml:reference  "teamname" .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -174,10 +143,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "teamName" .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -185,7 +150,7 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "teamName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue>
@@ -208,12 +173,12 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/LogicalSource>
@@ -224,12 +189,8 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -253,10 +214,6 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rugby_team/LogicalSource> ;
@@ -266,10 +223,6 @@
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nickname" .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -281,20 +234,12 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
@@ -303,7 +248,7 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairman" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -312,12 +257,8 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
@@ -358,18 +299,14 @@
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "president" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -391,7 +328,7 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman>
@@ -400,13 +337,9 @@
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap> ;
         rr:predicate  dbo:chairman .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url>
@@ -441,12 +374,8 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -457,10 +386,6 @@
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -468,12 +393,8 @@
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_rugby_team/SimplePropertyMapping/president/president>
         a             rr:PredicateObjectMap ;

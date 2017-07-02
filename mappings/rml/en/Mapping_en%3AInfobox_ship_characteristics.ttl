@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,17 +37,13 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -58,23 +55,11 @@
         a              rr:ObjectMap ;
         rml:reference  "Ship length" .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "topSpeed" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "shipDisplacement" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -104,17 +89,13 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "shipBeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -146,7 +127,7 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Speed" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue>
@@ -177,44 +158,36 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "shipDisplacement" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "class" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship nickname" .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Speed" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap>
@@ -235,13 +208,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -267,7 +236,7 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue>
@@ -282,16 +251,8 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "powerType" .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -315,7 +276,7 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap>
@@ -324,25 +285,13 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname>
         a             rr:PredicateObjectMap ;
@@ -350,28 +299,16 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap> ;
         rr:predicate  foaf:nick .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap> ;
         rr:predicate  dbo:shipDraft .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_ship_characteristics/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -386,12 +323,12 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "powerType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed>
@@ -402,7 +339,7 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "topSpeed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue>
@@ -413,12 +350,8 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -440,28 +373,12 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "shipDraft" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "shipBeam" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "class" .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -483,27 +400,15 @@
         a              rr:ObjectMap ;
         rml:reference  "Ship class" .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDraft/Ship%20draft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "shipDraft" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/length/Ship%20length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -518,10 +423,6 @@
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/topSpeed/Ship%20speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship speed" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipDisplacement/Ship%20displacement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam>
         a             rr:PredicateObjectMap ;
@@ -543,7 +444,7 @@
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/class/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue>
@@ -552,27 +453,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/powerType/Ship%20power/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_characteristics/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/height/Ship%20height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_characteristics/SimplePropertyMapping/shipBeam/Ship%20beam/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

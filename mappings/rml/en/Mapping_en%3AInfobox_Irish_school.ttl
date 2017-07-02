@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,21 +43,13 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "principal" .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Republic_of_Ireland" .
 
 <./Mapping_en:Infobox_Irish_school/SubjectMap>
         a            rr:SubjectMap ;
@@ -69,10 +62,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours>
         a             rr:PredicateObjectMap ;
@@ -88,27 +77,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland/ObjectMap> ;
+        rr:object     dbr-en:Republic_of_Ireland ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -118,7 +95,7 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap>
@@ -133,7 +110,7 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours>
@@ -150,7 +127,7 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue>
@@ -170,7 +147,7 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -179,12 +156,8 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -194,20 +167,16 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officialSchoolColour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialSchoolColour" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
@@ -232,22 +201,18 @@
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue>
@@ -270,18 +235,10 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -312,10 +269,6 @@
         a              rr:ObjectMap ;
         rml:reference  "irish_name" .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -344,30 +297,26 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfStudents" .
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -376,12 +325,8 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "principal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -396,30 +341,22 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "established" .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Irish_school/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -438,47 +375,31 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "colours" .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colourName" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -488,12 +409,8 @@
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -510,10 +427,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue> .
@@ -529,8 +442,4 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,14 +29,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:US-academic-administrator-stub/ConstantMapping/nationality/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
 <./Mapping_en:US-academic-administrator-stub/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-academic-administrator-stub/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:object     dbr-en:United_States ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
@@ -52,7 +49,7 @@
 <./Mapping_en:US-academic-administrator-stub/ConstantMapping/nationality/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-academic-administrator-stub/ConstantMapping/nationality/United_States/ObjectMap> ;
+        rr:object     dbr-en:United_States ;
         rr:predicate  dbo:nationality .
 
 <./Mapping_en:US-academic-administrator-stub/LogicalSource>
@@ -66,8 +63,4 @@
         rr:class     dbo:Person , wikidata:Q215627 , schema:Person , owl:Thing , dul:NaturalPerson , wikidata:Q5 , foaf:Person , dul:Agent , dbo:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:US-academic-administrator-stub/ConstantMapping/country/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 

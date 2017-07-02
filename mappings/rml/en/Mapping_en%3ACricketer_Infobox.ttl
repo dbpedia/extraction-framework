@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,17 +29,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "countryofdeath" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath>
         a             rr:PredicateObjectMap ;
@@ -46,28 +39,20 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue>
@@ -82,7 +67,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -92,12 +77,13 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -105,21 +91,10 @@
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -134,18 +109,16 @@
         a              rr:ObjectMap ;
         rml:reference  "last date" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
@@ -174,10 +147,6 @@
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -191,17 +160,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname>
         a             rr:PredicateObjectMap ;
@@ -214,10 +175,6 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fcRuns" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue> .
@@ -227,10 +184,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap> ;
         rr:predicate  dbo:fc .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -250,18 +203,10 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndYear" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -271,7 +216,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap>
@@ -292,7 +237,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
@@ -312,7 +257,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue>
@@ -332,22 +277,14 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -359,36 +296,24 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartDate" .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -401,14 +326,6 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "debut date" .
@@ -417,18 +334,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap>
@@ -437,7 +350,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -447,7 +360,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue>
@@ -458,12 +371,12 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue>
@@ -478,17 +391,13 @@
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "yearofdeath" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -506,14 +415,6 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Cricketer_Infobox?oldid=24712" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -525,10 +426,6 @@
         rr:class     wikidata:Q215627 , dul:Agent , dbo:Cricketer , dbo:Agent , dbo:Person , owl:Thing , schema:Person , foaf:Person , wikidata:Q5 , dbo:Athlete , dul:NaturalPerson ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath>
         a             rr:PredicateObjectMap ;
@@ -568,7 +465,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -582,16 +479,12 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "monthofbirth" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -604,21 +497,9 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndDate" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fc" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth>
@@ -640,12 +521,12 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fcRuns" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue>
@@ -661,7 +542,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap>
@@ -679,16 +560,16 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap> ;
         rr:predicate  dbo:fcRuns .
 
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -698,7 +579,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -707,20 +588,21 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "countryofbirth" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -728,30 +610,13 @@
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
@@ -776,17 +641,17 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SubjectMap/Function>
@@ -811,7 +676,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname>
@@ -830,22 +695,14 @@
         a              rr:ObjectMap ;
         rml:reference  "FCs" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartYear" .
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "dayofdeath" .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -853,7 +710,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -863,12 +720,8 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -882,10 +735,6 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsEndYear .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -894,33 +743,21 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fc" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year>
@@ -933,18 +770,14 @@
         a              rr:ObjectMap ;
         rml:reference  "placeofdeath" .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath>
@@ -953,21 +786,13 @@
         rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nickname" .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap>
@@ -976,7 +801,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -990,7 +815,7 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1007,10 +832,6 @@
         rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1033,10 +854,6 @@
 
 <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 

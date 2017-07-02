@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,10 +34,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -45,25 +42,17 @@
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
 
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -88,18 +77,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Mercury_crater/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "diameter" .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Mercury_crater/LogicalSource> ;
@@ -114,7 +91,7 @@
 <./Mapping_en:Infobox_Mercury_crater/ConstantMapping/location/Mercury>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/ConstantMapping/location/Mercury/ObjectMap> ;
+        rr:object     dbr-en:Mercury ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Mercury_crater/SubjectMap/Function>
@@ -124,17 +101,13 @@
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "diameter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -146,10 +119,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_Mercury_crater/ConstantMapping/location/Mercury/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Mercury" .
-
 <./Mapping_en:Infobox_Mercury_crater/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:NaturalPlace , dbo:Crater ;
@@ -158,7 +127,7 @@
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap>
@@ -168,7 +137,7 @@
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -183,7 +152,7 @@
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Mercury_crater/LogicalSource>
@@ -196,13 +165,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "depth" .
-
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "depth" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Mercury_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>

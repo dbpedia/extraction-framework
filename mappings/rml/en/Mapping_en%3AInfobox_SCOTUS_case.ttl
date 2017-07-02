@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,12 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA>
@@ -50,12 +51,8 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "DecideDate" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate>
         a             rr:PredicateObjectMap ;
@@ -63,26 +60,18 @@
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap> ;
         rr:predicate  dbo:decideDate .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
+<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DecideDate" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ReargueDateB" .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -93,31 +82,23 @@
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -126,10 +107,6 @@
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -153,10 +130,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB> , <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName> ;
         rr:subjectMap          <./Mapping_en:Infobox_SCOTUS_case/SubjectMap> .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ArgueDateA" .
@@ -175,13 +148,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue>
@@ -198,7 +167,7 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB>
@@ -221,43 +190,31 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ArgueDate" .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap>
@@ -268,19 +225,11 @@
         a              rr:ObjectMap ;
         rml:reference  "ReargueDate" .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
-
 <./Mapping_en:Infobox_SCOTUS_case/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:UnitOfWork , dul:Situation , wikidata:Q2334719 , dbo:LegalCase , owl:Thing , dbo:SupremeCourtOfTheUnitedStatesCase , dbo:Case ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA>
         a             rr:PredicateObjectMap ;
@@ -288,13 +237,9 @@
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap> ;
         rr:predicate  dbo:argueDate .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "decideDate" .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap>
@@ -303,7 +248,7 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -319,12 +264,8 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -369,12 +310,12 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -383,7 +324,7 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap>
@@ -392,16 +333,12 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName>
         a             rr:PredicateObjectMap ;
@@ -411,12 +348,8 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/decideDate/DecideDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "decideDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -456,10 +389,6 @@
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap> ;
         rr:predicate  dbo:argueDate .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_SCOTUS_case/LogicalSource> ;
@@ -471,13 +400,9 @@
         rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -505,22 +430,10 @@
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateA2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "argueDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDateB/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "argueDate" .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/foaf:name/FullName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ReargueDate2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ReargueDate2" .
-
-<./Mapping_en:Infobox_SCOTUS_case/SimplePropertyMapping/argueDate/ArgueDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

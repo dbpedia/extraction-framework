@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
@@ -47,10 +48,6 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap> ;
         rr:predicate  dbo:extinctionYear .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "dissolution" .
@@ -59,26 +56,10 @@
         a              rr:ObjectMap ;
         rml:reference  "split" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "headquarter" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -100,22 +81,14 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "europeanAffiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internationalAffiliation" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -129,12 +102,12 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -142,18 +115,14 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ideology" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue>
@@ -173,7 +142,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue>
@@ -191,37 +160,21 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formationYear" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -230,7 +183,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formationYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -256,12 +209,12 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "internationalAffiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue>
@@ -270,20 +223,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap> ;
         rr:predicate  dbo:formationYear .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formationDate" .
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -292,7 +241,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "extinctionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -319,13 +268,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "extinctionYear" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1>
@@ -342,7 +287,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -356,31 +301,19 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap> ;
         rr:predicate  dbo:ideology .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "native_name" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colourName" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -388,7 +321,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -414,18 +347,14 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spokesperson" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -439,10 +368,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -451,7 +376,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "religion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name>
@@ -474,30 +399,22 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "secretary_general" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colours" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap> ;
         rr:predicate  dbo:colour .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "colours" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -516,10 +433,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap> ;
         rr:predicate  dbo:formationYear .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -552,10 +465,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mergedIntoParty" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
@@ -572,7 +481,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -586,7 +495,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson>
@@ -597,7 +506,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -612,12 +521,8 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -625,41 +530,25 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "color" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "europeanParliamentGroup" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation>
         a             rr:PredicateObjectMap ;
@@ -675,7 +564,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split>
@@ -696,7 +585,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson>
@@ -705,13 +594,9 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap> ;
         rr:predicate  dbo:spokesperson .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap>
@@ -730,12 +615,8 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color>
         a             rr:PredicateObjectMap ;
@@ -764,19 +645,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spokesperson" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -784,7 +657,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -806,23 +679,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "extinctionDate" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -837,7 +702,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "president" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -846,25 +711,17 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "youthWing" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "extinctionYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -898,10 +755,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue> .
@@ -916,51 +769,35 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "splitFromParty" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "youth_wing" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "extinctionDate" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "extinctionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -975,34 +812,14 @@
         a              rr:ObjectMap ;
         rml:reference  "dissolved" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colourName" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "religion" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -1015,10 +832,6 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formationDate" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1027,7 +840,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap>
@@ -1052,7 +865,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "secretaryGeneral" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap>
@@ -1070,18 +883,10 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap> ;
         rr:predicate  dbo:leader .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "extinctionYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/splitFromParty/split/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "splitFromParty" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1096,7 +901,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european>
@@ -1104,6 +909,16 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap> ;
         rr:predicate  dbo:europeanAffiliation .
+
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1114,20 +929,6 @@
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "chairperson" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_political_party/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formationYear" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1156,12 +957,12 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/youthWing/youth_wing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "youthWing" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1196,12 +997,12 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/leader/leader/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colourName/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1210,21 +1011,17 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanAffiliation/european/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "europeanAffiliation" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ideology" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1232,13 +1029,9 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1248,16 +1041,8 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "headquarter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationalAffiliation" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1285,7 +1070,7 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mergedIntoParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1293,18 +1078,14 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "extinctionYear" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "europeanParliamentGroup" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website>
@@ -1312,22 +1093,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/ideology/ideology/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairperson" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "affiliation" .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl>
         a             rr:PredicateObjectMap ;
@@ -1343,12 +1108,8 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationalAffiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded>
         a             rr:PredicateObjectMap ;
@@ -1360,17 +1121,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/nationalAffiliation/national/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1384,21 +1137,13 @@
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap> ;
         rr:predicate  foaf:logo .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/secretaryGeneral/secretary_general/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "secretaryGeneral" .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/affiliation/affiliation1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1411,10 +1156,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_political_party/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/mergedIntoParty/merged/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1422,25 +1163,21 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionDate/dissolution/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationDate/foundation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "foundation" .
 
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/spokesperson/spokesperson/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/europeanParliamentGroup/europarl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/internationalAffiliation/international/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolution>
@@ -1451,13 +1188,8 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/chairperson/chairperson/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairperson" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1467,6 +1199,11 @@
 
 <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_political_party/SimplePropertyMapping/formationYear/foundation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formationYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_political_party/SimplePropertyMapping/extinctionYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 

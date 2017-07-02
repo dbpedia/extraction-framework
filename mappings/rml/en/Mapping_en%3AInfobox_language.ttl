@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,7 +37,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2>
@@ -45,19 +46,11 @@
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap> ;
         rr:predicate  dbo:iso6392Code .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iso6391Code" .
-
 <./Mapping_en:Infobox_language/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_language?oldid=14178" .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iso6392Code" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -65,7 +58,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -77,10 +70,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageFamily" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency>
         a             rr:PredicateObjectMap ;
@@ -96,17 +85,17 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iso6392Code" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue>
@@ -117,7 +106,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "languageFamily" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3>
@@ -132,7 +121,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -141,12 +130,8 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "languageFamily" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageFamily" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -154,53 +139,33 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iso6391Code" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageRegulator" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "languageFamily" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spokenIn" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap> ;
         rr:predicate  dbo:languageFamily .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -215,7 +180,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3>
@@ -230,12 +195,12 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spokenIn" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -244,12 +209,8 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "languageFamily" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -274,20 +235,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_language/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "languageFamily" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_language/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_language/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spokenIn" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1>
         a             rr:PredicateObjectMap ;
@@ -307,10 +264,6 @@
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap> ;
         rr:predicate  dbo:languageFamily .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -319,16 +272,12 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -337,7 +286,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue>
@@ -352,12 +301,8 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -373,17 +318,9 @@
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "iso3" .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageFamily" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -397,28 +334,20 @@
         a              rr:ObjectMap ;
         rml:reference  "region" .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_language/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_language/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spokenIn" .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iso6393Code" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region>
@@ -431,18 +360,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/states/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -466,31 +387,13 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "languageRegulator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageRegulator/agency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6393Code/iso3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iso6393Code" .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "iso1" .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageFamily" .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap> ;
-        rr:predicate  dbo:languageFamily .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -500,16 +403,22 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap> ;
+        rr:predicate  dbo:languageFamily .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "fam1" .
+
+<./Mapping_en:Infobox_language/SimplePropertyMapping/iso6391Code/iso1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "iso1" .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -520,10 +429,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_language/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q34770 , wikidata:Q315 , schema:Language , dbo:Language ;
@@ -533,10 +438,6 @@
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -560,10 +461,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "languageFamily" .
-
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -580,7 +477,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/iso6392Code/iso2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -595,7 +492,7 @@
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_language/SimplePropertyMapping/spokenIn/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_language/SimplePropertyMapping/languageFamily/fam4>

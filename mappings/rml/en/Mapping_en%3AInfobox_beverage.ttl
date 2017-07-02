@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,25 +31,13 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasVariant" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -64,17 +53,9 @@
         a              rr:ObjectMap ;
         rml:reference  "distributor" .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "introduced" .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distributor" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -84,7 +65,7 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related>
@@ -101,10 +82,6 @@
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -127,25 +104,17 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -154,7 +123,7 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced>
@@ -173,31 +142,23 @@
         a              rr:ObjectMap ;
         rml:reference  "manufacturer" .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "related" .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distributor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap>
@@ -209,10 +170,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_beverage/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_beverage/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "discontinued" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -230,26 +187,22 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "introduced" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "discontinued" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "origin" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -261,13 +214,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_beverage/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue>
@@ -278,7 +227,7 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manufacturer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -292,17 +241,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_beverage/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "discontinued" .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasVariant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
@@ -323,10 +268,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/introduced/introduced> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:homepage/website> ;
         rr:subjectMap          <./Mapping_en:Infobox_beverage/SubjectMap> .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manufacturer" .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -339,7 +280,7 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin>
@@ -358,10 +299,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_beverage/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -375,12 +312,12 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "related" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued>
@@ -391,7 +328,7 @@
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "origin" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -401,10 +338,6 @@
 <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/hasVariant/variants/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_beverage/SubjectMap>
         a            rr:SubjectMap ;
@@ -422,10 +355,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_beverage/SimplePropertyMapping/discontinued/discontinued/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_beverage/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_beverage/SubjectMap/Function>
         a            rr:SubjectMap ;

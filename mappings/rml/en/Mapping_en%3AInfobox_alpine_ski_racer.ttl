@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -41,7 +42,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -51,7 +52,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue>
@@ -68,12 +69,8 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
@@ -85,13 +82,9 @@
         a              rr:ObjectMap ;
         rml:reference  "birth_place" .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines>
@@ -99,10 +92,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap> ;
         rr:predicate  dbo:discipline .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -112,10 +101,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams>
         a             rr:PredicateObjectMap ;
@@ -141,10 +126,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
@@ -168,10 +149,6 @@
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_alpine_ski_racer/LogicalSource> ;
@@ -180,29 +157,13 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "discipline" .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "club" .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -213,10 +174,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_alpine_ski_racer/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_alpine_ski_racer/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -237,7 +194,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name>
@@ -258,7 +215,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -275,14 +232,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -301,20 +250,16 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "club" .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "discipline" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue>
@@ -329,13 +274,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_alpine_ski_racer/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
@@ -353,13 +294,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/discipline/disciplines/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -371,30 +308,14 @@
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "club" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -405,12 +326,12 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
@@ -419,10 +340,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_alpine_ski_racer/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -430,12 +347,12 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -444,7 +361,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -463,10 +380,6 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "olympicteams" .
@@ -477,7 +390,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/club/club/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/birthDate/birth_date>
@@ -500,7 +413,7 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/worldsteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -516,11 +429,11 @@
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_alpine_ski_racer/SimplePropertyMapping/team/olympicteams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

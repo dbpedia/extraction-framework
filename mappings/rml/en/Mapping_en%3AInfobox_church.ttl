@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -41,7 +42,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -50,7 +51,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue>
@@ -59,22 +60,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architecturalStyle" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architecturalStyle" .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect>
         a             rr:PredicateObjectMap ;
@@ -108,7 +97,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor>
@@ -124,24 +113,16 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -154,7 +135,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architecturalStyle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type>
@@ -162,10 +143,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap> ;
         rr:predicate  dbo:architecturalStyle .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -184,10 +161,6 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -199,7 +172,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -224,7 +197,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap>
@@ -260,16 +233,8 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "district" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district>
         a             rr:PredicateObjectMap ;
@@ -305,13 +270,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "pastor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -321,20 +282,12 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architecturalStyle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pastor" .
 
 <./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "architect" .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -342,17 +295,17 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue>
@@ -365,31 +318,15 @@
         a              rr:ObjectMap ;
         rml:reference  "church name" .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -406,12 +343,12 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "architect" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:page" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -420,7 +357,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -447,10 +384,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "architectural type" .
@@ -461,12 +394,8 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -485,7 +414,7 @@
 
 <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_church/latitude>
@@ -515,22 +444,14 @@
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:page" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "district" .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue>
@@ -546,10 +467,6 @@
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_church/longitude>
         a             rr:PredicateObjectMap ;
@@ -580,12 +497,8 @@
         rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 

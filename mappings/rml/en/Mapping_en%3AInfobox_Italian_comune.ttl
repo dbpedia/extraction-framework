@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue>
@@ -45,20 +46,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "province" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country>
@@ -72,10 +65,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1> , <./Mapping_en:Infobox_Italian_comune/latitude> , <./Mapping_en:Infobox_Italian_comune/longitude> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m> , <./Mapping_en:Infobox_Italian_comune/ConstantMapping/country/Italy> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -95,7 +84,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code>
@@ -110,29 +99,21 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinTown" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
@@ -144,10 +125,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "motto" .
@@ -156,26 +133,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinCountry" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -208,21 +173,11 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap> ;
-        rr:predicate  dbo:twinCountry .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2>
         a             rr:PredicateObjectMap ;
@@ -235,23 +190,11 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinTown" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap> ;
+        rr:predicate  dbo:twinCountry .
 
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -261,9 +204,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Italian_comune/SubjectMap>
         a            rr:SubjectMap ;
@@ -273,7 +218,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue>
@@ -282,13 +227,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -301,35 +242,27 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/ConstantMapping/country/Italy>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/ConstantMapping/country/Italy/ObjectMap> ;
+        rr:object     dbr-en:Italy ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -354,14 +287,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue> .
@@ -370,13 +295,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
@@ -389,12 +310,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue>
@@ -409,20 +330,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -453,17 +366,13 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -474,29 +383,13 @@
         a              rr:ObjectMap ;
         rml:reference  "latNS" .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "twin1" .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -504,7 +397,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -517,14 +410,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap> ;
         rr:predicate  dbo:saint .
 
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "elevation_max_m" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -546,10 +439,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderName" .
-
 <./Mapping_en:Infobox_Italian_comune/latitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "latitudeMapping" ;
@@ -560,10 +449,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "principalArea" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -583,43 +468,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "saint" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinTown" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party>
         a             rr:PredicateObjectMap ;
@@ -627,9 +488,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap> ;
         rr:predicate  dbo:leaderParty .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -644,7 +505,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -654,17 +515,13 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -675,10 +532,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
@@ -691,13 +544,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinTown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3/FunctionTermMap>
@@ -706,7 +555,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -714,38 +563,18 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_total_km2" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "saint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/ConstantMapping/country/Italy/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Italy" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -753,23 +582,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longd" .
+
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "longd" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin3>
@@ -793,12 +618,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinTown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -811,16 +636,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
@@ -835,17 +656,17 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "day" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -869,19 +690,11 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Italian_comune?oldid=47727" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "frazioni" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -891,7 +704,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinTown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province>
@@ -908,12 +721,12 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day>
@@ -936,10 +749,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinCountry" .
-
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
@@ -948,7 +757,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
@@ -982,7 +791,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1002,10 +811,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "population_as_of" .
@@ -1014,19 +819,11 @@
         a              rr:ObjectMap ;
         rml:reference  "frazioni" .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "day" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1035,10 +832,6 @@
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
@@ -1060,22 +853,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/principalArea/adjacentcomuni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "principalArea" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1090,7 +875,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m>
@@ -1098,10 +883,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1133,10 +914,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
 <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
@@ -1155,7 +932,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1>
@@ -1166,7 +943,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap>
@@ -1226,7 +1003,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1236,12 +1013,8 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1264,17 +1037,17 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin1_country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1284,7 +1057,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1303,27 +1076,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "province" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin2_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinCountry" .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinTown/twin2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -1341,20 +1096,20 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Italian_comune/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1365,19 +1120,19 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/day/day/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "province" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1385,13 +1140,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Italian_comune/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Italian_comune/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/saint/saint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1414,7 +1171,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1423,7 +1180,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/frazioni/frazioni/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "frazioni" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/name>
@@ -1440,7 +1197,7 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/twinCountry/twin3_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1448,18 +1205,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
 
 <./Mapping_en:Infobox_Italian_comune/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
@@ -1467,6 +1216,6 @@
 
 <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Italian_comune/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 

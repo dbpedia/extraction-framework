@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -46,18 +43,14 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stadium" .
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "full_name" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "full_name" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport>
         a             rr:PredicateObjectMap ;
@@ -71,9 +64,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
+        rr:predicate  dbo:coach .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager>
         a             rr:PredicateObjectMap ;
@@ -81,31 +76,25 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap> ;
         rr:predicate  dbo:manager .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
-        rr:predicate  dbo:coach .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coach" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coach" .
+
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -113,12 +102,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -146,7 +131,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -170,12 +155,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stadium" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -188,12 +169,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -245,18 +222,10 @@
         a              rr:ObjectMap ;
         rml:reference  "founded" .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "league" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -318,14 +287,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap> ;
         rr:predicate  dbo:manager .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
@@ -341,10 +302,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
@@ -359,12 +316,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -377,14 +330,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -393,40 +338,24 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stadium" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -435,40 +364,32 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "stadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue>
@@ -483,10 +404,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "gm" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
@@ -499,6 +416,10 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap> ;
         rr:predicate  dbo:colour .
 
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gm" .
+
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -509,18 +430,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "anthem" .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -534,26 +443,14 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap> ;
         rr:predicate  dbo:division .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -565,10 +462,11 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap> ;
+        rr:predicate  dbo:stadium .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -580,21 +478,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena>
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap> ;
-        rr:predicate  dbo:stadium .
+        rr:object     "president" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -603,12 +496,12 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league>
@@ -616,10 +509,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap> ;
         rr:predicate  dbo:league .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -632,27 +521,19 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap> ;
         rr:predicate  dbo:president .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mascot" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -665,7 +546,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap>
@@ -691,10 +572,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -714,9 +591,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "division" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem>
         a             rr:PredicateObjectMap ;
@@ -728,32 +605,28 @@
         a              rr:ObjectMap ;
         rml:reference  "manager" .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "division" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city>
@@ -761,10 +634,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap> ;
         rr:predicate  dbo:city .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -782,12 +651,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -805,10 +670,6 @@
         a              rr:ObjectMap ;
         rml:reference  "president" .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue> .
@@ -820,7 +681,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap>
@@ -829,7 +690,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -838,12 +699,8 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -851,7 +708,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1>
@@ -860,13 +717,9 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap> ;
         rr:predicate  dbo:colour .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue>
@@ -883,7 +736,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -897,10 +750,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue> .
@@ -911,34 +760,22 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mascot" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "sport" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -954,12 +791,12 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap>
@@ -972,7 +809,7 @@
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors>
@@ -981,41 +818,34 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap> ;
         rr:predicate  dbo:colour .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sport" .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1023,43 +853,30 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "stadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "anthem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "stadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1068,14 +885,6 @@
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "logo" .
-
-<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;

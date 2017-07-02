@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -45,7 +46,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -80,12 +81,8 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -100,18 +97,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_racecourse/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_racecourse/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "name" .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -140,14 +125,6 @@
         rr:objectMap  <./Mapping_en:Infobox_racecourse/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -165,7 +142,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_racecourse/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -174,7 +151,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_racecourse/longitude/FunctionTermMap>
@@ -183,12 +160,8 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -212,7 +185,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_racecourse/SubjectMap>
@@ -229,12 +202,8 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name>
         a             rr:PredicateObjectMap ;
@@ -261,7 +230,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_racecourse/latitude/FunctionTermMap>
@@ -283,17 +252,9 @@
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location>
@@ -330,7 +291,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_racecourse/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
@@ -345,25 +306,13 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -374,13 +323,9 @@
         rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/owner/Owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -410,7 +355,7 @@
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_racecourse/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,12 +37,12 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officialSchoolColour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
@@ -49,10 +50,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Cambridge_college/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Cambridge_college/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -64,10 +61,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialSchoolColour" .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours>
         a             rr:PredicateObjectMap ;
@@ -81,16 +74,12 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sisterCollege" .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -113,27 +102,23 @@
         a              rr:ObjectMap ;
         rml:reference  "sister_college" .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "graduates" .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfUndergraduateStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfGraduateStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -141,13 +126,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto>
@@ -166,13 +147,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap> ;
         rr:predicate  dbo:numberOfGraduateStudents .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap>
@@ -181,7 +158,7 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage>
@@ -196,12 +173,12 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -223,26 +200,18 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -254,23 +223,15 @@
         a              rr:ObjectMap ;
         rml:reference  "homepage" .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Cambridge_college/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Cambridge_college/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfUndergraduateStudents" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
@@ -281,12 +242,8 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college>
         a             rr:PredicateObjectMap ;
@@ -294,13 +251,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap> ;
         rr:predicate  dbo:sisterCollege .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfGraduateStudents" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap>
@@ -315,7 +268,7 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "sisterCollege" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates>
@@ -324,26 +277,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap> ;
         rr:predicate  dbo:numberOfUndergraduateStudents .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "head" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "established" .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -366,13 +307,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue>
@@ -387,22 +324,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Cambridge_college/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -411,7 +336,7 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -440,7 +365,7 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "head" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established>
@@ -448,10 +373,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfGraduateStudents/graduates/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -487,7 +408,16 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue>
@@ -496,27 +426,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Cambridge_college/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -529,16 +442,8 @@
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Cambridge_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

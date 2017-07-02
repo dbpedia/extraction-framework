@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,11 +29,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap> ;
-        rr:predicate  dbo:spurType .
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image>
         a             rr:PredicateObjectMap ;
@@ -40,42 +40,34 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap> ;
         rr:predicate  foaf:logo .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ruralMunicipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "state" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state>
@@ -109,12 +101,8 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -122,52 +110,32 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "length_km" .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_road/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spurOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -183,10 +151,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
@@ -199,30 +163,26 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap> ;
-        rr:predicate  dbo:subsequentInfrastructure .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap> ;
         rr:predicate  dbo:city .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "direction_a" .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentInfrastructure .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "direction_a" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route>
         a             rr:PredicateObjectMap ;
@@ -233,10 +193,6 @@
 <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "beltway_city" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type>
         a             rr:PredicateObjectMap ;
@@ -267,7 +223,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -289,17 +245,13 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -318,13 +270,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -332,19 +285,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -352,21 +296,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "state" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "county" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeJunction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue>
@@ -375,22 +307,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeNumber" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -411,7 +335,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -419,25 +343,13 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeTypeAbbreviation" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap>
@@ -445,36 +357,20 @@
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeStartDirection" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spurType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "spur_of" .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue> .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -482,13 +378,17 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km> , <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b> , <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route> , <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type> , <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi> , <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of> , <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map> , <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type> , <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route> , <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route> , <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries> , <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type> , <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image> , <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo> , <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name> , <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city> , <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap> .
 
+<./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "spur_of" .
+
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dateOfAbandonment" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue>
@@ -509,21 +409,17 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type>
@@ -540,12 +436,8 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "beltwayCity" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -560,10 +452,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -580,13 +468,9 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route>
@@ -605,31 +489,23 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "terminus_b" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "terminus_b" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -652,7 +528,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeTypeAbbreviation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap>
@@ -671,10 +547,6 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap> ;
         rr:predicate  dbo:routeEndDirection .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue> .
@@ -687,16 +559,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "system" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -722,22 +590,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ruralMunicipality" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -747,12 +603,8 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -762,17 +614,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spurType" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "state" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spurOf" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -796,12 +640,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -810,21 +654,13 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subsequentInfrastructure" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeEndDirection" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -834,20 +670,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "subsequentInfrastructure" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousInfrastructure" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -857,12 +685,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "county" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo>
@@ -877,36 +705,16 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap> ;
         rr:predicate  dbo:spurOf .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dateOfAbandonment" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeJunction" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -915,12 +723,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap>
@@ -928,17 +736,9 @@
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/mile> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeStart" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "established" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -946,7 +746,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/openingDate/established>
@@ -957,23 +757,18 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/next_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -981,7 +776,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
@@ -995,9 +790,10 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country" .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/city/cities/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1005,7 +801,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name>
@@ -1014,15 +810,15 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
+<./Mapping_en:Infobox_road/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
 <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/highway_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/county/countries/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1054,7 +850,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned>
@@ -1069,26 +865,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeEnd" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highwaySystem" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1108,7 +892,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "map" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue>
@@ -1119,7 +903,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue>
@@ -1128,23 +912,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap> ;
         rr:predicate  dbo:routeStart .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "photo" .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1163,7 +943,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/highwaySystem/system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highwaySystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/map/map>
@@ -1174,7 +954,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeStart" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue>
@@ -1185,7 +965,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue>
@@ -1200,12 +980,8 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1215,30 +991,22 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousInfrastructure" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/type/previous_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeEnd" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/previousInfrastructure/previous_route/FunctionTermMap/FunctionValue>
@@ -1264,12 +1032,12 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeStartDirection" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeTypeAbbreviation/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1279,7 +1047,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "beltwayCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -1288,17 +1056,13 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/dateOfAbandonment/decommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1306,7 +1070,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeNumber/route/FunctionTermMap>
@@ -1323,10 +1087,6 @@
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap> ;
         rr:predicate  dbo:routeEnd .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:name/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "spur_type" .
@@ -1337,26 +1097,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_road/SimplePropertyMapping/spurOf/spur_of/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/subsequentInfrastructure/next_route/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/beltwayCity/beltway_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "map" .
 
 <./Mapping_en:Infobox_road/SubjectMap>
         a            rr:SubjectMap ;
@@ -1366,7 +1114,7 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/ruralMunicipality/rural_municipalities>
@@ -1377,25 +1125,22 @@
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeEndDirection" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap> ;
+        rr:predicate  dbo:spurType .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/spurType/spur_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_road/SimplePropertyMapping/country/country>

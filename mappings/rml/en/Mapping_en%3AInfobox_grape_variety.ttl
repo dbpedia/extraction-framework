@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -32,10 +33,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "notableWine" .
-
 <./Mapping_en:Infobox_grape_variety/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q10978 , dbo:Plant , dbo:Species , owl:Thing , wikidata:Q19088 , dbo:Grape , dbo:Eukaryote , wikidata:Q756 , dbo:FloweringPlant ;
@@ -44,7 +41,7 @@
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -68,13 +65,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin> ;
         rr:subjectMap          <./Mapping_en:Infobox_grape_variety/SubjectMap> .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "wineRegion" .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "wineRegion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species>
@@ -83,28 +76,24 @@
         rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap> ;
         rr:predicate  dbo:species .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "species" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "notableWine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -126,13 +115,9 @@
         a              rr:ObjectMap ;
         rml:reference  "origin" .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "origin" .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -153,10 +138,6 @@
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regions" .
-
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -185,10 +166,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -196,16 +173,12 @@
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "species" .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -217,18 +190,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "origin" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin>
@@ -237,19 +206,11 @@
         rr:objectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap> ;
         rr:predicate  dbo:origin .
 
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_grape_variety/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/notableWine/notable_wines/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_grape_variety/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_grape_variety/SimplePropertyMapping/wineRegion/regions/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

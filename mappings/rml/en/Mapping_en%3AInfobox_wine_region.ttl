@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,27 +29,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subregion" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "varietals" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Area> .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -61,19 +49,16 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap> ;
         rr:predicate  dbo:wineProduced .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isPartOfWineRegion" .
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap> ;
         rr:predicate  dbo:growingGrape .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -115,10 +100,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -127,7 +108,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -137,7 +118,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type>
@@ -153,7 +134,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "wineProduced" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue>
@@ -167,10 +148,6 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -181,34 +158,30 @@
         a              rr:ObjectMap ;
         rml:reference  "total size" .
 
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Area> .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "similar" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "wineries" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap> ;
         rr:predicate  dbo:numberOfWineries .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -220,18 +193,14 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue>
@@ -239,10 +208,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -252,21 +217,13 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfWineries" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -289,30 +246,18 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap> ;
         rr:predicate  dbo:isPartOfWineRegion .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "wineYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "wineProduced" .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -321,21 +266,17 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "subregion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "wineYear" .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap>
@@ -345,14 +286,6 @@
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "sub regions" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "varietals" .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -364,10 +297,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -390,7 +319,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -401,7 +330,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfVineyards" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap>
@@ -442,10 +371,6 @@
         a              rr:ObjectMap ;
         rml:reference  "official name" .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
@@ -457,7 +382,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isPartOfWineRegion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue>
@@ -493,18 +418,14 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap> ;
         rr:predicate  dbo:subregion .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "growingGrape" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "growingGrape" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SubjectMap/Function>
@@ -520,22 +441,22 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue>
@@ -547,10 +468,6 @@
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "other name" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -570,7 +487,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue>
@@ -581,20 +498,12 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "varietals" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -603,12 +512,12 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap>
@@ -621,7 +530,7 @@
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted>
@@ -634,40 +543,24 @@
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "similar" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap>
@@ -680,26 +573,14 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_wine_region?oldid=14206" .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap>
@@ -721,14 +602,6 @@
         a              rr:ObjectMap ;
         rml:reference  "vineyards" .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVineyards" .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -746,16 +619,8 @@
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap> ;
         rr:predicate  dbo:varietals .
 
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfWineries" .
 

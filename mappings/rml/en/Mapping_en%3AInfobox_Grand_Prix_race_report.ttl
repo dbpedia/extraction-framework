@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -35,7 +36,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue>
@@ -50,7 +51,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "thirdDriver" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country>
@@ -79,10 +80,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue> ;
@@ -90,12 +87,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstDriverCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "poleDriver" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -106,17 +99,13 @@
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap>
@@ -142,10 +131,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -154,12 +139,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstDriver" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "thirdTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name>
@@ -168,43 +153,27 @@
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Distance_laps" .
+
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First_Country" .
+
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Pole_Country" .
+
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Distance_laps" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Pole_Country" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "First_Country" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -212,24 +181,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distanceLaps" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "secondTeam" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -237,12 +190,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fastestDriver" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -252,12 +205,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "secondDriver" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource>
@@ -284,35 +237,23 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Course_mi" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "poleDriverCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstDriverTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "secondDriverCountry" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fastestDriverCountry" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -326,10 +267,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -337,7 +274,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -373,16 +310,6 @@
         a              rr:ObjectMap ;
         rml:reference  "Pole_Team" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap> ;
-        rr:predicate  dbo:poleDriverTeam .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue> ;
@@ -392,9 +319,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap> ;
+        rr:predicate  dbo:poleDriverTeam .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver>
         a             rr:PredicateObjectMap ;
@@ -406,30 +335,22 @@
         a              rr:ObjectMap ;
         rml:reference  "Third_Driver" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "secondDriver" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -441,35 +362,31 @@
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap> ;
         rr:predicate  dbo:fastestDriverTeam .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstDriverTeam" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "course" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap> ;
         rr:predicate  dbo:secondDriverCountry .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -478,21 +395,13 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "thirdDriver" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -516,22 +425,18 @@
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/mile> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "First_Driver" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "poleDriverTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "course" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue>
@@ -554,7 +459,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap>
@@ -563,16 +468,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue>
@@ -589,16 +490,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -616,13 +509,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstDriverCountry" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi>
@@ -633,12 +522,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "poleDriver" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -662,22 +547,22 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fastestDriverCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "secondTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team>
@@ -688,12 +573,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue>
@@ -706,26 +591,18 @@
         a              rr:ObjectMap ;
         rml:reference  "Distance_km" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distanceLaps" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Pole_Driver" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -735,17 +612,13 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "course" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -754,7 +627,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue>
@@ -774,49 +647,25 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distance" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Third_Team" .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Second_Country" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "poleDriverCountry" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "thirdDriverCountry" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -828,25 +677,17 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distance" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "thirdDriverCountry" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fastestDriverTeam" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap>
@@ -865,19 +706,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fastestDriver" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distance" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country>
         a             rr:PredicateObjectMap ;
@@ -887,12 +720,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -918,30 +751,14 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fastestDriverTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "course" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "thirdTeam" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap> ;
         rr:predicate  dbo:location .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -950,12 +767,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstDriver" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver>
         a             rr:PredicateObjectMap ;
@@ -975,27 +788,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type>
         a             rr:PredicateObjectMap ;
@@ -1005,12 +806,8 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1018,12 +815,12 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1034,10 +831,6 @@
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Official name" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1057,7 +850,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country>
@@ -1066,37 +859,25 @@
         rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap> ;
         rr:predicate  dbo:firstDriverCountry .
 
+<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "secondDriverCountry" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "poleDriverTeam" .
-
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Grand_Prix_race_report/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Grand_Prix_race_report/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distance" .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver>
         a             rr:PredicateObjectMap ;
@@ -1112,7 +893,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue>
@@ -1130,10 +911,6 @@
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Location" .
-
-<./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1178,7 +955,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue>
@@ -1200,7 +977,7 @@
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue>

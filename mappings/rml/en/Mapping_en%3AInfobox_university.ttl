@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,18 +29,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -52,10 +49,6 @@
         rr:class     dul:SocialPerson , owl:Thing , schema:CollegeOrUniversity , dul:Agent , dbo:EducationalInstitution , schema:EducationalOrganization , dbo:Organisation , wikidata:Q3918 , dbo:Agent , wikidata:Q43229 , dbo:University , schema:Organization ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -73,10 +66,6 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "superintendent" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
@@ -89,26 +78,14 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap> ;
         rr:predicate  dbo:formerName .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officerInCharge" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -132,10 +109,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "principal" .
-
 <./Mapping_en:Infobox_university/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -145,60 +118,40 @@
         a              rr:ObjectMap ;
         rml:reference  "endowment" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "affiliation" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "other" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "colours" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "doctoral" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "vicePresident" .
+<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colours" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "campus" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president>
         a             rr:PredicateObjectMap ;
@@ -210,17 +163,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "affiliation" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "other" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -230,16 +175,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "athletics" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "staff" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -252,10 +193,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap> ;
         rr:predicate  dbo:numberOfPostgraduateStudents .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "head" .
 
 <./Mapping_en:Infobox_university/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
@@ -288,12 +225,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -324,10 +261,6 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap> ;
         rr:predicate  dbo:affiliation .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -345,7 +278,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "viceChancellor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established>
@@ -364,18 +297,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "provost" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -399,14 +324,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfUndergraduateStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/longitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_university/longitude/FunctionTermMap> ;
-        rr:predicate  geo:long .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff>
         a             rr:PredicateObjectMap ;
@@ -414,20 +333,22 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap> ;
         rr:predicate  dbo:staff .
 
+<./Mapping_en:Infobox_university/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_university/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap> ;
         rr:predicate  dbo:mascot .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chancellor" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor>
         a             rr:PredicateObjectMap ;
@@ -437,16 +358,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfDoctoralStudents" .
 
 <./Mapping_en:Infobox_university/latitude/FunctionTermMap/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -455,17 +368,17 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "province" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue>
@@ -476,12 +389,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "campus" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue>
@@ -496,7 +409,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "head" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country>
@@ -517,16 +430,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "principal" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -540,27 +449,23 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officialSchoolColour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "provost" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -581,31 +486,19 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialSchoolColour" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -614,7 +507,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -634,7 +527,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap>
@@ -643,12 +536,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mascot" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -660,13 +553,9 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue>
@@ -675,27 +564,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "superintendent" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sport" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor>
         a             rr:PredicateObjectMap ;
@@ -709,10 +594,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_university/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
@@ -721,7 +602,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairman" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap>
@@ -731,7 +612,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "state" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -750,17 +631,17 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "facultySize" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
@@ -775,7 +656,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -788,53 +669,29 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap> ;
         rr:predicate  dbo:athletics .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "city" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mascot" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -856,34 +713,26 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap> ;
         rr:predicate  dbo:principal .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "facultySize" .
+<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latin_name" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "latin_name" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "dean" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "provost" .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -893,7 +742,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "superintendent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -905,21 +754,13 @@
         a              rr:ObjectMap ;
         rml:reference  "sports" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairman" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rector" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge>
@@ -955,7 +796,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officerInCharge" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1011,29 +852,21 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean>
@@ -1066,13 +899,18 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfPostgraduateStudents" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "students" .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports>
         a             rr:PredicateObjectMap ;
@@ -1080,34 +918,13 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap> ;
         rr:predicate  dbo:sport .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "native_name" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endowment" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialSchoolColour" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1122,7 +939,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1144,12 +961,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officialSchoolColour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed>
         a             rr:PredicateObjectMap ;
@@ -1159,7 +972,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfPostgraduateStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost>
@@ -1167,10 +980,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap> ;
         rr:predicate  dbo:provost .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1184,10 +993,6 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap> ;
         rr:predicate  dbo:vicePresident .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
@@ -1196,12 +1001,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "staff" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
@@ -1209,35 +1010,15 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
         rr:predicate  foaf:nick .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfPostgraduateStudents/postgrad/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors>
@@ -1254,12 +1035,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type>
@@ -1279,39 +1060,31 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "head" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "state" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "principal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1330,7 +1103,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1357,25 +1130,9 @@
         a              rr:ObjectMap ;
         rml:reference  "vice_chancellor" .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "athletics" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap>
@@ -1400,22 +1157,14 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officerInCharge/officer_in_charge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1427,12 +1176,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "president" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1469,7 +1214,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dean" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus>
@@ -1483,41 +1228,21 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "other" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfStudents" .
+<./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "established" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/latin_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1535,12 +1260,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfDoctoralStudents" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "endowment" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1548,22 +1273,18 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sport" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "mascot" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/sport/sports/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_university/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mascot" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1577,7 +1298,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue>
@@ -1594,10 +1315,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfUndergraduateStudents" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1617,24 +1334,20 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "former_names" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/dean/dean/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dean" .
+<./Mapping_en:Infobox_university/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "former_names" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1651,7 +1364,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "vicePresident" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1660,12 +1373,12 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue>
@@ -1674,23 +1387,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_university/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/other/other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1715,22 +1420,14 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rector" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1738,7 +1435,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1758,12 +1455,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/athletics/athletics/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng>
         a             rr:PredicateObjectMap ;
@@ -1771,21 +1464,9 @@
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "website" .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1819,10 +1500,6 @@
         rr:objectMap  <./Mapping_en:Infobox_university/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/closed/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closed" .
-
 <./Mapping_en:Infobox_university/SimplePropertyMapping/provost/provost/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_university/LogicalSource> ;
@@ -1834,10 +1511,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap> ;
         rr:predicate  dbo:director .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/motto/mottoeng/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1864,7 +1537,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfDoctoralStudents/doctoral>
@@ -1875,20 +1548,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "province" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/rector/rector/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1910,7 +1571,7 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/vicePresident/vice-president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/LogicalSource>
@@ -1938,17 +1599,13 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chancellor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/director/director/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1961,28 +1618,20 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "campus" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_university/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_university/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_university/SimplePropertyMapping/campus/campus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "campus" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/chancellor/chancellor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/city/city>
@@ -1997,12 +1646,8 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_university/SimplePropertyMapping/viceChancellor/vice_chancellor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "viceChancellor" .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/numberOfUndergraduateStudents/undergrad/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2010,11 +1655,11 @@
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_university/SimplePropertyMapping/staff/staff/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

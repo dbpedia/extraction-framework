@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -31,13 +32,13 @@
 <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:object     dbr-en:Canada ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador/ObjectMap> ;
+        rr:object     dbr-en:Newfoundland_and_Labrador ;
         rr:predicate  dbo:province .
 
 <>      a                      rr:TriplesMap ;
@@ -51,14 +52,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Newfoundland-geo-stub?oldid=29791" .
-
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Newfoundland_and_Labrador" .
-
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
 <./Mapping_en:Newfoundland-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

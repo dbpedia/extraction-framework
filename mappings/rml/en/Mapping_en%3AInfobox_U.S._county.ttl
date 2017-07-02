@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -48,10 +45,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -64,26 +57,18 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -112,12 +97,12 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "censusYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
@@ -129,23 +114,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:object     dbr-en:United_States ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "timeZone" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -156,13 +129,9 @@
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "percentageOfAreaWater" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi>
@@ -215,7 +184,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr>
@@ -253,7 +222,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue>
@@ -262,39 +231,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "congressionalDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latMinutesParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area percentage" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state>
         a             rr:PredicateObjectMap ;
@@ -307,21 +256,9 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "congressionalDistrict" .
-
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long min" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -329,7 +266,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "congressionalDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -344,12 +281,12 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "inhabitantsPerSquareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -360,10 +297,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -383,17 +316,17 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaLand" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
@@ -405,10 +338,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -416,7 +345,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -432,7 +361,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -444,45 +373,33 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestCity" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue>
@@ -506,10 +423,6 @@
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue> .
@@ -520,21 +433,9 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap> ;
         rr:predicate  dbo:areaLand .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cityType" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "timeZone" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2>
@@ -563,13 +464,9 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type>
@@ -583,14 +480,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -637,27 +526,13 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMile" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -665,18 +540,28 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "founded year" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
+        rr:object     "percentageOfAreaWater" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue>
@@ -689,24 +574,20 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "inhabitantsPerSquareMile" .
 
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -722,10 +603,9 @@
         a              rr:ObjectMap ;
         rml:reference  "density_sq_mi" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl>
         a             rr:PredicateObjectMap ;
@@ -737,13 +617,14 @@
         a              rr:ObjectMap ;
         rml:reference  "founded" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue>
@@ -764,33 +645,21 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_total_sq_mi" .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "inhabitantsPerSquareKilometre" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "countySeat" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue>
@@ -847,22 +716,14 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone>
         a             rr:PredicateObjectMap ;
@@ -877,7 +738,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue>
@@ -891,14 +752,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap> ;
         rr:predicate  dbo:congressionalDistrict .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "censusYear" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop>
         a             rr:PredicateObjectMap ;
@@ -914,12 +767,8 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaWater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -929,7 +778,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "countySeat" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -947,7 +796,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi>
@@ -958,7 +807,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "inhabitantsPerSquareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_U.S._county/longitude>
@@ -971,10 +820,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "countySeat" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "seat" .
@@ -983,10 +828,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/squareMile> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1005,22 +846,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaLand" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1029,7 +858,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaWater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1061,14 +890,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1077,7 +898,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "congressionalDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap>
@@ -1086,12 +907,12 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap>
@@ -1111,7 +932,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cityType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district>
@@ -1122,7 +943,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr>
@@ -1130,14 +951,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap> ;
         rr:predicate  dbo:censusYear .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaWater" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1148,41 +961,25 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaWater" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "censusYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1193,37 +990,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestCity" .
-
 <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "congressionalDistrict" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaLand" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "state" .
-
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1255,7 +1028,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue>
@@ -1277,7 +1050,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SubjectMap/Function>
@@ -1287,12 +1060,8 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1301,17 +1070,13 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "countySeat" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1321,7 +1086,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1331,7 +1096,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "state" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
@@ -1350,7 +1115,7 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SubjectMap>
@@ -1364,10 +1129,6 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "congressionalDistrict" .
-
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
@@ -1375,21 +1136,13 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaLand" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1403,20 +1156,12 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "censusYear" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3>
         a             rr:PredicateObjectMap ;
@@ -1427,10 +1172,6 @@
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "district" .
-
-<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1449,21 +1190,21 @@
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

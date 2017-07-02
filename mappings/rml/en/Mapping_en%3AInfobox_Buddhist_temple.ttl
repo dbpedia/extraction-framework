@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,29 +29,99 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+<./Mapping_en:Infobox_Buddhist_temple/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:ArchitecturalStructure , schema:LandmarksOrHistoricalBuildings , dbo:Place , schema:Place , wikidata:Q41176 , dbo:HistoricBuilding , dbo:Location , dbo:Building , owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Buddhist_temple/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_Buddhist_temple/longitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
@@ -59,20 +130,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country>
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website>
         a             rr:PredicateObjectMap ;
@@ -80,145 +141,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap> ;
         rr:predicate  foaf:page .
 
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:page" .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Buddhist_temple/latitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap> ;
-        rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_Buddhist_temple/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:ArchitecturalStructure , schema:LandmarksOrHistoricalBuildings , dbo:Place , schema:Place , wikidata:Q41176 , dbo:HistoricBuilding , dbo:Location , dbo:Building , owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:latFunction .
-
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country" .
-
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Buddhist_temple?oldid=14130" .
-
-<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ParameterPOM>
@@ -226,13 +152,47 @@
         rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
+<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:page" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap>
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Buddhist_temple/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -240,8 +200,25 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/longitude> , <./Mapping_en:Infobox_Buddhist_temple/latitude> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:page/website> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap> .
 
-<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_Buddhist_temple/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Buddhist_temple?oldid=14130" .
+
+<./Mapping_en:Infobox_Buddhist_temple/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Buddhist_temple/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Buddhist_temple/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Buddhist_temple/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 

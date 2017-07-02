@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -37,7 +38,7 @@
 <./Mapping_en:England-bio-stub/ConstantMapping/nationality/England>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/England/ObjectMap> ;
+        rr:object     dbr-en:England ;
         rr:predicate  dbo:nationality .
 
 <./Mapping_en:England-bio-stub/SubjectMap>
@@ -45,14 +46,6 @@
         rr:class     dul:NaturalPerson , schema:Person , dul:Agent , wikidata:Q215627 , dbo:Agent , dbo:Person , wikidata:Q5 , foaf:Person , owl:Thing ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/England/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/England" .
-
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -68,6 +61,6 @@
 <./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
+        rr:object     dbr-en:United_Kingdom ;
         rr:predicate  dbo:nationality .
 

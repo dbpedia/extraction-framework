@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,29 +35,21 @@
         rr:predicateObjectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada> , <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan> ;
         rr:subjectMap          <./Mapping_en:Saskatchewan-geo-stub/SubjectMap> .
 
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
 <./Mapping_en:Saskatchewan-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Saskatchewan" .
-
 <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan/ObjectMap> ;
+        rr:object     dbr-en:Saskatchewan ;
         rr:predicate  dbo:region .
 
 <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:object     dbr-en:Canada ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Saskatchewan-geo-stub/SubjectMap>

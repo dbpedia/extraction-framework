@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3>
         a             rr:PredicateObjectMap ;
@@ -55,7 +52,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -64,12 +61,8 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -79,10 +72,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -91,12 +80,8 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -106,7 +91,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumInclination" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status>
@@ -126,10 +111,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last>
         a             rr:PredicateObjectMap ;
@@ -160,10 +141,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue> .
@@ -174,19 +151,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchRocket" .
-
 <./Mapping_en:Infobox_launch_pad/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_launch_pad?oldid=7337" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -202,18 +171,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchRocket" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -229,33 +190,17 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchRocket" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tlaunches" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -263,22 +208,14 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "launches" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "totalLaunches" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -288,7 +225,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue>
@@ -296,10 +233,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -321,10 +254,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -334,13 +263,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "launches" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches>
@@ -351,25 +276,21 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "first" .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "associatedRocket" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3>
@@ -377,10 +298,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap> ;
         rr:predicate  dbo:launches .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -414,7 +331,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "launchSite" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -427,10 +344,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -447,7 +360,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue>
@@ -462,50 +375,46 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap> ;
         rr:predicate  dbo:firstLaunchDate .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "first2" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first2" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "short" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "rockets" .
+
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "short" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3>
         a             rr:PredicateObjectMap ;
@@ -513,26 +422,10 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap> ;
         rr:predicate  dbo:associatedRocket .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumInclination" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchDate" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "launches" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -554,24 +447,12 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "pad2" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "associatedRocket" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3>
         a             rr:PredicateObjectMap ;
@@ -596,17 +477,13 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumInclination" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -629,13 +506,9 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap> ;
         rr:predicate  dbo:totalLaunches .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue>
@@ -649,22 +522,10 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -677,25 +538,17 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/totalLaunches/tlaunches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "totalLaunches" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "associatedRocket" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -703,7 +556,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination>
@@ -723,7 +576,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -732,21 +585,13 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchDate" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -754,13 +599,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2>
@@ -775,7 +620,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -789,10 +634,6 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap> ;
         rr:predicate  dbo:operator .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "launches2" .
@@ -803,27 +644,27 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap>
@@ -832,7 +673,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "launches" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -840,13 +681,9 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short>
@@ -855,16 +692,16 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/short/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -877,17 +714,9 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -910,27 +739,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "first" .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap> ;
-        rr:predicate  dbo:firstLaunchRocket .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -938,18 +753,20 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "associatedRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap> ;
+        rr:predicate  dbo:firstLaunchRocket .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -958,7 +775,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue>
@@ -969,7 +786,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap>
@@ -994,16 +811,16 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap> ;
         rr:predicate  dbo:lastLaunchDate .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap> ;
         rr:predicate  dbo:associatedRocket .
+
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1031,7 +848,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/minimumInclination/minimumInclination/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1053,35 +870,23 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "associatedRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumInclination" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchDate" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1107,10 +912,6 @@
         a              rr:ObjectMap ;
         rml:reference  "first3" .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchDate" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue> .
@@ -1131,22 +932,18 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1166,10 +963,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchDate" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue> .
@@ -1180,54 +973,33 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchDate" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/maximumInclination/maximumInclination/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstLaunchRocket" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "launches" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchRocket" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/pad1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1235,22 +1007,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "last3" .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastLaunchRocket" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status3/FunctionTermMap>
@@ -1259,7 +1032,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchDate/last2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1267,19 +1040,11 @@
         rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_launch_pad/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "launchSite" .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1289,7 +1054,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1304,20 +1069,12 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launches/launches2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "launches" .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchDate/first3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "associatedRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1344,10 +1101,6 @@
         a              rr:ObjectMap ;
         rml:reference  "last" .
 
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfPads" .
-
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/lastLaunchRocket/last/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_launch_pad/LogicalSource> ;
@@ -1356,7 +1109,7 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/launchSite/site>
@@ -1384,12 +1137,12 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstLaunchRocket" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfPads" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets2>
@@ -1406,16 +1159,8 @@
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/associatedRocket/rockets/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/numberOfPads/pads/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_launch_pad/SimplePropertyMapping/firstLaunchRocket/first3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;

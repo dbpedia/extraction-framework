@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -38,10 +39,6 @@
         a              rr:ObjectMap ;
         rml:reference  "coordinates" , "coords" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area_of_Australia/LogicalSource> ;
@@ -50,7 +47,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -62,23 +59,11 @@
         fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Area> .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area_of_Australia/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area_of_Australia/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "long_minutes" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/LogicalSource>
         a                         rml:LogicalSource ;
@@ -86,13 +71,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_protected_area_of_Australia?oldid=14654" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_minutes" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -106,18 +87,18 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap> , <./Mapping_en:Infobox_protected_area_of_Australia/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_direction" .
+<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue> .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_direction" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -160,22 +141,14 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfVisitors" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -192,12 +165,8 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -213,21 +182,17 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iucnCategory" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
@@ -239,13 +204,9 @@
         a              rr:ObjectMap ;
         rml:reference  "nearest_city" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap>
@@ -262,7 +223,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -275,12 +236,12 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
@@ -322,7 +283,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
@@ -360,10 +321,6 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -382,7 +339,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
@@ -402,10 +359,6 @@
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue> .
@@ -420,17 +373,13 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap> ;
         rr:predicate  dbo:nearestCity .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "iucn_category" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
@@ -444,18 +393,10 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Australia" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "iucnCategory" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -491,10 +432,6 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap> ;
         rr:predicate  dbo:nearestCity .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVisitors" .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
         fnml:functionValue     <./Mapping_en:Infobox_protected_area_of_Australia/latitude/FunctionTermMap> ;
@@ -509,12 +446,8 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -529,7 +462,7 @@
 <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia/ObjectMap> ;
+        rr:object     dbr-en:Australia ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
@@ -544,12 +477,12 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -558,7 +491,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
@@ -568,7 +501,7 @@
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/longitude>
@@ -583,18 +516,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area_of_Australia/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -614,10 +539,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nearestCity" .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SubjectMap>
         a            rr:SubjectMap ;

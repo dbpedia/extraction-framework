@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic>
         a             rr:PredicateObjectMap ;
@@ -48,13 +45,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -66,18 +58,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "role" .
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -92,21 +85,13 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterUtility" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "flyingHours" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -118,13 +103,9 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap> ;
         rr:predicate  dbo:aircraftTrainer .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftInterceptor" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue>
@@ -137,28 +118,24 @@
         a              rr:ObjectMap ;
         rml:reference  "nickname" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "thirdCommander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "identificationSymbol" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftRecon" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates>
@@ -176,16 +153,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "anniversary" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber>
         a             rr:PredicateObjectMap ;
@@ -205,7 +178,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterAttack" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -221,7 +194,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -247,10 +220,6 @@
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "activeYearsStartYear" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftRecon" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -292,7 +261,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -306,12 +275,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -326,13 +291,9 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "identificationSymbol" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon>
@@ -343,7 +304,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "secondCommander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -363,7 +324,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mascot" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap>
@@ -383,16 +344,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -406,30 +363,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "commandStructure" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "garrison" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "role" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SubjectMap>
@@ -446,25 +387,17 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colour" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "garrison" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders>
         a             rr:PredicateObjectMap ;
@@ -479,24 +412,16 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterMultirole" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -511,30 +436,26 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftElectronic" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "colour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "march" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap>
@@ -548,12 +469,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march>
@@ -561,10 +482,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap> ;
         rr:predicate  dbo:march .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol>
         a             rr:PredicateObjectMap ;
@@ -574,21 +491,17 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftBomber" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "notableCommander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -597,17 +510,13 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -619,17 +528,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftTrainer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -637,31 +538,19 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterTransport" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -681,12 +570,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -696,7 +585,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap>
@@ -715,7 +604,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -723,13 +612,9 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size>
@@ -743,14 +628,6 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftElectronic" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
@@ -759,12 +636,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -776,10 +649,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftFighter" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -788,7 +657,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded>
@@ -826,21 +695,17 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftInterceptor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "commandStructure" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftTransport" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -850,32 +715,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "garrison" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterMultirole" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "militaryUnitSize" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterCargo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SubjectMap/Function>
@@ -894,37 +739,25 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "secondCommander" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM>
@@ -945,21 +778,13 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftPatrol" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors>
         a             rr:PredicateObjectMap ;
@@ -1011,12 +836,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue>
@@ -1037,12 +862,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "flyingHours" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3>
@@ -1053,7 +878,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "identificationSymbol" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap>
@@ -1068,12 +893,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "identificationSymbol" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mascot" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1091,7 +912,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison>
@@ -1100,23 +921,11 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap> ;
         rr:predicate  dbo:garrison .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "march" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "battle" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "patron" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1128,12 +937,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterAttack" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1145,10 +950,6 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates> ;
@@ -1158,12 +959,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "disbanded" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1182,7 +983,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftBomber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue>
@@ -1190,10 +991,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1205,12 +1002,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "battleHonours" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue>
@@ -1230,10 +1027,6 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterCargo" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "aircraft_trainer" .
@@ -1248,21 +1041,17 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1281,12 +1070,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftTransport" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1298,18 +1083,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftPatrol" .
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1324,30 +1105,14 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fourthCommander" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "commander" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1384,10 +1149,6 @@
         a              rr:ObjectMap ;
         rml:reference  "notable_commanders" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "disbanded" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "commander3" .
@@ -1400,10 +1161,6 @@
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "commander1" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1424,7 +1181,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue>
@@ -1433,25 +1190,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftAttack" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries>
         a             rr:PredicateObjectMap ;
@@ -1459,18 +1200,18 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap> ;
         rr:predicate  dbo:anniversary .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -1481,24 +1222,10 @@
         a              rr:ObjectMap ;
         rml:reference  "command_structure" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap> ;
-        rr:predicate  dbo:aircraftHelicopterAttack .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "militaryUnitSize" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1510,15 +1237,17 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap> ;
         rr:predicate  dbo:battleHonours .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterAttack .
+
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap> ;
         rr:predicate  dbo:flyingHours .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack>
         a             rr:PredicateObjectMap ;
@@ -1526,21 +1255,17 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap> ;
         rr:predicate  dbo:aircraftAttack .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "identificationSymbol" .
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1552,13 +1277,9 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue>
@@ -1571,10 +1292,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1590,25 +1307,13 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "identification_symbol" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterObservation" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftAttack" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport>
@@ -1616,10 +1321,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap> ;
         rr:predicate  dbo:aircraftHelicopterTransport .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterTransport" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
@@ -1633,11 +1334,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1650,14 +1346,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftFighter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "identificationSymbol" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fourthCommander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1728,20 +1429,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "identificationSymbol" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue>
@@ -1760,7 +1453,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "aircraftHelicopterObservation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -1768,10 +1461,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4> , <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours> , <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "colourName" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1>
         a             rr:PredicateObjectMap ;
@@ -1781,7 +1470,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "battle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -1795,24 +1484,20 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap> ;
-        rr:predicate  dbo:aircraftHelicopter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap> ;
         rr:predicate  dbo:identificationSymbol .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1831,10 +1516,6 @@
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftTrainer" .
 
 <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -1865,12 +1546,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1902,10 +1579,6 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1915,10 +1588,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1936,10 +1605,6 @@
         a              rr:ObjectMap ;
         rml:reference  "dates" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "identificationSymbol" .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1950,21 +1615,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap>
@@ -1979,10 +1636,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "notableCommander" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1999,15 +1652,15 @@
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "battles" .
+
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "battles" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol>
         a             rr:PredicateObjectMap ;
@@ -2017,7 +1670,7 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "commander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue>
@@ -2025,26 +1678,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopter" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "battleHonours" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "thirdCommander" .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "militaryBranch" .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2060,12 +1693,12 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "militaryBranch" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "patron" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue>
@@ -2081,12 +1714,8 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "anniversary" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "aircraftHelicopterUtility" .
 
 <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -2100,11 +1729,10 @@
         a              rr:ObjectMap ;
         rml:reference  "aircraft_electronic" .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole>
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap> ;
-        rr:predicate  dbo:aircraftHelicopterMultirole .
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2113,17 +1741,18 @@
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterMultirole .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -2139,10 +1768,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;

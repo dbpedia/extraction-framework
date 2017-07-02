@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -39,7 +40,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/StartDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/OntologyParameterPOM>
@@ -83,7 +84,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue>
@@ -91,20 +92,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_college_coach/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_college_coach/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -114,9 +101,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -125,10 +118,6 @@
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -139,13 +128,9 @@
         rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coachingRecord" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/StartDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap>
@@ -164,7 +149,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
@@ -173,7 +158,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentRecord" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -182,13 +167,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_college_coach/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -199,10 +180,6 @@
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "tournamentRecord" .
 
 <./Mapping_en:Infobox_college_coach/SubjectMap>
         a            rr:SubjectMap ;
@@ -237,22 +214,14 @@
         a              rr:ObjectMap ;
         rml:reference  "date_place" .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentRecord" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -288,23 +257,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coachedTeam" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "tournamentRecord" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap>
@@ -317,12 +282,12 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "overallRecord" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coachedTeam" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap>
@@ -335,12 +300,8 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coachingRecord" .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -350,25 +311,17 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "overall_record" .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bowlRecord" .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -380,10 +333,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap> ;
         rr:predicate  dbo:coachingRecord .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachedTeam/coach_teams>
         a             rr:PredicateObjectMap ;
@@ -415,13 +364,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_college_coach/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bowlRecord" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -446,14 +391,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathPlace/date_place>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -465,26 +402,14 @@
         rr:objectMap  <./Mapping_en:Infobox_college_coach/EndDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/coachingRecord/coaching_records/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coaching_records" .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -499,7 +424,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_college_coach/StartDate/activeYearsStartDate/activeYearsEndDate/coach_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -523,28 +448,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_college_coach/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/tournamentRecord/tournament_record/FunctionTermMap> ;
         rr:predicate  dbo:tournamentRecord .
-
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/bowlRecord/bowl_record/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
@@ -567,13 +484,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "overallRecord" .
-
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/overallRecord/overall_record/FunctionTermMap/FunctionValue>
@@ -605,7 +518,7 @@
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/currentRecord/current_record/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_college_coach/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>

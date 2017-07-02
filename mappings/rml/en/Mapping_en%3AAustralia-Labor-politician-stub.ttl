@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -37,7 +38,7 @@
 <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party/ObjectMap> ;
+        rr:object     dbr-en:Australian_Labor_Party ;
         rr:predicate  dbo:party .
 
 <./Mapping_en:Australia-Labor-politician-stub/LogicalSource>
@@ -49,7 +50,7 @@
 <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia/ObjectMap> ;
+        rr:object     dbr-en:Australia ;
         rr:predicate  dbo:nationality .
 
 <>      a                      rr:TriplesMap ;
@@ -62,12 +63,4 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Australian_Labor_Party" .
-
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Australia" .
 

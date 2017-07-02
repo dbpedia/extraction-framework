@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -35,7 +36,7 @@
 
 <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -44,12 +45,8 @@
 
 <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "licensee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "licensee" .
 
 <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -59,12 +56,8 @@
 
 <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "network" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "licensee" .
 
 <Video/SimplePropertyMapping/licensee/licensee>
         a             rr:PredicateObjectMap ;
@@ -74,16 +67,12 @@
 
 <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "licensee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -113,12 +102,8 @@
 
 <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "network" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -143,10 +128,6 @@
         rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap> ;
         rr:predicate  dbo:network .
 
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <Video/SimplePropertyMapping/licensee/licensor>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -155,21 +136,13 @@
 
 <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "network" .
 
 <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -202,10 +175,6 @@
         rr:predicateObjectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM> , <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
 <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
@@ -214,16 +183,12 @@
 
 <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "producer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/producer/producer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
-
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -231,22 +196,18 @@
 
 <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "musicComposer" .
 
 <Video/SimplePropertyMapping/network/network_other>
         a             rr:PredicateObjectMap ;
@@ -266,12 +227,12 @@
 
 <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -286,13 +247,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue> .
 
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "licensee" .
-
 <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
@@ -307,13 +264,9 @@
         rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap> ;
         rr:predicate  dbo:writer .
 
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "musicComposer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SubjectMap>  a  rr:SubjectMap ;
@@ -323,7 +276,7 @@
 
 <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -341,7 +294,7 @@
 
 <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/network/network/FunctionTermMap>
@@ -352,18 +305,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue> .
 
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -378,7 +323,7 @@
 
 <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -387,7 +332,7 @@
 
 <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/writer/writer/FunctionTermMap>
@@ -400,10 +345,6 @@
         rr:predicateObjectMap  <Video/SimplePropertyMapping/licensee/licensee> , <Video/SimplePropertyMapping/network/network> , <Video/SimplePropertyMapping/director/director> , <Video/SimplePropertyMapping/type/type> , <Video/SimplePropertyMapping/network/network_other> , <Video/SimplePropertyMapping/musicComposer/music> , <Video/SimplePropertyMapping/writer/writer> , <Video/SimplePropertyMapping/producer/producer> , <Video/SimplePropertyMapping/licensee/licensor_other> , <Video/SimplePropertyMapping/network/network_en> , <Video/SimplePropertyMapping/foaf:name/title> , <Video/SimplePropertyMapping/licensee/licensor> ;
         rr:subjectMap          <Video/SubjectMap> .
 
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -415,10 +356,6 @@
         rr:objectMap  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap> ;
         rr:predicate  dbo:network .
 
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
-
 <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
@@ -429,27 +366,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
 
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <Video/SimplePropertyMapping/director/director/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue> .
 
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
+<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -461,7 +390,7 @@
 
 <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <Video/SimplePropertyMapping/type/type>
@@ -482,20 +411,12 @@
 
 <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "licensee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue> .
-
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "network" .
 
 <Video/SimplePropertyMapping/director/director>
         a             rr:PredicateObjectMap ;
@@ -520,7 +441,7 @@
 
 <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "network" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <Video/SimplePropertyMapping/licensee/licensor_other>
@@ -535,26 +456,10 @@
         rr:predicateObjectMap  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM> , <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "network" .
-
 <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <Video/SubjectMap/Function>
         a            rr:SubjectMap ;

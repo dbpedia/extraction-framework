@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -40,24 +41,24 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -67,22 +68,14 @@
         a              rr:ObjectMap ;
         rml:reference  "frequently_updated" .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -106,10 +99,6 @@
         a              rr:ObjectMap ;
         rml:reference  "latest_preview_version" .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_software/LogicalSource> ;
@@ -130,36 +119,28 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestPreviewVersion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/selectParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/selectParameterPOM/ObjectMap> ;
+        rr:object     "first" ;
         rr:predicate  dbf:selectParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operatingSystem" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released>
         a             rr:PredicateObjectMap ;
@@ -167,25 +148,13 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap> ;
         rr:predicate  dbo:releaseDate .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "frequentlyUpdated" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "author" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -205,12 +174,8 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status>
         a             rr:PredicateObjectMap ;
@@ -218,25 +183,13 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/selectParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "first" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date>
@@ -245,39 +198,23 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap> ;
         rr:predicate  dbo:latestPreviewDate .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "author" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "author" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "computingPlatform" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestReleaseVersion" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -294,68 +231,48 @@
         a              rr:ObjectMap ;
         rml:reference  "frequently updated" .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "frequentlyUpdated" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestPreviewDate" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestReleaseVersion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "license" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "genre" .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/selectParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/selectParameterPOM/ObjectMap> ;
+        rr:object     "first" ;
         rr:predicate  dbf:selectParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap>
@@ -372,10 +289,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_software/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license> , <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer> , <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size> , <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author> , <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version> , <./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform> , <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language> , <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version> , <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status> , <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date> , <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version> , <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released> ;
         rr:subjectMap          <./Mapping_en:Infobox_software/SubjectMap> .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version>
         a             rr:PredicateObjectMap ;
@@ -395,7 +308,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "frequentlyUpdated" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -405,7 +318,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue>
@@ -421,7 +334,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "developer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -444,7 +357,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "programmingLanguage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue>
@@ -453,23 +366,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/selectParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_software/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -488,7 +393,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -506,17 +411,9 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "megabyte" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version>
@@ -527,17 +424,17 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fileSize" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestPreviewDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap>
@@ -556,7 +453,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -568,14 +465,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap> ;
         rr:predicate  dbo:operatingSystem .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestPreviewVersion" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -594,14 +483,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_software/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre>
         a             rr:PredicateObjectMap ;
@@ -609,18 +498,10 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
         rr:predicate  dbo:genre .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "author" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -632,12 +513,12 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestReleaseVersion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue>
@@ -648,16 +529,8 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestReleaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/computingPlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "computingPlatform" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version>
         a             rr:PredicateObjectMap ;
@@ -681,10 +554,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestPreviewVersion" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_software/LogicalSource> ;
@@ -693,21 +562,17 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "frequentlyUpdated" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language>
@@ -726,33 +591,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_software/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "operating system" .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "developer" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "megabyte" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -776,10 +621,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "license" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue> .
@@ -789,14 +630,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_software/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_software/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestReleaseDate" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -821,14 +654,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap> ;
         rr:predicate  dbo:frequentlyUpdated .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/fileSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fileSize" .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestReleaseVersion" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license>
         a             rr:PredicateObjectMap ;
@@ -881,7 +706,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue>
@@ -892,7 +717,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -901,7 +726,7 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -912,10 +737,6 @@
 <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_software/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "latestReleaseDate" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -945,13 +766,9 @@
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_software/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "programmingLanguage" .
-
 <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap>
@@ -977,12 +794,12 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestPreviewVersion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -991,12 +808,12 @@
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "latestReleaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/operatingSystem/operating%20system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operatingSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue>
@@ -1010,10 +827,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_software/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
-
-<./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/selectParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "first" .
 
 <./Mapping_en:Infobox_software/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

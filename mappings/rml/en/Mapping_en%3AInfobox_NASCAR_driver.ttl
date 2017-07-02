@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,7 +37,7 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -58,7 +59,7 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -74,27 +75,15 @@
         a              rr:ObjectMap ;
         rml:reference  "Cause of Death" .
 
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -112,12 +101,8 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathCause" .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -135,7 +120,7 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NASCAR_driver/SubjectMap/Function>
@@ -157,7 +142,7 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate>
@@ -166,23 +151,19 @@
         rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathCause" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue>
@@ -207,18 +188,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthDate/Birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -227,20 +200,12 @@
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -251,10 +216,6 @@
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Name" .
-
-<./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_NASCAR_driver/SimplePropertyMapping/deathCause/Cause%20of%20Death/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

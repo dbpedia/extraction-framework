@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,16 +31,12 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -47,30 +44,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -79,7 +64,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue>
@@ -93,10 +78,6 @@
         rr:class     dbo:WrestlingEvent , schema:SportsEvent , dbo:SocietalEvent , dul:Event , wikidata:Q1656682 , dbo:SportsEvent , schema:Event , owl:Thing , dbo:Event ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date>
         a             rr:PredicateObjectMap ;
@@ -115,21 +96,13 @@
         rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap> ;
         rr:predicate  dbo:promotion .
 
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "promotion" .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "followingEvent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap>
@@ -152,12 +125,12 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "brand" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent>
@@ -165,10 +138,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap> ;
         rr:predicate  dbo:followingEvent .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousEvent" .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city>
         a             rr:PredicateObjectMap ;
@@ -184,7 +153,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -196,10 +165,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Wrestling_event?oldid=7475" .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -216,7 +181,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
@@ -237,13 +202,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "followingEvent" .
-
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "promotion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue>
@@ -258,20 +219,12 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousEvent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "promotion" .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -280,12 +233,8 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue>
         a             rr:PredicateObjectMap ;
@@ -295,7 +244,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
@@ -304,18 +253,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "brand" .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -328,18 +269,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap> ;
         rr:predicate  dbo:previousEvent .
 
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -364,7 +301,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -382,7 +319,7 @@
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap>

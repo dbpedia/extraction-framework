@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "area" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -50,7 +51,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/latitude/FunctionTermMap>
@@ -64,17 +65,13 @@
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "established" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "jurisdiction" .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "established" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/latitude/FunctionTermMap/ParameterPOM>
@@ -84,7 +81,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -95,31 +92,23 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "jurisdiction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfMembers" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2>
@@ -130,20 +119,12 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -154,10 +135,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "members" .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -171,19 +148,19 @@
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
+<./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "members" .
+
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -199,29 +176,21 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "area" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "territory" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_diocese/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_diocese/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -237,10 +206,6 @@
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "area" .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -263,12 +228,12 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "patron" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue>
@@ -300,7 +265,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -327,18 +292,13 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "province" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -346,16 +306,13 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "area" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -364,7 +321,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap>
@@ -391,13 +348,9 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "territory" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -418,12 +371,12 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
@@ -447,16 +400,8 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/LogicalSource>
         a                         rml:LogicalSource ;
@@ -488,14 +433,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_diocese/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "patron" .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_diocese/LogicalSource> ;
@@ -514,18 +451,10 @@
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "jurisdiction" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfMembers" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -544,31 +473,19 @@
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap> ;
         rr:predicate  dbo:jurisdiction .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "website" .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap>
         a                      rr:TriplesMap ;
@@ -597,21 +514,9 @@
         rr:objectMap  <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "province" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -621,10 +526,6 @@
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -651,7 +552,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron>
@@ -670,7 +571,7 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "area" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name>
@@ -684,10 +585,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members>
         a             rr:PredicateObjectMap ;
@@ -703,16 +600,12 @@
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory>
         a             rr:PredicateObjectMap ;
@@ -729,10 +622,6 @@
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_diocese/LogicalSource> ;
@@ -747,16 +636,8 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap/ParentTriplesMap/longitude/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "area" .
-
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

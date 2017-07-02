@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -52,11 +53,6 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_metro" .
@@ -66,13 +62,10 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "district" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde>
         a             rr:PredicateObjectMap ;
@@ -86,7 +79,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -96,7 +89,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "district" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap>
@@ -107,10 +100,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk>
         a             rr:PredicateObjectMap ;
@@ -125,17 +114,13 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_German_location/ConstantMapping/country/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://dbpedia.org/resource/Germany" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -146,18 +131,6 @@
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "City" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -172,10 +145,6 @@
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/6/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:PopulatedPlace , wikidata:Q486972 , dbo:Settlement .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -199,21 +168,21 @@
 <./Mapping_en:Infobox_German_location/ConstantMapping/country/Germany>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:object     <http://dbpedia.org/resource/Germany> ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -229,10 +198,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -268,20 +233,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "administrativeCollectivity" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -293,17 +250,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -326,17 +275,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap> ;
         rr:predicate  dbo:populationMetro .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  schema:City , dbo:Place , dbo:PopulatedPlace , dbo:Settlement , dbo:City , dbo:Location , schema:Place , wikidata:Q486972 , wikidata:Q515 , owl:Thing .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "administrativeDistrict" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3>
         a             rr:PredicateObjectMap ;
@@ -352,7 +293,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue>
@@ -361,13 +302,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationMetro" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap>
@@ -376,12 +313,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -389,7 +322,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -398,7 +331,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue>
@@ -414,7 +347,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -440,17 +373,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationUrban" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -458,13 +383,13 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -474,29 +399,17 @@
         a              rr:ObjectMap ;
         rml:reference  "pop_urban" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "administrativeDistrict" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -511,17 +424,13 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "administrativeDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -562,20 +471,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "federalState" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -593,28 +494,24 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:equals .
 
-<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "administrativeCollectivity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Regierungsbezirk" .
 
+<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -643,21 +540,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:equals .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -669,22 +554,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "associationOfLocalGovernment" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap>
@@ -695,18 +572,14 @@
         a              rr:ObjectMap ;
         rml:reference  "district" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "administrativeDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1>
@@ -718,7 +591,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -726,13 +599,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderName" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "department" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -758,12 +627,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -772,17 +641,17 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
@@ -793,7 +662,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -826,7 +695,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -838,30 +707,18 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap>
@@ -887,17 +744,13 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Municipality" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue>
@@ -934,7 +787,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -946,27 +799,15 @@
         a              rr:ObjectMap ;
         rml:reference  "borough" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "licence" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -974,7 +815,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "district" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue>
@@ -985,17 +826,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che>
         a             rr:PredicateObjectMap ;
@@ -1003,17 +839,14 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband>
@@ -1024,25 +857,17 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1056,7 +881,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1074,17 +899,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap> ;
         rr:predicate  dbo:associationOfLocalGovernment .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1095,21 +912,13 @@
         a              rr:ObjectMap ;
         rml:reference  "ruling_party3" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -1127,10 +936,6 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Art" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "population_as_of" .
@@ -1141,18 +946,19 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap> ;
         rr:predicate  dbo:associationOfLocalGovernment .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Art" .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "jointCommunity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "ruling_party2" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel>
         a             rr:PredicateObjectMap ;
@@ -1170,30 +976,13 @@
         a              rr:ObjectMap ;
         rml:reference  "Verbandsgemeinde" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ruling_party2" .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1202,16 +991,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationUrban" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1221,16 +1002,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1239,7 +1016,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaMetro" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -1264,12 +1041,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/ObjectMap>
@@ -1278,7 +1055,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/ObjectMap>
@@ -1296,21 +1073,13 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "associationOfLocalGovernment" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1319,7 +1088,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1333,16 +1102,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1353,22 +1114,18 @@
         a            rr:ObjectMap ;
         rr:constant  "Stadt" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1376,7 +1133,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue>
@@ -1385,18 +1142,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "administrativeDistrict" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland>
         a             rr:PredicateObjectMap ;
@@ -1410,22 +1159,10 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap> ;
         rr:predicate  dbo:areaCode .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "department" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1435,7 +1172,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap>
@@ -1444,13 +1181,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1460,16 +1192,17 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro>
         a             rr:PredicateObjectMap ;
@@ -1485,7 +1218,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap>
@@ -1500,17 +1233,13 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1527,7 +1256,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban>
@@ -1558,7 +1287,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1586,7 +1315,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei>
@@ -1595,18 +1324,10 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap> ;
         rr:predicate  dbo:leaderParty .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1620,43 +1341,23 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap> ;
         rr:predicate  dbo:areaCode .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Verwaltungsgemeinschaft" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Einwohner" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap>
@@ -1677,13 +1378,9 @@
         a              rr:ObjectMap ;
         rml:reference  "elevation" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue>
@@ -1695,14 +1392,6 @@
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough>
         a             rr:PredicateObjectMap ;
@@ -1718,7 +1407,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1741,10 +1430,6 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/6>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/6/FunctionTermMap> ;
@@ -1757,26 +1442,22 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap> ;
         rr:predicate  dbo:administrativeCollectivity .
 
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "leaderParty" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
@@ -1789,21 +1470,13 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap>
@@ -1812,7 +1485,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region>
@@ -1823,7 +1496,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1850,48 +1523,28 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "municipality" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "federalState" .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "federalState" .
-
 <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1907,10 +1560,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:otherwise .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "associationOfLocalGovernment" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1922,10 +1571,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/divisions> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/Bundesland> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type> , <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel> , <./Mapping_en:Infobox_German_location/latitude> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde> , <./Mapping_en:Infobox_German_location/longitude> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he> , <./Mapping_en:Infobox_German_location/ConstantMapping/country/Germany> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party2> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/license> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/Name> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsverband/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "administrativeCollectivity" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1980,13 +1625,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
@@ -1997,10 +1638,6 @@
 <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lon_sec" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4>
         a                    rr:PredicateObjectMap ;
@@ -2022,7 +1659,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/ExecutePOM>
@@ -2030,27 +1667,23 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  owl:Thing , dbo:PopulatedPlace , dbo:Place , dbo:Location , dbo:Town , wikidata:Q3957 , wikidata:Q486972 , schema:Place , dbo:Settlement .
 
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/ruling_party3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2072,7 +1705,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -2096,25 +1729,17 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "division" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -2132,10 +1757,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "district" .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2172,10 +1793,6 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
@@ -2196,31 +1813,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationUrban/pop_urban/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2238,7 +1843,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
@@ -2258,12 +1863,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "administrativeCollectivity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -2275,17 +1880,17 @@
         a              rr:ObjectMap ;
         rml:reference  "divisions" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap> ;
-        rr:predicate  dbo:city .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap> ;
         rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap> ;
+        rr:predicate  dbo:city .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2318,10 +1923,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2362,10 +1963,6 @@
         a            rr:ObjectMap ;
         rr:constant  "City" .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap> ;
@@ -2375,7 +1972,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town>
@@ -2386,41 +1983,33 @@
         rr:objectMap         <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/ObjectMap> ;
         rr:predicate         rdf:type .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/Stand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:equals .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/borough/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2428,19 +2017,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2453,7 +2034,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/Regierungsbezirk/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "administrativeDistrict" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap>
@@ -2462,7 +2043,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -2472,17 +2053,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "state" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2490,9 +2066,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/city/Town/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -2511,7 +2092,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type>
@@ -2550,7 +2131,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/3/4/5/6/FunctionTermMap>
@@ -2569,7 +2150,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -2578,12 +2159,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeDistrict/regbzk/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
@@ -2602,7 +2183,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -2618,7 +2199,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Verbandsgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "associationOfLocalGovernment" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/administrativeCollectivity/Verwaltungsgemeinschaft/FunctionTermMap/FunctionValue>
@@ -2632,50 +2213,29 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "district" .
-
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
-
 <./Mapping_en:Infobox_German_location/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/longitude/ObjectMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap> ;
-        rr:predicate  dbo:leaderName .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/jointCommunity/Samtgemeinde/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "jointCommunity" .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
+<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/mayor/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/Vorwahl>
         a             rr:PredicateObjectMap ;
@@ -2688,13 +2248,14 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/department/Amt>
@@ -2705,12 +2266,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/elevation/H%C3%B6he/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderTitle/B%C3%BCrgermeistertitel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_German_location/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2732,13 +2289,9 @@
         rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Landkreis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:name/German_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/federalState/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "federalState" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/associationOfLocalGovernment/Gemeindeverwaltungsverband/FunctionTermMap/FunctionValue>
@@ -2755,12 +2308,8 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "district" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaMetro" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationAsOf/population_as_of/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2770,16 +2319,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationMetro/pop_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationMetro" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/party/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/populationTotal/Einwohner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/type/Art/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2788,7 +2333,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "municipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/district/Kreis/FunctionTermMap/FunctionValue>
@@ -2802,10 +2347,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderName" .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2825,12 +2366,12 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderParty/Partei/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/postalCode/PLZ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/1/2/FunctionTermMap/FunctionValue>
@@ -2858,7 +2399,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "division" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foundingYear/year>
@@ -2873,10 +2414,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaTotal/Fl%C3%A4che/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_German_location/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/areaCode/licence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/municipality/Municipality/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_German_location/LogicalSource> ;
@@ -2885,7 +2422,7 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/division/Gliederung/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_German_location/LogicalSource>
@@ -2913,15 +2450,11 @@
 
 <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_German_location/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_German_location/ConditionalMapping/type_equals_Town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_German_location/SimplePropertyMapping/leaderName/B%C3%BCrgermeister/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

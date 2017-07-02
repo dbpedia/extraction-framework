@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,10 +37,6 @@
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "population density" .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority>
         a             rr:PredicateObjectMap ;
@@ -75,7 +72,7 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue>
@@ -84,13 +81,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Scottish_island/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -109,10 +102,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -125,10 +114,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Scottish_island/LogicalSource> ;
@@ -137,29 +122,25 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
+<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestSettlement" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
@@ -171,10 +152,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -191,10 +168,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Scottish_island/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -208,10 +181,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_Scottish_island/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -227,12 +196,8 @@
 <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland/ObjectMap> ;
+        rr:object     dbr-en:Scotland ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -246,7 +211,7 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/longitude>
@@ -262,7 +227,7 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/longitude/FunctionTermMap/FunctionValue>
@@ -273,17 +238,13 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "archipelago" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "archipelago" .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -291,27 +252,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Scottish_island/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap> ;
         rr:predicate  dbo:populationDensity .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestSettlement" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "highest elevation" .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/SubjectMap>
         a            rr:SubjectMap ;
@@ -341,7 +294,7 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue>
@@ -352,12 +305,8 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -365,17 +314,17 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "unitaryAuthority" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group>
@@ -386,7 +335,7 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Scottish_island/latitude/FunctionTermMap/ExecutePOM>
@@ -394,19 +343,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "PopulationDensity" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement>
         a             rr:PredicateObjectMap ;
@@ -414,18 +354,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap> ;
         rr:predicate  dbo:largestSettlement .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationDensity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
 
 <./Mapping_en:Infobox_Scottish_island/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -437,12 +374,12 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
@@ -474,10 +411,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Scottish_island/LogicalSource> ;
@@ -497,22 +430,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "unitaryAuthority" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area" .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Scotland" .
 
 <./Mapping_en:Infobox_Scottish_island/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
@@ -523,23 +448,11 @@
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "PopulationDensity" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 

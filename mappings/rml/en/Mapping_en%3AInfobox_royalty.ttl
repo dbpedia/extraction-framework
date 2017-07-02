@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
@@ -43,10 +40,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -72,23 +65,19 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -97,16 +86,12 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap>
@@ -115,7 +100,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "parent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -133,18 +118,14 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -153,12 +134,8 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem>
         a             rr:PredicateObjectMap ;
@@ -173,12 +150,8 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "restingPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -197,7 +170,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -223,10 +196,6 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -234,12 +203,12 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -258,17 +227,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/StartDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -285,12 +246,12 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -310,29 +271,17 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "spouse" .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_royalty/StartDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -341,7 +290,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/OntologyParameterPOM>
@@ -365,13 +314,9 @@
         a              rr:ObjectMap ;
         rml:reference  "reign" .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "parent" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father>
@@ -379,10 +324,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap> ;
         rr:predicate  dbo:parent .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "predecessor" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -396,6 +337,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "place of death" .
@@ -404,29 +350,20 @@
         a              rr:ObjectMap ;
         rml:reference  "death_place" .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "royalAnthem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -444,7 +381,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap>
@@ -455,19 +392,11 @@
         a            rr:ObjectMap ;
         rr:constant  "activeYearsStartYear" .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "restingPlace" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "place of burial" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -475,15 +404,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "place of burial" .
+
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap> ;
         rr:predicate  dbo:spouse .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -500,13 +429,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "parent" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/StartDate/activeYearsStartYear/activeYearsEndYear/reign>
@@ -516,22 +441,10 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/StartDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -548,18 +461,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue>
@@ -580,12 +489,8 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -600,7 +505,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap>
@@ -609,17 +514,13 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "spouse" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successor" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -649,17 +550,9 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap> ;
         rr:predicate  dbo:predecessor .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -671,12 +564,12 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -691,12 +584,8 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -707,19 +596,11 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "royalAnthem" .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign>
         a              rr:PredicateObjectMap ;
@@ -758,7 +639,7 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "predecessor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap>
@@ -771,10 +652,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/title/title> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/spouse/spouse> , <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign> , <./Mapping_en:Infobox_royalty/StartDate/activeYearsStartYear/activeYearsEndYear/reign> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/occupation/occupation> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/place%20of%20birth> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/date%20of%20death> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/royalAnthem/royal%20anthem> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue> .
@@ -785,17 +662,9 @@
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap> ;
         rr:predicate  dbo:restingPlace .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_royalty/EndDate/activeYearsStartYear/activeYearsEndYear/reign/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "activeYearsEndYear" .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -808,22 +677,14 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/father/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "parent" .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -833,18 +694,14 @@
         a              rr:ObjectMap ;
         rml:reference  "date of death" .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/restingPlace/place%20of%20burial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name>
@@ -859,29 +716,21 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_royalty/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_royalty/SimplePropertyMapping/parent/mother/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_royalty/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_royalty/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_royalty/LogicalSource>
         a                         rml:LogicalSource ;
@@ -930,12 +779,12 @@
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "successor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_royalty/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_royalty/SimplePropertyMapping/foaf:name/full%20name>

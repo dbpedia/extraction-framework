@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -71,7 +72,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -84,23 +85,11 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "averageSpeed" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -110,16 +99,16 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_transit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -131,17 +120,9 @@
         a              rr:ObjectMap ;
         rml:reference  "transit_type" .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -150,7 +131,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue>
@@ -165,7 +146,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfLines" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap>
@@ -174,7 +155,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles>
@@ -201,22 +182,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfVehicles" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ended_operation" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "railGauge" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -231,16 +204,8 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -248,22 +213,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -283,7 +240,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "map" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -293,7 +250,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
@@ -302,7 +259,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -312,7 +269,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "averageSpeed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed>
@@ -331,10 +288,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -344,10 +297,6 @@
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "headquarters" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start>
         a             rr:PredicateObjectMap ;
@@ -361,10 +310,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_transit/LogicalSource> ;
@@ -373,12 +318,12 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "topSpeed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -394,27 +339,19 @@
         a              rr:ObjectMap ;
         rml:reference  "lines" .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfLines" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "passengersPerYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfVehicles" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -424,20 +361,16 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "top_speed" .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operatedBy" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership>
@@ -458,7 +391,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -471,16 +404,12 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation>
         a             rr:PredicateObjectMap ;
@@ -501,7 +430,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -510,16 +439,12 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -527,7 +452,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue>
@@ -544,7 +469,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap>
@@ -556,10 +481,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_public_transit/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_transit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation>
         a             rr:PredicateObjectMap ;
@@ -577,17 +498,9 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "image" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "topSpeed" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start>
         a             rr:PredicateObjectMap ;
@@ -604,10 +517,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -616,12 +525,12 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "typeOfElectrification" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operatedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -634,10 +543,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap> ;
         rr:predicate  dbo:map .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfStations" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue> .
@@ -646,13 +551,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -660,48 +561,20 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:PublicTransitSystem , schema:Organization , owl:Thing , wikidata:Q43229 , dul:Agent , dul:SocialPerson , dbo:Agent , dbo:Organisation ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "began_operation" .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "headquarter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "map" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type>
         a             rr:PredicateObjectMap ;
@@ -715,18 +588,10 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
         rr:predicate  dbo:headquarter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -735,17 +600,17 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "railGauge" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation>
@@ -753,10 +618,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/began_operation/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -766,20 +627,12 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge>
         a             rr:PredicateObjectMap ;
@@ -815,12 +668,8 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/map/map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingYear" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -836,30 +685,22 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/type/transit_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "voltageOfElectrification" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/typeOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "typeOfElectrification" .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale>
         a             rr:PredicateObjectMap ;
@@ -872,26 +713,14 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingDate/operation_will_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "voltageOfElectrification" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -920,14 +749,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap> ;
         rr:predicate  dbo:operatedBy .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "passengersPerDay" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -952,7 +773,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/LogicalSource>
@@ -976,10 +797,6 @@
         a              rr:ObjectMap ;
         rml:reference  "el" .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "headquarter" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -990,10 +807,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "passengersPerYear" .
-
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_transit/LogicalSource> ;
@@ -1002,7 +815,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/averageSpeed/average_speed/FunctionTermMap>
@@ -1015,7 +828,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/railGauge/track_gauge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/owner/owner/FunctionTermMap>
@@ -1024,7 +837,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfStations" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1038,7 +851,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/openingYear/began_operation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1048,25 +861,13 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingDate/ended_operation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfVehicles/vehicles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_public_transit/SimplePropertyMapping/topSpeed/top_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/numberOfLines/lines/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1108,7 +909,7 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "passengersPerDay" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/closingYear/ended_operation/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1123,6 +924,6 @@
 
 <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_transit/SimplePropertyMapping/voltageOfElectrification/el/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

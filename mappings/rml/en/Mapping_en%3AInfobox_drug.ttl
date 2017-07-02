@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,8 @@
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "license" .
 
 <./Mapping_en:Infobox_drug/SubjectMap>
         a            rr:SubjectMap ;
@@ -63,7 +60,7 @@
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -83,15 +80,15 @@
         rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap> ;
         rr:predicate  dbo:density .
 
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_drug/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -99,12 +96,8 @@
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_drug/LogicalSource>
         a                         rml:LogicalSource ;
@@ -120,7 +113,7 @@
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bioavailability" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue>
@@ -146,21 +139,13 @@
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "license" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "density" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability>
         a             rr:PredicateObjectMap ;
@@ -171,12 +156,4 @@
 <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bioavailability" .
-
-<./Mapping_en:Infobox_drug/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "density" .
 

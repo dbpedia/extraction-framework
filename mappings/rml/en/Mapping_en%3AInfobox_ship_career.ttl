@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,22 +29,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue>
@@ -52,39 +45,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "commissioningDate" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "captureDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndDate" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship launched" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -97,10 +74,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "christeningDate" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ship_career/LogicalSource> ;
@@ -109,7 +82,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue>
@@ -120,7 +93,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired>
@@ -145,7 +118,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -170,28 +143,16 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship owner" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "completionDate" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "layingDown" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -208,22 +169,10 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down>
         a             rr:PredicateObjectMap ;
@@ -243,10 +192,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -261,21 +206,17 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "recommissioningDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsStartDate" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "acquirementDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -293,16 +234,8 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "decommissioningDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -315,7 +248,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -324,7 +257,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -350,14 +283,6 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap> ;
         rr:predicate  dbo:recommissioningDate .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "homeport" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue> .
@@ -371,10 +296,6 @@
         a              rr:ObjectMap ;
         rml:reference  "Ship recommissioned" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ship_career/LogicalSource> ;
@@ -383,7 +304,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue>
@@ -415,23 +336,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap>
@@ -440,12 +357,12 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -458,17 +375,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "orderDate" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -490,7 +403,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name>
@@ -504,10 +417,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_ship_career?oldid=11657" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -531,10 +440,6 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap> ;
         rr:predicate  dbo:status .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maidenVoyage" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -547,37 +452,25 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ship_career/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -601,7 +494,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue>
@@ -612,20 +505,12 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "decommissioningDate" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -643,17 +528,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "acquirementDate" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -664,30 +541,18 @@
         a              rr:ObjectMap ;
         rml:reference  "Ship in service" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "completionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship name" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -695,26 +560,18 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/commissioningDate/Ship%20commissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "commissioningDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -727,10 +584,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartDate .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -745,7 +598,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "orderDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -758,7 +611,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -771,21 +624,17 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "builder" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -793,7 +642,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -801,22 +650,14 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -849,10 +690,6 @@
         a              rr:ObjectMap ;
         rml:reference  "Ship nickname" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "recommissioningDate" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -872,12 +709,12 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maidenVoyage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -890,10 +727,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_ship_career/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ship_career/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsEndDate/Ship%20out%20of%20service/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -909,7 +742,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -934,20 +767,16 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Ship status" .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "shipLaunch" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:name/Ship%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class>
@@ -958,12 +787,12 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -979,12 +808,12 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cost" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/recommissioningDate/Ship%20recommissioned/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1003,7 +832,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/homeport/Ship%20homeport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "homeport" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SubjectMap>
@@ -1012,28 +841,20 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/status/Ship%20fate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/captureDate/Ship%20captured/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "captureDate" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap> ;
         rr:predicate  dbo:shipLaunch .
 
+<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/christeningDate/Ship%20christened/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "christeningDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap>
@@ -1046,10 +867,6 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/foaf:nick/Ship%20nickname/FunctionTermMap> ;
         rr:predicate  foaf:nick .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cost" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/activeYearsStartDate/Ship%20in%20service/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ship_career/LogicalSource> ;
@@ -1059,10 +876,6 @@
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/maidenVoyage/Ship%20maiden%20voyage/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/decommissioningDate/Ship%20decommissioned>
         a             rr:PredicateObjectMap ;
@@ -1076,7 +889,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/shipLaunch/Ship%20launched/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "shipLaunch" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/motto/Ship%20motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1109,7 +922,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/layingDown/Ship%20laid%20down/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "layingDown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue>
@@ -1120,7 +933,7 @@
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1141,39 +954,15 @@
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/cost/Ship%20original%20cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/builder/Ship%20builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "builder" .
-
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/orderDate/Ship%20ordered/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/acquirementDate/Ship%20acquired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/operator/Ship%20operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/country/Ship%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/owner/Ship%20owner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
-<./Mapping_en:Infobox_ship_career/SimplePropertyMapping/completionDate/Ship%20completed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_ship_career/SimplePropertyMapping/type/Ship%20class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,14 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -47,9 +40,9 @@
         rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -59,47 +52,35 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectBudgetTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fundedBy" .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "website" .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator>
@@ -107,10 +88,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap> ;
         rr:predicate  dbo:projectCoordinator .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -128,14 +105,6 @@
         rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectParticipant" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -145,32 +114,24 @@
         a              rr:ObjectMap ;
         rml:reference  "end" .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectObjective" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -195,7 +156,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end>
@@ -204,18 +165,14 @@
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap> ;
         rr:predicate  dbo:projectEndDate .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants>
@@ -231,7 +188,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectParticipant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap>
@@ -240,16 +197,8 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectEndDate" .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectBudgetFunding" .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -259,13 +208,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -316,10 +261,6 @@
         a              rr:ObjectMap ;
         rml:reference  "fundingAgency" .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectReferenceID" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -333,12 +274,12 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fundedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective>
@@ -351,13 +292,9 @@
         a              rr:ObjectMap ;
         rml:reference  "participants" .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap>
@@ -375,7 +312,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectObjective" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/LogicalSource>
@@ -390,14 +327,6 @@
         rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -405,7 +334,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectParticipant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SubjectMap/Function>
@@ -415,38 +344,22 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "budget" .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -461,10 +374,6 @@
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinator" .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -487,26 +396,18 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectKeyword" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectStartDate" .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -518,7 +419,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectBudgetFunding" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding>
@@ -543,19 +444,11 @@
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap> ;
         rr:predicate  dbo:projectType .
 
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectParticipant" .
-
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectCoordinator" .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -563,7 +456,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue>
@@ -595,7 +488,7 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SubjectMap>
@@ -621,16 +514,8 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectEndDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectBudgetTotal" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -640,12 +525,12 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectCoordinator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website>
@@ -653,10 +538,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -680,19 +561,19 @@
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectKeyword" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinator" .
 
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "projectReferenceID" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "projectType" .
 

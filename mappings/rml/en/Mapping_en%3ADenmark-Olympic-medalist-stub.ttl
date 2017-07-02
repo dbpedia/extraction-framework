@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -31,12 +32,8 @@
 <./Mapping_en:Denmark-Olympic-medalist-stub/ConstantMapping/country/Denmark>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Denmark-Olympic-medalist-stub/ConstantMapping/country/Denmark/ObjectMap> ;
+        rr:object     dbr-en:Denmark ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Denmark-Olympic-medalist-stub/ConstantMapping/country/Denmark/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Denmark" .
 
 <./Mapping_en:Denmark-Olympic-medalist-stub/LogicalSource>
         a                         rml:LogicalSource ;

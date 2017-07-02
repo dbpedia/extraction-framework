@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -44,7 +45,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap>
@@ -60,31 +61,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
-
 <./Mapping_en:Infobox_dam/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap> ;
         rr:predicate  dbo:installedCapacity .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Volume" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -94,12 +79,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation>
@@ -110,7 +95,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "installedCapacity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -129,26 +114,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1/ObjectMap>
         a                    rr:ObjectMap ;
         rr:parentTriplesMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1/ObjectMap/ParentTriplesMap> .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator>
         a             rr:PredicateObjectMap ;
@@ -156,13 +129,9 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap> ;
         rr:predicate  dbo:operator .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue>
@@ -173,7 +142,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue>
@@ -207,7 +176,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -220,16 +189,16 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "plant_lat_s" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "plant_lat_s" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner>
         a             rr:PredicateObjectMap ;
@@ -264,27 +233,10 @@
         a              rr:ObjectMap ;
         rml:reference  "lat_d" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -296,14 +248,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -319,30 +272,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "buildingStartYear" .
-
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "status" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -362,20 +299,10 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began>
         a             rr:PredicateObjectMap ;
@@ -383,18 +310,20 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap> ;
         rr:predicate  dbo:buildingStartDate .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/SubjectMap>
@@ -413,10 +342,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "buildingStartDate" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -437,10 +362,6 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
@@ -449,7 +370,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "purpose" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission>
@@ -460,12 +381,8 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "code" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -473,17 +390,13 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -495,26 +408,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -528,7 +425,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue>
@@ -539,17 +436,17 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plant_lat_NS" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -560,10 +457,6 @@
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demolitionYear" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -576,7 +469,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -594,7 +487,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -606,31 +499,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -666,10 +543,6 @@
         a              rr:ObjectMap ;
         rml:reference  "opening" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
@@ -680,13 +553,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap>
@@ -706,7 +575,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "averageAnnualGeneration" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished>
@@ -717,7 +586,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "river" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue>
@@ -725,10 +594,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -740,10 +605,6 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plant_commission" .
@@ -752,10 +613,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -772,22 +629,14 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap> ;
         rr:predicate  dbo:closingDate .
 
-<./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Hydropower" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "description" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
@@ -809,23 +658,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -848,17 +689,9 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap> ;
         rr:predicate  dbo:river .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "purpose" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -882,31 +715,23 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_s" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -924,10 +749,6 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -941,7 +762,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "buildingStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue>
@@ -949,10 +770,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -965,16 +782,12 @@
 <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower/ObjectMap> ;
+        rr:object     dbr-en:Hydropower ;
         rr:predicate  dbo:primaryFuelType .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -993,23 +806,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "purpose" .
-
-<./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1017,7 +826,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap>
@@ -1036,7 +845,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
@@ -1056,7 +865,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
@@ -1079,14 +888,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap> ;
         rr:predicate  dbo:watershed .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demolitionDate" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1111,16 +912,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "res_capacity_total" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "area" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished>
         a             rr:PredicateObjectMap ;
@@ -1136,7 +933,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1145,12 +942,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1162,10 +959,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1195,26 +988,22 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "installedCapacity" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
@@ -1237,18 +1026,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1261,10 +1046,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1288,13 +1069,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_dam?oldid=35530" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator>
@@ -1311,16 +1088,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1328,7 +1101,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/ExecutePOM>
@@ -1342,7 +1115,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap>
@@ -1368,15 +1141,15 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latMinutesParameter .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1390,30 +1163,26 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "averageAnnualGeneration" .
-
 <./Mapping_en:Infobox_dam/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Dam , owl:Thing , dbo:Place , wikidata:Q12323 , dbo:Infrastructure , dbo:Location , schema:Place , dbo:ArchitecturalStructure ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "plant_lat_d" .
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
+<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "plant_lat_d" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1426,40 +1195,24 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "river" .
-
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demolitionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "generationUnits" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "volume" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume>
         a             rr:PredicateObjectMap ;
@@ -1505,7 +1258,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1518,10 +1271,6 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "description" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1530,12 +1279,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "buildingStartYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
@@ -1543,27 +1292,23 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "dam_volume" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demolitionYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "watershed" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/res_elevation/FunctionTermMap>
@@ -1572,12 +1317,12 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1589,10 +1334,6 @@
         a              rr:ObjectMap ;
         rml:reference  "res_name" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1600,7 +1341,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "volume" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
@@ -1628,19 +1369,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length>
         a             rr:PredicateObjectMap ;
@@ -1672,26 +1409,22 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Volume" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_NS" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1699,7 +1432,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2>
@@ -1714,16 +1447,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude/ObjectMap> ;
         rr:predicate  geo:long .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1>
         a             rr:PredicateObjectMap ;
@@ -1739,7 +1472,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "volume" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
@@ -1749,17 +1482,17 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1770,28 +1503,16 @@
         a              rr:ObjectMap ;
         rml:reference  "res_elevation" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "volume" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1808,10 +1529,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/res_capacity_total>
         a             rr:PredicateObjectMap ;
@@ -1830,22 +1547,14 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "area" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/watershed/res_catchment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "watershed" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1862,10 +1571,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "generationUnits" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/res_name>
         a             rr:PredicateObjectMap ;
@@ -1885,7 +1590,7 @@
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap>
@@ -1898,17 +1603,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/area/res_surface/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Area" .
-
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap/FunctionValue>
@@ -1921,17 +1618,13 @@
         a              rr:ObjectMap ;
         rml:reference  "plant_long_d" .
 
-<./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "code" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_dam/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>

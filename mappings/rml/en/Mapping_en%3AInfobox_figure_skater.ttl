@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,7 +37,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -45,12 +46,8 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -64,12 +61,12 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerCoach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country>
@@ -78,26 +75,22 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_figure_skater/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_figure_skater/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_figure_skater/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_figure_skater/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -107,7 +100,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -123,13 +116,9 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "activeYearsEndYear" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner>
@@ -154,22 +143,10 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap> ;
         rr:predicate  dbo:club .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "club" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -177,7 +154,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentPartner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue>
@@ -188,7 +165,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -198,52 +175,36 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "choreographer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerChoreographer" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -256,10 +217,6 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "title" .
@@ -269,17 +226,9 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "choreographer" .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue>
@@ -301,7 +250,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "residence" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap>
@@ -328,10 +277,6 @@
         a              rr:ObjectMap ;
         rml:reference  "dateofbirth" .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_figure_skater/LogicalSource> ;
@@ -340,7 +285,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "club" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -356,7 +301,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -367,27 +312,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
         rr:predicate  dbo:coach .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentPartner" .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach>
         a             rr:PredicateObjectMap ;
@@ -399,18 +328,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerCoach" .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/club/skatingclub/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -418,7 +335,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue>
@@ -439,16 +356,12 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_figure_skater/SubjectMap>
         a            rr:SubjectMap ;
@@ -458,7 +371,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
@@ -473,12 +386,12 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerPartner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -513,10 +426,6 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap> ;
         rr:predicate  dbo:formerPartner .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_figure_skater/LogicalSource> ;
@@ -527,26 +436,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerPartner/formerpartner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerPartner" .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "retired" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/activeYearsEndYear/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "retired" .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -555,10 +452,6 @@
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "formercoach" .
-
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/currentPartner/partner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -587,7 +480,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap>
@@ -609,18 +502,14 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerCoach/formercoach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "residence" .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerChoreographer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/choreographer/choreographer>
@@ -631,7 +520,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
@@ -642,7 +531,7 @@
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/formerChoreographer/formerchoreographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -650,13 +539,9 @@
         rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_figure_skater/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

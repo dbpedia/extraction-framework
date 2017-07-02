@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,14 +35,10 @@
         rr:predicateObjectMap  <./Mapping_en:UK-SSSI-stub/ConstantMapping/country/United_Kindgom> , <./Mapping_en:UK-SSSI-stub/ConstantMapping/location/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-SSSI-stub/SubjectMap> .
 
-<./Mapping_en:UK-SSSI-stub/ConstantMapping/country/United_Kindgom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kindgom" .
-
 <./Mapping_en:UK-SSSI-stub/ConstantMapping/location/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-SSSI-stub/ConstantMapping/location/United_Kingdom/ObjectMap> ;
+        rr:object     dbr-en:United_Kingdom ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:UK-SSSI-stub/LogicalSource>
@@ -56,10 +53,6 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:UK-SSSI-stub/ConstantMapping/location/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
-
 <./Mapping_en:UK-SSSI-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -68,6 +61,6 @@
 <./Mapping_en:UK-SSSI-stub/ConstantMapping/country/United_Kindgom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-SSSI-stub/ConstantMapping/country/United_Kindgom/ObjectMap> ;
+        rr:object     dbr-en:United_Kindgom ;
         rr:predicate  dbo:country .
 

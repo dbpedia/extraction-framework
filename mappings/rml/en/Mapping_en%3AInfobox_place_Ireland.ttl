@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,12 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m>
@@ -62,7 +63,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
@@ -73,7 +74,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
@@ -81,19 +82,9 @@
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "neighboringMunicipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue>
@@ -102,38 +93,32 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaCode" .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -159,12 +144,8 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
 
 <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -200,26 +181,14 @@
         a              rr:ObjectMap ;
         rml:reference  "municipality_code" .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -237,7 +206,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -247,7 +216,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym>
@@ -264,14 +233,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -282,21 +243,13 @@
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_m" .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -323,10 +276,6 @@
         a              rr:ObjectMap ;
         rml:reference  "lat_d" .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
@@ -334,12 +283,8 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -362,7 +307,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code>
@@ -383,30 +328,14 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighboringMunicipality" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationAsOf" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -416,12 +345,8 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
@@ -439,12 +364,12 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -453,22 +378,18 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "null" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -487,26 +408,22 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDirectionParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
+<./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -540,12 +457,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_place_Ireland/latitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "latitudeMapping" ;
@@ -572,7 +483,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_place_Ireland/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
@@ -581,26 +492,24 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_place_Ireland/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_place_Ireland/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "elevation" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -641,7 +550,7 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/longitude>
@@ -650,22 +559,10 @@
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
-
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -678,11 +575,11 @@
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_place_Ireland/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

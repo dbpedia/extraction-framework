@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeStart" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -58,7 +55,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
@@ -82,17 +79,9 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date>
@@ -105,13 +94,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft>
@@ -125,13 +110,9 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established>
@@ -163,7 +144,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demolitionDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -177,27 +158,23 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "addresses" .
+
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "addresses" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -206,7 +183,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -229,13 +206,14 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "junction" .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties>
         a             rr:PredicateObjectMap ;
@@ -243,22 +221,9 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap> ;
         rr:predicate  dbo:county .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "state" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "buildingEndDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/LogicalSource>
@@ -283,7 +248,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -296,10 +261,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeEndDirection" .
 
 <./Mapping_en:Infobox_street/SubjectMap>
         a            rr:SubjectMap ;
@@ -328,14 +289,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
@@ -344,7 +297,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -370,17 +323,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeStartDirection" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -400,7 +345,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -409,7 +354,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue>
@@ -420,43 +365,23 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maintainedBy" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "commissioning_date" .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lengthReference" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -472,10 +397,6 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeEnd" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
@@ -484,7 +405,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap>
@@ -495,17 +416,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "state" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isPartOfName" .
 
 <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -514,20 +427,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeStart" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -535,16 +440,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -552,12 +453,8 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -565,34 +462,18 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeEnd" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kilometre" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demolitionDate" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -623,22 +504,22 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "county" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -652,20 +533,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "county" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km>
         a             rr:PredicateObjectMap ;
@@ -691,12 +564,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -704,30 +577,14 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "buildingEndDate" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -744,21 +601,21 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "addressInRoad" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
 
 <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -771,7 +628,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -784,23 +641,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap> ;
         rr:predicate  dbo:length .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -808,9 +653,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -834,12 +679,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue>
@@ -856,7 +701,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
@@ -865,7 +710,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "state" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint>
@@ -888,7 +733,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -898,16 +743,8 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref>
         a             rr:PredicateObjectMap ;
@@ -930,27 +767,15 @@
         a              rr:ObjectMap ;
         rml:reference  "inauguration_date" .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mile" .
-
 <./Mapping_en:Infobox_street/longitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_street/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction>
@@ -959,13 +784,9 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap> ;
         rr:predicate  dbo:routeJunction .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "buildingStartDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue>
@@ -976,7 +797,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeStartDirection" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
@@ -995,19 +816,11 @@
         a              rr:ObjectMap ;
         rml:reference  "alternate_name" .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "buildingStartDate" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap> ;
         rr:predicate  dbo:routeStart .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1021,7 +834,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isPartOfName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code>
@@ -1036,10 +849,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "county" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
@@ -1052,20 +861,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "maint" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "routeJunction" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1085,7 +886,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1093,18 +894,14 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap>
@@ -1120,7 +917,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maintainedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1130,7 +927,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
@@ -1141,21 +938,17 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "addressInRoad" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1171,7 +964,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county>
@@ -1182,7 +975,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name>
@@ -1193,22 +986,14 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lengthReference" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/latitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_street/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1222,43 +1007,27 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "routeJunction" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1282,14 +1051,14 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap> ;
         rr:predicate  dbo:state .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "terminus_b" .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "terminus_b" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image>
         a             rr:PredicateObjectMap ;
@@ -1297,14 +1066,14 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap> ;
         rr:predicate  foaf:logo .
 
-<./Mapping_en:Infobox_street/longitude/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_street/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -1323,16 +1092,12 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap>
@@ -1349,30 +1114,22 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "mile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "county" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date>
         a             rr:PredicateObjectMap ;
@@ -1382,16 +1139,8 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
-
-<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1403,7 +1152,7 @@
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image>
@@ -1418,13 +1167,9 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap> ;
         rr:predicate  dbo:city .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1437,12 +1182,12 @@
         rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "length_ref" .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeEndDirection" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 

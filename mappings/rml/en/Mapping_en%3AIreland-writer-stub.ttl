@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,7 +43,7 @@
 <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland/ObjectMap> ;
+        rr:object     dbr-en:Ireland ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
@@ -56,8 +57,4 @@
         rr:class     dbo:Person , dul:NaturalPerson , owl:Thing , dbo:Writer , wikidata:Q215627 , dul:Agent , wikidata:Q36180 , foaf:Person , wikidata:Q5 , schema:Person , dbo:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Ireland" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,113 +29,52 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
-        rr:predicate  dbo:publisher .
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discipline" .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publisher" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publisher" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "frequencyOfPublication" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "academicDiscipline" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "frequencyOfPublication" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "publisher" .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_academic_conference/SubjectMap>
+<./Mapping_en:Infobox_academic_conference/SubjectMap/Function>
         a            rr:SubjectMap ;
-        rr:class     dbo:SocietalEvent , wikidata:Q1656682 , dbo:Event , dul:Event , dbo:AcademicConference , schema:Event , owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_academic_conference/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_academic_conference?oldid=50365" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "discipline" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "abbreviation" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "academicDiscipline" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -142,56 +82,28 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline> ;
         rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap> .
 
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap> ;
         rr:predicate  dbo:academicDiscipline .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency>
         a             rr:PredicateObjectMap ;
@@ -199,27 +111,84 @@
         rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap> ;
         rr:predicate  dbo:frequencyOfPublication .
 
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_academic_conference/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:SocietalEvent , wikidata:Q1656682 , dbo:Event , dul:Event , dbo:AcademicConference , schema:Event , owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_academic_conference/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_academic_conference/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "frequency" .
 
-<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_academic_conference/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_academic_conference?oldid=50365" .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "abbreviation" .
 
 <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_academic_conference/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
+        rr:predicate  dbo:publisher .
+
+<./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_academic_conference/SimplePropertyMapping/foaf:name/abbreviation/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 

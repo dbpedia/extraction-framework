@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Anglicanism" .
 
 <./Mapping_en:Anglican-bishop-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -52,7 +49,7 @@
 <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism/ObjectMap> ;
+        rr:object     dbr-en:Anglicanism ;
         rr:predicate  dbo:religion .
 
 <>      a                      rr:TriplesMap ;

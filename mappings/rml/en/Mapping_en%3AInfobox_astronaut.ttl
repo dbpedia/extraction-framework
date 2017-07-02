@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,24 +29,20 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
+
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth>
         a             rr:PredicateObjectMap ;
@@ -57,45 +54,29 @@
         a              rr:ObjectMap ;
         rml:reference  "mission" .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mission" .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "timeInSpace" .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "selection" .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -114,17 +95,13 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret>
         a             rr:PredicateObjectMap ;
@@ -134,26 +111,18 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -167,17 +136,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -186,20 +147,12 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "selection" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SubjectMap/Function>
@@ -209,7 +162,7 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/LogicalSource>
@@ -232,7 +185,7 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -251,14 +204,6 @@
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue> .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_astronaut/LogicalSource> ;
@@ -269,17 +214,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "retired" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
@@ -295,12 +236,12 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission>
@@ -315,32 +256,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_astronaut/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -356,24 +275,22 @@
         a              rr:ObjectMap ;
         rml:reference  "Dateofret" .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "selection" .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_astronaut/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_astronaut/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -381,26 +298,22 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "retired" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "timeInSpace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap>
@@ -417,19 +330,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap> ;
         rr:predicate  dbo:timeInSpace .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -446,7 +351,7 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/foaf:name/name>
@@ -473,7 +378,7 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mission" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/current_occupation>
@@ -484,12 +389,12 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/occupation>
@@ -561,17 +466,13 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -580,12 +481,8 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathPlace/place_death/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -604,12 +501,8 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/deathDate/date_death/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -624,20 +517,12 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthPlace/place_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation>
@@ -663,22 +548,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/mission/mission/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_astronaut/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "date_birth" .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/occupation/previous_occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_astronaut/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/retired/Dateofret/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -698,11 +575,11 @@
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/selection/selection/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_astronaut/SimplePropertyMapping/birthDate/date_birth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

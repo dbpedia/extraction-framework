@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -40,10 +41,6 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap> ;
         rr:predicate  dbo:leaderTitle .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareMile" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
@@ -68,30 +65,18 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "longName" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -101,14 +86,6 @@
 <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "percent_water" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "map" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -133,15 +110,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5> , <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3> , <./Mapping_en:Infobox_country/longitude> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3> , <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups> , <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement> , <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name> , <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4> , <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9> , <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages> , <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages> , <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem> , <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name> , <./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4> , <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2> , <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate> , <./Mapping_en:Infobox_country/latitude> , <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages> , <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto> , <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map> , <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone> , <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap> .
 
+<./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "national_motto" .
+
 <./Mapping_en:Infobox_country/longitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_country/longitude/ObjectMap> ;
         rr:predicate  geo:long .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "national_motto" .
 
 <./Mapping_en:Infobox_country/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -155,16 +132,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -179,10 +152,6 @@
 <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regional_languages" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -202,22 +171,14 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap> ;
         rr:predicate  dbo:ethnicGroupsInYear .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "percentageOfAreaWater" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name>
@@ -226,43 +187,39 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap> ;
         rr:predicate  dbo:longName .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestCity" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "anthem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "longName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap>
@@ -279,28 +236,24 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "anthem" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap>
@@ -319,12 +272,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue>
@@ -333,18 +286,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1>
         a             rr:PredicateObjectMap ;
@@ -354,12 +299,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "regionalLanguage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -385,20 +330,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "conventional_long_name" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2>
         a             rr:PredicateObjectMap ;
@@ -408,12 +345,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currency" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -421,13 +354,18 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3>
         a             rr:PredicateObjectMap ;
@@ -435,27 +373,14 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap> ;
         rr:predicate  dbo:leaderTitle .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ethnicGroup" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -473,14 +398,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "anthem" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -494,7 +411,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap>
@@ -512,12 +429,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "regionalLanguage" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -527,7 +440,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "capital" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -540,14 +453,6 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap> ;
         rr:predicate  dbo:anthem .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "governmentType" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -558,17 +463,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
@@ -577,25 +474,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue>
@@ -610,21 +495,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
-
 <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currency" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -655,12 +528,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "inhabitantsPerSquareMile" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "percentageOfAreaWater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -670,7 +543,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2>
@@ -681,12 +554,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ethnicGroupsInYear" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -709,12 +578,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement>
         a             rr:PredicateObjectMap ;
@@ -722,32 +587,20 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap> ;
         rr:predicate  dbo:largestSettlement .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/longName/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     schema:Place , dbo:PopulatedPlace , dbo:Location , wikidata:Q486972 , wikidata:Q6256 , owl:Thing , schema:Country , dbo:Country , dbo:Place ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap>
@@ -760,37 +613,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap> ;
-        rr:predicate  dbo:percentageOfAreaWater .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4>
         a             rr:PredicateObjectMap ;
@@ -798,14 +633,16 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap> ;
         rr:predicate  dbo:leaderTitle .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leader" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "officialLanguage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap> ;
+        rr:predicate  dbo:percentageOfAreaWater .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -814,16 +651,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages>
         a             rr:PredicateObjectMap ;
@@ -855,15 +688,15 @@
         a              rr:ObjectMap ;
         rml:reference  "longEW" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "flag" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -872,21 +705,17 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -897,26 +726,18 @@
         a              rr:ObjectMap ;
         rml:reference  "currency" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap>
@@ -934,18 +755,10 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "inhabitantsPerSquareKilometre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "capital" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3>
         a             rr:PredicateObjectMap ;
@@ -957,10 +770,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
@@ -969,7 +778,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -997,7 +806,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1012,38 +821,30 @@
         a              rr:ObjectMap ;
         rml:reference  "latd" .
 
+<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_country/latitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_country/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city>
@@ -1060,12 +861,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "map" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1087,7 +888,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1096,7 +897,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/ExecutePOM>
@@ -1119,10 +920,6 @@
         a              rr:ObjectMap ;
         rml:reference  "image_map" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1138,21 +935,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "timeZone" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "common_name" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto>
@@ -1170,10 +959,6 @@
 <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "official_languages" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1205,16 +990,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "inhabitantsPerSquareMile" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "map" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1232,21 +1009,17 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "inhabitantsPerSquareKilometre" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestSettlement" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue>
@@ -1255,14 +1028,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "leader_name5" .
+
+<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9>
         a             rr:PredicateObjectMap ;
@@ -1270,36 +1043,24 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue> .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "largestSettlement" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1315,17 +1076,13 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ethnicGroupsInYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialLanguage" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4>
         a             rr:PredicateObjectMap ;
@@ -1390,7 +1147,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/capital/capital/FunctionTermMap>
@@ -1401,13 +1158,9 @@
         a              rr:ObjectMap ;
         rml:reference  "longd" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1431,14 +1184,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -1451,29 +1196,13 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "timeZone" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "map" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1482,12 +1211,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1514,7 +1243,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1529,17 +1258,13 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "governmentType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency>
         a             rr:PredicateObjectMap ;
@@ -1569,16 +1294,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "anthem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "established_date9" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1602,17 +1323,13 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map2>
         a             rr:PredicateObjectMap ;
@@ -1626,18 +1343,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/inhabitantsPerSquareKilometre> .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1651,12 +1360,8 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/flag/image_flag/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "flag" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5>
         a             rr:PredicateObjectMap ;
@@ -1682,7 +1387,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue>
@@ -1699,16 +1404,12 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/map/image_map/FunctionTermMap/FunctionValue>
@@ -1723,20 +1424,16 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longm" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ethnicGroup" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1754,22 +1451,14 @@
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
+<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1795,10 +1484,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
@@ -1810,10 +1495,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap> ;
         rr:predicate  dbo:anthem .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1830,10 +1511,6 @@
         rr:objectMap  <./Mapping_en:Infobox_country/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue> .
@@ -1844,7 +1521,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leader" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap>
@@ -1855,17 +1532,13 @@
         a              rr:ObjectMap ;
         rml:reference  "leader_title5" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "population_density_sq_mi" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationDensity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue>
@@ -1878,13 +1551,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1893,7 +1562,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
@@ -1902,7 +1571,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1912,10 +1581,6 @@
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_km2" .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderTitle" .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/populationTotal/population_estimate>
         a             rr:PredicateObjectMap ;
@@ -1938,10 +1603,6 @@
         a              rr:ObjectMap ;
         rml:reference  "official_languages" .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_country/LogicalSource> ;
@@ -1960,7 +1621,7 @@
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderTitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap>
@@ -1979,17 +1640,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_country/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_country/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_country/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_country/SubjectMap/Function>
@@ -2001,13 +1654,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_country/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_country/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationDensity" .
-
 <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_country/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "largestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_country/SimplePropertyMapping/leader/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM>

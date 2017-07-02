@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,26 +29,22 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/province/British_Columbia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/British_Columbia" .
-
 <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/locatedInArea/British_Columbia_Interior>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/locatedInArea/British_Columbia_Interior/ObjectMap> ;
+        rr:object     dbr-en:British_Columbia_Interior ;
         rr:predicate  dbo:locatedInArea .
 
 <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/province/British_Columbia>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/province/British_Columbia/ObjectMap> ;
+        rr:object     dbr-en:British_Columbia ;
         rr:predicate  dbo:province .
 
 <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:object     dbr-en:Canada ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:BritishColumbiaInterior-geo-stub/LogicalSource>
@@ -61,14 +58,6 @@
         rml:logicalSource      <./Mapping_en:BritishColumbiaInterior-geo-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/locatedInArea/British_Columbia_Interior> , <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/province/British_Columbia> , <./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/country/Canada> ;
         rr:subjectMap          <./Mapping_en:BritishColumbiaInterior-geo-stub/SubjectMap> .
-
-<./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/country/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
-<./Mapping_en:BritishColumbiaInterior-geo-stub/ConstantMapping/locatedInArea/British_Columbia_Interior/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/British_Columbia_Interior" .
 
 <./Mapping_en:BritishColumbiaInterior-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

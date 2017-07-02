@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -50,12 +51,12 @@
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -64,30 +65,17 @@
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stadium" .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Nickname" .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -95,31 +83,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rugby_league_representative_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "stadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -136,17 +113,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -171,7 +144,7 @@
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue>
@@ -180,20 +153,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rugby_league_representative_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap> ;
-        rr:predicate  foaf:name .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium>
         a             rr:PredicateObjectMap ;
@@ -201,9 +164,11 @@
         rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap> ;
         rr:predicate  dbo:stadium .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2>
         a             rr:PredicateObjectMap ;
@@ -240,10 +205,6 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:name/Nickname3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -257,7 +218,7 @@
 
 <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rugby_league_representative_team/SimplePropertyMapping/foaf:nick/Nickname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;

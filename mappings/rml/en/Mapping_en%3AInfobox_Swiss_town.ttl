@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,27 +29,15 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Swiss_town/ConstantMapping/country/Switzerland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Switzerland" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "district" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "municipalityCode" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -61,7 +50,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "municipalityCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue>
@@ -80,12 +69,8 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -93,7 +78,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party>
@@ -118,34 +103,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Swiss_town/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "neighboringMunicipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "canton" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "demonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
@@ -157,23 +126,19 @@
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -195,17 +160,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "mayor" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -231,22 +188,14 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_Swiss_town/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q486972 , schema:Place , dbo:Place , dbo:Location , dbo:PopulatedPlace , dbo:Settlement ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -256,10 +205,6 @@
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_m" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns>
         a             rr:PredicateObjectMap ;
@@ -285,32 +230,18 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lowestPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
-        rr:predicate  dbo:neighboringMunicipality .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -318,13 +249,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Swiss_town/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "leaderParty" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "censusYear" .
+<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
+        rr:predicate  dbo:neighboringMunicipality .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -335,10 +264,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "twinTown" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -353,20 +278,8 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "leaderParty" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "areaTotal" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -384,17 +297,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap> ;
         rr:predicate  dbo:censusYear .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_d" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minimumElevation" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -402,7 +307,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "twinTown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -426,16 +331,16 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minimumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "populationof" .
 
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "populationof" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -457,10 +362,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "municipalityCode" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof>
         a             rr:PredicateObjectMap ;
@@ -487,24 +388,24 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "within_municipality" .
+
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Swiss_town/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Swiss_town/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "within_municipality" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude>
@@ -515,20 +416,12 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest>
         a             rr:PredicateObjectMap ;
@@ -538,12 +431,8 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -571,7 +460,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highestPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -580,17 +469,13 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
@@ -604,17 +489,13 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -630,28 +511,20 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
+<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isoCodeRegion" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -665,10 +538,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -684,10 +553,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type>
         a             rr:PredicateObjectMap ;
@@ -716,21 +581,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mayor" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lowestPlace" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
@@ -742,7 +595,7 @@
 <./Mapping_en:Infobox_Swiss_town/ConstantMapping/country/Switzerland>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/ConstantMapping/country/Switzerland/ObjectMap> ;
+        rr:object     dbr-en:Switzerland ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap>
@@ -769,7 +622,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mayor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/mayor/mayor>
@@ -816,7 +669,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -825,7 +678,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "municipality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap>
@@ -848,12 +701,8 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "censusYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -869,7 +718,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isoCodeRegion" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation>
@@ -888,13 +737,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest>
@@ -910,7 +755,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap>
@@ -925,26 +770,22 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maximumElevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -959,18 +800,10 @@
         a              rr:ObjectMap ;
         rml:reference  "mayor_party" .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/lowestPlace/lowest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -984,13 +817,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Swiss_town/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "district" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue>
@@ -1004,18 +833,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "canton" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code>
@@ -1040,18 +865,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "squareKilometre" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1085,27 +902,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "municipality" .
-
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipalityCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "municipalityCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationTotal" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1113,7 +918,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/LogicalSource>
@@ -1132,22 +937,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "neighboringMunicipality" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maximumElevation" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/municipality/within_municipality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1160,7 +957,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap>
@@ -1179,7 +976,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton>
@@ -1187,10 +984,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap> ;
         rr:predicate  dbo:canton .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/foaf:name/subject_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/type/municipality_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1204,7 +997,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/longitude/ObjectMap/FunctionValue>
@@ -1218,14 +1011,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highestPlace" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/censusYear/popofyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1237,7 +1022,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/twinTown/twintowns/FunctionTermMap/FunctionValue>
@@ -1253,21 +1038,17 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "highest" .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/elevation/altitude/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/highestPlace/highest/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1280,13 +1061,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "demonym" .
-
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/district/district>
@@ -1297,7 +1074,7 @@
 
 <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Swiss_town/SimplePropertyMapping/populationTotal/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Swiss_town/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,13 +29,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "residence" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -43,7 +40,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue>
@@ -62,22 +59,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_place" .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -91,12 +80,8 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "almaMater" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -108,14 +93,6 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -123,7 +100,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "shoeNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -154,12 +131,12 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -175,12 +152,8 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "residence" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -223,12 +196,12 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -239,23 +212,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_place" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap> ;
         rr:predicate  dbo:hairColor .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthName" .
+<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color>
         a             rr:PredicateObjectMap ;
@@ -265,7 +230,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue>
@@ -276,7 +241,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hometown" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -296,7 +261,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -326,10 +291,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_pageant_titleholder/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -337,7 +298,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -349,10 +310,6 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue> .
@@ -362,13 +319,9 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hairColor" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown>
@@ -379,17 +332,13 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -408,7 +357,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/LogicalSource>
@@ -423,7 +372,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -432,7 +381,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight>
@@ -443,31 +392,19 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hairColor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -476,7 +413,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date>
@@ -491,13 +428,9 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap> ;
         rr:predicate  dbo:title .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hometown" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -505,23 +438,15 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "eyeColor" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "almaMater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "education" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -550,10 +475,6 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_pageant_titleholder/LogicalSource> ;
@@ -566,10 +487,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight> ;
         rr:subjectMap          <./Mapping_en:Infobox_pageant_titleholder/SubjectMap> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "eye_color" .
@@ -577,14 +494,6 @@
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "hometown" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -595,9 +504,9 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -633,12 +542,12 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "education" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "almaMater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -655,13 +564,9 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue>
@@ -669,10 +574,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_pageant_titleholder/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_pageant_titleholder/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -684,17 +585,9 @@
         a              rr:ObjectMap ;
         rml:reference  "occupation" .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "eyeColor" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date>
@@ -716,12 +609,12 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "eyeColor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -738,7 +631,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue>
@@ -753,30 +646,18 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair_color/FunctionTermMap> ;
         rr:predicate  dbo:hairColor .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "eyeColor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "eye color" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -794,10 +675,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthName" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -809,13 +686,9 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hometown/hometown/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "almaMater" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -829,7 +702,7 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name>
@@ -842,10 +715,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye_color/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_pageant_titleholder/LogicalSource> ;
@@ -857,27 +726,15 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hairColor" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -889,44 +746,20 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/eyeColor/eye%20color/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "shoeNumber" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap>
@@ -939,17 +772,17 @@
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/almaMater/alma%20mater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -966,34 +799,26 @@
         rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/education/education/FunctionTermMap> ;
         rr:predicate  dbo:education .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birthname" .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/shoeNumber/shoe_size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/hairColor/hair%20color/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hairColor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/birthName/birthname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_pageant_titleholder/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

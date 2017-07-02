@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,10 +34,6 @@
         rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Football_box/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -45,7 +42,7 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time>
@@ -54,15 +51,15 @@
         rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap> ;
         rr:predicate  dbo:time .
 
-<./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "event" .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Football_box/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1> , <./Mapping_en:Football_box/SimplePropertyMapping/event/event> , <./Mapping_en:Football_box/SimplePropertyMapping/time/time> ;
         rr:subjectMap          <./Mapping_en:Football_box/SubjectMap> .
+
+<./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "event" .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1>
         a             rr:PredicateObjectMap ;
@@ -82,12 +79,8 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "event" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -101,7 +94,7 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -111,12 +104,8 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -126,10 +115,6 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfGoals" .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -145,12 +130,8 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfGoals" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "time" .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/numberOfGoals/goals1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -158,7 +139,7 @@
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "time" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue>
@@ -166,10 +147,6 @@
         rml:logicalSource      <./Mapping_en:Football_box/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Football_box/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Football_box/SubjectMap/Function> .
-
-<./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "event" .
 
 <./Mapping_en:Football_box/SimplePropertyMapping/event/event/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

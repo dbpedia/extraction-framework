@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,10 +34,6 @@
         rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "playingTime" .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "subtitle" .
@@ -53,40 +50,24 @@
         a              rr:ObjectMap ;
         rml:reference  "illustrator" .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publisher" .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "designer" .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -105,10 +86,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_game/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -117,7 +94,7 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime>
@@ -132,26 +109,18 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manufacturer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "publisher" .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subtitle" .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -161,22 +130,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -199,12 +160,8 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publicationDate" .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -214,13 +171,9 @@
         a              rr:ObjectMap ;
         rml:reference  "designer" .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publicationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -228,13 +181,9 @@
         rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue>
@@ -248,10 +197,6 @@
         rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -264,12 +209,8 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "setupTime" .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publicationDate/date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -309,10 +250,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_game/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "illustrator" .
-
 <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "setupTime" .
@@ -334,12 +271,12 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer>
@@ -350,7 +287,7 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue>
@@ -378,12 +315,8 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "setupTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/setupTime/setupTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -403,7 +336,7 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "illustrator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue>
@@ -419,32 +352,24 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publisher" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "designer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manufacturer" .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
         rr:predicate  dbo:publisher .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -453,7 +378,7 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/subtitle/subtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "subtitle" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime>
@@ -470,14 +395,10 @@
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "playingTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_game/SimplePropertyMapping/playingTime/playingTime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "playingTime" .
-
-<./Mapping_en:Infobox_game/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -40,18 +41,14 @@
         a              rr:ObjectMap ;
         rml:reference  "manpower_data" .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ageRange" .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country>
@@ -64,27 +61,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ageRange" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -100,7 +89,7 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ageRange" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue>
@@ -115,32 +104,24 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_national_military/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
+<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription>
@@ -148,10 +129,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap> ;
         rr:predicate  dbo:ageRange .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -198,13 +175,9 @@
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap> ;
         rr:predicate  dbo:ageRange .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue>
@@ -231,14 +204,6 @@
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_national_military/LogicalSource> ;
@@ -250,35 +215,15 @@
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -302,12 +247,12 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -331,12 +276,8 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -348,13 +289,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_national_military?oldid=16709" .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -368,22 +305,22 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ageRange" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -405,19 +342,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ageRange" .
-
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -426,7 +355,7 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -434,14 +363,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_national_military/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/date/manpower_data> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/conscription> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/picture/image2> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/age> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age> ;
         rr:subjectMap          <./Mapping_en:Infobox_national_military/SubjectMap> .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ageRange" .
-
-<./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -464,7 +385,7 @@
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_national_military/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_national_military/SimplePropertyMapping/ageRange/manpower_age/FunctionTermMap/FunctionValue>

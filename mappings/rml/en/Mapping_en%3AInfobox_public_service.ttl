@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue>
@@ -45,27 +46,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasInput" .
-
 <./Mapping_en:Infobox_public_service/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q161837 , dbo:PublicService ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -85,22 +70,18 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap> ;
         rr:predicate  dbo:produces .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap>
@@ -109,7 +90,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -118,7 +99,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasChannel" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3>
@@ -131,32 +112,20 @@
         a              rr:ObjectMap ;
         rml:reference  "PS_IN_Title3" .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dct:description" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "produces" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_service/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue>
@@ -189,12 +158,12 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -206,25 +175,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue>
@@ -233,9 +190,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasInput" .
+<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description>
         a             rr:PredicateObjectMap ;
@@ -245,7 +202,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -253,18 +210,10 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "produces" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -281,10 +230,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap> ;
         rr:predicate  dbo:follows .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -306,10 +251,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -317,20 +258,8 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasInput" .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -343,27 +272,23 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap> ;
         rr:predicate  dbo:hasInput .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "PS_PeriodOfTime" .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1>
@@ -384,10 +309,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -403,10 +324,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasInput" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -414,17 +331,17 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue>
@@ -451,7 +368,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue>
@@ -464,10 +381,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_public_service/LogicalSource>
         a                         rml:LogicalSource ;
@@ -488,10 +401,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "produces" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -500,7 +409,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap>
@@ -509,21 +418,17 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasInput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location>
@@ -543,7 +448,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3>
@@ -551,14 +456,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap> ;
         rr:predicate  dbo:hasInput .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasInput" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -580,10 +477,6 @@
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dct:temporal" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -592,7 +485,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dc:title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -604,23 +497,19 @@
         a              rr:ObjectMap ;
         rml:reference  "PS_Rule5" .
 
+<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap> ;
         rr:predicate  dbo:follows .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue>
@@ -628,10 +517,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_public_service/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule4/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -643,29 +528,17 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_service/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_public_service/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1>
         a             rr:PredicateObjectMap ;
@@ -675,7 +548,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasInput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -693,10 +566,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_public_service/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -709,7 +578,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasInput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -718,16 +587,12 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dct:temporal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:description/PS_Description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dct:description" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap>
@@ -751,7 +616,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap>
@@ -762,10 +627,6 @@
         a              rr:ObjectMap ;
         rml:reference  "PS_OUT_Title1" .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dct:spatial" .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -774,21 +635,13 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "produces" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasInput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasChannel/PS_Channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasChannel" .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -798,20 +651,12 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "follows" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dc:title" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "produces" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5>
@@ -822,7 +667,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "playRole" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap>
@@ -839,7 +684,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "hasInput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -857,16 +702,16 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/type/PS_Type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dc:title/PS_Title/FunctionTermMap> ;
         rr:predicate  dc:title .
+
+<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -875,12 +720,12 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dct:spatial" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue>
@@ -917,31 +762,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "follows" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/playRole/PS_Agent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "playRole" .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_public_service/SimplePropertyMapping/produces/PS_OUT_Title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "produces" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "follows" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title4>
         a             rr:PredicateObjectMap ;
@@ -959,10 +792,6 @@
         a              rr:ObjectMap ;
         rml:reference  "PS_Rule2" .
 
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_public_service/LogicalSource> ;
@@ -972,10 +801,6 @@
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:spatial/PS_Location/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/follows/PS_Rule3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -989,7 +814,7 @@
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_public_service/SimplePropertyMapping/hasInput/PS_IN_Title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_public_service/SimplePropertyMapping/dct:temporal/PS_PeriodOfTime/FunctionTermMap/FunctionValue/propertyParameterPOM>

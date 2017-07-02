@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,7 +43,7 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SubjectMap/Function>
@@ -67,17 +68,13 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "railwayPlatforms" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -88,22 +85,10 @@
         a              rr:ObjectMap ;
         rml:reference  "suburb" .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:page" .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isHandicappedAccessible" .
-
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CityRail_station/LogicalSource>
         a                         rml:LogicalSource ;
@@ -120,10 +105,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -131,22 +112,18 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfTracks" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -160,12 +137,12 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled>
@@ -188,22 +165,14 @@
         a              rr:ObjectMap ;
         rml:reference  "tracks" .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "platforms" .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "agencyStationCode" .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -224,16 +193,12 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:page" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap>
@@ -246,18 +211,10 @@
         rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap> ;
         rr:predicate  dbo:picture .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype>
         a             rr:PredicateObjectMap ;
@@ -279,7 +236,7 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -288,16 +245,8 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isHandicappedAccessible" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "railwayPlatforms" .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -326,18 +275,14 @@
         rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/location/suburb/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -353,12 +298,12 @@
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/type/stationtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "agencyStationCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities>
@@ -377,22 +322,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/isHandicappedAccessible/disabled/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
 
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:name/station_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -427,10 +360,6 @@
 <./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/foaf:page/facilities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "facilities" .
-
-<./Mapping_en:Infobox_CityRail_station/SimplePropertyMapping/numberOfTracks/tracks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfTracks" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;

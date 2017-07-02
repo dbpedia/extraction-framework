@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,7 +35,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -46,10 +47,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_hospital/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_hospital/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -93,21 +90,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_hospital/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingYear" .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Founded" .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group>
@@ -120,10 +109,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_hospital/LogicalSource> ;
@@ -132,7 +117,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo>
@@ -143,7 +128,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -152,16 +137,12 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap>
@@ -184,10 +165,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_hospital/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue> .
@@ -204,14 +181,6 @@
 <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -259,26 +228,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_hospital/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Region" .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -306,45 +263,25 @@
         a              rr:ObjectMap ;
         rml:reference  "Coordinates" .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Founded" .
-
 <./Mapping_en:Infobox_hospital/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q16917 , dbo:ArchitecturalStructure , schema:Place , dbo:Place , owl:Thing , dbo:Building , wikidata:Q41176 , schema:Hospital , dbo:Hospital , dbo:Location ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Founded" .
+
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -359,7 +296,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue>
@@ -368,27 +305,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_hospital/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -404,10 +333,6 @@
         a              rr:ObjectMap ;
         rml:reference  "Country" .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -418,19 +343,15 @@
         rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/owner/Org/Group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -444,7 +365,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -454,27 +375,23 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:logo/Logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/latitude/FunctionTermMap/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_hospital/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -493,10 +410,6 @@
         rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Closed" .
@@ -511,10 +424,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/region/Region/FunctionTermMap> ;
         rr:predicate  dbo:region .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country>
         a             rr:PredicateObjectMap ;
@@ -539,12 +448,12 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "state" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap>
@@ -553,7 +462,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -569,12 +478,8 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "affiliation" .
 
 <./Mapping_en:Infobox_hospital/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -597,12 +502,12 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/affiliation/Affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:homepage/Website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed>
@@ -617,7 +522,7 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
@@ -640,13 +545,8 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bedCount" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/latitude>
         a             rr:PredicateObjectMap ;
@@ -654,13 +554,10 @@
         rr:objectMap  <./Mapping_en:Infobox_hospital/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/bedCount/Beds/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bedCount" .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/state/State/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "state" .
+<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -683,25 +580,17 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingYear/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingYear/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_hospital/SimplePropertyMapping/closingDate/Closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/openingDate/Founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -715,6 +604,6 @@
 
 <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_hospital/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 

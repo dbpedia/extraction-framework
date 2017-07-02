@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,10 +35,6 @@
         rr:predicateObjectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:IMDb_title/SubjectMap/Function> .
 
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "imdbId" .
-
 <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -57,10 +54,6 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:IMDb_title?oldid=48652" .
 
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:IMDb_title/LogicalSource> ;
@@ -69,7 +62,7 @@
 
 <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "imdbId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:IMDb_title/SubjectMap/Function>
@@ -85,7 +78,7 @@
 
 <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:IMDb_title/SubjectMap>

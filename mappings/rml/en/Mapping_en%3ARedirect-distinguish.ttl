@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -38,31 +39,19 @@
         a              rr:ObjectMap ;
         rml:reference  "5" .
 
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
-
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -72,7 +61,7 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4>
@@ -84,14 +73,6 @@
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -106,18 +87,6 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -131,17 +100,17 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -150,12 +119,12 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2>
@@ -174,10 +143,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
-
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "6" .
@@ -189,21 +154,17 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -212,30 +173,18 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap> ;
+        rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6>
         a             rr:PredicateObjectMap ;
@@ -254,19 +203,11 @@
         rr:predicateObjectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Redirect-distinguish/SubjectMap/Function> .
 
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owl:differentFrom" .
-
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Redirect-distinguish/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/transformParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Redirect-distinguish/SubjectMap/Function> .
-
-<./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "internal" .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -304,7 +245,7 @@
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Redirect-distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

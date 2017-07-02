@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -32,10 +33,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -56,7 +53,7 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname>
@@ -96,14 +93,6 @@
         a              rr:ObjectMap ;
         rml:reference  "date" .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -121,15 +110,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_holiday/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap> ;
-        rr:predicate  dbo:type .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue>
@@ -138,13 +121,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_holiday/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -152,7 +133,7 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -170,17 +151,9 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -212,7 +185,7 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap>
@@ -221,7 +194,7 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "similar" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
@@ -236,22 +209,18 @@
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "relatedto" .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap>
@@ -260,16 +229,12 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meaning" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap>
@@ -284,21 +249,17 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meaning" .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:nick" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -323,10 +284,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/meaning/significance> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name> , <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date> ;
         rr:subjectMap          <./Mapping_en:Infobox_holiday/SubjectMap> .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -336,21 +293,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "similar" .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -360,17 +305,13 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/holiday_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/country/observedby/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -384,14 +325,10 @@
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_holiday/SimplePropertyMapping/similar/relatedto/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_holiday/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

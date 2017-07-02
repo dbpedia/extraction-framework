@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,43 +35,23 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Density" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Density" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "boilingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kelvin> .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "boilingPoint" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt>
         a             rr:PredicateObjectMap ;
@@ -100,36 +81,24 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "density" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "boilingPoint" .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "boilingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "density" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue>
@@ -150,14 +119,8 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_element/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K>
         a             rr:PredicateObjectMap ;
@@ -165,18 +128,20 @@
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap> ;
         rr:predicate  dbo:meltingPoint .
 
+<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_element/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "BoilingPt" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -196,14 +161,8 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_element/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F>
         a             rr:PredicateObjectMap ;
@@ -211,37 +170,35 @@
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap> ;
         rr:predicate  dbo:boilingPoint .
 
+<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_element/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/degreeFahrenheit> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kelvin" .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "degreeCelsius" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Temperature" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "boilingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "degreeCelsius" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -251,7 +208,7 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue>
@@ -260,26 +217,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "degreeCelsius" .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "boiling point K" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "melting point C" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -298,22 +247,18 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "degreeFahrenheit" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kelvin" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Temperature" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -323,21 +268,17 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meltingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "kelvin" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -348,10 +289,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/degreeCelsius> .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -370,18 +307,14 @@
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Temperature> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "kelvin" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap>
@@ -394,18 +327,10 @@
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Temperature> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "degreeFahrenheit" .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "boilingPoint" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density>
         a             rr:PredicateObjectMap ;
@@ -428,31 +353,19 @@
         fnml:functionValue  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kelvin> .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "boilingPoint" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "degreeCelsius" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -484,25 +397,17 @@
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Temperature" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "boilingPoint" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Name" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -515,14 +420,6 @@
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "degreeFahrenheit" .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -532,13 +429,9 @@
         a              rr:ObjectMap ;
         rml:reference  "boiling point C" .
 
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "degreeFahrenheit" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_element/SubjectMap>
@@ -552,14 +445,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_element/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_element/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meltingPoint" .
-
-<./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Temperature" .
 
 <./Mapping_en:Infobox_element/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

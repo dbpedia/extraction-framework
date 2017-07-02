@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,7 +37,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cave/SubjectMap>
@@ -53,7 +54,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
@@ -66,22 +67,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfEntrances" .
-
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name>
@@ -92,7 +85,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length>
@@ -111,34 +104,26 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -154,10 +139,6 @@
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "depth" .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "depth" .
 
 <./Mapping_en:Infobox_cave/LogicalSource>
         a                         rml:LogicalSource ;
@@ -176,10 +157,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cave/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -192,7 +169,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfEntrances" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -202,7 +179,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cave/latitude/FunctionTermMap>
@@ -237,14 +214,6 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cave/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
@@ -257,7 +226,7 @@
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/numberOfEntrances/number%20of%20entrances>
@@ -292,10 +261,6 @@
         rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_cave/LogicalSource> ;
@@ -307,13 +272,9 @@
         rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cave/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "depth" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -342,12 +303,4 @@
         dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cave/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
-
-<./Mapping_en:Infobox_cave/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 

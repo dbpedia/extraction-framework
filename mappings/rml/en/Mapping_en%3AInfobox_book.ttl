@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "numberOfPages" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language>
@@ -41,12 +42,8 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dcc" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -64,7 +61,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -92,25 +89,18 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publicationDate" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "cover_artist" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousWork" .
+<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isbn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -118,27 +108,18 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "series" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue>
@@ -146,14 +127,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -173,16 +146,8 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "subsequentWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -201,7 +166,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn>
@@ -209,11 +179,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap> ;
         rr:predicate  dbo:isbn .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
@@ -233,11 +198,6 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap> ;
         rr:predicate  dbo:nonFictionSubject .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -245,17 +205,22 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coverArtist" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -285,12 +250,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator>
@@ -307,26 +272,14 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "author" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:WrittenWork , dbo:Work , wikidata:Q386724 , bibo:Book , schema:Book , dbo:Book , schema:CreativeWork , wikidata:Q571 , owl:Thing ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -343,7 +296,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publisher" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue>
@@ -354,7 +307,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -369,7 +322,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -379,24 +332,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "author" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "preceded_by" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publisher" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -412,7 +353,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -431,10 +372,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "translator" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -445,34 +382,30 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue> .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages> , <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject> , <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress> , <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre> , <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by> , <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey> , <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator> , <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date> , <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by> , <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date> , <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series> , <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author> , <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist> , <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type> , <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc> , <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn> , <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date> , <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig> , <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator> , <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap> .
 
+<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "publicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_book/LogicalSource>
         a                         rml:LogicalSource ;
@@ -480,17 +413,13 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_book?oldid=51052" .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "series" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "series" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -499,7 +428,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -517,14 +446,6 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap> ;
         rr:predicate  dbo:oclc .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "literaryGenre" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
@@ -533,7 +454,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publicationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -543,12 +464,8 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "oclc" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -560,7 +477,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by>
@@ -585,25 +502,21 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap> ;
         rr:predicate  dbo:author .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_book/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "dcc" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isbn" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -613,35 +526,19 @@
         a              rr:ObjectMap ;
         rml:reference  "pages" .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "oclc" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publicationDate" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mediaType" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/pub_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "pub_date" .
+
+<./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -653,10 +550,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -664,47 +557,31 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nonFictionSubject" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "language" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nonFictionSubject" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -725,12 +602,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "illustrator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -740,10 +617,6 @@
 <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "translator" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -761,27 +634,11 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap> ;
         rr:predicate  dbo:publicationDate .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap> ;
         rr:predicate  dbo:dcc .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/numberOfPages/pages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfPages" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -793,13 +650,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subsequentWork" .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lcc" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -810,14 +663,6 @@
         a              rr:ObjectMap ;
         rml:reference  "isbn" .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "illustrator" .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue> .
@@ -825,10 +670,6 @@
 <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_book/SimplePropertyMapping/dcc/dewey/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/coverArtist/cover_artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coverArtist" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -859,12 +700,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/foaf:name/title_orig/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "translator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -874,7 +715,7 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap>
@@ -889,12 +730,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -916,13 +757,9 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap> ;
         rr:predicate  dbo:lcc .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/author/author/FunctionTermMap>
@@ -937,21 +774,17 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "literaryGenre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mediaType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/oclc/oclc/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/nonFictionSubject/subject/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -965,18 +798,10 @@
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap> ;
         rr:predicate  dbo:illustrator .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/lcc/congress/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lcc" .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/releaseDate/release_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1001,10 +826,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_book/SimplePropertyMapping/literaryGenre/genre/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_book/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_book/SimplePropertyMapping/translator/translator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_book/SimplePropertyMapping/publicationDate/english_pub_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "english_pub_date" .
@@ -1015,16 +836,12 @@
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_book/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_book/SimplePropertyMapping/mediaType/media_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_book/SimplePropertyMapping/isbn/isbn/FunctionTermMap>

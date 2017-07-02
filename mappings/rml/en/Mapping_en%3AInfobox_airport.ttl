@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -49,22 +50,13 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -72,18 +64,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "runwayDesignation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
@@ -104,10 +93,6 @@
         a              rr:ObjectMap ;
         rml:reference  "operator" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue> .
@@ -119,12 +104,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m>
         a             rr:PredicateObjectMap ;
@@ -167,21 +148,17 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longm" .
-
-<./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:endDateFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f>
         a             rr:PredicateObjectMap ;
@@ -189,14 +166,14 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
+<./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -215,26 +192,10 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -245,17 +206,13 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -274,7 +231,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue>
@@ -291,12 +248,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "icaoLocationIdentifier" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap>
@@ -313,18 +270,9 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "buildingStartDate" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m>
         a             rr:PredicateObjectMap ;
@@ -332,9 +280,10 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -343,7 +292,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -353,12 +302,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue>
@@ -393,7 +342,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/OntologyParameterPOM>
@@ -401,17 +350,9 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -424,7 +365,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SubjectMap>
@@ -435,7 +376,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID>
@@ -446,7 +387,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -455,7 +396,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -470,7 +411,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/EndDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -480,12 +421,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -494,12 +435,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap>
@@ -517,23 +458,15 @@
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -554,20 +487,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -580,20 +505,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "runwayLength" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue>
@@ -618,31 +543,23 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue> .
 
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f>
         a             rr:PredicateObjectMap ;
@@ -654,30 +571,14 @@
         a              rr:ObjectMap ;
         rml:reference  "longs" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -686,24 +587,16 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "r1-number" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f>
         a             rr:PredicateObjectMap ;
@@ -726,20 +619,16 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "website" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -749,7 +638,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -764,12 +653,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -792,45 +677,29 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "r6-length-f" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "used" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "iataLocationIdentifier" .
 
 <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -839,7 +708,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -876,22 +745,22 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -908,14 +777,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "commander" .
 
 <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -939,7 +800,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m>
@@ -950,7 +811,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap>
@@ -973,13 +834,9 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/EndDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap>
@@ -1006,14 +863,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f>
         a             rr:PredicateObjectMap ;
@@ -1021,9 +872,11 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1036,21 +889,13 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f>
@@ -1064,33 +909,10 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "locationIdentifier" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/latitude/FunctionTermMap>
-        a                      rr:TriplesMap , fnml:FunctionTermMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_airport/latitude/FunctionTermMap> ;
-        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1105,21 +927,20 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_airport/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_airport/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayDesignation" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1131,10 +952,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap> ;
         rr:predicate  dbo:commander .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1143,27 +960,23 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r3-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1177,20 +990,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "faaLocationIdentifier" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1204,26 +1005,22 @@
         a              rr:ObjectMap ;
         rml:reference  "ICAO" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1233,7 +1030,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "faaLocationIdentifier" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap>
@@ -1242,7 +1039,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1251,12 +1048,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue>
@@ -1267,46 +1064,22 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "locationIdentifier" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latNS" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1315,16 +1088,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used>
         a              rr:PredicateObjectMap ;
@@ -1338,26 +1103,18 @@
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/foot> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/EndDate/buildingStartDate/buildingEndDate/built/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/EndDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -1415,12 +1172,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m>
@@ -1440,40 +1197,24 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "city" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1483,7 +1224,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap>
@@ -1495,28 +1236,19 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r7-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDegreesParameter .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
@@ -1525,22 +1257,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
+<./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type>
@@ -1557,30 +1286,26 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "r3-length-f" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "r3-length-f" .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1588,7 +1313,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
@@ -1596,13 +1321,9 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue>
@@ -1621,16 +1342,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1646,7 +1359,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface>
@@ -1666,9 +1379,11 @@
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "r5-number" .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap> ;
+        rr:predicate  dbo:runwaySurface .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1676,11 +1391,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap> ;
-        rr:predicate  dbo:runwaySurface .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "r5-number" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1702,10 +1415,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1719,16 +1428,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
@@ -1751,18 +1456,18 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1781,26 +1486,22 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m>
         a             rr:PredicateObjectMap ;
@@ -1826,25 +1527,17 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
+<./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1878,13 +1571,9 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue>
@@ -1904,14 +1593,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "r4-surface" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
@@ -1923,6 +1604,10 @@
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "r4-surface" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1938,34 +1623,18 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "elevation-f" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "r1-surface" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r8-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
 
 <./Mapping_en:Infobox_airport/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -1986,15 +1655,15 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r5-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "runwayDesignation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/operator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2006,22 +1675,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
@@ -2032,12 +1693,12 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served>
@@ -2045,10 +1706,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap> ;
         rr:predicate  dbo:city .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "metre" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/locationIdentifier/LID/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2062,7 +1719,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA>
@@ -2070,14 +1727,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap> ;
         rr:predicate  dbo:faaLocationIdentifier .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2087,10 +1736,6 @@
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r2-surface/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/faaLocationIdentifier/FAA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2103,10 +1748,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "r6-surface" .
@@ -2117,22 +1758,14 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap> ;
         rr:predicate  dbo:runwayDesignation .
 
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "iataLocationIdentifier" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "r7-length-f" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2140,7 +1773,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper>
@@ -2163,10 +1796,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r8-number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_airport/LogicalSource> ;
@@ -2175,7 +1804,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built>
@@ -2194,14 +1823,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue> .
@@ -2210,18 +1831,10 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "icaoLocationIdentifier" .
-
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/EndDate/openingDate/dateOfAbandonment/used/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2256,26 +1869,18 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "city" .
-
 <./Mapping_en:Infobox_airport/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latm" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -2285,10 +1890,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "elevation" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -2310,21 +1911,16 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f>
@@ -2333,9 +1929,10 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-f/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -2352,20 +1949,8 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r1-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operator" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-a/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2376,13 +1961,9 @@
         a              rr:ObjectMap ;
         rml:reference  "r1-length-f" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r1-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number>
@@ -2403,13 +1984,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename-r/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r6-number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayDesignation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap>
@@ -2437,13 +2014,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/icaoLocationIdentifier/ICAO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "foot" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
@@ -2454,26 +2027,14 @@
         a              rr:ObjectMap ;
         rml:reference  "longd" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/city/city-served/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/operator/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue>
@@ -2490,17 +2051,13 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r3-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwaySurface" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner-oper/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwayLength" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2515,10 +2072,6 @@
 <./Mapping_en:Infobox_airport/StartDate/buildingStartDate/buildingEndDate/built/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "built" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface>
         a             rr:PredicateObjectMap ;
@@ -2546,7 +2099,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r7-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
@@ -2564,28 +2117,19 @@
         a              rr:ObjectMap ;
         rml:reference  "built" .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r2-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "IATA" .
+
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r6-length-m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:name/nativename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/iataLocationIdentifier/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2594,7 +2138,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap>
@@ -2604,16 +2148,13 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-f/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foot" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -2681,14 +2222,6 @@
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r5-length-m/FunctionTermMap> ;
         rr:predicate  dbo:runwayLength .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r4-number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r7-surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r8-length-m/FunctionTermMap/FunctionValue> ;
@@ -2696,24 +2229,20 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/commander/commander/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "commander" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r5-surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runwaySurface" .
-
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap> ;
-        rr:predicate  dbo:runwaySurface .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayDesignation/r2-number/FunctionTermMap> ;
         rr:predicate  dbo:runwayDesignation .
+
+<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r6-surface/FunctionTermMap> ;
+        rr:predicate  dbo:runwaySurface .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r1-surface>
         a             rr:PredicateObjectMap ;
@@ -2732,7 +2261,7 @@
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r4-length-m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runwayLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_airport/SimplePropertyMapping/runwaySurface/r4-surface/FunctionTermMap>
@@ -2748,18 +2277,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/runwayLength/r3-length-f/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_airport/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_airport/longitude/ObjectMap/FunctionValue> .
-
-<./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
 
 <./Mapping_en:Infobox_airport/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -2771,7 +2291,8 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_airport/SimplePropertyMapping/elevation/elevation-f/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_airport/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_airport/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
+<./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_airport/StartDate/openingDate/dateOfAbandonment/used/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
 

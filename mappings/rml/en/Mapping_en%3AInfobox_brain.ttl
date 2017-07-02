@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,15 +29,15 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "MeshNumber" .
+
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap> ;
         rr:predicate  dbo:meshNumber .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -49,12 +50,12 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "grayPage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -63,7 +64,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap>
@@ -75,10 +76,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_brain/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_brain/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -100,10 +97,6 @@
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap> ;
         rr:predicate  dbo:brainInfoNumber .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meshName" .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue> .
@@ -116,10 +109,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -127,7 +116,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "brainInfoNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -141,7 +130,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue>
@@ -159,14 +148,6 @@
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "graySubject" .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -188,7 +169,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name>
@@ -209,15 +190,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_brain/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -226,16 +198,13 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "artery" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "component" .
+<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -260,23 +229,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_brain/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "grayPage" .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -293,10 +254,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap> ;
         rr:predicate  dbo:dorlandsSuffix .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -325,23 +282,11 @@
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap> ;
         rr:predicate  dbo:isPartOfAnatomicalStructure .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "brainInfoNumber" .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_brain/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_brain/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meshNumber" .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -350,25 +295,17 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "IsPartOf" .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dorlandsSuffix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "artery" .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -388,7 +325,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue>
@@ -401,18 +338,6 @@
         a              rr:ObjectMap ;
         rml:reference  "BrainInfoType" .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isPartOfAnatomicalStructure" .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dorlandsSuffix" .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue> .
@@ -422,10 +347,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/grayPage/GrayPage/FunctionTermMap> ;
         rr:predicate  dbo:grayPage .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -441,23 +362,15 @@
         a              rr:ObjectMap ;
         rml:reference  "DorlandsPre" .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "vein" .
-
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshName/MeshName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meshName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery>
         a             rr:PredicateObjectMap ;
@@ -467,7 +380,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Latin/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -477,27 +390,27 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dorlandsPrefix" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "brainInfoType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isPartOfAnatomicalStructure" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap>
@@ -506,17 +419,13 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/isPartOfAnatomicalStructure/IsPartOf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "vein" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "brainInfoType" .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -543,17 +452,13 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsSuffix/DorlandsSuf/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/component/Components/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "component" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -562,7 +467,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/graySubject/GraySubject/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "graySubject" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/LogicalSource>
@@ -573,7 +478,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meshNumber" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_brain/SubjectMap/Function>
@@ -586,10 +491,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap> ;
         rr:predicate  dbo:dorlandsPrefix .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/vein/Vein/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_brain/SubjectMap>
         a            rr:SubjectMap ;
@@ -610,7 +511,7 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap>
@@ -623,12 +524,8 @@
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType>
         a             rr:PredicateObjectMap ;
@@ -636,20 +533,12 @@
         rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoType/BrainInfoType/FunctionTermMap> ;
         rr:predicate  dbo:brainInfoType .
 
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_brain/SimplePropertyMapping/artery/Artery/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_brain/SimplePropertyMapping/brainInfoNumber/BrainInfoNumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/dorlandsPrefix/DorlandsPre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dorlandsPrefix" .
-
-<./Mapping_en:Infobox_brain/SimplePropertyMapping/meshNumber/MeshNumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "MeshNumber" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,25 +29,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "abbreviation" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image>
         a             rr:PredicateObjectMap ;
@@ -62,14 +47,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -87,7 +64,7 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -114,25 +91,17 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "abbreviation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "servingRailwayLine" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -144,27 +113,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap> ;
         rr:predicate  dbo:agencyStationCode .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -191,7 +148,7 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap>
@@ -200,38 +157,38 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "railwayPlatforms" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany/ObjectMap> ;
+        rr:object     dbr-en:Germany ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -241,10 +198,6 @@
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -266,17 +219,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -295,7 +240,7 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap>
@@ -310,7 +255,7 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap>
@@ -319,17 +264,17 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "servingRailwayLine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude/FunctionTermMap>
@@ -362,38 +307,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lines" .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -456,10 +377,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "agencyStationCode" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -515,13 +432,9 @@
         a              rr:ObjectMap ;
         rml:reference  "image" .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "railwayPlatforms" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "alias" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap/FunctionValue>
@@ -536,12 +449,12 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines/FunctionTermMap>
@@ -556,17 +469,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines>
@@ -588,13 +497,13 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:object     dbr-en:Germany ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -603,7 +512,7 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -613,17 +522,17 @@
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "agencyStationCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -654,30 +563,10 @@
         a              rr:ObjectMap ;
         rml:reference  "street" .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "alias" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

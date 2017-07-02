@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -45,7 +46,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index>
@@ -54,20 +55,11 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap> ;
         rr:predicate  dbo:glycemicIndex .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2>
         a             rr:PredicateObjectMap ;
@@ -79,13 +71,14 @@
         a              rr:ObjectMap ;
         rml:reference  "course" .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
+<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "protein" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue>
@@ -96,16 +89,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "servingSize" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap>
@@ -114,22 +103,14 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "year" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap> ;
         rr:predicate  dc:type .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maxTime" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -139,7 +120,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap>
@@ -153,26 +134,13 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ingredientName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -183,17 +151,18 @@
         a              rr:ObjectMap ;
         rml:reference  "image" .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "creatorOfDish" .
+<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "notes" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -216,22 +185,18 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -283,10 +248,6 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "hasVariant" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
@@ -299,17 +260,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "year" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime>
@@ -320,12 +277,8 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "complexity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -333,12 +286,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -354,17 +307,13 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -372,7 +321,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap>
@@ -390,12 +339,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "carbohydrate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name>
@@ -428,7 +377,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -447,26 +396,14 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap> ;
         rr:predicate  dbo:carbohydrate .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fat" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "glycemic_index" .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -486,11 +423,6 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
@@ -503,9 +435,14 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
+<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -514,16 +451,8 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "related" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -535,7 +464,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year>
@@ -550,13 +479,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap>
@@ -592,7 +517,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue>
@@ -603,16 +528,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "calories" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators>
         a             rr:PredicateObjectMap ;
@@ -627,7 +548,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served>
@@ -638,7 +559,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue>
@@ -649,7 +570,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "alias" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -658,20 +579,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "servingTemperature" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "alias" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "glycemicIndex" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fat" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -681,22 +594,18 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -706,12 +615,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cuisine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ingredient" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat>
@@ -720,17 +629,13 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap> ;
         rr:predicate  dbo:fat .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "complexity" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue>
@@ -738,10 +643,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein>
         a             rr:PredicateObjectMap ;
@@ -757,7 +658,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maxTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -772,12 +673,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "approximateCalories" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue>
@@ -797,7 +698,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient>
@@ -805,14 +706,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap> ;
         rr:predicate  dbo:ingredient .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/type/course>
         a             rr:PredicateObjectMap ;
@@ -833,12 +726,8 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -864,19 +753,11 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap> ;
         rr:predicate  dbo:cuisine .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -890,7 +771,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -901,29 +782,21 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_food/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hasVariant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/cuisine/national_cuisine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cuisine" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -932,16 +805,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Energy" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "creatorOfDish" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories>
@@ -949,10 +818,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap> ;
         rr:predicate  dbo:approximateCalories .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ingredient" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -992,31 +857,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap>
@@ -1040,23 +893,14 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap> ;
         rr:predicate  dbo:minTime .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isPartOf" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dc:type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "isPartOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1067,22 +911,15 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "carbohydrate" .
+<./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "glycemicIndex" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maxTime" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1102,20 +939,12 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minTime" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "creators" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1134,18 +963,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "maxTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "alias" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/time2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1170,14 +991,6 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1191,7 +1004,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap>
@@ -1199,13 +1012,9 @@
         fnml:functionValue  <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Mass> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SubjectMap/Function>
@@ -1217,18 +1026,6 @@
         a              rr:ObjectMap ;
         rml:reference  "time2" .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "related" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/related/similar_dish/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1239,40 +1036,20 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/fat/fat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ingredientName" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/glycemicIndex/glycemic_index/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "alias" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1280,18 +1057,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredientName/main_ingredient/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Energy" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "approximateCalories" .
 
 <./Mapping_en:Infobox_food/LogicalSource>
         a                         rml:LogicalSource ;
@@ -1311,14 +1080,6 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap> ;
         rr:predicate  dbo:region .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/type/course/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/maxTime/maxtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/ingredient/main_ingredient/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -1330,21 +1091,9 @@
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap> ;
         rr:predicate  dbo:isPartOf .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "servingTemperature" .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/region/region/FunctionTermMap>
@@ -1359,7 +1108,7 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "creatorOfDish" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap>
@@ -1372,17 +1121,13 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/approximateCalories/calories/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/creatorOfDish/creators/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "creatorOfDish" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -1400,31 +1145,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_food/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "servingSize" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/alias/alternate_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/complexity/complexity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/servingTemperature/served/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/dc:type/course/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dc:type" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1437,38 +1170,22 @@
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/year/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "year" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/carbohydrate/carbohydrate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/time1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minTime" .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "serving_size" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_food/SimplePropertyMapping/notes/other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "notes" .
+<./Mapping_en:Infobox_food/SimplePropertyMapping/servingSize/serving_size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serving_size" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_food/SimplePropertyMapping/minTime/mintime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "minTime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_food/SimplePropertyMapping/protein/protein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "protein" .
 
 <./Mapping_en:Infobox_food/SimplePropertyMapping/isPartOf/cookbook/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

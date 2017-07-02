@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,298 +29,74 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "dateofbirth" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_date" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
-        rr:predicate  dbo:nationality .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birthplace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap> ;
-        rr:predicate  dbo:height .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_place" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "nationality" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "weight" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "fullname" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:nick" .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap> ;
-        rr:predicate  dbo:stateOfOrigin .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "birthdate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rml:reference  "birth_place" .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -330,55 +107,192 @@
         rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "residence" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "deathdate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "nationality" .
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathplace" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Person , wikidata:Q215627 , owl:Thing , foaf:Person , dul:NaturalPerson , dbo:Athlete , dbo:Agent , dul:Agent , wikidata:Q5 , schema:Person ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "residence" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<./Mapping_en:Infobox_sportsperson/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -388,81 +302,136 @@
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
+        rml:reference  "deathdate" .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dateofbirth" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<./Mapping_en:Infobox_sportsperson/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_sportsperson?oldid=16835" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "residence" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:stateOfOrigin .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -474,370 +443,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "deathplace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nationality" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
-        rr:predicate  dbo:weight .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_date" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
-        rr:predicate  foaf:nick .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_sportsperson/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Person , wikidata:Q215627 , owl:Thing , foaf:Person , dul:NaturalPerson , dbo:Athlete , dbo:Agent , dul:Agent , wikidata:Q5 , schema:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_place" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "dateofdeath" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "residence" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_sportsperson?oldid=16835" .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -845,39 +460,72 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
-        rr:predicate  dbo:team .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap> ;
+        rr:predicate  dbo:residence .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "stateOfOrigin" .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
@@ -886,48 +534,233 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap> ;
-        rr:predicate  dbo:residence .
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "stateOfOrigin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nickname" .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/dateofbirth/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
-
-<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/residence/residence/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sportsperson/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sportsperson/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/deathDate/dateofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dateofdeath" .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<./Mapping_en:Infobox_sportsperson/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 

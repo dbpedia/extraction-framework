@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_World_Heritage_Site/longitude>
         a             rr:PredicateObjectMap ;
         dcterms:type  "longitudeMapping" ;
@@ -40,7 +37,7 @@
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_World_Heritage_Site/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
@@ -75,12 +72,12 @@
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_World_Heritage_Site/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
@@ -128,10 +125,6 @@
         rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -141,18 +134,10 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
 
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "id" .
-
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "id" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -162,12 +147,8 @@
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
 
 <./Mapping_en:Infobox_World_Heritage_Site/latitude/FunctionTermMap/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -179,10 +160,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_World_Heritage_Site/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_World_Heritage_Site/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_World_Heritage_Site/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_World_Heritage_Site/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -196,26 +173,14 @@
         rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap> ;
         rr:predicate  dbo:region .
 
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -260,12 +225,12 @@
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/id/ID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap>
@@ -274,12 +239,12 @@
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:homepage/Link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/type/Type>
@@ -296,10 +261,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/region/Region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
 
 <./Mapping_en:Infobox_World_Heritage_Site/SimplePropertyMapping/foaf:name/Name>
         a             rr:PredicateObjectMap ;

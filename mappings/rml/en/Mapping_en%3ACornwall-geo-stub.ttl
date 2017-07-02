@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,7 +43,7 @@
 <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall/ObjectMap> ;
+        rr:object     dbr-en:Conrwall ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
@@ -50,14 +51,6 @@
         rml:logicalSource      <./Mapping_en:Cornwall-geo-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall> , <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:Cornwall-geo-stub/SubjectMap> .
-
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
-
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Conrwall" .
 
 <./Mapping_en:Cornwall-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -68,6 +61,6 @@
 <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:object     dbr-en:United_Kingdom ;
         rr:predicate  dbo:country .
 

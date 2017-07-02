@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,82 +29,35 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap> .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "owner" .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_MLB?oldid=47865" .
 
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_MLB/SubjectMap>
@@ -112,27 +66,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_MLB/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_MLB?oldid=47865" .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
-        rr:predicate  dbo:owner .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager>
         a             rr:PredicateObjectMap ;
@@ -140,47 +82,54 @@
         rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap> ;
         rr:predicate  dbo:manager .
 
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established" .
+
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap> .
 
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
-        rr:predicate  dbo:foundingDate .
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -188,38 +137,58 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "manager" .
-
 <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_MLB/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "established" .
+        rml:reference  "manager" .
 
-<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MLB/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_MLB/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MLB/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_MLB/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
 

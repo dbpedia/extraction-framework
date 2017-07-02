@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,17 +29,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "officialOpenedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue>
@@ -47,124 +45,10 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
 
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap> .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfParticipatingNations .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympic_games/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Olympic_games?oldid=15717" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Officiallyopenedby" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "torchBearer" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfParticipatingNations" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "officialOpenedBy" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfParticipatingAthletes .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Antorcha olímpica" .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap> ;
-        rr:predicate  dbo:torchBearer .
+<./Mapping_en:Infobox_Olympic_games/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
 
 <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -172,28 +56,68 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     "numberOfParticipatingAthletes" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfParticipatingNations .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Nations participating" .
 
-<./Mapping_en:Infobox_Olympic_games/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Antorcha olímpica" .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Officiallyopenedby" .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Athletes participating" .
 
 <./Mapping_en:Infobox_Olympic_games/SubjectMap>
         a            rr:SubjectMap ;
@@ -201,13 +125,56 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Athletes participating" .
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfParticipatingNations" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "torchBearer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_games/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating> , <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_games/SubjectMap> .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Olympic_games/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Olympic_games?oldid=15717" .
 
 <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/torchBearer/Antorcha%20ol%C3%ADmpica/FunctionTermMap> ;
+        rr:predicate  dbo:torchBearer .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfParticipatingAthletes .
+
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby>
         a             rr:PredicateObjectMap ;
@@ -215,11 +182,13 @@
         rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap> ;
         rr:predicate  dbo:officialOpenedBy .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingNations/Nations%20participating/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/officialOpenedBy/Officiallyopenedby/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfParticipatingAthletes" .
+<./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_games/SimplePropertyMapping/numberOfParticipatingAthletes/Athletes%20participating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 

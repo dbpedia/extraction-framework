@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,180 +29,38 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region6" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap> ;
-        rr:predicate  dbo:language .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region1" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "religion" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "region5" .
+        rml:reference  "related" .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "related" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap> ;
+        rr:predicate  dbo:religion .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "languages" .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1>
@@ -210,243 +69,39 @@
         rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap> ;
         rr:predicate  dbo:populationPlace .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "totalPopulation" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "langs" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "religion" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "totalPopulation" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "population" .
+        rml:reference  "region9" .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "region3" .
+        rml:reference  "rels" .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region7" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap> ;
-        rr:predicate  dbo:totalPopulation .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region2" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue>
@@ -455,353 +110,24 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "poptime" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "popplace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region9" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap> ;
-        rr:predicate  dbo:related .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region4" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "rels" .
-
-<./Mapping_en:Infobox_ethnic_group/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap> ;
-        rr:predicate  dbo:religion .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region8" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "regions" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "religions" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap> ;
-        rr:predicate  dbo:religion .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_ethnic_group?oldid=35138" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "populationPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_ethnic_group/SubjectMap>
@@ -810,104 +136,20 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "region10" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "populationPlace" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap> ;
         rr:predicate  dbo:language .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "totalPopulation" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap> ;
-        rr:predicate  dbo:populationPlace .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "related" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "group" .
-
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap> ;
-        rr:predicate  dbo:totalPopulation .
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -915,9 +157,287 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "pop" .
+        rml:reference  "regions" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "totalPopulation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap> ;
+        rr:predicate  dbo:related .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "related" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "totalPopulation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "group" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "popplace" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region2" .
+
+<./Mapping_en:Infobox_ethnic_group/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap> ;
+        rr:predicate  dbo:totalPopulation .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region5" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "langs" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap> ;
+        rr:predicate  dbo:religion .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region8" .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population>
         a             rr:PredicateObjectMap ;
@@ -925,14 +445,55 @@
         rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap> ;
         rr:predicate  dbo:totalPopulation .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "poptime" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region1" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "religion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3>
@@ -941,16 +502,288 @@
         rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap> ;
         rr:predicate  dbo:populationPlace .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region4" .
 
-<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region5> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region4> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/langs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region7" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/poptime/FunctionTermMap> ;
+        rr:predicate  dbo:totalPopulation .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "totalPopulation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "religion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region9/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region2/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region3" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/popplace/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/rels/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/religion/religions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "religions" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region10" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_ethnic_group/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region10/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_ethnic_group/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region7/FunctionTermMap> ;
+        rr:predicate  dbo:populationPlace .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region6" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pop" .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/totalPopulation/pop/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_ethnic_group?oldid=35138" .
 
 <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/populationPlace/region1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_ethnic_group/SimplePropertyMapping/foaf:name/group/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -32,23 +33,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subsequentWork" .
-
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -60,10 +57,6 @@
         a              rr:ObjectMap ;
         rml:reference  "next_link" .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousWork" .
-
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
@@ -72,12 +65,8 @@
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "publicationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -93,10 +82,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -127,10 +112,6 @@
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "genre" .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "publicationDate" .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -174,28 +155,20 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "subsequentWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -212,23 +185,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
-
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link>
         a             rr:PredicateObjectMap ;
@@ -240,10 +205,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -263,7 +224,7 @@
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -273,7 +234,7 @@
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue>
@@ -282,19 +243,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
         rr:predicate  dbo:genre .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -310,17 +263,13 @@
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "previousWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -329,12 +278,8 @@
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link>
         a             rr:PredicateObjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -27,10 +28,6 @@
 @prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "meshId" .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -49,7 +46,7 @@
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -65,17 +62,17 @@
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "icd9" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_disease/SubjectMap>
@@ -88,10 +85,6 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_disease/LogicalSource>
         a                         rml:LogicalSource ;
@@ -132,10 +125,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -144,7 +133,7 @@
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name>
@@ -155,7 +144,7 @@
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "icdo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap>
@@ -171,22 +160,10 @@
         a              rr:ObjectMap ;
         rml:reference  "ICD9" .
 
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icdo/ICDO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "icdo" .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "icd10" .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -206,12 +183,12 @@
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "icd10" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID>
@@ -220,22 +197,18 @@
         rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap> ;
         rr:predicate  dbo:meshId .
 
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "omim" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue>
@@ -248,17 +221,9 @@
         a              rr:ObjectMap ;
         rml:reference  "ICDO" .
 
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -292,20 +257,8 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_disease/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icd9/ICD9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "icd9" .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/icd10/ICD10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_disease/SimplePropertyMapping/meshId/MeshID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "meshId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_disease/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "omim" .
 

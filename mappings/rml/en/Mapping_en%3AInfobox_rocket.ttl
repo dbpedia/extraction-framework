@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,200 +29,56 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "partial" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "first" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "stages" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mass" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successfulLaunches" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap> ;
-        rr:predicate  dbo:height .
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap> ;
+        rr:predicate  dbo:partialFailedLaunches .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manufacturer" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_rocket/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dul:DesignedArtifact , dbo:MeanOfTransportation , wikidata:Q41291 , dbo:Rocket ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "LEO-payload" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "failedLaunches" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_rocket/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap> ;
-        rr:predicate  dbo:successfulLaunches .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "partial" .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -229,85 +86,42 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap> ;
-        rr:predicate  dbo:lowerEarthOrbitPayload .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "derivatives" .
+        rml:reference  "other_outcome" .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rocketFunction" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "launches" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "maidenFlight" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "function" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap> ;
+        rr:predicate  dbo:successor .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manufacturer" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country-origin" .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -315,223 +129,104 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap> ;
-        rr:predicate  dbo:failedLaunches .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "other_outcome" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap> ;
-        rr:predicate  dbo:rocketFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "comparable" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap> ;
+        rr:predicate  dbo:launchSite .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "diameter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap> ;
-        rr:predicate  dbo:comparable .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lowerEarthOrbitPayload" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap> ;
-        rr:predicate  dbo:maidenFlight .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap> ;
-        rr:predicate  dbo:finalFlight .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap> ;
-        rr:predicate  dbo:rocketStages .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "mass" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     "rocketFunction" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_rocket/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_rocket?oldid=7422" .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap> ;
-        rr:predicate  dbo:totalLaunches .
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "countryOrigin" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "comparable" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "sites" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome>
         a             rr:PredicateObjectMap ;
@@ -539,14 +234,213 @@
         rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap> ;
         rr:predicate  dbo:unknownOutcomes .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "launchSite" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "manufacturer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "LEO-payload" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fail" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sites" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue> .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap> ;
+        rr:predicate  dbo:lowerEarthOrbitPayload .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "successor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap> ;
+        rr:predicate  dbo:diameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "totalLaunches" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "launches" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap> ;
+        rr:predicate  dbo:totalLaunches .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "status" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap> ;
+        rr:predicate  dbo:rocketFunction .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap> ;
+        rr:predicate  dbo:status .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap> ;
+        rr:predicate  dbo:rocketStages .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "finalFlight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue>
@@ -555,82 +449,42 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap> ;
-        rr:predicate  dbo:launchSite .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "function" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "diameter" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successor" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     "failedLaunches" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap> ;
-        rr:predicate  dbo:partialFailedLaunches .
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap> ;
+        rr:predicate  dbo:failedLaunches .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "successfulLaunches" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "derivatives" .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -638,253 +492,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "finalFlight" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "totalLaunches" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "partialFailedLaunches" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "launchSite" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap> ;
-        rr:predicate  dbo:status .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap> ;
-        rr:predicate  dbo:countryOrigin .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap> ;
-        rr:predicate  dbo:diameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "status" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rocketStages" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "unknownOutcomes" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap> ;
-        rr:predicate  dbo:mass .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "last" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "country-origin" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rocket/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing , dul:DesignedArtifact , dbo:MeanOfTransportation , wikidata:Q41291 , dbo:Rocket ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/totalLaunches/launches/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -892,42 +502,172 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "diameter" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap> ;
-        rr:predicate  dbo:successor .
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successor/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "success" .
-
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "partialFailedLaunches" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "manufacturer" .
+        rml:reference  "mass" .
+
+<./Mapping_en:Infobox_rocket/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lowerEarthOrbitPayload" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stages" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mass" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap> ;
+        rr:predicate  dbo:comparable .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketStages/stages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "rocketStages" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "fail" .
+        rml:reference  "success" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "unknownOutcomes" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "diameter" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap> ;
+        rr:predicate  dbo:finalFlight .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap> ;
+        rr:predicate  dbo:mass .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maidenFlight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap> ;
+        rr:predicate  dbo:successfulLaunches .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "countryOrigin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer>
         a             rr:PredicateObjectMap ;
@@ -935,19 +675,104 @@
         rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap> ;
         rr:predicate  dbo:manufacturer .
 
-<./Mapping_en:Infobox_rocket/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_rocket?oldid=7422" .
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "comparable" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/launchSite/sites/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/finalFlight/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/unknownOutcomes/other_outcome/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_rocket/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rocket/SimplePropertyMapping/failedLaunches/fail/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_rocket/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap> ;
+        rr:predicate  dbo:maidenFlight .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/comparable/comparable/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "comparable" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/maidenFlight/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first" .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/rocketFunction/function/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/lowerEarthOrbitPayload/LEO-payload/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_rocket/SimplePropertyMapping/countryOrigin/country-origin/FunctionTermMap> ;
+        rr:predicate  dbo:countryOrigin .
 

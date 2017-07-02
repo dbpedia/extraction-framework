@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -35,7 +36,7 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
@@ -44,7 +45,7 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director>
@@ -53,13 +54,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap> ;
         rr:predicate  dbo:director .
 
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource>
@@ -70,16 +67,12 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "series" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "director" .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "animator" .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -89,12 +82,8 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator>
         a             rr:PredicateObjectMap ;
@@ -105,10 +94,6 @@
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "producer" .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distributor" .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap>
         a            rr:SubjectMap ;
@@ -138,23 +123,15 @@
         a              rr:ObjectMap ;
         rml:reference  "series" .
 
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -163,7 +140,7 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "animator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue>
@@ -172,23 +149,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distributor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -207,7 +176,7 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue>
@@ -238,14 +207,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -259,7 +220,7 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap>
@@ -269,10 +230,6 @@
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "series" .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -296,12 +253,8 @@
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "producer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer>
         a             rr:PredicateObjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,33 +29,25 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rkdArtistsId" .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bibsysId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "bpnId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -67,38 +60,22 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "selibrId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "nlaId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "orcidId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ridId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -114,16 +91,16 @@
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isniId" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Authority_control/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Authority_control/SubjectMap/Function> .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND>
         a             rr:PredicateObjectMap ;
@@ -135,10 +112,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -147,12 +120,12 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ndlId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap>
@@ -179,7 +152,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "selibrId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue>
@@ -199,13 +172,9 @@
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap> ;
         rr:predicate  dbo:sudocId .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ulanId" .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "viafId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue>
@@ -218,31 +187,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "SELIBR" .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "individualisedGnd" .
+<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Authority_control/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -276,25 +233,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ndlId" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "isniId" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bpnId" .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "SUDOC" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF>
@@ -309,16 +254,8 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mbaId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "nlaId" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "viafId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -331,7 +268,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "sudocId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap>
@@ -346,17 +283,9 @@
         a              rr:ObjectMap ;
         rml:reference  "LCCN" .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -369,7 +298,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "individualisedGnd" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID>
@@ -377,10 +306,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap> ;
         rr:predicate  dbo:orcidId .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bibsysId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF>
         a             rr:PredicateObjectMap ;
@@ -398,7 +323,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "orcidId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI>
@@ -415,22 +340,18 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lccnId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN>
         a             rr:PredicateObjectMap ;
@@ -440,7 +361,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap>
@@ -471,7 +392,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue>
@@ -483,10 +404,6 @@
 <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ISNI" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -503,17 +420,9 @@
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap> ;
         rr:predicate  dbo:bpnId .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "bnfId" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mbaId" .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lccnId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue>
@@ -535,7 +444,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -551,7 +460,7 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue>
@@ -559,10 +468,6 @@
         rml:logicalSource      <./Mapping_en:Authority_control/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Authority_control/SubjectMap/Function> .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "sudocId" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN>
         a             rr:PredicateObjectMap ;
@@ -582,48 +487,32 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ulanId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bnfId" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "ORCID" .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -631,17 +520,13 @@
         rr:predicateObjectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Authority_control/SubjectMap/Function> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "BIBSYS" .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ridId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -663,12 +548,12 @@
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rkdArtistsId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -681,22 +566,14 @@
         rr:predicateObjectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Authority_control/SubjectMap/Function> .
 
-<./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -723,10 +600,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap> ;
         rr:predicate  dbo:ndlId .
-
-<./Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;

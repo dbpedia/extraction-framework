@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,10 +29,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -43,10 +40,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap> ;
         rr:predicate  dbo:budget .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInSingleMale" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -61,7 +54,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "category" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -71,10 +64,6 @@
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "champd" .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInDoubleMale" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface>
         a             rr:PredicateObjectMap ;
@@ -93,12 +82,8 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -124,7 +109,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue>
@@ -135,16 +120,16 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "tennisSurfaceType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_event/StartDate/startDate/endDate/date/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "startDate" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_tennis_event/StartDate/startDate/endDate/date/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "startDate" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -152,16 +137,12 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms>
@@ -181,10 +162,6 @@
         rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInMixedDouble" .
-
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue> .
@@ -193,19 +170,11 @@
         a              rr:ObjectMap ;
         rml:reference  "champxd" .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "tennisSurfaceType" .
-
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_tennis_event/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_tennis_event/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "category" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -219,12 +188,8 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInDoubleFemale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -257,23 +222,15 @@
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "budget" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -282,7 +239,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "budget" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue>
@@ -301,17 +258,19 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInDoubleMale" .
-
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInSingleFemale" .
+<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prize_money" .
+
+<./Mapping_en:Infobox_tennis_event/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:TennisTournament , wikidata:Q1656682 , schema:SportsEvent , owl:Thing , dbo:Tournament , dul:Event , dbo:SocietalEvent , dbo:SportsEvent , wikidata:Q13219666 , wikidata:Q500834 , schema:Event , dbo:Event ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -321,44 +280,18 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInSingleMale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "prize_money" .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_event/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:TennisTournament , wikidata:Q1656682 , schema:SportsEvent , owl:Thing , dbo:Tournament , dul:Event , dbo:SocietalEvent , dbo:SportsEvent , wikidata:Q13219666 , wikidata:Q500834 , schema:Event , dbo:Event ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInDoubleMale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -387,7 +320,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap>
@@ -417,16 +350,12 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -457,7 +386,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue>
@@ -493,20 +422,12 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInDoubleFemale" .
-
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_tennis_event/StartDate/startDate/endDate/date> ;
         dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap> ;
         rr:predicate   dbo:endDate .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -526,21 +447,17 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInDoubleMale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInMixedDouble/champxd/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInMixedDouble" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleFemale/champwd>
         a             rr:PredicateObjectMap ;
@@ -558,17 +475,17 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/budget/prize_money/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws>
@@ -587,14 +504,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_tennis_event/StartDate/startDate/endDate/date/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/tennisSurfaceType/surface/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -619,7 +528,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleFemale/champws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInSingleFemale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInDoubleMale/champmd/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -629,10 +538,6 @@
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "endDate" .
-
-<./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "championInSingleMale" .
 
 <./Mapping_en:Infobox_tennis_event/EndDate/startDate/endDate/date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -648,7 +553,7 @@
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/championInSingleMale/champms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "championInSingleMale" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_tennis_event/SimplePropertyMapping/category/category/FunctionTermMap>

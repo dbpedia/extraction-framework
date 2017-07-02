@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -36,20 +37,12 @@
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "year" .
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "HeadCoach" .
-
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -61,32 +54,24 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NCAA_team_season/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
+<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "year" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Year" .
-
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -124,7 +109,7 @@
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap/FunctionValue>

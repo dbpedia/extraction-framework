@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,13 +29,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
@@ -70,23 +67,11 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NFL_coach/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Agent , wikidata:Q215627 , dbo:Coach , owl:Thing , dbo:AmericanFootballCoach , foaf:Person , dul:Agent , wikidata:Q5 , dul:NaturalPerson , schema:Person , dbo:Person ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -104,7 +89,7 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -113,7 +98,7 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap>
@@ -123,30 +108,22 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highschool" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -158,39 +135,23 @@
         rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "college" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "college" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue>
@@ -199,17 +160,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NFL_coach/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Weight_lbs" .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team>
@@ -218,18 +175,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "team" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school>
         a             rr:PredicateObjectMap ;
@@ -239,7 +188,7 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool>
@@ -247,14 +196,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap> ;
         rr:predicate  dbo:highschool .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -280,7 +221,7 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
@@ -324,12 +265,12 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -342,18 +283,10 @@
         rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highschool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -374,22 +307,14 @@
         fnml:functionValue  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lb/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/pound> .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -409,47 +334,31 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "highschool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pound" .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/team/current_team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "current_team" .
 
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "highschool" .
-
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "pound" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue>
@@ -460,12 +369,12 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue>
@@ -533,12 +442,8 @@
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lbs>
         a             rr:PredicateObjectMap ;
@@ -549,14 +454,6 @@
 <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/weight/Weight_lb/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
-<./Mapping_en:Infobox_NFL_coach/SimplePropertyMapping/highschool/HighSchool/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_NFL_coach/LogicalSource>
         a                         rml:LogicalSource ;

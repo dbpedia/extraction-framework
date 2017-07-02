@@ -71,8 +71,13 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       val executePomUri = functionValueUri.extend("/ExecutePOM")
       val executePom = functionValue.addPredicateObjectMap(executePomUri)
       executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+
+      /**
       val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
       executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
+      **/
+
+      executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
 
       addReferenceParameterFunction("property", functionValue)
 
@@ -121,8 +126,13 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
     parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+
+    /**
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
     parameterPom.addObjectMap(parameterObjectMapUri).addConstant(new RMLLiteral(getParameterValue(param)))
+      **/
+
+    parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
 
   private def getParameterValue(param: String) : String =

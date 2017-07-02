@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,700 +29,19 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:lonFunction .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name> , <./Mapping_en:Infobox_non-profit/longitude> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded> , <./Mapping_en:Infobox_non-profit/latitude> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "homepage" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founded_date" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founded_date" .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "key_people" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_non-profit?oldid=26159" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "organization_motto" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Non-profit_name" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "numberOfEmployees" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "num_employees" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "revenue" .
-
-<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap>
-        a                      rr:TriplesMap , fnml:FunctionTermMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap> ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "organization_name" .
-
-<./Mapping_en:Infobox_non-profit/longitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap> ;
-        rr:predicate  geo:long .
-
-<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endowment" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap> ;
-        rr:predicate  dbo:keyPerson .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "keyPerson" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundedBy" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap> ;
-        rr:predicate  dbo:foundedBy .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founder" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founded" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founded" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "endowment" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap> ;
-        rr:predicate  dbo:revenue .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap> ;
-        rr:predicate  dbo:foundingDate .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap> ;
-        rr:predicate  dbo:foundingDate .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "location" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap> ;
-        rr:predicate  dbo:foundingYear .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Currency> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:latFunction .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Currency> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap> ;
-        rr:predicate  dbo:foundedBy .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "product" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q163740 , dbo:Agent , dbo:Organisation , dul:Agent , owl:Thing , dbo:Non-ProfitOrganisation , schema:Organization , wikidata:Q43229 , dul:SocialPerson ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
-
-<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/latitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap> ;
-        rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "founded" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -729,90 +49,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfEmployees .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundedBy" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap> ;
-        rr:predicate  dbo:motto .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "product" .
-
-<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
-        rr:predicate  dbo:foundingYear .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment>
@@ -821,13 +60,428 @@
         rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap> ;
         rr:predicate  dbo:endowment .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
+<./Mapping_en:Infobox_non-profit/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q163740 , dbo:Agent , dbo:Organisation , dul:Agent , owl:Thing , dbo:Non-ProfitOrganisation , schema:Organization , wikidata:Q43229 , dul:SocialPerson ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "revenue" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "product" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name> , <./Mapping_en:Infobox_non-profit/longitude> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded> , <./Mapping_en:Infobox_non-profit/latitude> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_non-profit/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded_date" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "motto" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "revenue" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfEmployees" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundedBy .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_non-profit?oldid=26159" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "endowment" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "product" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founder" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "organization_name" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_employees" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "endowment" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product>
         a             rr:PredicateObjectMap ;
@@ -835,35 +489,238 @@
         rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap> ;
         rr:predicate  dbo:product .
 
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap> ;
+        rr:predicate  dbo:keyPerson .
+
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "homepage" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded_date" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/organization_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "key_people" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
-
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/product/product/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "keyPerson" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_non-profit/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founder/FunctionTermMap> ;
+        rr:predicate  dbo:foundedBy .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap> ;
+        rr:predicate  dbo:revenue .
+
+<./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/motto/organization_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "organization_motto" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_non-profit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_non-profit/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfEmployees .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Currency" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Currency" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundingYear/founded_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foundedBy/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<./Mapping_en:Infobox_non-profit/SimplePropertyMapping/foaf:name/Non-profit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Non-profit_name" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -38,10 +39,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -59,13 +56,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue>
@@ -73,10 +66,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_horseracing_personality/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
@@ -90,17 +79,17 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "race" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue>
@@ -115,13 +104,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "award" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -130,7 +115,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
@@ -149,7 +134,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -163,38 +148,26 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "wins" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:equals .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -215,7 +188,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
@@ -228,10 +201,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -243,10 +212,6 @@
         crml:fallbackMap     <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/2> ;
         rr:objectMap         <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/ObjectMap> ;
         rr:predicate         rdf:type .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -273,12 +238,8 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "conditionalMapping" ;
@@ -288,7 +249,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "occupation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue>
@@ -309,17 +270,17 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "raceHorse" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -356,7 +317,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue>
@@ -367,12 +328,8 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "raceHorse" .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -398,10 +355,6 @@
         a              rr:ObjectMap ;
         rml:reference  "horses" .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap/FunctionValue> .
@@ -422,29 +375,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "award" .
-
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/2/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  foaf:Person , owl:Thing , dbo:Athlete , dul:Agent , dbo:Jockey , dul:NaturalPerson , wikidata:Q5 , dbo:Person , dbo:Agent , schema:Person , wikidata:Q215627 .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "wins" .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "honours" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -470,7 +407,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -482,16 +419,6 @@
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_horseracing_personality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Jockey" .
@@ -502,14 +429,16 @@
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap> ;
         rr:predicate  dbo:honours .
 
+<./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_horseracing_personality/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -517,7 +446,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date>
@@ -538,7 +467,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/ObjectMap>
@@ -580,7 +509,7 @@
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey>
@@ -595,25 +524,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "occupation" .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_place" .
 
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "honours" .
-
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
@@ -621,10 +538,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_horseracing_personality/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_horseracing_personality/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "race" .
 
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;

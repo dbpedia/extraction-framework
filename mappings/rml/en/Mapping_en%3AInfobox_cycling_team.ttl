@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -50,18 +51,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "status" .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -78,12 +67,12 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -103,10 +92,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -117,22 +102,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -150,7 +119,7 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue>
@@ -174,10 +143,6 @@
         rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manager" .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -186,26 +151,22 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "uciCode" .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -239,13 +200,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap>
@@ -266,12 +223,12 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "status" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "season" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
@@ -282,12 +239,12 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -296,7 +253,7 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/manager>
@@ -309,10 +266,6 @@
         a              rr:ObjectMap ;
         rml:reference  "discipline" .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "discipline" .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_cycling_team/LogicalSource> ;
@@ -321,7 +274,7 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SubjectMap>
@@ -337,7 +290,7 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "uciCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season>
@@ -345,10 +298,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap> ;
         rr:predicate  dbo:season .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -369,40 +318,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/manager/teammanager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "season" .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/foaf:name/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -427,7 +356,7 @@
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/discipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "discipline" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_team/SimplePropertyMapping/uciCode/code/FunctionTermMap>

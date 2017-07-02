@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field>
@@ -41,30 +42,22 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "team_owners" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -73,7 +66,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap>
@@ -95,12 +88,12 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "homeStadium" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "president" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue>
@@ -129,7 +122,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
@@ -152,17 +145,9 @@
         a              rr:ObjectMap ;
         rml:reference  "nicknames" .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "generalManager" .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "general manager" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -177,39 +162,23 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "league" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -218,7 +187,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents>
@@ -229,16 +198,8 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "homeStadium" .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames>
         a             rr:PredicateObjectMap ;
@@ -246,52 +207,32 @@
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coach" .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "division" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -311,12 +252,8 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -332,23 +269,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap> ;
-        rr:predicate  dbo:owner .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -356,9 +279,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -367,12 +292,8 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division>
         a             rr:PredicateObjectMap ;
@@ -382,16 +303,12 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "generalManager" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -417,7 +334,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -431,16 +348,8 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "president" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -465,7 +374,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue>
@@ -509,17 +418,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_CFL_team/LogicalSource>
         a                         rml:LogicalSource ;
@@ -545,7 +450,7 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chairman" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
@@ -556,17 +461,13 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "president" .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach>
         a             rr:PredicateObjectMap ;
@@ -582,22 +483,22 @@
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman>
@@ -605,8 +506,4 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap> ;
         rr:predicate  dbo:chairman .
-
-<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chairman" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -48,7 +49,7 @@
 <./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan/ObjectMap> ;
+        rr:object     dbr-en:Japan ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:Japan-struct-stub/SubjectMap>
@@ -56,8 +57,4 @@
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,10 +34,6 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "headquarter" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rail/LogicalSource> ;
@@ -49,39 +46,31 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "electrification" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rail/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "electrification" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap> ;
         rr:predicate  dbo:voltageOfElectrification .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "railGauge" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge>
         a             rr:PredicateObjectMap ;
@@ -95,10 +84,6 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "typeOfElectrification" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -107,7 +92,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
@@ -116,13 +101,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -132,12 +113,8 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "reportingMark" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "map" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -145,38 +122,17 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "system_map" .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "voltageOfElectrification" .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -184,18 +140,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "headquarter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification>
         a             rr:PredicateObjectMap ;
@@ -213,22 +166,14 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "locale" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_rail/LogicalSource>
         a                         rml:LogicalSource ;
@@ -246,12 +191,12 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue>
@@ -268,10 +213,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -285,7 +226,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap>
@@ -294,17 +235,13 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -331,7 +268,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "railGauge" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue>
@@ -339,10 +276,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_rail/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:logo" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -370,7 +303,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap>
@@ -382,10 +315,6 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rail/LogicalSource> ;
@@ -394,7 +323,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "trackLength" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map>
@@ -415,23 +344,19 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "map" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "marks" .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingYear" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -449,7 +374,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap>
@@ -462,13 +387,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "reportingMark" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap>
@@ -485,7 +406,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap>
@@ -496,42 +417,30 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_rail/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_rail/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/voltageOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "voltageOfElectrification" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -555,21 +464,13 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap> ;
         rr:predicate  dbo:reportingMark .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/closingDate/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:logo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/map/system_map/FunctionTermMap>
@@ -583,17 +484,13 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:name/railroad_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/openingYear/start_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/railGauge/gauge/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -623,14 +520,6 @@
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:logo/logo_filename/FunctionTermMap> ;
         rr:predicate  foaf:logo .
 
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/headquarter/hq_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -650,26 +539,18 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/reportingMark/marks/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/typeOfElectrification/electrification/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "typeOfElectrification" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/trackLength/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "trackLength" .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/closingYear/end_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_rail/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -681,7 +562,7 @@
 
 <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_rail/SimplePropertyMapping/openingDate/start_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_rail/SubjectMap>

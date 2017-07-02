@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,12 +31,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cylinderBore" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -62,10 +59,6 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Power" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
@@ -87,18 +80,10 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -112,15 +97,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
@@ -132,13 +108,10 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "torqueOutput" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -148,7 +121,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -157,7 +130,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -169,10 +142,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "diameter" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem>
         a             rr:PredicateObjectMap ;
@@ -205,7 +174,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap>
@@ -217,18 +186,10 @@
         a              rr:ObjectMap ;
         rml:reference  "valvetrain" .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fuelConsumption" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -248,12 +209,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "valvetrain" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -263,7 +224,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap>
@@ -272,17 +233,17 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "powerOutput" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Power" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "length" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue>
@@ -293,16 +254,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "successor" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -315,12 +268,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon>
@@ -328,14 +281,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap> ;
         rr:predicate  dbo:fuelConsumption .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "configuration" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -355,16 +300,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "width" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -372,17 +309,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "pistonStroke" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -396,7 +329,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -408,13 +341,9 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "height" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power>
@@ -425,20 +354,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fuelType" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "valvetrain" .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -484,7 +401,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "displacement" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore>
@@ -498,26 +415,18 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "diameter" .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -546,10 +455,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production> , <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain> , <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production> , <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -560,10 +465,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "displacement" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -578,16 +479,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "oilSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "fuelcon" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "width" .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -597,10 +494,6 @@
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "compression" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "blockAlloy" .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -618,10 +511,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
@@ -630,12 +519,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "compressionRatio" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -658,7 +547,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -669,22 +558,14 @@
         a              rr:ObjectMap ;
         rml:reference  "head" .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "oilSystem" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "diameter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Torque" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -696,20 +577,16 @@
         a              rr:ObjectMap ;
         rml:reference  "predecessor" .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fuelType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -717,19 +594,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionStartYear" .
+
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "productionStartYear" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem>
         a             rr:PredicateObjectMap ;
@@ -739,13 +612,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fuelConsumption" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -754,13 +622,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Volume" ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -768,9 +631,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -794,21 +663,13 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "weight" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "pistonStroke" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
@@ -827,17 +688,9 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "fuelSystem" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "headAlloy" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "fuelSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem>
@@ -865,17 +718,13 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Volume" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head>
         a             rr:PredicateObjectMap ;
@@ -899,12 +748,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "configuration" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production>
@@ -937,7 +786,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -946,27 +795,17 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cylinderBore" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -974,9 +813,11 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -995,7 +836,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap>
@@ -1008,7 +849,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap>
@@ -1043,7 +884,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1064,68 +905,36 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Torque" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Length" .
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "weight" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "coolingSystem" .
-
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "productionEndDate" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "manufacturer" .
 
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDateOntologyParameter .
 
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "powerOutput" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "length" .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1138,21 +947,17 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "manufacturer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "coolingSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "compressionRatio" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "headAlloy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1168,12 +973,8 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Mass" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1181,7 +982,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1190,7 +991,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "successor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap>
@@ -1209,12 +1010,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1229,7 +1030,7 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "predecessor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap>
@@ -1248,31 +1049,15 @@
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap> ;
         rr:predicate  dbo:diameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "height" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "predecessor" .
-
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "blockAlloy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1293,22 +1078,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "torqueOutput" .
 
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production>
         a              rr:PredicateObjectMap ;
@@ -1340,12 +1109,12 @@
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
@@ -1355,10 +1124,6 @@
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "productionEndYear" .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1391,10 +1156,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap> ;
         rr:predicate  dbo:successor .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration>
         a             rr:PredicateObjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -42,20 +43,20 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -65,10 +66,6 @@
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "music" .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -80,17 +77,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap> ;
         rr:predicate  dbo:narrator .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "editing" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "imdb_id" .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -103,17 +92,17 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "writer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cinematography" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue>
@@ -129,28 +118,16 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "musicComposer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "producer" .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Time" .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "narrator" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Time" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap>
@@ -177,7 +154,7 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue>
@@ -186,14 +163,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue> ;
@@ -201,12 +170,8 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "producer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor>
         a             rr:PredicateObjectMap ;
@@ -218,10 +183,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
@@ -230,33 +191,21 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "released" .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -269,23 +218,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap> ;
         rr:predicate  dbo:director .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "budget" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography>
@@ -308,17 +249,17 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap>
@@ -336,7 +277,7 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime>
@@ -347,36 +288,28 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "gross" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_Chinese_film/SubjectMap>
         a            rr:SubjectMap ;
@@ -390,13 +323,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap> ;
         rr:predicate  dbo:amgid .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "runtime" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -408,10 +337,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "amgid" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "based on" .
@@ -422,13 +347,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -476,26 +397,14 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "basedOn" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "editing" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "imdbId" .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue>
@@ -504,31 +413,15 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "starring" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "gross" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -549,33 +442,21 @@
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap> ;
-        rr:predicate  dbo:writer .
 
 <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "writer" .
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap> ;
+        rr:predicate  dbo:writer .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring>
         a             rr:PredicateObjectMap ;
@@ -585,21 +466,17 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "Currency" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "amgid" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language>
@@ -607,10 +484,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -632,12 +505,8 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "imdbId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "musicComposer" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -661,12 +530,8 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runtime" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -680,7 +545,7 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:object     "Currency" ;
         rr:predicate  dbf:unitParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget>
@@ -691,7 +556,7 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -703,23 +568,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "starring" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross>
         a             rr:PredicateObjectMap ;
@@ -732,13 +589,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "narrator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name>
@@ -749,7 +602,7 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "distributor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue>
@@ -764,13 +617,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "basedOn" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
@@ -794,17 +643,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -819,22 +664,14 @@
         a              rr:ObjectMap ;
         rml:reference  "budget" .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap>
@@ -857,23 +694,19 @@
         rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap> ;
         rr:predicate  dbo:musicComposer .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "distributor" .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -889,21 +722,17 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released>
@@ -932,13 +761,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "budget" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -949,13 +774,13 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cinematography" .
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer>
@@ -966,12 +791,8 @@
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "writer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id>
         a             rr:PredicateObjectMap ;

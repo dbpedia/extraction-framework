@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -39,7 +40,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "ceo" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap>
@@ -62,7 +63,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue>
@@ -82,7 +83,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "director" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -103,16 +104,12 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -131,10 +128,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8>
         a                    rr:PredicateObjectMap ;
@@ -173,14 +166,14 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:contains .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -214,7 +207,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "founder" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap>
@@ -348,7 +341,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -398,10 +391,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -458,14 +447,6 @@
         a              rr:ObjectMap ;
         rml:reference  "sport" .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "founder" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "participant" .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
@@ -499,10 +480,6 @@
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Polo" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -577,7 +554,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "participant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
@@ -606,11 +583,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue> .
@@ -619,13 +591,14 @@
         a              rr:ObjectMap ;
         rml:reference  "sport" .
 
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "football" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -714,7 +687,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -755,14 +728,14 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "sport" .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -817,10 +790,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/ObjectMap>
         a            rr:ObjectMap ;
@@ -886,10 +855,6 @@
         a              rr:ObjectMap ;
         rml:reference  "sport" .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dul:SocialPerson , dbo:Agent , dbo:SportsLeague , wikidata:Q623109 , schema:Organization , dul:Agent , owl:Thing , dbo:FieldHockeyLeague , dbo:Organisation , wikidata:Q43229 .
@@ -933,7 +898,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "participant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -977,22 +942,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "Cricket" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1003,10 +960,6 @@
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "title" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1037,7 +990,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/ObjectMap>
@@ -1057,7 +1010,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "currentSeason" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/LogicalSource>
@@ -1092,14 +1045,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formationDate" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
@@ -1121,13 +1066,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -1135,15 +1076,15 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "ceo" .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1151,17 +1092,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "participant" .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
@@ -1205,7 +1142,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue>
@@ -1216,7 +1153,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams>
@@ -1254,16 +1191,16 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32>
         a                    rr:PredicateObjectMap ;
@@ -1289,7 +1226,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "knownFor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue>
@@ -1402,10 +1339,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -1430,7 +1363,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap>
@@ -1461,7 +1394,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formationDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM>
@@ -1473,10 +1406,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -1502,20 +1431,12 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "currentSeason" .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -1541,12 +1462,6 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31>
         a                    rr:PredicateObjectMap ;
         crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap> ;
@@ -1558,9 +1473,11 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1568,7 +1485,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
@@ -1667,7 +1584,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM>
@@ -1785,7 +1702,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap>
@@ -1823,10 +1740,6 @@
         a              rr:ObjectMap ;
         rml:reference  "sport" .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingYear" .
-
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
@@ -1839,13 +1752,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dul:Agent , dul:SocialPerson , dbo:SportsLeague , schema:Organization , dbo:IceHockeyLeague , owl:Thing , dbo:Agent , dbo:Organisation , wikidata:Q43229 , wikidata:Q623109 .
-
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6>
@@ -1854,6 +1763,10 @@
         crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7> ;
         rr:objectMap         <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/ObjectMap> ;
         rr:predicate         rdf:type .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dul:Agent , dul:SocialPerson , dbo:SportsLeague , schema:Organization , dbo:IceHockeyLeague , owl:Thing , dbo:Agent , dbo:Organisation , wikidata:Q43229 , wikidata:Q623109 .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/ObjectMap>
         a            rr:ObjectMap ;
@@ -1864,13 +1777,9 @@
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "participant" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap>
@@ -1911,7 +1820,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -1928,14 +1837,14 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
 
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "title" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1948,10 +1857,6 @@
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:contains .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1972,16 +1877,8 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "knownFor" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2025,10 +1922,6 @@
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  schema:Organization , dbo:VolleyballLeague , dul:Agent , dbo:Organisation , dbo:Agent , wikidata:Q623109 , owl:Thing , dul:SocialPerson , dbo:SportsLeague , wikidata:Q43229 .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -2096,10 +1989,6 @@
         a              rr:ObjectMap ;
         rml:reference  "sport" .
 
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "participant" .
-
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -2117,12 +2006,8 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -2135,10 +2020,6 @@
         crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6> ;
         rr:objectMap         <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/ObjectMap> ;
         rr:predicate         rdf:type .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "lastSeason" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/ObjectMap>
         a            rr:ObjectMap ;
@@ -2168,7 +2049,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "lastSeason" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap>
@@ -2177,7 +2058,7 @@
 
 <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -2207,10 +2088,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33>
         a                    rr:PredicateObjectMap ;
@@ -2329,10 +2206,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
-
-<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "motto" .
 
 <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/ObjectMap>
         a            rr:ObjectMap ;

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue>
@@ -38,14 +39,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_cycling_race/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_race/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -62,13 +55,9 @@
         a              rr:ObjectMap ;
         rml:reference  "localnames" .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -86,13 +75,9 @@
         rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap> ;
         rr:predicate  dbo:firstWinner .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "date" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "date" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SubjectMap/Function>
@@ -133,14 +118,9 @@
         rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap> ;
         rr:predicate  dbo:mostWins .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -149,24 +129,20 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_race/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SubjectMap>
         a            rr:SubjectMap ;
@@ -178,9 +154,10 @@
         a              rr:ObjectMap ;
         rml:reference  "mostwins" .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
+<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -189,7 +166,7 @@
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap>
@@ -218,12 +195,12 @@
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "startDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap>
@@ -236,7 +213,7 @@
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first>
@@ -249,37 +226,25 @@
         a              rr:ObjectMap ;
         rml:reference  "last" .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "endDate" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "startDate" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "firstWinner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "recentWinner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent>
@@ -292,14 +257,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -311,7 +268,7 @@
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue>
@@ -326,10 +283,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_cycling_race/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mostWins" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -342,17 +295,13 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_cycling_race?oldid=28401" .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/localnames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -364,13 +313,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/mostWins/mostwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mostWins" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -382,10 +327,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/startDate/first/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/firstWinner/firstwinner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "firstWinner" .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -395,21 +336,9 @@
         a              rr:ObjectMap ;
         rml:reference  "first" .
 
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/recentWinner/mostrecent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "recentWinner" .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/endDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "endDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_cycling_race/SimplePropertyMapping/location/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>

@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -44,12 +45,12 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "influencedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date>
@@ -60,7 +61,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue>
@@ -84,10 +85,6 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_philosopher?oldid=24724" .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -102,7 +99,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -116,7 +113,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place>
@@ -129,13 +126,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap>
@@ -145,10 +138,6 @@
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_date" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
@@ -173,7 +162,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
@@ -184,7 +173,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap>
@@ -201,19 +190,11 @@
         rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap> ;
         rr:predicate  dbo:influencedBy .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthDate" .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap> ;
         rr:predicate  dbo:influenced .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthYear" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -227,10 +208,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "notableIdea" .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -242,7 +219,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place>
@@ -256,14 +233,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_philosopher/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_philosopher/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -305,13 +274,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -320,7 +285,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "birthYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era>
@@ -337,7 +302,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -346,12 +311,8 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -372,23 +333,11 @@
         rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap> ;
         rr:predicate  dbo:mainInterest .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "region" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
@@ -404,7 +353,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "era" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -414,7 +363,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -423,7 +372,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "mainInterest" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue>
@@ -432,13 +381,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_philosopher/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "notableIdea" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -448,37 +393,21 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_date" .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "birthPlace" .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "influenced" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influencedBy/influences/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "influencedBy" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -487,7 +416,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -501,26 +430,14 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathPlace" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_philosopher/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_philosopher/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -545,7 +462,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "deathYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -561,28 +478,8 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "region" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathDate" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "deathYear" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "mainInterest" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "philosophicalSchool" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/deathYear/death_date/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -597,16 +494,8 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/era/era/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "era" .
-
-<./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "influenced" .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/influenced/influenced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -614,7 +503,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/region/region>
@@ -630,12 +519,12 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/mainInterest/main_interests/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/notableIdea/notable_ideas/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -644,7 +533,7 @@
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "philosophicalSchool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_philosopher/SimplePropertyMapping/philosophicalSchool/school_tradition>

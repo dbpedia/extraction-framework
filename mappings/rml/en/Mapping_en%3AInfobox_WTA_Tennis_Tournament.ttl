@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -33,10 +34,6 @@
         rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -45,7 +42,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue>
@@ -60,10 +57,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_WTA_Tennis_Tournament/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -72,7 +65,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -81,7 +74,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -96,12 +89,8 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -115,7 +104,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name>
@@ -130,10 +119,6 @@
         rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
@@ -141,10 +126,6 @@
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Name" .
-
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -158,13 +139,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_WTA_Tennis_Tournament/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/LogicalSource>
@@ -175,7 +152,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -184,7 +161,7 @@
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/City/FunctionTermMap>
@@ -207,13 +184,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue>
@@ -232,10 +205,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_WTA_Tennis_Tournament/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/location/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:SocietalEvent , owl:Thing , schema:SportsEvent , dul:Event , dbo:Event , dbo:WomensTennisAssociationTournament , schema:Event , wikidata:Q1656682 , dbo:Tournament , wikidata:Q500834 , dbo:SportsEvent ;
@@ -253,16 +222,8 @@
         rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:homepage/Web_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_WTA_Tennis_Tournament/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 

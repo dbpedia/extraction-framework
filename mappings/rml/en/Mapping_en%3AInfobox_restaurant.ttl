@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -34,10 +35,6 @@
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "owner" .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_restaurant/LogicalSource> ;
@@ -56,7 +53,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating>
@@ -73,7 +70,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "dressCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -85,10 +82,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_restaurant/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_restaurant/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "rating" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -102,12 +95,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap>
@@ -116,12 +109,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "headChef" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -131,10 +124,6 @@
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_restaurant/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
@@ -154,36 +143,20 @@
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap> ;
         rr:predicate  dbo:address .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "seatingCapacity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -197,7 +170,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -206,12 +179,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -227,16 +200,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longitude" .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_restaurant/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -245,14 +214,6 @@
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "cuisine" .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -263,10 +224,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap> ;
         rr:predicate  dbo:headChef .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "slogan" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -285,16 +242,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "cuisine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "established" .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "dressCode" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -304,13 +257,9 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -339,32 +288,24 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
-
 <./Mapping_en:Infobox_restaurant/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_restaurant?oldid=9325" .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue> .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latitude" .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -376,13 +317,9 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "headChef" .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "reservations" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap>
@@ -391,12 +328,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
@@ -421,7 +358,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "chef" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue>
@@ -438,16 +375,12 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "rating" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "reservations" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "slogan" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity>
@@ -456,21 +389,17 @@
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap> ;
         rr:predicate  dbo:seatingCapacity .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "rating" .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "current-owner" .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "rating" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -494,7 +423,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap>
@@ -510,10 +439,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap> ;
         rr:predicate  dbo:reservations .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef>
         a             rr:PredicateObjectMap ;
@@ -549,7 +474,7 @@
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue>
@@ -564,10 +489,6 @@
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap> ;
         rr:predicate  dbo:dressCode .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -579,26 +500,14 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_restaurant/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "chef" .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "reservations" .
-
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "seatingCapacity" .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -618,13 +527,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_restaurant/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap/FunctionValue/propertyParameterPOM>

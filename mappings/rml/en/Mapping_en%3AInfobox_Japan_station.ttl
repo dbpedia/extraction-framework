@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -40,25 +41,21 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operatedBy" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap> ;
-        rr:predicate  dbo:operatedBy .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -84,12 +81,12 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap>
@@ -98,7 +95,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operatedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue>
@@ -109,26 +106,14 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Japan_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingYear" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname>
         a             rr:PredicateObjectMap ;
@@ -138,7 +123,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address>
@@ -150,10 +135,6 @@
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -167,10 +148,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -182,7 +159,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -217,7 +194,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
@@ -232,10 +209,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap> ;
         rr:predicate  dbo:picture .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -249,18 +222,18 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "namerom" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap> ;
         rr:predicate  dbo:operatedBy .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "namerom" .
 
 <./Mapping_en:Infobox_Japan_station/LogicalSource>
         a                         rml:LogicalSource ;
@@ -279,7 +252,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -287,32 +260,20 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingYear" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -320,25 +281,17 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "passengersPerDay" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -352,17 +305,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "servingRailwayLine" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "operatedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -370,37 +315,29 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "closingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -418,22 +355,14 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -447,10 +376,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap> ;
         rr:predicate  dbo:passengersPerDay .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "operator" .
@@ -459,56 +384,32 @@
         a              rr:ObjectMap ;
         rml:reference  "address" .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap> ;
         rr:predicate  dbo:address .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "formerName" .
-
 <./Mapping_en:Infobox_Japan_station/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Japan_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "operatedBy" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -520,7 +421,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "servingRailwayLine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap>
@@ -529,16 +430,12 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -548,18 +445,6 @@
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "image" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "openingDate" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -584,28 +469,16 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "postalCode" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Japan_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator2> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom> , <./Mapping_en:Infobox_Japan_station/ConstantMapping/country/Japan> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
@@ -616,10 +489,6 @@
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "stats" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -636,7 +505,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -675,48 +544,28 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "passengersPerDay" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "town" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "passengersPerYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -726,10 +575,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/village/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Japan_station/LogicalSource> ;
@@ -738,24 +583,12 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "location" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "statsy" .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "address" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -763,12 +596,12 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap/FunctionValue>
@@ -783,13 +616,9 @@
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/ward/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
@@ -804,7 +633,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "address" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue>
@@ -815,7 +644,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/namerom>
@@ -845,7 +674,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom>
@@ -867,23 +696,19 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/ConstantMapping/country/Japan>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/ConstantMapping/country/Japan/ObjectMap> ;
+        rr:object     dbr-en:Japan ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -892,7 +717,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/jaloc/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/pref/FunctionTermMap>
@@ -902,10 +727,6 @@
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2>
         a             rr:PredicateObjectMap ;
@@ -919,13 +740,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "passengersPerYear" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -940,7 +757,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap>
@@ -959,7 +776,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "formerName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
@@ -968,30 +785,22 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Japan_station/ConstantMapping/country/Japan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1022,7 +831,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/town>
@@ -1043,10 +852,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Japan_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "closingDate" .
-
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1060,7 +865,7 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/openingYear/open/FunctionTermMap>
@@ -1090,6 +895,6 @@
 
 <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Japan_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 

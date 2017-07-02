@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -37,7 +38,7 @@
 <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap> ;
+        rr:object     dbr-en:Antarctica ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
@@ -46,24 +47,16 @@
         rr:predicateObjectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land> , <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica> ;
         rr:subjectMap          <./Mapping_en:EllsworthLand-geo-stub/SubjectMap> .
 
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Ellsworth_Land" .
-
 <./Mapping_en:EllsworthLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
-
 <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land/ObjectMap> ;
+        rr:object     dbr-en:Ellsworth_Land ;
         rr:predicate  dbo:isPartOf .
 
 <./Mapping_en:EllsworthLand-geo-stub/SubjectMap/Function>

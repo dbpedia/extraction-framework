@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -28,64 +29,30 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap> ;
         rr:predicate  dbo:recordDate .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing , dbo:Work , wikidata:Q482994 , wikidata:Q386724 , dbo:Album , dbo:MusicalWork , wikidata:Q2188189 , schema:CreativeWork , schema:MusicAlbum ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "Recorded" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/LogicalSource>
-        a                         rml:LogicalSource ;
-        rml:iterator              "Infobox" ;
-        rml:referenceFormulation  ql:wikitext ;
-        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_album?oldid=12042" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "runtime" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "review" .
+        rml:reference  "Next album" .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist>
         a             rr:PredicateObjectMap ;
@@ -93,215 +60,44 @@
         rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap> ;
         rr:predicate  dbo:artist .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap> ;
-        rr:predicate  dbo:genre .
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "recordedIn" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "Next album" .
+        rml:reference  "Last album" .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "minute" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "recordDate" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap> ;
-        rr:predicate  dbo:compiler .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap> ;
-        rr:predicate  dbo:longtype .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap> ;
-        rr:predicate  dbo:recordLabel .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "releaseDate" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap> ;
-        rr:predicate  dbo:previousWork .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/minute> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "producer" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap> ;
-        rr:predicate  dbo:language .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -309,328 +105,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Length" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "subsequentWork" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap> ;
-        rr:predicate  dbo:director .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "longtype" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Recorded" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "artist" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Director" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "compiler" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap> ;
-        rr:predicate  dbo:review .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Longtype" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap> ;
-        rr:predicate  dbo:releaseDate .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Genre" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "picture" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Artist" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Compiler" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "type" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Producer" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Released" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "genre" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap> ;
-        rr:predicate  dbo:subsequentWork .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Name" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Reviews" .
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -638,27 +115,34 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Language" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Label" .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap> ;
+        rr:predicate  dbo:longtype .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Type" .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Reviews" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap> ;
-        rr:predicate  dbo:runtime .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Artist" .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type>
         a             rr:PredicateObjectMap ;
@@ -666,75 +150,63 @@
         rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap> ;
-        rr:predicate  dbo:producer .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Last album" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Cover" .
-
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album> , <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews> ;
-        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap> .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap> ;
-        rr:predicate  dbo:recordedIn .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ExecutePOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subsequentWork" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     "previousWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover>
         a             rr:PredicateObjectMap ;
@@ -742,83 +214,234 @@
         rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap> ;
         rr:predicate  dbo:picture .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "previousWork" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "language" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "director" .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Longtype" .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentWork .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Language" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Released" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "artist" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Recorded" .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_album?oldid=12042" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "recordDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap> ;
+        rr:predicate  dbo:compiler .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "review" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "recordLabel" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "recordedIn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap> ;
+        rr:predicate  dbo:review .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap> ;
+        rr:predicate  dbo:producer .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Recorded" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Director" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "longtype" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "genre" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "recordLabel" .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        rr:object     "runtime" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
-        rr:predicate  fno:executes .
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap> ;
+        rr:predicate  dbo:runtime .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap>
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Producer" .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -826,12 +449,242 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap> ;
+        rr:predicate  dbo:previousWork .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Cover" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
 
 <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "compiler" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Compiler" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "minute" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language/FunctionTermMap/FunctionValue> .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/type/Type> , <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director> , <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label> , <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released> , <./Mapping_en:Infobox_album/SimplePropertyMapping/language/Language> , <./Mapping_en:Infobox_album/SimplePropertyMapping/producer/Producer> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre> , <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler> , <./Mapping_en:Infobox_album/SimplePropertyMapping/subsequentWork/Next%20album> , <./Mapping_en:Infobox_album/SimplePropertyMapping/foaf:name/Name> , <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordDate/Recorded> , <./Mapping_en:Infobox_album/SimplePropertyMapping/longtype/Longtype> , <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album> , <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded> , <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length> , <./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap> ;
+        rr:predicate  dbo:recordedIn .
+
+<./Mapping_en:Infobox_album/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/review/Reviews/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/picture/Cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap> ;
+        rr:predicate  dbo:genre .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_album/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_album/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordedIn/Recorded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/previousWork/Last%20album/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/artist/Artist/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Genre" .
+
+<./Mapping_en:Infobox_album/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dbo:Work , wikidata:Q482994 , wikidata:Q386724 , dbo:Album , dbo:MusicalWork , wikidata:Q2188189 , schema:CreativeWork , schema:MusicAlbum ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Label" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/compiler/Compiler/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/recordLabel/Label/FunctionTermMap> ;
+        rr:predicate  dbo:recordLabel .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_album/SimplePropertyMapping/releaseDate/Released/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Length" .
+
+<./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_album/SimplePropertyMapping/runtime/Length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/minute> .
 

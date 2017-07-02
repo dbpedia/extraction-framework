@@ -14,6 +14,7 @@
 @prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: <http://en.dbpedia.org/resource/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
 @prefix fno:   <http://w3id.org/function/ontology#> .
@@ -30,7 +31,7 @@
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_library/longitude>
@@ -42,14 +43,6 @@
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
@@ -68,12 +61,12 @@
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
@@ -85,14 +78,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_library/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_library/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_library/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_library/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:name" .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -106,12 +91,12 @@
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country>
@@ -140,10 +125,6 @@
         dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_library/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -189,8 +170,14 @@
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_library/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent , schema:EducationalOrganization , schema:Library , dbo:ArchitecturalStructure , dbo:Location , dbo:EducationalInstitution , schema:Organization , wikidata:Q7075 , wikidata:Q43229 , dbo:Place , dul:SocialPerson , wikidata:Q41176 , dbo:Organisation , dbo:Library , owl:Thing , dbo:Agent , dbo:Building , schema:Place ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 <./Mapping_en:Infobox_library/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;
@@ -199,19 +186,13 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_library/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_library/latitude/FunctionTermMap/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_library/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_library/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dul:Agent , schema:EducationalOrganization , schema:Library , dbo:ArchitecturalStructure , dbo:Location , dbo:EducationalInstitution , schema:Organization , wikidata:Q7075 , wikidata:Q43229 , dbo:Place , dul:SocialPerson , wikidata:Q41176 , dbo:Organisation , dbo:Library , owl:Thing , dbo:Agent , dbo:Building , schema:Place ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
-
 <./Mapping_en:Infobox_library/longitude/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_library/longitude/FunctionTermMap/FunctionValue> .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/name_en/FunctionTermMap>
@@ -227,14 +208,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "country" .
 
 <./Mapping_en:Infobox_library/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -255,13 +228,9 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_library/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue>
@@ -273,10 +242,6 @@
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "library_name" .
-
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foundingDate" .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established>
         a             rr:PredicateObjectMap ;
@@ -292,7 +257,7 @@
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_library/SubjectMap/Function>
@@ -310,13 +275,9 @@
         rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:name/library_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_library/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
 <./Mapping_en:Infobox_library/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
