@@ -83,12 +83,12 @@ class WikiPage(
     else
       RecordSeverity.Warning
 
-    extractionRecords.append(new RecordEntry(recordEntry.page, severity, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
+    extractionRecords.append(new RecordEntry(recordEntry.page, recordEntry.page.uri, severity, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
   }
 
   def addExtractionRecord(errorMsg: String = null, error: Throwable = null, severity: RecordSeverity.Value = null): Unit ={
 
-    addExtractionRecord(new RecordEntry[WikiPage](this, severity, this.title.language, errorMsg, error))
+    addExtractionRecord(new RecordEntry[WikiPage](this, this.uri, severity, this.title.language, errorMsg, error))
   }
 
   def getExtractionRecords() = this.extractionRecords.seq

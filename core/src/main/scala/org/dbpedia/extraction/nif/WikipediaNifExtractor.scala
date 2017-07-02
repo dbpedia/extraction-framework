@@ -51,7 +51,7 @@ class WikipediaNifExtractor(
 
   def extractNif(html: String)(exceptionHandle: RecordEntry[WikiPage] => Unit): Seq[Quad] = {
     super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (_1:String, _2:RecordSeverity.Value, _3:Throwable) =>
-      new RecordEntry[WikiPage](wikiPage, _2, context.language, _1, _3)
+      new RecordEntry[WikiPage](wikiPage, wikiPage.uri, _2, context.language, _1, _3)
     }
   }
 

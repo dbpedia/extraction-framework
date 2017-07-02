@@ -121,9 +121,11 @@ class Dataset private[provenance](
     }
     this.language match {
       case Some(l) => Option(this.defaultGraf) match{
-        case Some(dg) => dg.trim match{
-          case str if str == "namespace" => Some(appendNamespaceByTrait(l.dbpediaUri))
-          case str if str == "dataset" => Some(appendNamespaceByTrait(l.dbpediaUri) + "/" + this.encoded)
+        case Some(dg) =>
+          val namespace = if(l == Language.English) l.dbpediaUri.replace("en.", "") else l.dbpediaUri
+          dg.trim match{
+          case str if str == "namespace" => Some(appendNamespaceByTrait(namespace))
+          case str if str == "dataset" => Some(appendNamespaceByTrait(namespace) + "/" + this.encoded)
           case str if str.trim.matches("(\\w|-|_)+") => Some(appendNamespaceByTrait(l.dbpediaUri) + "/" + str.trim.toLowerCase())
           case _ => throw new IllegalArgumentException("Default graph entry is missing or malformed for dataset: " + this.encoded)
         }

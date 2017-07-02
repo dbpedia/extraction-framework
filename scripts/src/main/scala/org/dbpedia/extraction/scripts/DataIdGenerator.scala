@@ -212,7 +212,7 @@ object DataIdGenerator {
             lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
             val datasetName = getDatasetName(dis, lang)
             getDBpediaDataset(datasetName, lang, this.dbpVersion) match {
-              case Some(d) => {
+              case Some(d) =>
                 val dResource = mainModel.createResource(d.versionUri)
                 val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
                 mainModel.add(dResource, getProperty("dataid", "relatedDataset"), pagesArticlesResource)
@@ -222,12 +222,10 @@ object DataIdGenerator {
                 relationModel.add(relation, getProperty("dataid", "qualifiedRelationOf"), dResource)
                 relationModel.add(relation, getProperty("dataid", "qualifiedRelationTo"), pagesArticlesResource)
                 relationModel.add(relation, getProperty("dataid", "datasetRelationRole"), currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "SourceRole"))
-              }
               case None =>
             }
           }
         }
-
       }
 
       //TODO validate & publish DataIds online!!!
@@ -334,43 +332,39 @@ object DataIdGenerator {
 
   def getMediaType(outer: String, inner: String): Resource = {
     mediaTypeMap.get((outer, inner)) match{
-      case None => {
+      case None =>
         val o = Option(outer match {
           case y if y.contains("gz") => "application/x-gzip"
           case z if z.contains("bz2") => "application/x-bzip2"
           case "sparql" => "application/sparql-results+xml"
-          case _ => {
+          case _ =>
             logger.log(Level.SEVERE, "outer MediaType could not be determined: " + outer)
             null
-          }
         })
         val oe = Option(outer match {
           case y if y.contains("gz") => ".gz"
           case z if z.contains("bz2") => ".bz2"
-          case _ => {
+          case _ =>
             logger.log(Level.WARNING, "outer file extension could not be determined: " + outer)
             null
-          }
         })
         val i = Option(inner match {
           case ttl if ttl.contains("ttl") => "text/turtle"
           case tql if tql.contains("tql") || tql.contains(".nq") => "application/n-quads"
           case nt if nt.contains("nt") => "application/n-triples"
           case xml if xml.contains("xml") => "application/xml"
-          case _ => {
+          case _ =>
             logger.log(Level.WARNING, "inner MediaType could not be determined: " + inner)
             null
-          }
         })
         val ie = Option(inner match {
           case ttl if ttl.contains("ttl") => ".ttl"
           case tql if tql.contains("tql") || tql.contains(".nq") => ".tql"
           case nt if nt.contains("nt") => ".nt"
           case xml if xml.contains("xml") => "application/xml"
-          case _ => {
+          case _ =>
             logger.log(Level.WARNING, "inner file extension could not be determined: " + inner)
             null
-          }
         })
 
         //this is the outer mime type (don't be confused by the inner match!
@@ -389,7 +383,7 @@ object DataIdGenerator {
 
         //this is the inner mime type
         i match{
-          case Some(ii) =>{
+          case Some(ii) =>
             val it = staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "MediaType_" + ii.substring(ii.lastIndexOf("/") + 1))
             staticModel.add(it, RDF.`type`, staticModel.createResource(staticModel.getNsPrefixURI("dataid") + "MediaType"))
             staticModel.add(mime, getProperty("dataid", "innerMediaType"), it)
@@ -404,12 +398,10 @@ object DataIdGenerator {
               case None =>
             }
             mediaTypeMap += (inner, null) -> it
-          }
           case None =>
         }
         mediaTypeMap += (outer, inner) -> mime
         mime
-      }
       case Some(m) => m
     }
   }
@@ -492,7 +484,7 @@ object DataIdGenerator {
     None
   }
 
-  def getDatasetName(fileName: String, lang: Language) =
+  def getDatasetName(fileName: String, lang: Language): String =
     if(fileName.contains("_" + lang.wikiCode.replace("-", "_") + "."))
       fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
     else fileName.substring(fileName.lastIndexOf("/")+1).replaceAll("\\.\\w+", "")
@@ -530,10 +522,9 @@ object DataIdGenerator {
       model.add(datasetUri, getProperty("dc", "title"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
       dataset.description match{
         case Some(desc) => model.add(datasetUri, getProperty("dc", "description"), createLiteral(desc, "en"))
-        case None => {
+        case None =>
           model.add(datasetUri, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
           err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
-        }
       }
       if(dataset.isLinkedDataDataset) {
         model.add(datasetUri, getProperty("void", "rootResource"), currentRootSet)
@@ -606,10 +597,9 @@ object DataIdGenerator {
     model.add(dist, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
     dataset.description match{
       case Some(desc) => model.add(dist, getProperty("dc", "description"), createLiteral(desc, "en"))
-      case None => {
+      case None =>
         model.add(dist, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
         err.println("Could not find description for distribution: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
-      }
     }
 
     // add prev/next/latest statements
@@ -643,14 +633,13 @@ object DataIdGenerator {
       model.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
     }
 
-    lbpMap.get(currentFile)
-    match {
-      case Some(bytes) => {
+    lbpMap.get(currentFile) match {
+      case Some(bytes) =>
         model.add(dist, getProperty("dcat", "byteSize"), createLiteral(bytes("bz2"), "xsd", "integer"))
         model.add(dist, getProperty("dataid", "uncompressedByteSize"), createLiteral(bytes("bytes"), "xsd", "integer"))
         //add checksum
         bytes.get("md5") match{
-          case Some(md5) => {
+          case Some(md5) =>
             if (checksumModel != null) {
               val checksum = model.createResource(dist.getURI + "&checksum=" + "md5")
               model.add(dist, getProperty("dataid", "checksum"), checksum)
@@ -658,10 +647,8 @@ object DataIdGenerator {
               checksumModel.add(checksum, getProperty("spdx", "algorithm"), model.createResource(model.getNsPrefixURI("spdx") + "checksumAlgorithm_md5"))
               checksumModel.add(checksum, getProperty("spdx", "checksumValue"), createLiteral(md5, "xsd", "hexBinary"))
             }
-          }
           case None =>
         }
-      }
       case None =>
     }
     model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(webDir + currentFile))
@@ -681,7 +668,7 @@ object DataIdGenerator {
 
     val config = new Config(args(0))
 
-    val jsonString = config.getArbitraryStringProperty("dataid-config") match{
+    config.getArbitraryStringProperty("dataid-config") match{
       case Some(s) =>
         val path = if(s.startsWith("/")) s else  System.getProperty("user.dir") + "/" + s
         val source = scala.io.Source.fromFile(path)
@@ -748,15 +735,15 @@ object DataIdGenerator {
 
     //TODO links...
     //visit all subdirectories, determine if its a dbpedia language dir, and create a DataID for this language
-    //TODO reactivate!
-    //extractDataID(dump, new File(dump, "core"))
+    //first create DataId for the core directory
+    extractDataID(dump, new File(dump, "core"))
     for (outer <- dump.listFiles().filter(_.isDirectory).filter(_.getName != "core")) {
       //core has other structure (no languages)
       for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith(".")))
         extractDataID(outer, dir)
     }
-    //write catalog
 
+    //write catalog
     catalogModel.write(new FileOutputStream(new File(dump + "/" + dbpVersion + "_dataid_catalog.ttl")), "TURTLE")
 
     val outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(catalogModel), RDFFormat.JSONLD).replace(".ttl\"", ".json\"")

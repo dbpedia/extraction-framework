@@ -29,11 +29,11 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
     if(errorMsg == null && error == null)
-      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Info, lang, errorMsg, error))
+      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Info, lang, errorMsg, error))
     else if(error != null)
-      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Exception, lang, errorMsg, error))
+      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Exception, lang, errorMsg, error))
     else
-      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Warning, lang, errorMsg, error))
+      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Warning, lang, errorMsg, error))
   }
 
   /**

@@ -206,7 +206,7 @@ object ConfigUtils {
       if(extractionRecorder != null) {
         val records = page.getExtractionRecords() match {
           case seq: Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
-          case _ => Seq(new RecordEntry[WikiPage](page, RecordSeverity.Info, page.title.language))
+          case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
         }
         //forward all records to the recorder
         extractionRecorder.record(records:_*)
