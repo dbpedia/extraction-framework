@@ -109,7 +109,7 @@ object DataIdGenerator {
     }
 
     if(dir.getName == "core")
-      coreList = lbpMap.keySet.toList
+      coreList = lbpMap.keySet.map(x => x.replace("core/", "")).toList
 
     currentDataid = ModelFactory.createDefaultModel()
     val topsetModel = ModelFactory.createDefaultModel()
@@ -192,15 +192,16 @@ object DataIdGenerator {
             topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
             mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
           }
-          if(coreList.contains(dis)) { //TODO check this
-            mainModel.add(addSparqlEndpoint(dataset))
-            mainModel.add(dataset, getProperty("void", "sparqlEndpoint"), mainModel.createResource(sparqlEndpoint))
-          }
         }
       }
       lastFile = dis.split("\\.").head
-      if(dataset != null)
+      if(dataset != null) {
+        if (coreList.contains(dis.substring(dis.lastIndexOf("/") + 1))) {
+          mainModel.add(addSparqlEndpoint(dataset))
+          mainModel.add(dataset, getProperty("void", "sparqlEndpoint"), mainModel.createResource(sparqlEndpoint))
+        }
         addDistribution(mainModel, dataset, lang, dis, creator)
+      }
     }
     //run through all dataset again to add dataset relations
     if(pagesArticles != null) {
