@@ -16,7 +16,8 @@ import scala.util.matching.Regex
 
 /**
   * Created by chile on 30.06.17.
-  * This script will create the lines-bytes-packed.csv files for every subdirectory (maxdepth 2)
+  * This script will create the lines-bytes-packed.csv files for every subdirectory (maxdepth 2),
+  * as well as the _checksums.md5 file...
   * recording each bz2 file (this can be changed by adapting the 'pattern' variable.
   * Format (filepath;lines;uncompressed length;file length;md5 hash)
   * It should only be run on the Download Server. Its results are then used by the DataIdGenerator script.
@@ -125,15 +126,21 @@ object CreateLinesBytesPacked {
         map = readLBP(target)
       else
         map = new mutable.HashMap[String, mutable.HashMap[String, String]]()
-
       target.createNewFile()
       val writer = IOUtils.writer(target)
+
+      val md5File = new File(path.getFile, "_checksums.md5")
+      md5File.createNewFile()
+      val md5Writer = IOUtils.writer(md5File)
+
       var lastFile: String = ""
 
       try {
         for (file <- files) {
           lastFile = file.getAbsolutePath
           val md5 = getMd5(file)
+          md5Writer.write(md5 + "  " + file.getCanonicalPath.replace(baseDir.toString, ".") + "\n")
+
           map.get(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1)) match {
             case Some(insert) => if (insert("hash").trim != md5)
               writeInsert(file, writer, md5)
@@ -158,8 +165,10 @@ object CreateLinesBytesPacked {
           writer.write("Exception: " + f.getMessage + "\n")
           writer.close()
       }
-      finally
+      finally{
         writer.close()
+        md5Writer.close()
+      }
     }
 
     Workers.work[FileLike[_]](dirWorkers, directories)
