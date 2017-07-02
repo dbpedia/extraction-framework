@@ -25,6 +25,18 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
     objectMap
   }
 
+  def addObject(uri: RMLUri) : RMLPredicateObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "object"), createProperty(uri.toString))
+    this
+  }
+
+  def addObject(literal: RMLLiteral) : RMLPredicateObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "object"), literal.toString())
+    this
+  }
+
   def addConditionalMap(uri: RMLUri) : RMLConditionalObjectMap =
   {
     val conditionalMap = factory.createRMLConditionalObjectMap(uri)
