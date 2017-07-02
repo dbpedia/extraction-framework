@@ -101,7 +101,7 @@ object DataIdGenerator {
       else if (x.length == 4)
         x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))
       else
-        throw new InvalidParameterException("Lines-bytes-packed.csv file is not in an expected format!")
+        throw new InvalidParameterException("Lines-bytes-packed.csv file is not in an expected format, in directory: " + dir)
       ).toMap
       case None =>
         logger.log(Level.INFO, "No lines-bytes-packed.csv file found for directory " + dir)
