@@ -29,6 +29,12 @@ class ModelWrapper() {
     out.toString
   }
 
+  def writeAsTurtle(base : String) = {
+    val out = new StringWriter()
+    model.write(out, "TURTLE", base)
+    out.toString
+  }
+
   def writeAsNTriples: String =
   {
     val out = new StringWriter()

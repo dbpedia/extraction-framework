@@ -38,12 +38,12 @@ class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWr
 
   private def convertToLogicalSourceUri(title: WikiTitle): String =
   {
-    title.resourceIri + "/" + title.encoded.toString().trim + "/LogicalSource"
+    title.resourceIri + "/LogicalSource"
   }
 
   private def convertToSubjectMapUri(title: WikiTitle): String =
   {
-    title.resourceIri + "/" + title.encoded.toString().trim + "/SubjectMap"
+    title.resourceIri + "/SubjectMap"
   }
 
 

@@ -28,7 +28,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
       rmlMapper.addConditionalMapping(conditionalMapping)
     }
 
-    new RMLTemplateMapping(rmlModel)
+    new RMLTemplateMapping(page.title.resourceIri, rmlModel)
   }
 
 
