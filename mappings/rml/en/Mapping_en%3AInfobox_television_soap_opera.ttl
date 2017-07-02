@@ -1,0 +1,1654 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_soap_opera> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_aired" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "distributor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_television_soap_opera?oldid=13656" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "producer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "director" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "writer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_television_soap_opera/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , wikidata:Q15416 , dbo:TelevisionShow ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "executive_producer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "starring" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfEpisodes" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "previousWork" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official_website" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "channel" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "genre" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "composer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "related" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap> ;
+        rr:predicate  dbo:coExecutiveProducer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "endtheme" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap> ;
+        rr:predicate  dbo:executiveProducer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "producer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "followed_by" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "creativeDirector" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "editor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "coProducer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "releaseDate" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "runtime" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap> ;
+        rr:predicate  dbo:related .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap> ;
+        rr:predicate  dbo:composer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alternate_titles" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfEpisodes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_aired" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap> ;
+        rr:predicate  dbo:presenter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "opentheme" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Time> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfSeasons" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "creator" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap> ;
+        rr:predicate  dbo:completionDate .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap> ;
+        rr:predicate  dbo:creator .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_seasons" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_run" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "developer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap> ;
+        rr:predicate  dbo:channel .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "runtime" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "network" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "preceded_by" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap> ;
+        rr:predicate  dbo:creativeDirector .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap> ;
+        rr:predicate  dbo:developer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingTheme" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_episodes" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "story_editor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "genre" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "storyEditor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap> ;
+        rr:predicate  dbo:editor .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap> ;
+        rr:predicate  dbo:author .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "voice" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "related" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap> ;
+        rr:predicate  dbo:previousWork .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "composer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "presenter" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "co_exec" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "author" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap> ;
+        rr:predicate  dbo:network .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Time" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/runtime/runtime/FunctionTermMap> ;
+        rr:predicate  dbo:runtime .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "creat_director" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "coExecutiveProducer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentWork .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfEpisodes/num_episodes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/presenter/presenter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "presenter" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starring" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "editor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap> ;
+        rr:predicate  dbo:coProducer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "co-producer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "voices" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "distributor" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap> ;
+        rr:predicate  dbo:producer .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "subsequentWork" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "executiveProducer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "creator" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "show_name" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
+        rr:predicate  dbo:genre .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/official_website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "endingTheme" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap> ;
+        rr:predicate  dbo:distributor .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/previousWork/preceded_by/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/alternate_titles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSeasons .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap> ;
+        rr:predicate  dbo:starring .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/subsequentWork/followed_by/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/openingTheme/opentheme/FunctionTermMap> ;
+        rr:predicate  dbo:openingTheme .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coProducer/co-producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_website" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creativeDirector/creat_director/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/production_website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "network" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/numberOfSeasons/num_seasons/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_run/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "director" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/composer/composer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/creator/creator/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "developer" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/channel/channel/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "channel" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/releaseDate/first_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "releaseDate" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/endingTheme/endtheme/FunctionTermMap> ;
+        rr:predicate  dbo:endingTheme .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_television_soap_opera/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_television_soap_opera/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/completionDate/last_aired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "completionDate" .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/author/writer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/storyEditor/story_editor/FunctionTermMap> ;
+        rr:predicate  dbo:storyEditor .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/voice/voices/FunctionTermMap> ;
+        rr:predicate  dbo:voice .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/related/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/coExecutiveProducer/co_exec/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_television_soap_opera/SimplePropertyMapping/foaf:name/show_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+

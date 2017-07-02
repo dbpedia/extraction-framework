@@ -1,0 +1,859 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_hotel> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "developer" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architect" .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:Hotel , wikidata:Q41176 , dbo:Building , owl:Thing , dbo:Location , wikidata:Q27686 , schema:Place , dbo:Place , dbo:Hotel , dbo:ArchitecturalStructure ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "floorCount" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfRooms .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "hotel_name" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "address" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "floorArea" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "height" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfRooms" .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter , dbf:coordParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "chain" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfParkingSpaces" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfParkingSpaces .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" , "coordinates" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+<./Mapping_en:Infobox_hotel/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number_of_restaurants" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "address" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap> ;
+        rr:predicate  dbo:architect .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "chain" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Area" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap> ;
+        rr:predicate  dbo:floorArea .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number_of_rooms" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap> ;
+        rr:predicate  dbo:address .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfRestaurants .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_hotel?oldid=9491" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap> ;
+        rr:predicate  dbo:floorCount .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfSuites" .
+
+<./Mapping_en:Infobox_hotel/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfRestaurants" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSuites .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parking" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latParameter , dbf:coordParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "developer" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap> ;
+        rr:predicate  dbo:chain .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architect" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "tenant" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number_of_suites" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap> ;
+        rr:predicate  dbo:tenant .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "floor_area" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "operator" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer/FunctionTermMap> ;
+        rr:predicate  dbo:developer .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "opening_date" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_hotel/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/address/address> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfParkingSpaces/parking> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRestaurants/number_of_restaurants> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfRooms/number_of_rooms> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/developer/developer> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/tenant/operator> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/foaf:name/hotel_name> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/architect/architect> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_hotel/latitude> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors> , <./Mapping_en:Infobox_hotel/longitude> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorArea/floor_area> , <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain> ;
+        rr:subjectMap          <./Mapping_en:Infobox_hotel/SubjectMap> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/openingDate/opening_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/chain/chain/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/floorCount/floors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "floors" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_hotel/SimplePropertyMapping/numberOfSuites/number_of_suites/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_hotel/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latitude" , "coordinates" .
+
+<./Mapping_en:Infobox_hotel/SimplePropertyMapping/closingDate/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "closing_date" .
+

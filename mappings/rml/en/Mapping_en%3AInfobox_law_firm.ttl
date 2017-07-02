@@ -1,0 +1,923 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_law_firm> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundedBy" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfOffices" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingYear" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap> ;
+        rr:predicate  dbo:service .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfLawyers" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_offices" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "headquarter" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfEmployees .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap> ;
+        rr:predicate  dbo:revenue .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dissolved" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "company_type" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "keyPerson" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap> ;
+        rr:predicate  dbo:slogan .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfLawyers" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "slogan" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "headquarters" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfLawyers .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfEmployees" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_employees" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+<./Mapping_en:Infobox_law_firm/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dbo:Agent , dbo:Organisation , dbo:LawFirm , dul:SocialPerson , wikidata:Q43229 , dul:Agent , wikidata:Q613142 , dbo:Company , schema:Organization ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "homepage" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founder" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap> ;
+        rr:predicate  dbo:keyPerson .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:logo" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_attorneys" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfLawyers .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "company_type" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dissolved" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "legalForm" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_attorneys/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_lawyers" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "logo" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap> ;
+        rr:predicate  dbo:closingYear .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "service" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfOffices/num_offices/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfOffices .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundingYear" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "slogan" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "practice_areas" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "revenue" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundingDate" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "revenue" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfLawyers/num_lawyers/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_law_firm?oldid=16227" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/legalForm/company_type/FunctionTermMap> ;
+        rr:predicate  dbo:legalForm .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_founded" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_founded" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "key_people" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap> ;
+        rr:predicate  dbo:foundedBy .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/service/practice_areas/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingDate/date_founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foaf:name/firm_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firm_name" .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingYear/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_law_firm/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundedBy/founder/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_law_firm/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/foundingYear/date_founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/closingDate/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
+        rr:predicate  dbo:headquarter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/type/company_type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_law_firm/SimplePropertyMapping/keyPerson/key_people/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+

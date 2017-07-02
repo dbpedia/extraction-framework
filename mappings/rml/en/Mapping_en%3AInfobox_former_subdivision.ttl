@@ -1,0 +1,1806 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_former_subdivision> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap> ;
+        rr:predicate  dbo:regionalLanguage .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_name1" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundingDate" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "demonym" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "anthem" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_km2" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ethnic_groups" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap> ;
+        rr:predicate  dbo:capital .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "motto" .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "common_name" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "inhabitantsPerSquareMile" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "officialLanguage" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_title5" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement> , <./Mapping_en:Infobox_former_subdivision/longitude> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2> , <./Mapping_en:Infobox_former_subdivision/latitude> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/inhabitantsPerSquareMile> .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap> ;
+        rr:predicate  dbo:areaMetro .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_title4" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap> ;
+        rr:predicate  dbo:leaderTitle .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_former_subdivision/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currency" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap> ;
+        rr:predicate  dbo:largestCity .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap> ;
+        rr:predicate  dbo:officialLanguage .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "percent_water" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap> ;
+        rr:predicate  dbo:ethnicGroup .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latNS" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "anthem" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "regional_languages" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "areaMetro" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap> ;
+        rr:predicate  dbo:leaderTitle .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "largestCity" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "inhabitantsPerSquareKilometre" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_sq_mi" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderName" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:areaMetro .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap> ;
+        rr:predicate  dbo:percentageOfAreaWater .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap> ;
+        rr:predicate  dbo:ethnicGroupsInYear .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ethnic_groups_year" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "largest_settlement" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_title3" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "areaMetro" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderTitle" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderName" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_title2" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "capital" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap> ;
+        rr:predicate  dbo:currency .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_title1" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "government_type" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "currency" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderTitle" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderName" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "squareMile" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "national_anthem" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderName" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established_date2" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official_languages" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/inhabitantsPerSquareKilometre> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_former_subdivision?oldid=10211" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "languages" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "percentageOfAreaWater" .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderTitle" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ethnicGroupsInYear" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderTitle" .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderName" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap> ;
+        rr:predicate  dbo:leaderTitle .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/currency/currency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:populationDensity .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "squareKilometre" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap> ;
+        rr:predicate  dbo:populationDensity .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_name5" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:AdministrativeRegion , dbo:PopulatedPlace , wikidata:Q486972 , schema:AdministrativeArea , dbo:Place , dbo:Location , wikidata:Q3455524 , schema:Place , owl:Thing , dbo:Region ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "leaderTitle" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "regional_languages" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap> ;
+        rr:predicate  dbo:largestSettlement .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_name4" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "capital" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longEW" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "regionalLanguage" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "national_motto" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap> ;
+        rr:predicate  dbo:anthem .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/regional_languages/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/officialLanguage/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demonym" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population_density_sq_mi" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longd" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "royal_anthem" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap> ;
+        rr:predicate  dbo:leaderTitle .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "conventional_long_name" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "populationDensity" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latd" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/motto/national_motto/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "governmentType" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established_date1" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap> ;
+        rr:predicate  dbo:anthem .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established_date9" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/royal_anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroupsInYear/ethnic_groups_year/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population_density_km2" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
+        rr:predicate  dbo:demonym .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "largest_city" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundingDate" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official_languages" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap> ;
+        rr:predicate  dbo:leaderName .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/ethnicGroup/ethnic_groups/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ethnicGroup" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/regionalLanguage/regional_languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/anthem/national_anthem/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/conventional_long_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/percentageOfAreaWater/percent_water/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longm" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestCity/largest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/populationDensity/population_density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "populationDensity" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/governmentType/government_type/FunctionTermMap> ;
+        rr:predicate  dbo:governmentType .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_name3" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderTitle/leader_title3/FunctionTermMap> ;
+        rr:predicate  dbo:leaderTitle .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_subdivision/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latm" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/language/official_languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/largestSettlement/largest_settlement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "largestSettlement" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foundingDate/established_date1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foundingDate" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/areaMetro/area_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader_name2" .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_subdivision/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/capital/capital/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_subdivision/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/leaderName/leader_name3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_subdivision/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+

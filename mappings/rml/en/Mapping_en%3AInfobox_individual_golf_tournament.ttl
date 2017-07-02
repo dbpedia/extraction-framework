@@ -1,0 +1,311 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_individual_golf_tournament> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "champion" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lang" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Champion" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_individual_golf_tournament?oldid=28789" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "champion" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap> ;
+        rr:predicate  dbo:champion .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "org" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q15061650 , dbo:SocietalEvent , dul:Event , wikidata:Q500834 , schema:SportsEvent , dbo:Event , schema:Event , dbo:GolfTournament , wikidata:Q1656682 , dbo:SportsEvent , owl:Thing , dbo:Tournament ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap> ;
+        rr:predicate  dbo:champion .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/Champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "organisation" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/language/lang/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "champion" .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_individual_golf_tournament/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/champion/champion/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_individual_golf_tournament/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_individual_golf_tournament/SimplePropertyMapping/organisation/org/FunctionTermMap> ;
+        rr:predicate  dbo:organisation .
+

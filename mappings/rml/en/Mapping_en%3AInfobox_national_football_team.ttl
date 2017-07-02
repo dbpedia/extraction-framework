@@ -1,0 +1,268 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_national_football_team> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_national_football_team?oldid=26133" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Home Stadium" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap> ;
+        rr:predicate  dbo:stadium .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_national_football_team/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:SportsTeam , dbo:Agent , dul:Agent , owl:Thing , dbo:Organisation , dbo:SportsTeam , dbo:SoccerClub , wikidata:Q43229 , schema:Organization , dul:SocialPerson , wikidata:Q476028 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "stadium" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap> ;
+        rr:predicate  dbo:coach .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Nickname" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Coach" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "coach" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/stadium/Home%20Stadium/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/coach/Coach/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:nick" .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_national_football_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_national_football_team/SimplePropertyMapping/foaf:nick/Nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_national_football_team/SubjectMap/Function> .
+

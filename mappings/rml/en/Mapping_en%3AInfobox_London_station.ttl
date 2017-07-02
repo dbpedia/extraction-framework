@@ -1,0 +1,1209 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_London_station> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image_name" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fareZone" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "railwayPlatforms" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1> ;
+        rr:objectMap         <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starting" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_London_station/ConstantMapping/location/http://en.dbpedia.org/resource/Greater_London>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConstantMapping/location/http://en.dbpedia.org/resource/Greater_London/ObjectMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "agencyStationCode" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/ConstantMapping/location/http://en.dbpedia.org/resource/Greater_London> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_London_station/latitude> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough> , <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2> , <./Mapping_en:Infobox_London_station/longitude> , <./Mapping_en:Infobox_London_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2> ;
+        rr:objectMap         <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner2" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "events1" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "railwayPlatforms" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gridref" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Opened" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "alias" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_London_station/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_London_station?oldid=14620" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "events" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+<./Mapping_en:Infobox_London_station/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "locale" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "access" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "picture" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap> ;
+        rr:predicate  dbo:fareZone .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/ConstantMapping/location/http://en.dbpedia.org/resource/Greater_London/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Greater_London" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<./Mapping_en:Infobox_London_station/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager2" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap> ;
+        rr:predicate  dbo:agencyStationCode .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "borough" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager1" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platforms" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Opened" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "borough" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "district" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:otherwise .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap> ;
+        rr:predicate  dbo:gridReference .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platform" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM> , <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starting" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "isHandicappedAccessible" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner1" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap> ;
+        rr:objectMap         <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fare_zone" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latitude" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alt_name" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "gridReference" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "railcode" .
+
+<./Mapping_en:Infobox_London_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap> ;
+        rr:predicate  dbo:isHandicappedAccessible .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue> .
+

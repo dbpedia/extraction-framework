@@ -1,0 +1,741 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_year_in_spaceflight> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "success" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "failed" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "partial" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "successfulLaunches" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap> ;
+        rr:predicate  dbo:suborbitalFlights .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "failedLaunches" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_year_in_spaceflight?oldid=48776" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firstsat" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "totalTravellers" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "countryWithFirstAstronaut" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "countryWithFirstSatellite" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "partialFailedLaunches" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "retired" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap> ;
+        rr:predicate  dbo:countryWithFirstSatelliteLaunched .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap> ;
+        rr:predicate  dbo:countryWithFirstSatellite .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "catalogued" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap> ;
+        rr:predicate  dbo:failedLaunches .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap> ;
+        rr:predicate  dbo:countryWithFirstAstronaut .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "suborbital" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "orbital" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "totalcrew" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "countryWithFirstSatelliteLaunched" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap> ;
+        rr:predicate  dbo:totalTravellers .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "retiredRocket" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firstlaunch" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lastLaunch" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap> ;
+        rr:predicate  dbo:retiredRocket .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firsttrav" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maidens" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstAstronaut/firsttrav/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "suborbitalFlights" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap> ;
+        rr:predicate  dbo:orbitalFlights .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap> ;
+        rr:predicate  dbo:countryWithFirstSpaceflight .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap> ;
+        rr:predicate  dbo:cosparId .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalTravellers/totalcrew/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "total" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap> ;
+        rr:predicate  dbo:successfulLaunches .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatelliteLaunched/firstlaunch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "totalLaunches" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maidenFlightRocket" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/partialFailedLaunches/partial/FunctionTermMap> ;
+        rr:predicate  dbo:partialFailedLaunches .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firstflight" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/retiredRocket/retired/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/failedLaunches/failed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSpaceflight/firstflight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "countryWithFirstSpaceflight" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstLaunch" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/cosparId/catalogued/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cosparId" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dbo:TimePeriod , dbo:YearInSpaceflight ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/firstLaunch/first/FunctionTermMap> ;
+        rr:predicate  dbo:firstLaunch .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/totalLaunches/total/FunctionTermMap> ;
+        rr:predicate  dbo:totalLaunches .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/countryWithFirstSatellite/firstsat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/suborbitalFlights/suborbital/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap> ;
+        rr:predicate  dbo:lastLaunch .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/orbitalFlights/orbital/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "orbitalFlights" .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/maidenFlightRocket/maidens/FunctionTermMap> ;
+        rr:predicate  dbo:maidenFlightRocket .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_year_in_spaceflight/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/lastLaunch/last/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_year_in_spaceflight/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_year_in_spaceflight/SimplePropertyMapping/successfulLaunches/success/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+

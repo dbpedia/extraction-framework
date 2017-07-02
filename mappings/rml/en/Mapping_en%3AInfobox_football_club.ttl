@@ -1,0 +1,1128 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_football_club> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "chairman" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_football_club?oldid=14110" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap> ;
+        rr:predicate  dbo:worstDefeat .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "honours" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fansgroup" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ground" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "chairman" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap> ;
+        rr:predicate  dbo:manager .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstGame" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "position" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "managerTitle" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:nick" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "worstdefeat" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ceo" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "worstDefeat" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap> ;
+        rr:predicate  dbo:clubsRecordGoalscorer .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap> ;
+        rr:predicate  dbo:honours .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap> ;
+        rr:predicate  dbo:chairmanTitle .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formationDate" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:formationDate .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap> ;
+        rr:predicate  dbo:largestWin .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "clubsRecordGoalscorer" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent , wikidata:Q476028 , wikidata:Q43229 , dbo:Agent , dbo:Organisation , schema:Organization , dul:SocialPerson , owl:Thing , dbo:SoccerClub , schema:SportsTeam , dbo:SportsTeam ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap> ;
+        rr:predicate  dbo:dissolved .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "shortname" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap> ;
+        rr:predicate  dbo:fansgroup .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "firstgame" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "league" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap> ;
+        rr:predicate  dbo:managerTitle .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dissolved" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "topscorer" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap> ;
+        rr:predicate  dbo:season .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "season" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ground" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap> ;
+        rr:predicate  dbo:ceo .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "chairmanTitle" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fansgroup" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dissolved" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "largestwin" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "largestWin" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/fansgroup/fansgroup/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "capacity" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/shortname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/firstGame/firstgame/FunctionTermMap> ;
+        rr:predicate  dbo:firstGame .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap> ;
+        rr:predicate  dbo:ground .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "manager" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairmanTitle/chrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "chrtitle" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ceo" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "capacity" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/chairman/chairman/FunctionTermMap> ;
+        rr:predicate  dbo:chairman .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "league" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/capacity/capacity/FunctionTermMap> ;
+        rr:predicate  dbo:capacity .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "honours" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/title/owntitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owntitle" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/largestWin/largestwin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/league/league/FunctionTermMap> ;
+        rr:predicate  dbo:league .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "clubname" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "season" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/ground/ground/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mgrtitle" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_football_club/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_football_club/SimplePropertyMapping/clubsRecordGoalscorer/topscorer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_football_club/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/season/season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/dissolved/dissolved/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/worstDefeat/worstdefeat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_football_club/SimplePropertyMapping/managerTitle/mgrtitle/FunctionTermMap/FunctionValue> .
+

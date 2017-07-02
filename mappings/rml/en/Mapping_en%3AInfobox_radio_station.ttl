@@ -1,0 +1,1279 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_radio_station> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "broadcastNetwork" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "broadcastRepeater" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap> ;
+        rr:predicate  dbo:formerCallsign .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap> ;
+        rr:predicate  dbo:sisterStation .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "callsignMeaning" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "effectiveRadiatedPower" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap> ;
+        rr:predicate  dbo:facilityId .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap> ;
+        rr:predicate  dbo:shareDate .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap> ;
+        rr:predicate  dbo:heightAboveAverageTerrain .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "airdate" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "broadcastTranslator" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue> .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_radio_station/latitude> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast> , <./Mapping_en:Infobox_radio_station/longitude> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap> ;
+        rr:predicate  dbo:broadcastTranslator .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "broadcastArea" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "erp" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "branding" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "webcast" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap> ;
+        rr:predicate  dbo:slogan .
+
+<./Mapping_en:Infobox_radio_station/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "city" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap> ;
+        rr:predicate  dbo:broadcastRepeater .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "licensee" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "slogan" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "affiliations" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:logo" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap> ;
+        rr:predicate  dbo:broadcastNetwork .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "broadcastStationClass" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerCallsign" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "share" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "facility_id" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap> ;
+        rr:predicate  dbo:licensee .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "licensee" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "shareDate" .
+
+<./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap> ;
+        rr:predicate  dbo:shareOfAudience .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstAirDate" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "slogan" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap> ;
+        rr:predicate  dbo:programmeFormat .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "share as of" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "programmeFormat" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap> ;
+        rr:predicate  dbo:frequency .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "format" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap> ;
+        rr:predicate  dbo:shareSource .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "shareOfAudience" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "repeater" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "webcast" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "haat" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "share source" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "sisterStation" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap> ;
+        rr:predicate  dbo:broadcastStationClass .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "alias" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "heightAboveAverageTerrain" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "former_callsigns" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap> ;
+        rr:predicate  dbo:broadcastArea .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "class" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastRepeater/repeater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastNetwork/affiliations/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "frequency" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap> ;
+        rr:predicate  dbo:callsignMeaning .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap> ;
+        rr:predicate  dbo:webcast .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastArea/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+<./Mapping_en:Infobox_radio_station/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_radio_station?oldid=11920" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "frequency" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/programmeFormat/format/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sister_stations" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/alias/branding/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/slogan/slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dbo:Agent , dul:Agent , schema:RadioStation , dul:SocialPerson , dbo:Organisation , wikidata:Q43229 , dbo:RadioStation , wikidata:Q15265344 , schema:Organization , dbo:Broadcaster ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastStationClass/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/webcast/webcast/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/formerCallsign/former_callsigns/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/broadcastTranslator/translator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "translator" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/effectiveRadiatedPower/erp/FunctionTermMap> ;
+        rr:predicate  dbo:effectiveRadiatedPower .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_radio_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/sisterStation/sister_stations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_radio_station/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "facilityId" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/facilityId/facility_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/firstAirDate/airdate/FunctionTermMap> ;
+        rr:predicate  dbo:firstAirDate .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/heightAboveAverageTerrain/haat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_radio_station/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/callsignMeaning/callsign_meaning/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "callsign_meaning" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "shareSource" .
+
+<./Mapping_en:Infobox_radio_station/SimplePropertyMapping/foaf:logo/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+

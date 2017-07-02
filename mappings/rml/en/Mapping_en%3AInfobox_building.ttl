@@ -1,0 +1,1898 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_building> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_building_name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_building?oldid=14144" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "demolitionDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "award" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap> ;
+        rr:predicate  dbo:buildingEndDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "visitorsPerYear" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location_city" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap> ;
+        rr:predicate  dbo:width .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "building_type" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "visitorsTotal" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "current_tenants" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap> ;
+        rr:predicate  dbo:visitorsTotal .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "floor_area" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location_town" .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingStartDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerName" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cost" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingEndDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start_date" .
+
+<./Mapping_en:Infobox_building/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap> ;
+        rr:predicate  dbo:cost .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "destruction_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "buildingEndDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap> ;
+        rr:predicate  dbo:rebuildingDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevationInFoot" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "structuralSystem" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "construction_start_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rebuildingDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "building_name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "visitorsTotal" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owningOrganisation" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "structural_system" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "metre" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "rebuildingDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "address" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot> , <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants> , <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening> , <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names> , <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal> , <./Mapping_en:Infobox_building/latitude> , <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation> , <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost> , <./Mapping_en:Infobox_building/longitude> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date> , <./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country> , <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate> , <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap> ;
+        rr:predicate  dbo:dateOfAbandonment .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "floorCount" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap> ;
+        rr:predicate  dbo:architecturalStyle .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Building , schema:Place , dbo:Location , owl:Thing , dbo:Place , wikidata:Q41176 , dbo:ArchitecturalStructure ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "former_names" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap> ;
+        rr:predicate  dbo:tenant .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap> ;
+        rr:predicate  dbo:demolitionDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "address" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cost" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevationInMeters" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owningOrganisation" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architect" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingStartDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architecturalStyle" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "inauguration_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foot" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap> ;
+        rr:predicate  dbo:buildingEndDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap> ;
+        rr:predicate  dbo:owningOrganisation .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "width" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location_country" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap> ;
+        rr:predicate  dbo:floorArea .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demolition_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap> ;
+        rr:predicate  dbo:buildingStartDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "floor_count" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "completion_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorCount/floor_count/FunctionTermMap> ;
+        rr:predicate  dbo:floorCount .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "floorArea" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap> ;
+        rr:predicate  dbo:demolitionDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "closing_date" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap> ;
+        rr:predicate  dbo:architect .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<./Mapping_en:Infobox_building/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap> ;
+        rr:predicate  dbo:architectualBureau .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architectualBureau" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateOfAbandonment" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap> ;
+        rr:predicate  dbo:structuralSystem .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap> ;
+        rr:predicate  dbo:visitorsPerYear .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "width" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/owningOrganisation/owningOrganisation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "height" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsTotal/visitorsTotal/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_demolished" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Area" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/building_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "destructionDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architect" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/country/location_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architecturalStyle/architectural_style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architectural_style" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "opening" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/structuralSystem/structural_system/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInFoot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap> ;
+        rr:predicate  dbo:address .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/rebuildingDate/rebuildingDate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_building/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/latitude/FunctionTermMap/ParameterPOM> , <./Mapping_en:Infobox_building/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/destructionDate/destruction_date/FunctionTermMap> ;
+        rr:predicate  dbo:destructionDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/opening/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "city" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/city/location_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/foaf:name/native_building_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/date_demolished/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "demolitionDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/dateOfAbandonment/closing_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingEndDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/start_date/FunctionTermMap> ;
+        rr:predicate  dbo:buildingStartDate .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_building/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_building/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/floorArea/floor_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_building/SimplePropertyMapping/buildingEndDate/buildingEndDate/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/location/location_town/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/type/building_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/elevation/elevationInMeters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/tenant/current_tenants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "tenant" .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_building/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/architectualBureau/architecturalBureau/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architecturalBureau" .
+
+<./Mapping_en:Infobox_building/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_building/SimplePropertyMapping/visitorsPerYear/visitorsPerYear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "visitorsPerYear" .
+

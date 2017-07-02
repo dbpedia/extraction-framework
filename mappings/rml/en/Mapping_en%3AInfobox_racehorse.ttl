@@ -1,0 +1,741 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Infobox_racehorse> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap> ;
+        rr:predicate  dbo:foalDate .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "foaled" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap> ;
+        rr:predicate  dbo:damsire .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap> ;
+        rr:predicate  dbo:sire .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "colour" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dam" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "jockey" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dam" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_racehorse?oldid=49329" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colour" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "breeder" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap> ;
+        rr:predicate  dbo:race .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "award" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap> ;
+        rr:predicate  dbo:dam .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "horsename" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "honours" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap> ;
+        rr:predicate  dbo:breeder .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap> ;
+        rr:predicate  dbo:trainer .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "jockey" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "race" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "grandsire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/award/awards> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap> .
+
+<./Mapping_en:Infobox_racehorse/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap> ;
+        rr:predicate  dbo:honours .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "trainer" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "sex" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "trainer" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "grandsire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "race" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foaf:name/horsename/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap> ;
+        rr:predicate  dbo:jockey .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/colour/colour/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap> ;
+        rr:predicate  dbo:grandsire .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "sire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "breeder" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foalDate" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap> ;
+        rr:predicate  dbo:sex .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/dam/dam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/foalDate/foaled/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/grandsire/grandsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/breeder/breeder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/honours/honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "honours" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/jockey/jockey/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/race/race/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/trainer/trainer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "damsire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/damsire/damsire/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "damsire" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_racehorse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sire/sire/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_racehorse/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/sex/sex/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sex" .
+
+<./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_racehorse/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_racehorse/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:RaceHorse , owl:Thing , dbo:Mammal , dbo:Horse , dbo:Species , wikidata:Q7377 , dbo:Animal , wikidata:Q729 , wikidata:Q19088 , dbo:Eukaryote ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+

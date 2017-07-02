@@ -1,0 +1,1768 @@
+@base          <http://en.dbpedia.org/resource/Mapping_en:Listen> .
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description6" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__6" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description5" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title4" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description> , <./Mapping_en:Listen/SimplePropertyMapping/title/title> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename1" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title3" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename9" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9> , <./Mapping_en:Listen/SimplePropertyMapping/title/title9> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename8" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Listen?oldid=45360" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1> , <./Mapping_en:Listen/SimplePropertyMapping/title/title1> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__10" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10> , <./Mapping_en:Listen/SimplePropertyMapping/title/title10> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__7" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2> , <./Mapping_en:Listen/SimplePropertyMapping/title/title2> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__4" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description4" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__1" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description3" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title2" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description2" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title1" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3> , <./Mapping_en:Listen/SimplePropertyMapping/title/title3> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename7" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title9" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__11" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename6" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title10" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title8" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename5" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10> , <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description4> , <./Mapping_en:Listen/SimplePropertyMapping/title/title4> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename4> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__5" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__2" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5> , <./Mapping_en:Listen/SimplePropertyMapping/title/title5> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description1" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description9" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description8" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title7" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename4" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6> , <./Mapping_en:Listen/SimplePropertyMapping/title/title6> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename6> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title6" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__8" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename3" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title5" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dc:type" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description1/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename2" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__3" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7> , <./Mapping_en:Listen/SimplePropertyMapping/title/title7> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "description" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title10/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title4/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "filename10" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap> ;
+        rr:predicate  dc:type .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/title/title1/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description9/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title6/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description8> , <./Mapping_en:Listen/SimplePropertyMapping/title/title8> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename8> , <./Mapping_en:Listen/SimplePropertyMapping/dc:type/type> ;
+        rr:subjectMap          <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap> ;
+        rr:predicate  dbo:filename .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "filename" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description2/FunctionTermMap> ;
+        rr:predicate  dbo:description .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap/ParentTriplesMap> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description7" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/description/description5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/soundRecording" ;
+        rr:class       dbo:Sound ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__9" ;
+        rr:termType    rr:IRI .
+
+<./Mapping_en:Listen/SimplePropertyMapping/description/description10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "description10" .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename10/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Listen/SimplePropertyMapping/filename/filename/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap/Function> .
+
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+<./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Listen/SimplePropertyMapping/title/title9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
