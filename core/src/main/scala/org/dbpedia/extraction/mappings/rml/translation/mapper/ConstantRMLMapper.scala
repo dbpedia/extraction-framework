@@ -46,8 +46,15 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
     constantPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
     if(mapping.datatype == null) {
-      val objectMapUri = constantPom.uri.extend("/ObjectMap")
-      constantPom.addObjectMap(objectMapUri).addConstant(new RMLLiteral(mapping.value))
+      /**
+        * val objectMapUri = constantPom.uri.extend("/ObjectMap")
+        * constantPom.addObjectMap(objectMapUri).addConstant(new RMLLiteral(mapping.value))
+        **/
+      if(mapping.isObjectProperty) {
+        constantPom.addObject(new RMLUri(mapping.value))
+      } else {
+        constantPom.addObject(new RMLLiteral(mapping.value))
+      }
     } else {
       addUnitToPredicateObjectMap(constantPom)
     }

@@ -27,13 +27,14 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
 
   def addObject(uri: RMLUri) : RMLPredicateObjectMap =
   {
-    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "object"), createProperty(uri.toString))
+    val toString = uri.toString
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "object"), model.createResource(toString))
     this
   }
 
   def addObject(literal: RMLLiteral) : RMLPredicateObjectMap =
   {
-    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "object"), literal.toString())
+    resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "object"), literal.toString())
     this
   }
 
