@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.mappings.rml.translation.model
 
+import org.dbpedia.extraction.mappings.rml.translation.formatter.RMLFormatter
+
 /**
   * RML Template Mapping converted from the DBpedia mappings
   */
-class RMLTemplateMapping(val title: String, modelWrapper: ModelWrapper) extends RMLMapping {
+class RMLTemplateMapping(val title: String, modelWrapper: RMLModel) extends RMLMapping {
 
 
   def printAsNTriples: Unit =
@@ -23,6 +25,7 @@ class RMLTemplateMapping(val title: String, modelWrapper: ModelWrapper) extends 
 
   def writeAsTurtle(base : String) =
   {
+    RMLFormatter.format(modelWrapper, title)
     modelWrapper.writeAsTurtle(base : String)
   }
 
