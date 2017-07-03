@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.translation.formatter
 import org.apache.jena.rdf.model.StmtIterator
+
+import collection.JavaConverters._
 import org.dbpedia.extraction.mappings.rml.translation.model.{ModelWrapper, RMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
@@ -17,7 +19,7 @@ object RMLFormatter extends Formatter {
     val subjectMapPart = getSubjectMapPart(model, base)
     val mappingsPart = getAllMappings(model, base)
 
-    print(Seq(prefixes, triplesMapPart, subjectMapPart).reduce((first, second) => first.concat('\n' + second)))
+    print(Seq(prefixes, triplesMapPart, subjectMapPart,mappingsPart).reduce((first, second) => first.concat('\n' + second)))
 
     triplesMapPart
   }
@@ -72,12 +74,14 @@ object RMLFormatter extends Formatter {
 
     // Get the normal (non-conditional) mappings first
     val triplesMapResource = model.triplesMap.resource
-    val iterator = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap"))
-    while(iterator.hasNext) {
-      val predicateObjectMap = iterator.nextStatement().getObject
+    val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
+
+    statements.asScala.map(statement => {
+      val predicateObjectMap = statement.getObject
       val properties = predicateObjectMap.asResource().listProperties()
-    }
-    ""
+      getMapping(properties, base)
+    }).reduce((first, second) => first.concat("\n" + second))
+
   }
 
   /**
@@ -90,9 +94,9 @@ object RMLFormatter extends Formatter {
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(properties)
-    val title = "### Property Mapping"
+    val heading = "### Property Mapping"
     val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
-    predicateObjectMapString
+    heading + predicateObjectMapString + offset
   }
 
   /**
