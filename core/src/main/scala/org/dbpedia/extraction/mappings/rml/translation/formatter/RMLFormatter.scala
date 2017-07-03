@@ -25,10 +25,6 @@ object RMLFormatter extends Formatter {
       case x : Exception => x.printStackTrace(); null
     }
 
-
-
-
-
   }
 
 
@@ -108,10 +104,12 @@ object RMLFormatter extends Formatter {
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
-    val heading = "### Property Mapping"
+    val heading = "########\n\n### Property Mapping"
     val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
+
     val functionTermMap = getObjectMap(propertiesArray.head.getSubject)
     val functionTermMapString = getFunctionTermMap(functionTermMap.listProperties(), base)
+
     heading + predicateObjectMapString + offset + functionTermMapString
   }
 
@@ -123,15 +121,39 @@ object RMLFormatter extends Formatter {
     * @return
     */
   private def getFunctionTermMap(properties : StmtIterator, base : String) : String = {
+    val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
-    freshModel.insertRDFNamespacePrefixes()
-    freshModel.model.add(properties)
+    freshModel.model.add(propertiesArray)
 
     val heading = "### Function Term Map"
     val functionTermMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
 
-    heading + functionTermMapString + offset
+    val functionValueProperty = freshModel.model.getProperty(RdfNamespace.FNML.namespace + "functionValue")
+    val functionValue = propertiesArray.head.getSubject.getProperty(functionValueProperty).getObject.asResource()
+    val functionValueString = getFunctionValue(functionValue.listProperties(), base)
+
+    heading + functionTermMapString + offset + functionValueString
+
+  }
+
+
+  /**
+    * Retrieves all necessary constructs for a function value
+    * @param properties
+    * @param base
+    * @return
+    */
+  private def getFunctionValue(properties : StmtIterator, base : String) : String = {
+    val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
+    val freshModel = new ModelWrapper
+    freshModel.insertRDFNamespacePrefixes()
+    freshModel.model.add(propertiesArray)
+
+    val heading = "### Function Value"
+    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t\t\t\t\t  "))
+
+    heading + functionValueString + offset
 
   }
 
@@ -145,6 +167,8 @@ object RMLFormatter extends Formatter {
     val objectMapProperty = resource.getModel.getProperty(RdfNamespace.RR.namespace + "objectMap")
     resource.getProperty(objectMapProperty).getObject.asResource()
   }
+
+
 
   /**
     * Gets the prefixes from a turtle string
