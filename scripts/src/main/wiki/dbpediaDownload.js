@@ -277,8 +277,10 @@ function getDataIDsFromCatalog(catalog)
             for(var j = 0; j < catalog["@graph"][i]["dcat:record"].length; j++)
             {
                 var id = catalog["@graph"][i]["dcat:record"][j]["@id"];
+                var wikicode = getLangFromUri(id);
+                if(wikicode != "none" && wikicode != "core")
+                    ret[wikicode] = catalog["@graph"][i]["dcat:record"][j]["@id"];
 
-                ret[getLangFromUri(id)] = catalog["@graph"][i]["dcat:record"][j]["@id"];
             }
         }
     }
@@ -299,10 +301,10 @@ function getDatasetList(){
         return removeQuery(item["@id"]) + "--" + item["dc:title"]["@value"];
     })
         .filter(function(item, pos, self) {
-        return self.indexOf(item) == pos;
-    }).map(function(str){
-        return{id: str.substring(0, str.indexOf("--")), title: str.substring(str.indexOf("--")+2)}
-    });
+            return self.indexOf(item) == pos;
+        }).map(function(str){
+            return{id: str.substring(0, str.indexOf("--")), title: str.substring(str.indexOf("--")+2)}
+        });
 }
 
 function loadDatasetListOfLang(lang)

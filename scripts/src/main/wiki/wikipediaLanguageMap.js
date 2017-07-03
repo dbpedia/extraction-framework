@@ -96,6 +96,11 @@ var langmap = {
         "iso639_1": "az",
         "name": "Azerbaijani"
     },
+    "azb": {
+        "iso639_3": "azb",
+        "iso639_1": "az",
+        "name": "South Azerbaijani"
+    },
     "ba": {
         "iso639_3": "bak",
         "iso639_1": "ba",
@@ -807,6 +812,11 @@ var langmap = {
         "iso639_3": "mri",
         "iso639_1": "mi",
         "name": "Maori"
+    },
+    "min": {
+        "iso639_3": "min",
+        "iso639_1": "",
+        "name": "Minangkabau"
     },
     "mk": {
         "iso639_3": "mkd",

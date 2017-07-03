@@ -180,13 +180,13 @@ ls -1 */*/*-page-links*.{nt,ttl}.gz | grep -v -E 'en-uris|unredirected' > page-l
 bzcat  geo_coordinates_*.ttl.bz2 | cut -d ' ' -f 1 | sort -u | wc -l
 
 #No of disambiguations
-bzcat disambiguations_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
+bzcat disambiguations_en.ttl.bz2 | cut -d ' ' -f 1 | uniq | wc -l
 
 #No of redirects
-bzcat redirects_en.nt.bz2 | cut -d ' ' -f 1 | uniq | wc -l
+bzcat redirects_en.ttl.bz2 | cut -d ' ' -f 1 | uniq | wc -l
 
 #No of images
-bzcat images_en.nt.bz2 | grep "<http://xmlns.com/foaf/0.1/thumbnail>"  | cut -d ' ' -f 1 | uniq | wc -l
+bzcat images_en.ttl.bz2 | grep "<http://xmlns.com/foaf/0.1/thumbnail>"  | cut -d ' ' -f 1 | uniq | wc -l
 
 #No of skos concepts
 bzcat skos_categories_en.ttl.bz2 redirects_en.ttl.bz2 instance_types_transitive_en.ttl.bz2 page_ids_en.ttl.bz2 | cut -d ' ' -f 1 | sort -u | wc -l

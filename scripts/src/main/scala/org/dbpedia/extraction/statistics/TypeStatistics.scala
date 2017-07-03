@@ -4,7 +4,6 @@ import java.io.{File, PrintWriter}
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.{Level, Logger}
 
-import org.apache.jena.atlas.json.JSON
 import org.dbpedia.extraction.scripts.QuadMapper
 import org.dbpedia.extraction.util.{Language, RichFile, SimpleWorkers, Workers}
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -26,7 +25,7 @@ object TypeStatistics {
 
 
     require(args != null && args.length >= 7,
-      "need at least three args: " +
+      "need at least 7 args: " +
         /*0*/ "base directory, " +
         /*1*/ "input file suffix (e.g. .ttl.bz2)" +
         /*2*/ "comma- or space-separated names of input files (e.g. 'instance_types,instance_types_transitive') without suffix, language or path!" +
