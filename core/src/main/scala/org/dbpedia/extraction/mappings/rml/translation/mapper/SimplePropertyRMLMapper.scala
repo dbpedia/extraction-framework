@@ -63,51 +63,26 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       // adds the unit datatype if there is one
       addDatatype(functionTermMap)
 
+      // adds the function value for simplepropertymapping
       val functionValueUri = functionTermMapUri.extend("/FunctionValue")
       val functionValue = functionTermMap.addFunctionValue(functionValueUri)
       functionValue.addLogicalSource(rmlModel.logicalSource)
       functionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-      val executePomUri = functionValueUri.extend("/ExecutePOM")
-      val executePom = functionValue.addPredicateObjectMap(executePomUri)
-      executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
 
-      /**
-      val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
-      executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
-      **/
-
-      executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
-
-      addReferenceParameterFunction("property", functionValue)
-
-      if(mapping.factor != 1) {
-        addConstantParameterFunction("factor", functionValue)
+      // the next few lines check if the SimplePropertyFunction already exists or not in the mapping file so that
+      // there is always a maximum of one ExecutePOMs of this function in a mapping
+      if(!rmlModel.containsResource(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
+      {
+        createSimplePropertyFunction(functionValue)
+      }
+      else
+      {
+        functionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
       }
 
-      if(mapping.transform != null) {
-        addConstantParameterFunction("transform", functionValue)
-      }
-
-      if(mapping.select != null) {
-        addConstantParameterFunction("select", functionValue)
-      }
-
-      if(mapping.prefix != null) {
-        addConstantParameterFunction("prefix", functionValue)
-      }
-
-      if(mapping.suffix != null) {
-        addConstantParameterFunction("suffix", functionValue)
-      }
-
-      if(mapping.unit != null) {
-        addConstantParameterFunction("unit", functionValue)
-      }
-
-      if(mapping.ontologyProperty != null) {
-        addConstantParameterFunction("ontologyProperty", functionValue)
-      }
+      // add the remaining parameters
+      addParameters(functionValue)
 
   }
 
@@ -126,12 +101,6 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
     parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
-
-    /**
-    val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
-    parameterPom.addObjectMap(parameterObjectMapUri).addConstant(new RMLLiteral(getParameterValue(param)))
-      **/
-
     parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
 
@@ -149,6 +118,55 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       case "ontologyProperty" => mapping.ontologyProperty.name
     }
 
+  }
+
+  /**
+    * Adds an Execute Predicate Object Map (fixed uri) for the SimplePropertyFunction to a given FunctionValue
+    * @param functionValue
+    * @return
+    */
+  private def createSimplePropertyFunction(functionValue : RMLTriplesMap) = {
+    val executePomUri = new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
+    val executePom = functionValue.addPredicateObjectMap(executePomUri)
+    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
+  }
+
+  /**
+    * Adds all the parameter POMs if neccessary
+    * @param functionValue
+    * @return
+    */
+  private def addParameters(functionValue: RMLTriplesMap) = {
+    addReferenceParameterFunction("property", functionValue)
+
+    if(mapping.factor != 1) {
+      addConstantParameterFunction("factor", functionValue)
+    }
+
+    if(mapping.transform != null) {
+      addConstantParameterFunction("transform", functionValue)
+    }
+
+    if(mapping.select != null) {
+      addConstantParameterFunction("select", functionValue)
+    }
+
+    if(mapping.prefix != null) {
+      addConstantParameterFunction("prefix", functionValue)
+    }
+
+    if(mapping.suffix != null) {
+      addConstantParameterFunction("suffix", functionValue)
+    }
+
+    if(mapping.unit != null) {
+      addConstantParameterFunction("unit", functionValue)
+    }
+
+    if(mapping.ontologyProperty != null) {
+      addConstantParameterFunction("ontologyProperty", functionValue)
+    }
   }
 
 

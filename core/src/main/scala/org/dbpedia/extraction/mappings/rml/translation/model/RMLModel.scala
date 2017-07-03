@@ -36,6 +36,15 @@ class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWr
     model.setNsPrefix(rdfNamespace._2.prefix, rdfNamespace._2.namespace)
   }
 
+  /**
+    * Checks if the Jena model contains the given RMLUri as a resource
+    * @param rmlUri
+    * @return
+    */
+  def containsResource(rmlUri: RMLUri) : Boolean = {
+    model.containsResource(model.createResource(rmlUri.toString))
+  }
+
   private def convertToLogicalSourceUri(title: WikiTitle): String =
   {
     title.resourceIri + "/LogicalSource"
