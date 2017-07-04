@@ -144,13 +144,15 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
     val executePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ExecutePOM"))
     executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    executePom.addObjectMap(executePom.uri.extend("/ObjectMap")).addConstant(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
+    //executePom.addObjectMap(executePom.uri.extend("/ObjectMap")).addConstant(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
+    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
 
     // checks if this condition needs a value or not
     if(conditionMapping.value != null) {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
       paramValuePom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace  + conditionMapping.operator + "/" + DbfFunction.operatorFunction.valueParameter))
-      paramValuePom.addObjectMap(paramValuePom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.value))
+      //paramValuePom.addObjectMap(paramValuePom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.value))
+      paramValuePom.addObject(new RMLLiteral(conditionMapping.value))
     }
 
     // checks if this condition needs a property or not

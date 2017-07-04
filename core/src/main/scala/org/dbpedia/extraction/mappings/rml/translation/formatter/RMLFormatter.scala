@@ -19,7 +19,8 @@ object RMLFormatter extends Formatter {
       val triplesMapPart = getTriplesMapPart(model, base)
       val subjectMapPart = getSubjectMapPart(model, base)
       val mappingsPart = getAllMappings(model, base)
-      print(Seq(prefixes, triplesMapPart, subjectMapPart,mappingsPart).reduce((first, second) => first.concat('\n' + second)))
+      val functionsPart = getFunctions(model, base)
+      print(Seq(prefixes, triplesMapPart, subjectMapPart, functionsPart, mappingsPart).reduce((first, second) => first.concat('\n' + second)))
       triplesMapPart
     } catch {
       case x : Exception => x.printStackTrace(); null
@@ -126,10 +127,29 @@ object RMLFormatter extends Formatter {
   }
 
   /**
-  private def getFunctions() : String {
-    ""
+    * Retrieves all function rr:PredicateObjectMaps
+    *
+    * @return
+    */
+  private def getFunctions(modelWrapper : ModelWrapper, base : String): String = {
+    val predicate =  modelWrapper.model.getProperty(RdfNamespace.RR.namespace, "predicate")
+    val _object = modelWrapper.model.getResource(RdfNamespace.FNO.namespace + "executes")
+    val statement = modelWrapper.model.listResourcesWithProperty(predicate, _object)
+      .toList.asScala
+    val properties = modelWrapper.model.listStatements(null,null, _object)
+      .toList.asScala
+      .flatMap(statement => statement.getSubject.listProperties().toList.asScala)
+
+
+    val freshWrapper = new ModelWrapper
+    freshWrapper.insertRDFNamespacePrefixes()
+    freshWrapper.model.add(properties.toArray)
+
+    val heading = "### Functions"
+    val functionsString = removePrefixes(freshWrapper.writeAsTurtle(base))
+
+    heading + functionsString + offset
   }
-    **/
 
   /**
     * Retrieves all necessary constructs of a function term map
@@ -257,6 +277,7 @@ object RMLFormatter extends Formatter {
 
   /**
     * Checks if given resource contains an rr:ObjectMap that is a rr:FunctionTermMap
+    *
     * @param resource
     * @return
     */
