@@ -84,8 +84,10 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     val startExecutePomUri = startFunctionValueUri.extend("/ExecutePOM")
     val startExecutePom = startFunctionValue.addPredicateObjectMap(startExecutePomUri)
     startExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    val startExecuteObjectMapUri = startExecutePomUri.extend("/ObjectMap")
-    startExecutePom.addObjectMap(startExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
+    startExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
+
+    //val startExecuteObjectMapUri = startExecutePomUri.extend("/ObjectMap")
+    //startExecutePom.addObjectMap(startExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
 
     // adding the property parameter pom of the start date function
     val startParameterPomUri = startFunctionValueUri.extend("/PropertyParameterPOM")
@@ -98,8 +100,10 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     val startOntologyParameterPomUri = startFunctionValueUri.extend("/OntologyParameterPOM")
     val startOntologyParameterPom = startFunctionValue.addPredicateObjectMap(startOntologyParameterPomUri)
     startOntologyParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.ontologyParameter))
-    val startOntologyParameterObjectMapUri = startOntologyParameterPomUri.extend("/ObjectMap")
-    startOntologyParameterPom.addObjectMap(startOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.startDateOntologyProperty.name))
+    startOntologyParameterPom.addObject(new RMLLiteral(mapping.startDateOntologyProperty.name))
+
+    //val startOntologyParameterObjectMapUri = startOntologyParameterPomUri.extend("/ObjectMap")
+    //startOntologyParameterPom.addObjectMap(startOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.startDateOntologyProperty.name))
 
     endFunctionValue.addLogicalSource(rmlModel.logicalSource)
     endFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
@@ -108,8 +112,10 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     val endExecutePomUri = endFunctionValueUri.extend("/ExecutePOM")
     val endExecutePom = endFunctionValue.addPredicateObjectMap(endExecutePomUri)
     endExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    val endExecuteObjectMapUri = endExecutePomUri.extend("/ObjectMap")
-    endExecutePom.addObjectMap(endExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
+    endExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
+
+    //val endExecuteObjectMapUri = endExecutePomUri.extend("/ObjectMap")
+    //endExecutePom.addObjectMap(endExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
 
     // adding the property parameter pom of the end date function
     val endParameterPomUri = endFunctionValueUri.extend("/PropertyParameterPOM")
@@ -122,8 +128,10 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     val endOntologyParameterPomUri = endFunctionValueUri.extend("/OntologyParameterPOM")
     val endOntologyParameterPom = endFunctionValue.addPredicateObjectMap(endOntologyParameterPomUri)
     endOntologyParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.ontologyParameter))
-    val endOntologyParameterObjectMapUri = endOntologyParameterPomUri.extend("/ObjectMap")
-    endOntologyParameterPom.addObjectMap(endOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.endDateOntologyProperty.name))
+    endOntologyParameterPom.addObject(new RMLLiteral(mapping.endDateOntologyProperty.name))
+    
+    //val endOntologyParameterObjectMapUri = endOntologyParameterPomUri.extend("/ObjectMap")
+    //endOntologyParameterPom.addObjectMap(endOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.endDateOntologyProperty.name))
 
   }
 
