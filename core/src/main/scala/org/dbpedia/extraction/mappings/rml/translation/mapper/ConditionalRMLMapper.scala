@@ -34,12 +34,10 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     mapToClassPom.addDCTermsType(new RMLLiteral("conditionalMapping"))
 
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    val mapToClassOmUri = mapToClassPomUri.extend("/ObjectMap")
-    val mapToClassOm = mapToClassPom.addObjectMap(mapToClassOmUri)
-    mapToClassOm.addConstant(new RMLUri(firstTemplateMapping.mapToClass.uri))
+    mapToClassPom.addObject(new RMLUri(firstTemplateMapping.mapToClass.uri))
 
     // adds the related classes of this condition
-    addRelatedClassesToOM(mapToClassOm, firstTemplateMapping.mapToClass)
+    addRelatedClassesToPOM(mapToClassPom, firstTemplateMapping.mapToClass)
 
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
 
@@ -76,10 +74,10 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     val mapToClassPomUri = new RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
     val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    val objectMap = mapToClassPom.addObjectMap(mapToClassPom.uri.extend("/ObjectMap")).addConstant(new RMLUri(templateMapping.mapToClass.uri))
+    mapToClassPom.addObject(new RMLUri(templateMapping.mapToClass.uri))
 
     // adds all the related classes for this condition
-    addRelatedClassesToOM(objectMap, templateMapping.mapToClass)
+    addRelatedClassesToPOM(mapToClassPom, templateMapping.mapToClass)
 
     val conditionFunctionTermMap = addEqualCondition(condition, mapToClassPom)
     val state = new MappingState
@@ -175,6 +173,13 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     for(cls <- relatedClasses) {
       subjectMap.addClass(new RMLUri(cls.uri))
     }
+  }
+
+  private def addRelatedClassesToPOM(pom: RMLPredicateObjectMap, mapToClass : OntologyClass) =
+  {
+    mapToClass.relatedClasses.foreach(relatedClass => {
+      pom.addObject(new RMLUri(relatedClass.uri))
+    })
   }
 
   /**
