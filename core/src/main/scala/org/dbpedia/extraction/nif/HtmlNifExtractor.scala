@@ -9,7 +9,8 @@ import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Config, CssConfigurationMap, UriUtils}
+import org.dbpedia.extraction.util.Config.NifParameters
+import org.dbpedia.extraction.util.{CssConfigurationMap, UriUtils}
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}
 import org.jsoup.parser.Tag
@@ -23,19 +24,19 @@ import scala.util.{Failure, Success, Try}
 /**
   * Created by Chile on 1/19/2017.
   */
-abstract class HtmlNifExtractor(nifContextIri: String, language: String, configFile : Config) {
+abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifParameters : NifParameters) {
 
   assert(nifContextIri.contains("?"), "the nifContextIri needs a query part!")
 
-  protected val writeLinkAnchors = configFile.nifParameters.writeLinkAnchor
-  protected val writeStrings = configFile.nifParameters.writeAnchor
-  protected val cssSelectorConfigMap = new CssConfigurationMap(configFile.nifParameters.cssSelectorMap).getCssSelectors(language)
+  protected val writeLinkAnchors: Boolean = nifParameters.writeLinkAnchor
+  protected val writeStrings: Boolean = nifParameters.writeAnchor
+  protected val cssSelectorConfigMap: CssConfigurationMap#CssLanguageConfiguration = new CssConfigurationMap(nifParameters.cssSelectorMap).getCssSelectors(language)
 
-  protected lazy val nifContext = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifContext.encoded) _
-  protected lazy val nifStructure = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifPageStructure.encoded) _
-  protected lazy val nifLinks = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifTextLinks.encoded) _
-  protected lazy val rawTables = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.RawTables.encoded) _
-  protected lazy val equations = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.Equations.encoded) _
+  protected lazy val nifContext: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifContext.encoded) _
+  protected lazy val nifStructure: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifPageStructure.encoded) _
+  protected lazy val nifLinks: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifTextLinks.encoded) _
+  protected lazy val rawTables: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.RawTables.encoded) _
+  protected lazy val equations: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.Equations.encoded) _
 
   protected val templateString = "Template"
 
@@ -72,16 +73,19 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
             context = context + "\n\n"
             offset += 2
           }
-          var quad = makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
+          var quads = if(nifParameters.abstractsOnly)
+            Seq()
+          else
+            makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
 
           offset += extractionResults.getExtractedLength
           context += extractionResults.getExtractedText
 
           //collect additional triples
-          quad ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
+          quads ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
           //forward exceptions
           extractionResults.errors.foreach(exceptionHandle(_, RecordSeverity.Warning, null))
-          quad
+          quads
         }
         case Failure(e) => {
           exceptionHandle(e.getMessage, RecordSeverity.Exception, e)
@@ -91,8 +95,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     }
 
     quads.flatten ++
+    (if(nifParameters.abstractsOnly) Seq()
+      else {
       makeContext(context, nifContextIri, graphIri, offset) ++
       extendContextTriples(quads.flatten, graphIri, subjectIri)
+    })
   }
 
   /**

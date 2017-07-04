@@ -24,7 +24,7 @@ class Config(val configPath: String) extends
   if(configPath != null)
     this.putAll(ConfigUtils.loadConfig(configPath))
 
-  val logger = Logger.getLogger(getClass.getName)
+  private val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
@@ -46,8 +46,6 @@ class Config(val configPath: String) extends
     * get all universal properties, check if there is an override in the provided config file
     */
 
-
-  // TODO Watch out, this could be a regex
   lazy val source: String = this.getProperty("source", "pages-articles.xml.bz2").trim
 
   lazy val wikiName: String = this.getProperty("wiki-name", "wiki").trim
@@ -101,7 +99,7 @@ class Config(val configPath: String) extends
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val ontologyFile: File = getValue(this, "ontology", required = false)(new File(_))
+  lazy val ontologyFile: File = getValue(this, "ontology")(new File(_))
 
   /**
     * Local mappings files, downloaded for speed and reproducibility
@@ -109,7 +107,7 @@ class Config(val configPath: String) extends
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val mappingsDir: File = getValue(this, "mappings", required = false)(new File(_))
+  lazy val mappingsDir: File = getValue(this, "mappings")(new File(_))
 
   lazy val policies: Map[String, Array[Policy]] = parsePolicies(this, "uri-policy")
 
@@ -188,36 +186,47 @@ class Config(val configPath: String) extends
     ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
   }
 
-  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
-    new IllegalArgumentException(message, cause)
+  lazy val mediawikiConnection: MediaWikiConnection = Try {
+    MediaWikiConnection(
+      apiUrl = this.getProperty("mwc-apiUrl", "").trim,
+      maxRetries = this.getProperty("mwc-maxRetries", "4").trim.toInt,
+      connectMs = this.getProperty("mwc-connectMs", "2000").trim.toInt,
+      readMs = this.getProperty("mwc-readMs", "5000").trim.toInt,
+      sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt
+    )
+  } match{
+    case Success(s) => s
+    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'MediaWikiConnection' class were provided or could not be parsed to the expected type.", f)
   }
 
-  lazy val mediawikiConnection = MediaWikiConnection(
-    apiUrl=this.getProperty("mwc-apiUrl", "").trim,
-    maxRetries = this.getProperty("mwc-maxRetries", "4").trim.toInt,
-    connectMs = this.getProperty("mwc-connectMs", "2000").trim.toInt,
-    readMs = this.getProperty("mwc-readMs", "5000").trim.toInt,
-    sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt
-  )
-
-  lazy val abstractParameters = AbstractParameters(
-    abstractQuery=this.getProperty("abstract-query", "").trim,
-    shortAbstractsProperty = this.getProperty("short-abstracts-property", "rdfs:comment").trim,
-    longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
-    shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
-    abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim
-  )
+  lazy val abstractParameters: AbstractParameters = Try {
+    AbstractParameters(
+      abstractQuery = this.getProperty("abstract-query", "").trim,
+      shortAbstractsProperty = this.getProperty("short-abstracts-property", "rdfs:comment").trim,
+      longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
+      shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
+      abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim
+    )
+  } match{
+    case Success(s) => s
+    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'AbstractParameters' class were provided or could not be parsed to the expected type.", f)
+  }
 
 
-  lazy val nifParameters = NifParameters(
-    nifQuery=this.getProperty("nif-query", "").trim,
-    nifTags = this.getProperty("nif-tags", "parse,text").trim,
-    isTestRun = this.getProperty("nif-isTestRun", "false").trim.toBoolean,
-    writeAnchor = this.getProperty("nif-write-anchor", "false").trim.toBoolean,
-    writeLinkAnchor = this.getProperty("nif-write-link-anchor", "true").trim.toBoolean,
-    abstractsOnly = this.getProperty("nif-extract-abstract-only", "true").trim.toBoolean,
-    cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json")   //static config file in core/src/main/resources
-  )
+  lazy val nifParameters: NifParameters = Try {
+    NifParameters(
+      nifQuery = this.getProperty("nif-query", "").trim,
+      nifTags = this.getProperty("nif-tags", "parse,text").trim,
+      isTestRun = this.getProperty("nif-isTestRun", "false").trim.toBoolean,
+      writeAnchor = this.getProperty("nif-write-anchor", "false").trim.toBoolean,
+      writeLinkAnchor = this.getProperty("nif-write-link-anchor", "true").trim.toBoolean,
+      abstractsOnly = this.getProperty("nif-extract-abstract-only", "true").trim.toBoolean,
+      cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json") //static config file in core/src/main/resources
+    )
+  } match{
+    case Success(s) => s
+    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'NifParameters' class were provided or could not be parsed to the expected type.", f)
+  }
 }
 
 object Config{
@@ -255,9 +264,10 @@ object Config{
    )
 
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
+
   val universalConfig: Config = new Config(null)
 
-  private val wikisinfoFile = new File(getString(universalProperties , "base-dir", true), WikiInfo.FileName)
+  private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
   private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
-  def wikiInfos = wikiinfo
+  def wikiInfos: Seq[WikiInfo] = wikiinfo
 }

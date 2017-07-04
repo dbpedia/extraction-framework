@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.server
 
-import java.net.{URI,URL}
-import java.util.logging.{Level,Logger}
-import scala.collection.immutable.SortedMap
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.{ConfigUtils, Language}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.server.stats.MappingStatsManager
+import java.net.{URI, URL}
+import java.util.logging.Logger
+
 import com.sun.jersey.api.container.httpserver.HttpServerFactory
-import com.sun.jersey.api.core.{ResourceConfig,PackagesResourceConfig}
+import com.sun.jersey.api.core.{PackagesResourceConfig, ResourceConfig}
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.server.Server._
+import org.dbpedia.extraction.server.stats.MappingStatsManager
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.wikiparser.{WikiTitle, Namespace}
-import Server._
+import org.dbpedia.extraction.wikiparser.WikiTitle
+
+import scala.collection.immutable.SortedMap
 
 class Server(
   private val password : String,
@@ -20,13 +22,13 @@ class Server(
   mappingTestExtractors: Seq[Class[_ <: Extractor[_]]],
   customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
-    val managers = {
+    val managers: SortedMap[Language, MappingStatsManager] = {
       val tuples = languages.map(lang => lang -> new MappingStatsManager(paths.statsDir, lang))
       SortedMap(tuples: _*)
     }
 
-    val redirects = {
-      managers.map(manager => (manager._1, buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1))).toMap
+    val redirects: Map[Language, Redirects] = {
+      managers.map(manager => (manager._1, buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1)))
     }
         
     val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), languages, paths, redirects, mappingTestExtractors, customTestExtractors)
@@ -42,11 +44,15 @@ class Server(
  */
 object Server
 {
-    val logger = Logger.getLogger(getClass.getName)
+    val logger: Logger = Logger.getLogger(getClass.getName)
 
-    private var _instance: Server = null
-    
-    def instance = _instance
+    private var _instance: Server = _
+
+    def instance: Server = _instance
+
+    private var _config: ServerConfiguration = _
+
+    def config: ServerConfiguration = _config
     
     def main(args : Array[String])
     {
@@ -57,21 +63,19 @@ object Server
         require(args != null && args.length == 1, "need the server configuration file as argument.")
 
         // Load properties
-        val properties = ConfigUtils.loadConfig(args(0), "UTF-8")
+        _config = new ServerConfiguration(args(0))
+        
+        val mappingsUrl = new URL(_config.mappingsUrl)
+        
+        val localServerUrl = new URI(_config.localServerUrl)
+        
+        val serverPassword = _config.serverPassword
 
-        val configuration = new ServerConfiguration(properties)
-        
-        val mappingsUrl = new URL(configuration.mappingsUrl)
-        
-        val localServerUrl = new URI(configuration.localServerUrl)
-        
-        val serverPassword = configuration.serverPassword
+        val languages = _config.languages
 
-        val languages = configuration.languages
-
-        val paths = new Paths(new URL(mappingsUrl, "index.php"), new URL(mappingsUrl, "api.php"), configuration.statisticsDir, configuration.ontologyFile, configuration.mappingsDir)
+        val paths = new Paths(new URL(mappingsUrl, "index.php"), new URL(mappingsUrl, "api.php"), _config.statisticsDir, _config.ontologyFile, _config.mappingsDir)
         
-        _instance = new Server(serverPassword, languages, paths, configuration.mappingTestExtractorClasses, configuration.customTestExtractorClasses)
+        _instance = new Server(serverPassword, languages, paths, _config.mappingTestExtractorClasses, _config.customTestExtractorClasses)
         
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
@@ -100,6 +104,6 @@ object Server
     def buildTemplateRedirects(redirects: Map[String, String], language: Language): Redirects = {
       new Redirects(redirects.map { case (from, to) =>
         (WikiTitle.parse(from, language).decoded, WikiTitle.parse(to, language).decoded)
-      }.toMap)
+      })
     }
 }

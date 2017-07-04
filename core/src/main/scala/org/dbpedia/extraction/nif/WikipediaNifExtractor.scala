@@ -2,7 +2,7 @@ package org.dbpedia.extraction.nif
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
-import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Config, Language}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
@@ -25,33 +25,37 @@ class WikipediaNifExtractor(
        def configFile : Config
      },
      wikiPage: WikiPage
-   ) extends HtmlNifExtractor(wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context", context.language.isoCode, context.configFile) {
-
+   ) extends HtmlNifExtractor(
+      wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context",
+      context.language.isoCode,
+      context.configFile.nifParameters
+  ) {
 
   /**
     * DBpedia relevant properties
     */
 
   // lazy so testing does not need ontology
-  protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
+  protected lazy val shortProperty: OntologyProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
   // lazy so testing does not need ontology
-  protected lazy val longProperty = context.ontology.properties(context.configFile.abstractParameters.longAbstractsProperty)
+  protected lazy val longProperty: OntologyProperty = context.ontology.properties(context.configFile.abstractParameters.longAbstractsProperty)
 
-  protected val dbpediaVersion = context.configFile.dbPediaVersion
-  protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
-  protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
-  protected val recordAbstracts = !context.configFile.nifParameters.isTestRun  //not! will create dbpedia short and long abstracts
-  protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
-  protected val abstractsOnly = context.configFile.nifParameters.abstractsOnly
-  override protected val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
+  protected val dbpediaVersion: String = context.configFile.dbPediaVersion
+  protected lazy val longQuad: (String, String, String) => Quad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
+  protected lazy val shortQuad: (String, String, String) => Quad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
+  protected val recordAbstracts: Boolean = !context.configFile.nifParameters.isTestRun  //not! will create dbpedia short and long abstracts
+  protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
+  protected val abstractsOnly: Boolean = context.configFile.nifParameters.abstractsOnly
+  override protected val templateString: String = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
     case None => "Template"
   }
 
   def extractNif(html: String)(exceptionHandle: RecordEntry[WikiPage] => Unit): Seq[Quad] = {
-    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (_1:String, _2:RecordSeverity.Value, _3:Throwable) =>
-      new RecordEntry[WikiPage](wikiPage, wikiPage.uri, _2, context.language, _1, _3)
+    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (msg:String, severity:RecordSeverity.Value, error:Throwable) =>
+      //deal with any exception recorded in the super class
+      new RecordEntry[WikiPage](wikiPage, wikiPage.uri, severity, context.language, msg, error)
     }
   }
 
@@ -64,7 +68,6 @@ class WikipediaNifExtractor(
   override def extendSectionTriples(extractionResults: ExtractedSection, graphIri: String, subjectIri: String): Seq[Quad] = {
     //this is only dbpedia relevant: for singling out long and short abstracts
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      //not!
       List(longQuad(subjectIri, extractionResults.getExtractedText, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults), graphIri))
     }
     else
@@ -78,7 +81,7 @@ class WikipediaNifExtractor(
     * @return
     */
   override def extendContextTriples(quads: Seq[Quad], graphIri: String, subjectIri: String): Seq[Quad] = {
-    List(nifContext(wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context", RdfNamespace.NIF.append("predLang"), "http://lexvo.org/id/iso639-3/" + this.context.language.iso639_3, graphIri, null))
+    List(nifContext(wikiPage.uri + "?dbpv=" + this.dbpediaVersion + "&nif=context", RdfNamespace.NIF.append("predLang"), "http://lexvo.org/id/iso639-3/" + this.context.language.iso639_3, graphIri, null))
   }
 
   private def getShortAbstract(extractionResults: ExtractedSection): String = {
