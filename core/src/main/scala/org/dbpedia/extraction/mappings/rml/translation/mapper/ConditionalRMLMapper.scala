@@ -24,7 +24,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
   }
 
   def addConditions() = {
-    val firstConditionMapping = mapping.cases(0)
+    val firstConditionMapping = mapping.cases.head
     val firstTemplateMapping = firstConditionMapping.mapping.asInstanceOf[TemplateMapping]
 
     //add first mapToClass
