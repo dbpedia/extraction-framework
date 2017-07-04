@@ -104,21 +104,24 @@ object RMLFormatter extends Formatter {
     val triplesMapResource = model.triplesMap.resource
     val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
 
-    val tuple = statements.asScala.map(statement => {
+    val innerHeading = "\n### Conditional Mapping\n"
+    val heading = "#####################\nConditional Mappings\n#####################\n"
+
+    val conditionalString = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
       if(hasConditions(predicateObjectMap.asResource())) {
-        getConditionalMapping(predicateObjectMap.asResource(), base)
+        val tuple = getConditionalMapping(predicateObjectMap.asResource(), base)
+        tuple._1.concat(tuple._2)
       } else {
-        ("","") // skip conditionals here
+        "" // skip conditionals here
       }
 
-    }).filter(tuple => !tuple._1.equals("") && !tuple._2.equals(""))
-      .reduce((first, second) => (first._1.concat("\n" + second._1), first._2.concat("\n" + second._2))) // so return all concatenated mappings
+    }).filter(conditionString => !conditionString.equals(""))
+      .reduce((first, second) => first.concat("\n" + innerHeading + second))
 
-    val heading = "########\n\n#### Conditional Mappings\n"
+    heading + innerHeading + conditionalString
 
-    heading + tuple._1.concat("\n" + tuple._2)
   }
 
   /**
@@ -187,9 +190,15 @@ object RMLFormatter extends Formatter {
     */
   private def getCondition(resource : Resource, base : String) : (String, String) = {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "equalCondition")
-    val functionPOM = getResourceString(resource.getPropertyResourceValue(property).asResource(), base)
+    val functionPOM = resource.getPropertyResourceValue(property).asResource()
+    val functionPOMString = getResourceString(functionPOM, base)
+
+    val propertyFunctionValue = resource.getModel.getProperty(RdfNamespace.FNML.namespace + "functionValue")
+    val functionValue = functionPOM.getPropertyResourceValue(propertyFunctionValue)
+    val functionValueString = getFunctionValue(functionValue.listProperties(), base)
+
     val conditionPOM = getResourceString(resource, base)
-    (conditionPOM, functionPOM)
+    (conditionPOM, functionPOMString.concat("\n" + functionValueString))
   }
 
   /**
@@ -286,7 +295,10 @@ object RMLFormatter extends Formatter {
 
     val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
     val parameters = propertiesArray.head.getSubject.listProperties(predicateObjectMapProperty).toList.asScala.toArray
-    val parameterString = getParameters(parameters, base)
+
+    val parameterString = if(hasParameters(propertiesArray.head.getSubject)) {
+      getParameters(parameters, base)
+    } else ""
 
 
     heading + functionValueString + offset + parameterString
@@ -342,6 +354,16 @@ object RMLFormatter extends Formatter {
     heading + referencesString + offset
 
 
+  }
+
+  /**
+    * Checks if a rr:PredicateObjectMap has parameters
+    * @param resource
+    * @return
+    */
+  private def hasParameters(resource : Resource) = {
+    val property = resource.getModel.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
+    resource.listProperties(property).toList.asScala.size > 1
   }
 
   /**
