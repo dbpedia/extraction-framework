@@ -93,7 +93,8 @@ object RMLFormatter extends Formatter {
   }
 
   /**
-    * Retrieve all necessary constructs of a single mapping (predicate object map)
+    * Retrieve all necessary constructs of a single mapping (rr:PredicateObjectMap)
+    * This functions checks the properties of a rr:PredicateObjectMap
     *
     * @param properties
     * @param base
@@ -104,14 +105,31 @@ object RMLFormatter extends Formatter {
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
+
     val heading = "########\n\n### Property Mapping"
     val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
 
-    val functionTermMap = getObjectMap(propertiesArray.head.getSubject)
-    val functionTermMapString = getFunctionTermMap(functionTermMap.listProperties(), base)
+    /** The case if a function is used:
+      * Checks if the rr:PredicateObjectMap contains a FunctionTermMap
+      */
+    val functionTermMapString = if(hasFunctionTermMap(propertiesArray.head.getSubject)) {
+      val functionTermMap = getObjectMap(propertiesArray.head.getSubject)
+      getFunctionTermMap(functionTermMap.listProperties(), base)
+    } else ""
+
+    /**
+      * The case if the rr:PredicateObjectMap contains a rr:object --> this is a constant mapping, already covered
+      * by adding all properties to the new model ()
+      */
 
     heading + predicateObjectMapString + offset + functionTermMapString
   }
+
+  /**
+  private def getFunctions() : String {
+    ""
+  }
+    **/
 
   /**
     * Retrieves all necessary constructs of a function term map
@@ -137,9 +155,9 @@ object RMLFormatter extends Formatter {
 
   }
 
-
   /**
     * Retrieves all necessary constructs for a function value
+    *
     * @param properties
     * @param base
     * @return
@@ -153,8 +171,101 @@ object RMLFormatter extends Formatter {
     val heading = "### Function Value"
     val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t\t\t\t\t  "))
 
-    heading + functionValueString + offset
+    val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
+    val parameters = propertiesArray.head.getSubject.listProperties(predicateObjectMapProperty).toList.asScala.toArray
+    val parameterString = getParameters(parameters, base)
 
+
+    heading + functionValueString + offset + parameterString
+
+  }
+
+  /**
+    * Retrieves all necessary constructs for parameters of a function value
+    *
+    * @param parameterStatements
+    * @return
+    */
+  private def getParameters(parameterStatements : Array[Statement], base : String) : String = {
+    val paramStmtnsWithoutFunctions = parameterStatements
+                                        .filter(statement => !hasFunction(statement.getObject.asResource()))
+
+    val properties = paramStmtnsWithoutFunctions
+                      .flatMap(statement => statement.getObject.asResource().listProperties().toList.asScala)
+
+    val freshModel = new ModelWrapper
+    freshModel.insertRDFNamespacePrefixes()
+    freshModel.model.add(properties)
+
+    val heading = "### Parameters"
+    val parameterString = removePrefixes(freshModel.writeAsTurtle(base))
+
+    val referencesString = getReferences(paramStmtnsWithoutFunctions, base)
+
+
+    heading + parameterString + offset + referencesString
+
+  }
+
+  /**
+    * Retrieve referencing Object Maps from a list of statements
+    *
+    * @param statements
+    * @param base
+    * @return
+    */
+  private def getReferences(statements : Array[Statement], base : String) : String = {
+
+    val properties = statements.filter(statement => hasObjectMap(statement.getObject.asResource()))
+      .flatMap(statement => getObjectMap(statement.getObject.asResource()).listProperties().toList.asScala)
+
+    val freshModel = new ModelWrapper
+    freshModel.insertRDFNamespacePrefixes()
+    freshModel.model.add(properties)
+
+    val heading = "### References"
+    val referencesString = removePrefixes(freshModel.writeAsTurtle(base))
+
+    heading + referencesString + offset
+
+
+  }
+
+  /**
+    * Checks if given resource has a rr:predicate fno:exucutes
+    *
+    * @param resource
+    * @return
+    */
+  private def hasFunction(resource : Resource) : Boolean = {
+    resource.listProperties().toList.asScala.exists(statement => {
+      statement.getObject.toString.equals(RdfNamespace.FNO.namespace + "executes")
+    })
+  }
+
+  /**
+    * Checks if given resource is rr:predicate rr:objectMap
+    *
+    * @param resource
+    * @return
+    */
+  private def hasObjectMap(resource : Resource) : Boolean = {
+    resource.listProperties().toList.asScala.exists(statement => {
+      statement.getPredicate.getURI.equals(RdfNamespace.RR.namespace + "objectMap")
+    })
+  }
+
+  /**
+    * Checks if given resource contains an rr:ObjectMap that is a rr:FunctionTermMap
+    * @param resource
+    * @return
+    */
+  private def hasFunctionTermMap(resource : Resource) : Boolean = {
+    if(hasObjectMap(resource)) {
+      getObjectMap(resource).listProperties().toList.asScala.exists(statement => {
+        statement.getObject.toString.equals(RdfNamespace.FNML.namespace + "FunctionTermMap")
+      })
+    } else false
   }
 
   /**
