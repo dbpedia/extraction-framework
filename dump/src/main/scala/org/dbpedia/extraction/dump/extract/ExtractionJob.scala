@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity, WikiPageExtractor}
 import org.dbpedia.extraction.sources.Source
@@ -32,7 +33,7 @@ class ExtractionJob(
 
   result.foreach( x => println(x.toString))*/
 
-  def datasets = extractor.datasets
+  def datasets: Set[Dataset] = extractor.datasets
 
   private val workers = SimpleWorkers { page: WikiPage =>
     try {
@@ -45,7 +46,7 @@ class ExtractionJob(
 
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{
-        case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+        case seq :Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
         case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
       }
       //forward all records to the recorder

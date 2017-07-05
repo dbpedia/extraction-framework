@@ -6,8 +6,8 @@ import Finder._
 import scala.util.{Failure, Success}
 
 private object Finder {
-  val datePattern = Pattern.compile("\\d{8}")
-  def dateFilter(name: String) = datePattern.matcher(name).matches 
+  val datePattern: Pattern = Pattern.compile("\\d{8}")
+  def dateFilter(name: String): Boolean = datePattern.matcher(name).matches
 }
 
 /**
@@ -25,12 +25,12 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   /**
    * directory name/file prefix for language, e.g. "en" -> "enwiki"
    */
-  val wikiName = language.filePrefix + wikiNameSuffix
+  val wikiName: String = language.filePrefix + wikiNameSuffix
 
   /**
    * Directory for language, e.g. "baseDir/enwiki"
    */
-  val wikiDir = baseDir.resolve(wikiName) match{
+  val wikiDir: T = baseDir.resolve(wikiName) match{
     case Success (f) => f
     case Failure(x) =>  throw x
   }
@@ -38,18 +38,17 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   /**
    * date directory for language, e.g. "20120403" -> "baseDir/enwiki/20120403"
    */
-  def directory(date: String) = wikiDir.resolve(date) match{
+  def directory(date: String): T = wikiDir.resolve(date) match{
     case Success(f) => f
-    case Failure(x) => {
+    case Failure(x) =>
       println("Error: could not find file/path: " + wikiDir.toString + "/" + date)
       null.asInstanceOf[T]
-    }
   }
   
   /**
    * Finds the names (which are dates in format YYYYMMDD) of dump directories for the language.
     *
-    * @suffix Return only directories that contain a file with this suffix,
+    * suffix Return only directories that contain a file with this suffix,
    * e.g. "download-complete" -> "baseDir/enwiki/20120403/enwiki-20120403-download-complete". 
    * May be null, in which case we just look for date directories.
    * @return dates in ascending order
@@ -86,24 +85,22 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
    * File with given name suffix in main directory for language, e.g. "download-running" ->
    * "baseDir/enwiki/enwiki-download-running"
    */
-  def file(suffix: String) = wikiDir.resolve(wikiName+'-'+suffix)match{
+  def file(suffix: String): Option[T] = wikiDir.resolve(wikiName+'-'+suffix)match{
     case Success(f) => Some(f)
-    case Failure(x) => {
+    case Failure(x) =>
       println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+suffix)
       None
-    }
   }
   
   /**
    * File with given name suffix in date directory for language, e.g. "pages-articles.xml" ->
    * "baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml"
    */
-  def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix) match{
+  def file(date: String, suffix: String): Option[T] = directory(date).resolve(wikiName+'-'+date+'-'+suffix) match{
     case Success(f) => Some(f)
-    case Failure(x) => {
+    case Failure(x) =>
       println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+date+'-'+suffix)
       None
-    }
   }
 
   /**

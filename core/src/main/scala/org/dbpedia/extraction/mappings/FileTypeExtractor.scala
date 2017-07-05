@@ -126,7 +126,7 @@ class FileTypeExtractor(context: {
     /**
      * Determine the extension of a WikiPage.
  *
-     * @returns None if no extension exists, Some[String] if an extension was found.
+     * @return None if no extension exists, Some[String] if an extension was found.
      */
     def extractExtension(page: WikiPage): Option[String] =
     {

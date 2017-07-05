@@ -15,7 +15,7 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks._
 
 /**
@@ -41,13 +41,13 @@ object TypeConsistencyCheck {
   val correctDataset = DBpediaDatasets.OntologyPropertiesObjectsCleaned
   //range based datasets
   val disjointRangeDataset = DBpediaDatasets.OntologyPropertiesDisjointRange
-  val untypedRangeDataset = correctDataset //new Dataset("mappingbased-properties-untyped");
-  val nonDisjointRangeDataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
+  val untypedRangeDataset: Dataset = correctDataset //new Dataset("mappingbased-properties-untyped");
+  val nonDisjointRangeDataset: Dataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
 
   //domain based datasets
   val disjointDomainDataset = DBpediaDatasets.OntologyPropertiesDisjointDomain
-  val untypedDomainDataset = correctDataset //new Dataset("mappingbased-properties-untyped");
-  val nonDisjointDomainDataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
+  val untypedDomainDataset: Dataset = correctDataset //new Dataset("mappingbased-properties-untyped");
+  val nonDisjointDomainDataset: Dataset = correctDataset //new Dataset("mappingbased-properties-non-disjoint");
 
   val datasets = Seq(correctDataset, disjointRangeDataset, disjointDomainDataset)
 
@@ -152,93 +152,49 @@ object TypeConsistencyCheck {
 
 
     /**
-     * Chacks a Quad for range violations and returns the new dataset where it should be written depending on the state
-      *
-      * @param quad
+     * Checks a Quad for range violations and returns the new dataset where it should be written depending on the state
      * @return
      */
     def checkQuadRange(quad: Quad, resourceTypes: scala.collection.mutable.Map[String, OntologyClass], ontology: Ontology): Dataset =
     {
-      if (quad.datatype != null) {
+      //if datatype property we carry on
+      if (quad.datatype != null)
         return correctDataset
-      }
 
-      //object is uri
-      val obj = try {
-        resourceTypes(quad.value)
-      } catch {
-        case _: Throwable => return untypedRangeDataset
+      resourceTypes.get(quad.value) match {
+        case Some(obj) => ontology.getOntologyProperty(quad.predicate) match{
+          case Some(predicate) if predicate.range.equals(OntologyClass.owlThing) => correctDataset
+          case Some(predicate) if obj.relatedClasses.contains(predicate.range) => correctDataset
+          case Some(predicate) if isDisjoined(obj, predicate.range.asInstanceOf[OntologyClass]) => disjointRangeDataset
+          case Some(predicate) => nonDisjointRangeDataset
+          case None => untypedRangeDataset
+        }
+        case None => untypedRangeDataset
       }
-
-      val predicate = getProperty(quad.predicate, ontology)
-
-
-      if (predicate != null && predicate.range.uri.trim().equals("http://www.w3.org/2002/07/owl#Thing")) {
-        return correctDataset
-      }
-      else if (obj == null || obj == None) {
-        return untypedRangeDataset
-      }
-      else if (predicate == null) {
-        //TODO not encountered yet -> delete?
-        return null
-      }
-
-      if (obj.relatedClasses.contains(predicate.range))
-        return correctDataset
-      else {
-        if (isDisjoined(obj, predicate.range.asInstanceOf[OntologyClass], true))
-          return disjointRangeDataset
-        else
-          return nonDisjointRangeDataset
-      }
-
     }
 
     /**
-      * Chacks a Quad for domain violations and returns the new dataset where it should be written depending on the state
-      *
-      * @param quad
+      * Checks a Quad for domain violations and returns the new dataset where it should be written depending on the state
       * @return
       */
     def checkQuadDomain(quad: Quad, resourceTypes: scala.collection.mutable.Map[String, OntologyClass], ontology: Ontology): Dataset =
     {
       //object is uri
-      val subj = try {
-        resourceTypes(quad.subject)
-      } catch {
-        case _: Throwable => return untypedDomainDataset
+      resourceTypes.get(quad.subject) match {
+        case Some(subj) => ontology.getOntologyProperty(quad.predicate) match{
+          case Some(predicate) if predicate.domain.equals(OntologyClass.owlThing) => correctDataset
+          case Some(predicate) if subj.relatedClasses.contains(predicate.domain) => correctDataset
+          case Some(predicate) if isDisjoined(subj, predicate.domain.asInstanceOf[OntologyClass]) => disjointDomainDataset
+          case Some(predicate) => nonDisjointDomainDataset
+          case None => untypedDomainDataset
+        }
+        case None => untypedDomainDataset
       }
-
-      val predicate = getProperty(quad.predicate, ontology)
-
-
-      if (predicate != null && predicate.domain.uri.trim().equals("http://www.w3.org/2002/07/owl#Thing")) {
-        return correctDataset
-      }
-      else if (subj == null || subj == None) {
-        return untypedDomainDataset
-      }
-      else if (predicate == null) {
-        //TODO not encountered yet -> delete?
-        return null
-      }
-
-      if (subj.relatedClasses.contains(predicate.domain))
-        return correctDataset
-      else {
-        if (isDisjoined(subj, predicate.domain.asInstanceOf[OntologyClass], true))
-          return disjointDomainDataset
-        else
-          return nonDisjointDomainDataset
-      }
-
     }
 
     /**
      * checks if two classes ar disjoint by testing any base-classes recursively for disjointnes
-      *
-      * @param objClass      the type of an object
+     * @param objClass      the type of an object
      * @param rangeClass    the range of the pertaining property
      * @param clear         new disjoint tests have to clear the relatedClasses cache, keeps already tested combinations of this cycle
      * @return
@@ -262,11 +218,11 @@ object TypeConsistencyCheck {
       for (objClazz <- objClass.relatedClasses) {
         for(rangeClazz <- rangeClass.relatedClasses) {
           if (!relatedClasses.contains(objClazz, rangeClazz)) { //not!
-            if (isDisjoined(objClazz, rangeClazz, false))
+            if (isDisjoined(objClazz, rangeClazz, clear = false))
               return true
           }
           if (!relatedClasses.contains(rangeClazz, objClazz)) { //not!
-            if (isDisjoined(rangeClazz, objClazz, false))
+            if (isDisjoined(rangeClazz, objClazz, clear = false))
               return true
           }
         }
@@ -280,7 +236,7 @@ object TypeConsistencyCheck {
     breakable {
       val classOption = ontology.classes.find(x => x._2.uri == quad.value)
       var ontoClass: OntologyClass = null
-      if (classOption != null && classOption != None)
+      if (classOption != null && classOption.isDefined)
         ontoClass = classOption.get._2
       else
         break
@@ -293,25 +249,10 @@ object TypeConsistencyCheck {
     }
   }
 
-  // returns an ontologyProperty from a URI and keeps a local cache
-  private def getProperty(uri: String, ontology: Ontology) : OntologyProperty = {
-
-    if (propertyMap.contains(uri)) {
-      propertyMap(uri)
-    } else {
-      val predicateOpt = ontology.properties.find(x => x._2.uri == uri)
-      val predicate: OntologyProperty =
-        if (predicateOpt != null && predicateOpt != None) { predicateOpt.get._2 }
-        else (null)
-      propertyMap.put(uri, predicate);
-      predicate
-    }
-  }
-
   private def createDestination(finder: Finder[File], date: String, formats: scala.collection.Map[String, Formatter]) : Destination = {
     val destination = new ArrayBuffer[Destination]()
     for ((suffix, format) <- formats) {
-      val datasetDestinations = new HashMap[Dataset, Destination]()
+      val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         val file = finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix).get
         datasetDestinations(dataset) = new WriterDestination(writer(file), format)
@@ -319,7 +260,7 @@ object TypeConsistencyCheck {
 
       destination += new DatasetDestination(datasetDestinations)
     }
-    new CompositeDestination(destination.toSeq: _*)
+    new CompositeDestination(destination: _*)
   }
 
   private def writer(file: File): () => Writer = {

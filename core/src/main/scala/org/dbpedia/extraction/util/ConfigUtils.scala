@@ -51,15 +51,14 @@ object ConfigUtils {
     loadFromStream(new FileInputStream(file), charset)
   }
 
-  def loadConfig(url: URL) = {
+  def loadConfig(url: URL): Object = {
 
     url match {
-      case selection => {
+      case selection =>
         if(selection.getFile.endsWith(".json"))
           loadJsonComfig(url)
         else
           loadFromStream(url.openStream())
-      }
     }
   }
 
@@ -120,19 +119,18 @@ object ConfigUtils {
     var languages = SortedSet[Language]()
     var excludedLanguages = SortedSet[Language]()
     
-    val ranges = new HashSet[(Int,Int)]
+    val ranges = new mutable.HashSet[(Int,Int)]
   
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappingLanguages
       case "@chapters" => languages ++= Namespace.chapterLanguages
       case "@downloaded" => languages ++= downloadedLanguages(baseDir, wikiPostFix)
       case "@all" => languages ++= Language.map.values
-      case "@abstracts" => {
+      case "@abstracts" =>
         //@downloaded - Commons & Wikidata
         languages ++= downloadedLanguages(baseDir, wikiPostFix)
         excludedLanguages += Language.Commons
         excludedLanguages += Language.Wikidata
-      }
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
@@ -205,7 +203,7 @@ object ConfigUtils {
     {
       if(extractionRecorder != null) {
         val records = page.getExtractionRecords() match {
-          case seq: Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+          case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
           case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
         }
         //forward all records to the recorder

@@ -9,6 +9,8 @@ import org.dbpedia.extraction.util.{MediaWikiConnector, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.scalatest.FunSuite
 
+import scala.language.reflectiveCalls
+
 
 /**
   * Created by Chile on 10/17/2016.

@@ -126,6 +126,10 @@
 								<arg>*.sql.gz,*.xml.bz2,*.sql,*-pages-articles.xml,index.html</arg><!-- 
 									delete these files -->
 							</args>
+							<jvmArgs>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+							</jvmArgs>
 						</launcher>
 
 						<launcher>
@@ -138,6 +142,10 @@
 								<arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete 
 									these files -->
 							</args>
+							<jvmArgs>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+							</jvmArgs>
 						</launcher>
 					</launchers>
 				</configuration>

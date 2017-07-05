@@ -12,6 +12,7 @@ import scala.collection.mutable.{Set => MutableSet, HashSet}
 import org.dbpedia.extraction.sources.{XMLSource, MemorySource}
 import org.dbpedia.extraction.wikiparser.{WikiPage, WikiParser, Namespace, WikiTitle}
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
   *

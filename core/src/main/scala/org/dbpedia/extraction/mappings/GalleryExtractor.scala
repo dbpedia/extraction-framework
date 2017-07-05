@@ -42,7 +42,6 @@ extends WikiPageExtractor
     )
 
     /**
-     * The structure of a [[File:...]] link.
      * I developed the "does this look like a title" logic 
      * from https://www.mediawiki.org/wiki/Manual:Page_title
      */
@@ -71,7 +70,7 @@ extends WikiPageExtractor
                 case "" => Seq.empty
 
                 // Other lines have names of files.
-                case fileLine => {
+                case fileLine =>
                     val fileLineOption = fileLineRegex.findFirstMatchIn(fileLine)
 
                     // If the regular expression doesn't match, ignore it:
@@ -101,7 +100,7 @@ extends WikiPageExtractor
                                 null
                             ))
                         } catch {
-                            case e: WikiParserException => {
+                            case e: WikiParserException =>
                                 // If there's a WikiParserException, report the
                                 // error and keep going.
                                 logger.warning("Could not parse file line '" +
@@ -111,10 +110,8 @@ extends WikiPageExtractor
 
                                 // Just skip this line and keep going.
                                 Seq.empty
-                            }
                         }
                     }
-                }
             })
 
             fileLineQuads.toSeq

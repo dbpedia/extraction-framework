@@ -37,9 +37,9 @@ object CreateLinesBytesPacked {
   def getLinesCompressed(file: File): (String, String) = {
     val link = resolveSymLink(file)
     val exception = new StringBuilder()
-    val zw = Process("/bin/bash", Seq("-c", "bzip2 -cd <" + link + " | wc -cl")).!!<(
-      ProcessLogger.apply((o: String) => o, (e: String)=>
-        exception.append(e)))
+    val zw = Process("/bin/bash", Seq("-c", "bzip2 -cd <" + link + " | wc -cl")).!!< (
+      ProcessLogger.apply((o: String) => o.toString, (e: String)=> exception.append(e))
+    )
 
     if(exception.nonEmpty && exception.toString.contains("bzip2"))
       throw new IllegalArgumentException("An exception arose: " + exception.toString)

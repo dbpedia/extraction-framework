@@ -21,24 +21,24 @@ object CanonicalizeIris {
 
   private val finders = new ConcurrentHashMap[Language, DateFinder[File]]().asScala
 
-  private var baseDir: File = null
+  private var baseDir: File = _
 
   private var genericLanguage: Language = Language.English
   private val dbpPrefix = "http://dbpedia.org"
-  private var newLanguage: Language = null
-  private var newPrefix: String = null
-  private var newResource: String = null
+  private var newLanguage: Language = _
+  private var newPrefix: String = _
+  private var newResource: String = _
 
-  case class WorkParameters(language: Language, source: FileLike[_], destination: Dataset)
+  case class WorkParameters(language: Language, source: FileLike[File], destination: Dataset)
 
-  private var frmts: Map[String, Formatter] = null
+  private var frmts: Map[String, Formatter] = _
 
   /**
     * produces a copy of the Formatter map (necessary to guarantee concurrent processing)
  *
     * @return
     */
-  def formats = frmts.map(x => x._1 -> (x._2 match {
+  def formats: Map[String, Formatter] = frmts.map(x => x._1 -> (x._2 match {
     case formatter: TerseFormatter => new QuadMapperFormatter(formatter)
     case _ => x._2.getClass.newInstance()
   }))
@@ -57,27 +57,25 @@ object CanonicalizeIris {
     * @param lang
     * @return
     */
-  def finder(lang: Language) = finders.get(lang) match{
+  def finder(lang: Language): DateFinder[File] = finders.get(lang) match{
     case Some(f) => f
-    case None => {
+    case None =>
       val f = new DateFinder(baseDir, lang)
       finders.put(lang, f)
       f.byName("download-complete", auto = true) //get date workaround
       f
-    }
   }
 
   /**
     * this worker reads the mapping file into a concurrent HashMap
     */
-  val mappingsReader = { langFile: WorkParameters =>
+  val mappingsReader: (WorkParameters) => Unit = { langFile: WorkParameters =>
     val map = mappings.get(langFile.language) match {
       case Some(m) => m
-      case None => {
+      case None =>
         val zw = new ConcurrentHashMap[String, String]().asScala
         mappings.put(langFile.language, zw)
         zw
-      }
     }
     val oldReource = uriPrefix(langFile.language)+"resource/"
     val qReader = new QuadReader()
@@ -93,13 +91,13 @@ object CanonicalizeIris {
   /**
     * this worker does the actual mapping of URIs
     */
-  val mappingExecutor = { langSourceDest: WorkParameters =>
+  val mappingExecutor: (WorkParameters) => Unit = { langSourceDest: WorkParameters =>
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
     val destination = DestinationUtils.createDatasetDestination(finder(langSourceDest.language), Seq(langSourceDest.destination), formats)
     val destName = langSourceDest.destination.encoded
-    val map = mappings.get(langSourceDest.language).get //if this fails something is really wrong
+    val map = mappings(langSourceDest.language) //if this fails something is really wrong
 
     def newUri(oldUri: String): String = {
       //let our properties pass :)
@@ -199,14 +197,14 @@ object CanonicalizeIris {
     // load all mappings
     val loadParameters = for (lang <- languages; mapping <- mappings)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(mapping+mappingSuffix, auto = true).get), null)
+        WorkParameters(language = lang, source = new RichFile(finder(lang).byName(mapping + mappingSuffix, auto = true).get), null)
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
 
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get),
+        WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get),
           DBpediaDatasets.getDataset(input+extension.getOrElse("")).getOrElse(
             throw new IllegalArgumentException("A dataset named " + input+extension.getOrElse("") + " is unknown.")
           ))

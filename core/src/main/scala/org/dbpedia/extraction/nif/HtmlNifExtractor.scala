@@ -140,17 +140,15 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
     //adding navigational properties
     section.getPrev match{
-      case Some(p) => {
+      case Some(p) =>
         triples += nifStructure(sectionUri, RdfNamespace.NIF.append("previousSection"), p.getSectionIri(), sourceUrl, null)
         triples += nifStructure(p.getSectionIri(), RdfNamespace.NIF.append("nextSection"), sectionUri, sourceUrl, null)
-      }
       case None =>
     }
     section.getTop match{
-      case Some(p) => {
+      case Some(p) =>
         triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), p.getSectionIri(), sourceUrl, null)
         triples += nifStructure(p.getSectionIri(), RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
-      }
       case None =>
     }
 
@@ -226,7 +224,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
   private def saveRawTables(tables: List[HtmlString], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
     val triples = ListBuffer[Quad]()
-    for(table <- tables.toList){
+    for(table <- tables){
       section.tableCount = section.tableCount+1
       val position = offset + table.getOffset
       val tableUri = getNifIri("table", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.tableCount)
@@ -243,7 +241,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
   private def saveEquations(equs: List[HtmlString], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
     val triples = ListBuffer[Quad]()
-    for(equ <- equs.toList){
+    for(equ <- equs){
       section.equationCount = section.equationCount+1
       val position = offset + equ.getOffset
       val equUri = getNifIri("equation", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.equationCount)
@@ -303,27 +301,17 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
       val element = new Element(Tag.valueOf("div"), "")
       pageSection.content.foreach(element.appendChild)
 
-        if (element.isInstanceOf[TextNode]) {
-          val paragraph = new Paragraph(0, "", "p")
-          val text = element.asInstanceOf[TextNode].text().trim
-          if(text.length > 0) {
-            paragraph.addText(text)
-            section.addParagraphs(List(paragraph))
-          }
-        }
-        else {
-          val extractor: LinkExtractor = new LinkExtractor(extractionContext)
-          val traversor: NodeTraversor = new NodeTraversor(extractor)
-          traversor.traverse(element)
-          if (extractor.getParagraphs.size() > 0){
-            section.addParagraphs(extractor.getParagraphs.asScala.toList)
-            section.addErrors(extractor.getErrors.asScala.toList)
-          }
-          else if(extractor.getTableCount > 0){
-            section.addParagraphs(extractor.getParagraphs.asScala.toList)
-            section.addErrors(extractor.getErrors.asScala.toList)
-          }
-        }
+      val extractor: LinkExtractor = new LinkExtractor(extractionContext)
+      val traversor: NodeTraversor = new NodeTraversor(extractor)
+      traversor.traverse(element)
+      if (extractor.getParagraphs.size() > 0){
+        section.addParagraphs(extractor.getParagraphs.asScala.toList)
+        section.addErrors(extractor.getErrors.asScala.toList)
+      }
+      else if(extractor.getTableCount > 0){
+        section.addParagraphs(extractor.getParagraphs.asScala.toList)
+        section.addErrors(extractor.getErrors.asScala.toList)
+      }
       section
     }
   }
@@ -526,9 +514,9 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         offset
     }
 
-    def addParagraphs(p: List[Paragraph]) = paragraphs ++= p
+    def addParagraphs(p: List[Paragraph]): Unit = paragraphs ++= p
 
-    def addErrors(e: List[String]) = errors ++= e
+    def addErrors(e: List[String]): Unit = errors ++= e
 
 /*    def whiteSpaceAfterSection = {
       val text = getExtractedText

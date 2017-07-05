@@ -40,7 +40,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
  */
 object CreateMappingStats
 {
-    val logger = Logger.getLogger(getClass.getName)
+    val logger: Logger = Logger.getLogger(getClass.getName)
     
     def main(args: Array[String])
     {
@@ -55,7 +55,7 @@ object CreateMappingStats
         val pretty = args(3).toBoolean
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages: Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var languages: Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if lang.nonEmpty) yield Language(lang)
           
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
