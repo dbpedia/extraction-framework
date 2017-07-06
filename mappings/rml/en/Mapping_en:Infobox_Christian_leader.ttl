@@ -34,28 +34,28 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5> ,
 			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap> .
 
 
@@ -83,228 +83,76 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap> ;
-        rr:predicate  dbo:child .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "child" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/child/children/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "children" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:predecessor .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "predecessor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/predecessor/Predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Predecessor" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "date of birth" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap> ;
-        rr:predicate  dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsEndYear/ended/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "ended" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
-        rr:predicate  dbo:nationality .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "nationality" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "nationality" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:title .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/title/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Title" .
 
@@ -312,572 +160,724 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap> ;
-        rr:predicate  dbo:activeYearsStartYear .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:birthPlace .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
+        rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/activeYearsStartYear/enthroned/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "enthroned" .
+        rml:reference  "birthplace" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap> ;
-        rr:predicate  dbo:parent .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "parent" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/parent/parents/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "parents" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap> ;
-        rr:predicate  dbo:religion .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "religion" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/religion/religion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "religion" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
-        rr:predicate  dbo:occupation .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "occupation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "occupation" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap> ;
-        rr:predicate  dbo:successor .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "successor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/successor/Successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Successor" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap> ;
-        rr:predicate  dbo:spouse .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "spouse" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/spouse/spouse/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "spouse" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM> ;
         rr:predicate  dbo:birthDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_date" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:occupation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "occupation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "occupation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:parent .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "parent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parents" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:religion .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "religion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "religion" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:child .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
+        rr:object     "child" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "death_date" .
+        rml:reference  "children" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "place of death" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "date of death" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM> ;
         rr:predicate  dbo:almaMater .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "almaMater" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "alma_mater" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ended" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "deathplace" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:deathPlace .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "place of death" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of death" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "enthroned" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of birth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:successor .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "successor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Successor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:spouse .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "spouse" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "spouse" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "birthPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "place of birth" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:deathDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "birthplace" .
+        rml:reference  "death_date" .
 
 
 ######################
@@ -889,38 +889,38 @@
 ###################################
 <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap> ;
+        crml:equalCondition  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM> ;
         crml:fallbackMap     <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1> ;
         rr:object            dbo:Pope , owl:Thing , dbo:Person , dbo:Agent , wikidata:Q19546 , wikidata:Q215627 , foaf:Person , dul:NaturalPerson , dul:Agent , dbo:Cleric , wikidata:Q5 , schema:Person ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/equals> ,
-			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/PropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/ValueParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Pope" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
@@ -928,38 +928,38 @@
 ###################################
 <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap> ;
+        crml:equalCondition  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM> ;
         crml:fallbackMap     <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/2> ;
         rr:object            dbo:Cardinal , dul:Agent , wikidata:Q5 , dbo:Agent , dbo:Person , schema:Person , dbo:Cleric , wikidata:Q215627 , foaf:Person , dul:NaturalPerson , owl:Thing ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Christian_leader/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Christian_leader/Function/equals> ,
-			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/PropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Christian_leader/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Cardinal" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Christian_leader/ConditionalMapping/type_equals_Pope/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
@@ -994,5 +994,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

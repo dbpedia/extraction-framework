@@ -34,7 +34,7 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:See_also/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1> ;
+        rr:predicateObjectMap  <./Mapping_en:See_also/SimplePropertyMapping/0> ;
         rr:subjectMap          <./Mapping_en:See_also/SubjectMap> .
 
 
@@ -63,44 +63,44 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1>
+<./Mapping_en:See_also/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/0/FTM> ;
         rr:predicate  rdfs:seeAlso .
 
 ### Function Term Map
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap>
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue>
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:See_also/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:See_also/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/transformParameterPOM> ,
+			       <./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:See_also/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/transformParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "internal" ;
-        rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "rdfs:seeAlso" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/transformParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "internal" ;
+        rr:predicate  dbf:transformParameter .
+
 ### References
-<./Mapping_en:See_also/SimplePropertyMapping/rdfs:seeAlso/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:See_also/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "1" .
 
@@ -129,5 +129,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

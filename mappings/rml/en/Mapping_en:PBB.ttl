@@ -34,7 +34,7 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:PBB/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid> ;
+        rr:predicateObjectMap  <./Mapping_en:PBB/SimplePropertyMapping/0> ;
         rr:subjectMap          <./Mapping_en:PBB/SubjectMap> .
 
 
@@ -67,38 +67,38 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid>
+<./Mapping_en:PBB/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:PBB/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:entrezgene .
 
 ### Function Term Map
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap>
+<./Mapping_en:PBB/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue>
+<./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:PBB/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:PBB/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:PBB/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "entrezgene" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:PBB/SimplePropertyMapping/entrezgene/geneid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:PBB/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "geneid" .
 
@@ -127,5 +127,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

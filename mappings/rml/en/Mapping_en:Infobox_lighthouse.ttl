@@ -34,13 +34,13 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation> ,
-			       <./Mapping_en:Infobox_lighthouse/latitude> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/latitude> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4> ,
 			       <./Mapping_en:Infobox_lighthouse/longitude> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location> ;
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3> ;
         rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap> .
 
 
@@ -77,275 +77,275 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
-        rr:predicate  dbo:elevation .
-
-### Function Term Map
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "elevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "elevation" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_lighthouse/latitude>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/latitude/FTM> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap>
+<./Mapping_en:Infobox_lighthouse/latitude/FTM>
         a                      fnml:FunctionTermMap , rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap> ;
+        fnml:functionValue     <./Mapping_en:Infobox_lighthouse/latitude/FTM> ;
         rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/LatitudeFunction> , <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap/ParameterPOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/LatitudeFunction> , <./Mapping_en:Infobox_lighthouse/latitude/FTM/ParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
 
 ### Function Value
-<./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap>
+<./Mapping_en:Infobox_lighthouse/latitude/FTM>
         a                      fnml:FunctionTermMap ,
 			       rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap> ;
+        fnml:functionValue     <./Mapping_en:Infobox_lighthouse/latitude/FTM> ;
         rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap/ParameterPOM> ;
+			       <./Mapping_en:Infobox_lighthouse/latitude/FTM/ParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap/ParameterPOM>
+<./Mapping_en:Infobox_lighthouse/latitude/FTM/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/latitude/FTM/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
 ### References
-<./Mapping_en:Infobox_lighthouse/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_lighthouse/latitude/FTM/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap> ;
-        rr:predicate  dbo:buildingEndDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "buildingEndDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/buildingEndDate/yearbuilt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "yearbuilt" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_lighthouse/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap> ;
-        rr:predicate  geo:long .
-
-### Function Term Map
-<./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:coordParameter .
-
-### References
-<./Mapping_en:Infobox_lighthouse/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coordinates" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap> ;
-        rr:predicate  dbo:height .
-
-### Function Term Map
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "height" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap> ;
-        rr:predicate  dbo:location .
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:elevation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
 
 ### Function Value
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_lighthouse/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/longitude/FTM> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_lighthouse/longitude/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/longitude/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_lighthouse/longitude/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_lighthouse/longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_lighthouse/longitude/FTM/FV/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+### References
+<./Mapping_en:Infobox_lighthouse/longitude/FTM/FV/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:buildingEndDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "buildingEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearbuilt" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_lighthouse/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_lighthouse/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_lighthouse/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_lighthouse/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
 
 
 ######################
@@ -382,5 +382,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

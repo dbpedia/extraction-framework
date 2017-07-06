@@ -34,18 +34,18 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/SimplePropertyMapping/numberOfVolumes/volumes> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/published> ,
-			       <Print/SimplePropertyMapping/author/author> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/first> ,
-			       <Print/SimplePropertyMapping/illustrator/illustrator> ,
-			       <Print/SimplePropertyMapping/publisher/publisher> ,
-			       <Print/SimplePropertyMapping/lastPublicationDate/last> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_other> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_en> ,
-			       <Print/SimplePropertyMapping/type/type> ,
-			       <Print/SimplePropertyMapping/foaf:name/title> ,
-			       <Print/SimplePropertyMapping/magazine/magazine> ;
+        rr:predicateObjectMap  <Print/SimplePropertyMapping/0> ,
+			       <Print/SimplePropertyMapping/3> ,
+			       <Print/SimplePropertyMapping/7> ,
+			       <Print/SimplePropertyMapping/11> ,
+			       <Print/SimplePropertyMapping/5> ,
+			       <Print/SimplePropertyMapping/2> ,
+			       <Print/SimplePropertyMapping/6> ,
+			       <Print/SimplePropertyMapping/9> ,
+			       <Print/SimplePropertyMapping/10> ,
+			       <Print/SimplePropertyMapping/4> ,
+			       <Print/SimplePropertyMapping/1> ,
+			       <Print/SimplePropertyMapping/8> ;
         rr:subjectMap          <Print/SubjectMap> .
 
 
@@ -81,458 +81,458 @@
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/numberOfVolumes/volumes>
+<Print/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfVolumes .
-
-### Function Term Map
-<Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Print/SubjectMap/Function> .
-
-### Parameters
-<Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "numberOfVolumes" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Print/SimplePropertyMapping/numberOfVolumes/volumes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "volumes" .
-
-
-### PredicateObjectMap
-#######################
-<Print/SimplePropertyMapping/firstPublicationDate/published>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap> ;
-        rr:predicate  dbo:firstPublicationDate .
-
-### Function Term Map
-<Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Print/SubjectMap/Function> .
-
-### Parameters
-<Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "firstPublicationDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Print/SimplePropertyMapping/firstPublicationDate/published/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "published" .
-
-
-### PredicateObjectMap
-#######################
-<Print/SimplePropertyMapping/author/author>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/author/author/FunctionTermMap> ;
-        rr:predicate  dbo:author .
-
-### Function Term Map
-<Print/SimplePropertyMapping/author/author/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Print/SubjectMap/Function> .
-
-### Parameters
-<Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "author" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Print/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "author" .
-
-
-### PredicateObjectMap
-#######################
-<Print/SimplePropertyMapping/firstPublicationDate/first>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap> ;
-        rr:predicate  dbo:firstPublicationDate .
-
-### Function Term Map
-<Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Print/SubjectMap/Function> .
-
-### Parameters
-<Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "firstPublicationDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<Print/SimplePropertyMapping/firstPublicationDate/first/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "first" .
-
-
-### PredicateObjectMap
-#######################
-<Print/SimplePropertyMapping/illustrator/illustrator>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap> ;
-        rr:predicate  dbo:illustrator .
-
-### Function Term Map
-<Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Print/LogicalSource> ;
-        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Print/SubjectMap/Function> .
-
-### Parameters
-<Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "illustrator" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Print/SimplePropertyMapping/illustrator/illustrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "illustrator" .
-
-
-### PredicateObjectMap
-#######################
-<Print/SimplePropertyMapping/publisher/publisher>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:publisher .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap>
+<Print/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Print/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "publisher" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<Print/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "publisher" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/lastPublicationDate/last>
+<Print/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap> ;
-        rr:predicate  dbo:lastPublicationDate .
+        rr:objectMap  <Print/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:author .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap>
+<Print/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "lastPublicationDate" ;
+        rr:object     "author" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<Print/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<Print/SimplePropertyMapping/lastPublicationDate/last/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "last" .
+        rml:reference  "author" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/publisher/publisher_en>
+<Print/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap> ;
-        rr:predicate  dbo:publisher .
+        rr:objectMap  <Print/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:firstPublicationDate .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap>
+<Print/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Print/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "publisher" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<Print/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstPublicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<Print/SimplePropertyMapping/publisher/publisher_en/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "publisher_en" .
+        rml:reference  "published" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/publisher/publisher_other>
+<Print/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap> ;
-        rr:predicate  dbo:publisher .
+        rr:objectMap  <Print/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:numberOfVolumes .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap>
+<Print/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Print/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Print/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfVolumes" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Print/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "volumes" .
+
+
+### PredicateObjectMap
+#######################
+<Print/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<Print/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Print/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Value
+<Print/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Print/LogicalSource> ;
+        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
+			       <Print/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Print/SubjectMap/Function> .
+
+### Parameters
+<Print/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Print/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Print/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+### PredicateObjectMap
+#######################
+<Print/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:publisher .
+
+### Function Term Map
+<Print/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Print/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Value
+<Print/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Print/LogicalSource> ;
+        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
+			       <Print/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Print/SubjectMap/Function> .
+
+### Parameters
+<Print/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "publisher" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<Print/SimplePropertyMapping/publisher/publisher_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "publisher_other" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/type/type>
+<Print/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/type/type/FunctionTermMap> ;
-        rr:predicate  dbo:type .
+        rr:objectMap  <Print/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:illustrator .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/type/type/FunctionTermMap>
+<Print/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "type" ;
+        rr:object     "illustrator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<Print/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<Print/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "type" .
+        rml:reference  "illustrator" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/magazine/magazine>
+<Print/SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap> ;
-        rr:predicate  dbo:magazine .
+        rr:objectMap  <Print/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:lastPublicationDate .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap>
+<Print/SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Print/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastPublicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Print/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last" .
+
+
+### PredicateObjectMap
+#######################
+<Print/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:magazine .
+
+### Function Term Map
+<Print/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Print/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Value
+<Print/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Print/LogicalSource> ;
+        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
+			       <Print/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Print/SubjectMap/Function> .
+
+### Parameters
+<Print/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Print/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "magazine" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<Print/SimplePropertyMapping/magazine/magazine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "magazine" .
 
 
 ### PredicateObjectMap
 #######################
-<Print/SimplePropertyMapping/foaf:name/title>
+<Print/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <Print/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:type .
 
 ### Function Term Map
-<Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
+<Print/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Print/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
+<Print/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Print/LogicalSource> ;
         rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
-			       <Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Print/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Print/SubjectMap/Function> .
 
 ### Parameters
-<Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Print/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<Print/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Print/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<Print/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Print/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "title" .
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<Print/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:publisher .
+
+### Function Term Map
+<Print/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Print/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<Print/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Print/LogicalSource> ;
+        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
+			       <Print/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Print/SubjectMap/Function> .
+
+### Parameters
+<Print/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Print/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "publisher" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Print/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "publisher_en" .
+
+
+### PredicateObjectMap
+#######################
+<Print/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:firstPublicationDate .
+
+### Function Term Map
+<Print/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Print/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<Print/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Print/LogicalSource> ;
+        rr:predicateObjectMap  <Print/Function/SimplePropertyFunction> ,
+			       <Print/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <Print/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Print/SubjectMap/Function> .
+
+### Parameters
+<Print/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Print/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Print/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstPublicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Print/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first" .
 
 
 ######################
@@ -559,5 +559,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

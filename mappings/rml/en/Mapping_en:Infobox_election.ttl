@@ -34,15 +34,15 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/4> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap> .
 
 
@@ -78,344 +78,344 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap> ;
-        rr:predicate  dbo:startDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "startDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/startDate/election_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "election_date" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:title .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/title/election_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "election_name" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap> ;
-        rr:predicate  dbo:firstLeader .
-
-### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "firstLeader" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstLeader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "leader1" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:affiliation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "party1" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap> ;
-        rr:predicate  dbo:secondPopularVote .
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:country .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "secondPopularVote" ;
+        rr:object     "country" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondPopularVote/popular_vote2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "popular_vote2" .
+        rml:reference  "country" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap> ;
-        rr:predicate  dbo:firstPopularVote .
-
-### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "firstPopularVote" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/firstPopularVote/popular_vote1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "popular_vote1" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:affiliation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "affiliation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/affiliation/party2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "party2" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap> ;
-        rr:predicate  dbo:secondLeader .
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:startDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "secondLeader" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "startDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/secondLeader/leader2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "leader2" .
+        rml:reference  "election_date" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:firstPopularVote .
 
 ### Function Term Map
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "country" ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstPopularVote" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<./Mapping_en:Infobox_election/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "popular_vote1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:firstLeader .
+
+### Function Term Map
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstLeader" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_election/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:secondPopularVote .
+
+### Function Term Map
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "secondPopularVote" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_election/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_election/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "country" .
+        rml:reference  "popular_vote2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:secondLeader .
+
+### Function Term Map
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_election/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_election/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_election/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "secondLeader" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_election/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader2" .
 
 
 ######################
@@ -442,5 +442,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

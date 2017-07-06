@@ -34,14 +34,14 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4> ,
 			       <./Mapping_en:Infobox_Russian_district/ConstantMapping/country/Russia> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3> ,
 			       <./Mapping_en:Infobox_Russian_district/longitude> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1> ,
 			       <./Mapping_en:Infobox_Russian_district/latitude> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap> .
 
@@ -80,85 +80,40 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap> ;
-        rr:predicate  dbo:areaTotal .
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  foaf:homepage .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "squareKilometre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/areaTotal/area_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area_km2" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
+        rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/en_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "en_name" .
+        rml:reference  "website" .
 
 
 ### PredicateObjectMap
@@ -171,116 +126,161 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:populationTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pop_2010census" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:name/ru_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "ru_name" .
+        rml:reference  "en_name" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:synonym .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "synonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "other_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_km2" .
 
 
 ### PredicateObjectMap
@@ -293,94 +293,94 @@
 ### Function Term Map
 <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
 ### References
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longs" .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longd" .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longm" .
 
-<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longEW" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap> ;
-        rr:predicate  dbo:populationTotal .
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "populationTotal" ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/populationTotal/pop_2010census/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "pop_2010census" .
+        rml:reference  "ru_name" .
 
 
 ### PredicateObjectMap
@@ -393,54 +393,54 @@
 ### Function Term Map
 <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Russian_district/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Russian_district/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> ;
+			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Russian_district/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
 ### References
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latd" .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latm" .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latNS" .
 
-<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Russian_district/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lats" .
 
@@ -479,5 +479,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

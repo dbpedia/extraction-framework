@@ -34,15 +34,15 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7> ;
         rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap> .
 
 
@@ -75,386 +75,386 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap> ;
-        rr:predicate  dbo:width .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "width" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "width" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap> ;
-        rr:predicate  dbo:volume .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/cubicMetre> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "cubicMetre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "volume" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "volume" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/foaf:name/station/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "station" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap> ;
-        rr:predicate  dbo:callSign .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "callSign" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/callSign/sign/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "sign" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap> ;
-        rr:predicate  dbo:mass .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "mass" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Mass" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "mass" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap> ;
-        rr:predicate  dbo:height .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "height" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap> ;
-        rr:predicate  dbo:length .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "length" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "length" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:nssdcId .
 
 ### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "nssdcId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/nssdcId/NSSDC_ID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "NSSDC_ID" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap> ;
-        rr:predicate  dbo:diameter .
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:mass .
 
 ### Function Term Map
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
 
 ### Function Value
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mass" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mass" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:width .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "width" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "width" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:callSign .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "callSign" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sign" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:diameter .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "diameter" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "kilometre" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_en:Infobox_space_station/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "diameter" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "station" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:volume .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetre> .
+
+### Function Value
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "volume" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicMetre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_space_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "volume" .
 
 
 ######################
@@ -481,5 +481,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

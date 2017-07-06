@@ -34,18 +34,18 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/SimplePropertyMapping/licensee/licensee> ,
-			       <Video/SimplePropertyMapping/network/network> ,
-			       <Video/SimplePropertyMapping/director/director> ,
-			       <Video/SimplePropertyMapping/type/type> ,
-			       <Video/SimplePropertyMapping/network/network_other> ,
-			       <Video/SimplePropertyMapping/musicComposer/music> ,
-			       <Video/SimplePropertyMapping/writer/writer> ,
-			       <Video/SimplePropertyMapping/producer/producer> ,
-			       <Video/SimplePropertyMapping/licensee/licensor_other> ,
-			       <Video/SimplePropertyMapping/network/network_en> ,
-			       <Video/SimplePropertyMapping/foaf:name/title> ,
-			       <Video/SimplePropertyMapping/licensee/licensor> ;
+        rr:predicateObjectMap  <Video/SimplePropertyMapping/8> ,
+			       <Video/SimplePropertyMapping/10> ,
+			       <Video/SimplePropertyMapping/7> ,
+			       <Video/SimplePropertyMapping/4> ,
+			       <Video/SimplePropertyMapping/1> ,
+			       <Video/SimplePropertyMapping/11> ,
+			       <Video/SimplePropertyMapping/5> ,
+			       <Video/SimplePropertyMapping/2> ,
+			       <Video/SimplePropertyMapping/9> ,
+			       <Video/SimplePropertyMapping/0> ,
+			       <Video/SimplePropertyMapping/6> ,
+			       <Video/SimplePropertyMapping/3> ;
         rr:subjectMap          <Video/SubjectMap> .
 
 
@@ -80,458 +80,458 @@
 
 ### PredicateObjectMap
 #######################
-<Video/SimplePropertyMapping/licensee/licensee>
+<Video/SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap> ;
+        rr:objectMap  <Video/SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:licensee .
 
 ### Function Term Map
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap>
+<Video/SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Video/SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Value
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue>
+<Video/SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
         rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Video/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
 ### Parameters
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Video/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "licensee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<Video/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<Video/SimplePropertyMapping/licensee/licensee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Video/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "licensee" .
 
 
 ### PredicateObjectMap
 #######################
-<Video/SimplePropertyMapping/network/network>
+<Video/SimplePropertyMapping/10>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap> ;
-        rr:predicate  dbo:network .
-
-### Function Term Map
-<Video/SimplePropertyMapping/network/network/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "network" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/network/network/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "network" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/director/director>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/director/director/FunctionTermMap> ;
-        rr:predicate  dbo:director .
-
-### Function Term Map
-<Video/SimplePropertyMapping/director/director/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "director" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "director" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/type/type>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/type/type/FunctionTermMap> ;
-        rr:predicate  dbo:type .
-
-### Function Term Map
-<Video/SimplePropertyMapping/type/type/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "type" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "type" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/network/network_other>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap> ;
-        rr:predicate  dbo:network .
-
-### Function Term Map
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "network" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<Video/SimplePropertyMapping/network/network_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "network_other" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/musicComposer/music>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap> ;
-        rr:predicate  dbo:musicComposer .
-
-### Function Term Map
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "musicComposer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "music" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/writer/writer>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap> ;
-        rr:predicate  dbo:writer .
-
-### Function Term Map
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "writer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "writer" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/producer/producer>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap> ;
-        rr:predicate  dbo:producer .
-
-### Function Term Map
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "producer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<Video/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "producer" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/licensee/licensor_other>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap> ;
+        rr:objectMap  <Video/SimplePropertyMapping/10/FTM> ;
         rr:predicate  dbo:licensee .
 
 ### Function Term Map
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap>
+<Video/SimplePropertyMapping/10/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Video/SimplePropertyMapping/10/FTM/FV> .
 
 ### Function Value
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue>
+<Video/SimplePropertyMapping/10/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
         rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Video/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
 ### Parameters
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Video/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "licensee" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<Video/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<Video/SimplePropertyMapping/licensee/licensor_other/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Video/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "licensor_other" .
 
 
 ### PredicateObjectMap
 #######################
-<Video/SimplePropertyMapping/network/network_en>
+<Video/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap> ;
+        rr:objectMap  <Video/SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:network .
 
 ### Function Term Map
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap>
+<Video/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Video/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Value
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue>
+<Video/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
         rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Video/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
 ### Parameters
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Video/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "network" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<Video/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "network_other" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <Video/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:writer .
+
+### Function Term Map
+<Video/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Video/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "writer" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:producer .
+
+### Function Term Map
+<Video/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Video/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<Video/SimplePropertyMapping/network/network_en/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Video/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "producer" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:musicComposer .
+
+### Function Term Map
+<Video/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "musicComposer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Video/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "music" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:network .
+
+### Function Term Map
+<Video/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "network" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Video/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "network" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<Video/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Video/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Video/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:licensee .
+
+### Function Term Map
+<Video/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "licensee" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Video/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "licensor" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:director .
+
+### Function Term Map
+<Video/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Video/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Video/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "director" .
+
+
+### PredicateObjectMap
+#######################
+<Video/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:network .
+
+### Function Term Map
+<Video/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Video/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Value
+<Video/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Video/LogicalSource> ;
+        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
+			       <Video/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Video/SubjectMap/Function> .
+
+### Parameters
+<Video/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "network" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Video/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "network_en" .
 
 
 ### PredicateObjectMap
 #######################
-<Video/SimplePropertyMapping/foaf:name/title>
+<Video/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
+        rr:objectMap  <Video/SimplePropertyMapping/3/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
+<Video/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <Video/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
+<Video/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <Video/LogicalSource> ;
         rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <Video/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <Video/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <Video/SubjectMap/Function> .
 
 ### Parameters
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<Video/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Video/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Video/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<Video/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<Video/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "title" .
-
-
-### PredicateObjectMap
-#######################
-<Video/SimplePropertyMapping/licensee/licensor>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap> ;
-        rr:predicate  dbo:licensee .
-
-### Function Term Map
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <Video/LogicalSource> ;
-        rr:predicateObjectMap  <Video/Function/SimplePropertyFunction> ,
-			       <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <Video/SubjectMap/Function> .
-
-### Parameters
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "licensee" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<Video/SimplePropertyMapping/licensee/licensor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "licensor" .
 
 
 ######################
@@ -558,5 +558,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

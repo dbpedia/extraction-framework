@@ -34,14 +34,14 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9> ;
+        rr:predicateObjectMap  <./Mapping_en:Film_date/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/7> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap> .
 
 
@@ -76,330 +76,330 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1>
+<./Mapping_en:Film_date/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:releaseDate .
 
 ### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue>
+<./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "1" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19>
+<./Mapping_en:Film_date/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap> ;
-        rr:predicate  dbo:releaseLocation .
-
-### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/transformParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "internal" ;
-        rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "releaseLocation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/19/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "19" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:releaseDate .
 
 ### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue>
+<./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "releaseDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/16/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "16" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6>
+<./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap> ;
-        rr:predicate  dbo:releaseDate .
-
-### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "releaseDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "6" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap> ;
-        rr:predicate  dbo:releaseDate .
-
-### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "releaseDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseDate/11/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "11" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4>
+<./Mapping_en:Film_date/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap> ;
-        rr:predicate  dbo:releaseLocation .
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:releaseDate .
 
 ### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue>
+<./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/transformParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Film_date/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "6" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Film_date/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:releaseLocation .
+
+### Function Term Map
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/transformParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/transformParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "releaseLocation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "4" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14>
+<./Mapping_en:Film_date/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap> ;
-        rr:predicate  dbo:releaseLocation .
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:releaseDate .
 
 ### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue>
+<./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Film_date/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "16" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Film_date/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:releaseLocation .
+
+### Function Term Map
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/transformParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "releaseLocation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/transformParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/transformParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
 ### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/14/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "14" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9>
+<./Mapping_en:Film_date/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:releaseLocation .
 
 ### Function Term Map
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue>
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/transformParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/transformParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/transformParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "releaseLocation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Film_date/SimplePropertyMapping/releaseLocation/9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Film_date/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "9" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Film_date/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:releaseLocation .
+
+### Function Term Map
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Film_date/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Film_date/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/transformParameterPOM> ,
+			       <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Film_date/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/transformParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "internal" ;
+        rr:predicate  dbf:transformParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "releaseLocation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Film_date/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "19" .
 
 
 ######################
@@ -426,5 +426,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

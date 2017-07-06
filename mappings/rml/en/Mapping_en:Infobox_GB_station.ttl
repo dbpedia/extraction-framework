@@ -34,31 +34,31 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/19> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9> ,
 			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16> ,
 			       <./Mapping_en:Infobox_GB_station/ConstantMapping/country/United_Kingdom> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/20> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4> ,
 			       <./Mapping_en:Infobox_GB_station/latitude> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref> ,
-			       <./Mapping_en:Infobox_GB_station/longitude> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_GB_station/longitude> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap> .
 
 
@@ -84,472 +84,352 @@
 # Mappings
 ###########
 
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap> ;
-        rr:predicate  dbo:openingDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "openingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "starting" .
-
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap> ;
-        rr:predicate  dbo:railwayPlatforms .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "railwayPlatforms" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "platform" .
-
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap> ;
-        rr:predicate  dbo:passengersPerYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "passengersPerYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lowusage0910" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap> ;
-        rr:predicate  dbo:passengersPerYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/factorParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "passengersPerYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/factorParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "1000000.0" ;
-        rr:predicate  dbf:factorParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "usage0910" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "location" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "locale" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap> ;
-        rr:predicate  dbo:passengersPerYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/factorParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "passengersPerYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/factorParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "1000000.0" ;
-        rr:predicate  dbf:factorParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "usage1011" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "location" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "borough" .
-
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM> ;
         rr:predicate  dbo:openingYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "openingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "starting" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap> ;
-        rr:predicate  dbo:operatedBy .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:agencyStationCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "agencyStationCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "code" .
+
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:operatedBy .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "operatedBy" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "manager" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap> ;
-        rr:predicate  dbo:agencyStationCode .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:openingDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "agencyStationCode" ;
+        rr:object     "openingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "code" .
+        rml:reference  "start" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:owner .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "owner" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap> ;
-        rr:predicate  dbo:district .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:passengersPerYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "passengersPerYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lowusage1011" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:object     "district" ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:passengersPerYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/factorParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "passengersPerYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/factorParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "1000000.0" ;
+        rr:predicate  dbf:factorParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "usage1011" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "borough" .
 
@@ -564,338 +444,458 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap> ;
-        rr:predicate  dbo:passengersPerYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "passengersPerYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lowusage1011" .
-
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap> ;
-        rr:predicate  dbo:openingYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "openingYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "start" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap> ;
-        rr:predicate  dbo:railwayPlatforms .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "railwayPlatforms" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "platforms" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap> ;
-        rr:predicate  dbo:openingDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "openingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "start" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap> ;
-        rr:predicate  geo:lat .
-
-### Function Term Map
-<./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap>
-        a                      fnml:FunctionTermMap , rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap> ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LatitudeFunction> , <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Function Value
-<./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap>
-        a                      fnml:FunctionTermMap ,
-			       rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap> ;
-        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latParameter .
-
-### References
-<./Mapping_en:Infobox_GB_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "latitude" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM> ;
         rr:predicate  dbo:gridReference .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "gridReference" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "gridref" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/longitude>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap> ;
-        rr:predicate  geo:long .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:location .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonParameter .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_GB_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "longitude" .
+        rml:reference  "locale" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap> ;
-        rr:predicate  dbo:picture .
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:railwayPlatforms .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "railwayPlatforms" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platform" .
+
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:openingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starting" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:district .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "district" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "borough" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/latitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/latitude/FTM> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/latitude/FTM>
+        a                      fnml:FunctionTermMap , rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_GB_station/latitude/FTM> ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LatitudeFunction> , <./Mapping_en:Infobox_GB_station/latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/latitude/FTM>
+        a                      fnml:FunctionTermMap ,
+			       rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_GB_station/latitude/FTM> ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LatitudeFunction> ,
+			       <./Mapping_en:Infobox_GB_station/latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/latitude/FTM/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/latitude/FTM/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/latitude/FTM/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latitude" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "picture" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:passengersPerYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/factorParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/factorParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "1000000.0" ;
+        rr:predicate  dbf:factorParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "passengersPerYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "usage0910" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:passengersPerYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "passengersPerYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lowusage0910" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "railwayPlatforms" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platforms" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_GB_station/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/longitude/FTM> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_GB_station/longitude/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/longitude/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_GB_station/longitude/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_GB_station/longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GB_station/longitude/FTM/FV/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter .
+
+### References
+<./Mapping_en:Infobox_GB_station/longitude/FTM/FV/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" .
 
 
 ######################
@@ -905,49 +905,49 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/19>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
-        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years/FunctionTermMap> ;
-        rr:predicate         dbo:openingDate .
+        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM> ;
+        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/19/FTM> ;
+        rr:predicate         dbo:openingYear .
 
 
 ### Conditional PredicateObjectMap
 ###################################
 <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
+        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM> ;
         crml:fallbackMap     <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1> ;
         rr:object            dbo:Infrastructure , dbo:ArchitecturalStructure , schema:Place , dbo:Station , dbo:Location , dbo:Place , owl:Thing , wikidata:Q719456 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/contains> ,
-			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/PropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Opened" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "events" .
 
@@ -955,38 +955,38 @@
 ###################################
 <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap> ;
+        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM> ;
         crml:fallbackMap     <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years1> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years1> , <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/2> ;
         rr:object            dbo:Place , dbo:Station , schema:Place , dbo:Location , dbo:ArchitecturalStructure , wikidata:Q719456 , owl:Thing , dbo:Infrastructure ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/Function/contains> ,
-			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/PropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Opened" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "events1" .
 
@@ -994,17 +994,17 @@
 ###################################
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap> ;
-        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap> .
+        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/FTM> ;
+        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years1/FTM> .
 
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years>
+<./Mapping_en:Infobox_GB_station/SimplePropertyMapping/20>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
-        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years/FunctionTermMap> ;
-        rr:predicate         dbo:openingYear .
+        crml:equalCondition  <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/FTM> ;
+        rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/20/FTM> ;
+        rr:predicate         dbo:openingDate .
 
 
 ############
@@ -1040,5 +1040,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

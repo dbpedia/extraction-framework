@@ -34,10 +34,10 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Australian_football_club/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3> ;
         rr:subjectMap          <./Mapping_en:Infobox_Australian_football_club/SubjectMap> .
 
 
@@ -75,152 +75,152 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:coach .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Australian_football_club/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Australian_football_club/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coach" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM> ;
         rr:predicate  foaf:homepage .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Australian_football_club/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Australian_football_club/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "url" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Australian_football_club/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Australian_football_club/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "fullname" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Australian_football_club/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_football_club/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Australian_football_club/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/foaf:name/clubname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Australian_football_club/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "clubname" .
 
@@ -249,5 +249,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

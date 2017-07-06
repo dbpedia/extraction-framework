@@ -34,13 +34,13 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0> ;
         rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap> .
 
 
@@ -77,268 +77,268 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap> ;
-        rr:predicate  dbo:publicationDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "publicationDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/publicationDate/year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "year" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/foaf:name/song/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "song" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap> ;
-        rr:predicate  dbo:subsequentWork .
-
-### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "subsequentWork" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/subsequentWork/next_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "next_link" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:language .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "languages" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap> ;
-        rr:predicate  dbo:previousWork .
-
-### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "previousWork" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/previousWork/prev_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "prev_link" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:language .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "language" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:genre .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "genre" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "genre" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:publicationDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "publicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "genre" .
+        rml:reference  "year" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:subsequentWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subsequentWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "next_link" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:previousWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prev_link" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Eurovision_Song_Contest_entry/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "song" .
 
 
 ######################
@@ -365,5 +365,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

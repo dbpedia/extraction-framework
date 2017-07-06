@@ -34,12 +34,12 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap> .
 
 
@@ -77,228 +77,228 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:coach .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "coach" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coach" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:owner .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "owner" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:location .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "city" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:foundingYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foundingYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "founded" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:league .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/divison/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "divison" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:league .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NBA_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NBA_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NBA_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "league" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/league/conference/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NBA_team/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "conference" .
 
@@ -327,5 +327,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

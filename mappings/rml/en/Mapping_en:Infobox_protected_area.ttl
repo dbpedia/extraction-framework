@@ -34,17 +34,17 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/latitude> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_protected_area/longitude> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_protected_area/longitude> ,
+			       <./Mapping_en:Infobox_protected_area/latitude> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap> .
 
 
@@ -78,475 +78,475 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_protected_area/latitude>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/FunctionTermMap> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap> ;
-        rr:predicate  geo:lat .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latSecondsParameter .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDirectionParameter .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latMinutesParameter .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:latDegreesParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_NS" .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_s" .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_d" .
-
-<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lat_m" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:nearestCity .
 
 ### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "nearestCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nearest_city" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfVisitors .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "numberOfVisitors" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/numberOfVisitors/visitation_num/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "visitation_num" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "official_site" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:iucnCategory .
 
 ### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "iucnCategory" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "iucn_category" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap> ;
-        rr:predicate  dbo:nearestCity .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "nearestCity" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/nearestCity/nearest_town_or_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "nearest_town_or_city" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "native_name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
-        rr:predicate  dbo:areaTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Area> .
-
-### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Area" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:location .
 
 ### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "location" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "location" .
 
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official_site" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:nearestCity .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nearestCity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nearest_town_or_city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Area" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_protected_area/longitude>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/FunctionTermMap> , <./Mapping_en:Infobox_protected_area/longitude/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/FTM> , <./Mapping_en:Infobox_protected_area/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
 <./Mapping_en:Infobox_protected_area/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> ;
+			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
 ### References
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_d" .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_s" .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_m" .
 
-<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_EW" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:numberOfVisitors .
 
 ### Function Term Map
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
+        rr:object     "numberOfVisitors" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_protected_area/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "name" .
+        rml:reference  "visitation_num" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_protected_area/latitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/FTM> , <./Mapping_en:Infobox_protected_area/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_protected_area/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area/Function/LatitudeFunction> ,
+			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_protected_area/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+### References
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_NS" .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_s" .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_d" .
+
+<./Mapping_en:Infobox_protected_area/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_m" .
 
 
 ######################
@@ -583,5 +583,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

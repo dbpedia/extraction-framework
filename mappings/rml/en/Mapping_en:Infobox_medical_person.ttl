@@ -34,21 +34,21 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12> ,
 			       <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ,
 			       <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap> .
 
 
@@ -88,154 +88,154 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap> ;
-        rr:predicate  dbo:institution .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "institution" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institutions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "work_institutions" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM> ;
         rr:predicate  dbo:nationality .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "nationality" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "nationality" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:knownFor .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthDate" ;
+        rr:object     "knownFor" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "birth_date" .
+        rml:reference  "known_for" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap> ;
-        rr:predicate  dbo:profession .
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:education .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "profession" ;
+        rr:object     "education" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/profession/profession/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "profession" .
+        rml:reference  "education" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:birthName .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_name" .
 
 
 ### PredicateObjectMap
@@ -243,36 +243,36 @@
 <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
-        rr:objectMap   <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
+        rr:objectMap   <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM> ;
         rr:predicate   dbo:activeYearsEndYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/OntologyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "years_active" .
 
@@ -282,380 +282,380 @@
 <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_medical_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/OntologyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "years_active" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap> ;
-        rr:predicate  dbo:birthName .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_place" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_date" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
-        rr:predicate  dbo:occupation .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "occupation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "occupation" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap> ;
-        rr:predicate  dbo:knownFor .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "knownFor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "known_for" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:deathPlace .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "deathPlace" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "death_place" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap> ;
-        rr:predicate  dbo:education .
-
-### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "education" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/education/education/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "education" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM> ;
         rr:predicate  dbo:institution .
 
 ### Function Term Map
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "institution" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "work_institution" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:profession .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "profession" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/institution/work_institution/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "work_institution" .
+        rml:reference  "profession" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:occupation .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "occupation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "occupation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:institution .
+
+### Function Term Map
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_medical_person/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_medical_person/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_medical_person/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "institution" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_medical_person/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "work_institutions" .
 
 
 ######################
@@ -692,5 +692,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

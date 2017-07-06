@@ -34,35 +34,35 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19> ,
+			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production> ,
 			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6> ,
 			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production> ,
 			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap> .
 
 
@@ -94,39 +94,77 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19>
         a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production> ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
-        rr:predicate  dbo:productionStartYear .
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:oilSystem .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:object     "oilSystem" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "oilsystem" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM> ;
+        rr:predicate  dbo:productionStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
@@ -136,76 +174,166 @@
 <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production> ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM> ;
         rr:predicate  dbo:productionStartDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionStartDate" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap> ;
-        rr:predicate  dbo:valvetrain .
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:headAlloy .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "headAlloy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "head" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22>
         a             rr:PredicateObjectMap ;
-        rr:object     "valvetrain" ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:torqueOutput .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Torque> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "torqueOutput" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Torque" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "torque" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:displacement .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Volume> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Volume" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "displacement" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/valvetrain/valvetrain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "valvetrain" .
+        rml:reference  "displacement" .
 
 
 ### PredicateObjectMap
@@ -213,38 +341,249 @@
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartDate/productionEndDate/production> ;
-        rr:objectMap   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
+        rr:objectMap   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM> ;
         rr:predicate   dbo:productionEndDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionEndDate" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:fuelConsumption .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fuelConsumption" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fuelcon" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:powerOutput .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Power> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Power" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "powerOutput" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "power" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:width .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "width" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "width" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:pistonStroke .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pistonStroke" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stroke" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:configuration .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "configuration" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "configuration" .
 
 
 ### PredicateObjectMap
@@ -252,1020 +591,681 @@
 <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_automobile_engine/StartDate/productionStartYear/productionEndYear/production> ;
-        rr:objectMap   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
+        rr:objectMap   <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM> ;
         rr:predicate   dbo:productionEndYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap> ;
-        rr:predicate  dbo:fuelSystem .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "fuelSystem" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelSystem/fuelsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "fuelsystem" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap> ;
-        rr:predicate  dbo:cylinderBore .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "cylinderBore" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/cylinderBore/bore/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "bore" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap> ;
-        rr:predicate  dbo:fuelConsumption .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "fuelConsumption" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelConsumption/fuelcon/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "fuelcon" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap> ;
-        rr:predicate  dbo:height .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "height" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "height" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "aka" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap> ;
-        rr:predicate  dbo:torqueOutput .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Torque> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "torqueOutput" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Torque" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/torqueOutput/torque/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "torque" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap> ;
-        rr:predicate  dbo:compressionRatio .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "compressionRatio" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/compressionRatio/compression/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "compression" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap> ;
-        rr:predicate  dbo:headAlloy .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "headAlloy" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/headAlloy/head/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "head" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:manufacturer .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "manufacturer" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "manufacturer" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap> ;
-        rr:predicate  dbo:configuration .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "configuration" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/configuration/configuration/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "configuration" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap> ;
-        rr:predicate  dbo:blockAlloy .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "blockAlloy" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/blockAlloy/block/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "block" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap> ;
-        rr:predicate  dbo:length .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "length" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "length" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap> ;
-        rr:predicate  dbo:displacement .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Volume> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Volume" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "displacement" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/displacement/displacement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "displacement" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap> ;
-        rr:predicate  dbo:powerOutput .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Power> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Power" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "powerOutput" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/powerOutput/power/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "power" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap> ;
-        rr:predicate  dbo:coolingSystem .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "coolingSystem" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/coolingSystem/coolingsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "coolingsystem" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap> ;
-        rr:predicate  dbo:diameter .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "diameter" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "diameter" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
-        rr:predicate  dbo:weight .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Mass> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "weight" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Mass" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "weight" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap> ;
-        rr:predicate  dbo:width .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "width" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "width" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap> ;
-        rr:predicate  dbo:successor .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "successor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "successor" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap> ;
-        rr:predicate  dbo:predecessor .
-
-### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "predecessor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "predecessor" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM> ;
         rr:predicate  dbo:fuelType .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "fuelType" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/fuelType/fueltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "fueltype" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap> ;
-        rr:predicate  dbo:oilSystem .
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:fuelSystem .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "oilSystem" ;
+        rr:object     "fuelSystem" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/oilSystem/oilsystem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "oilsystem" .
+        rml:reference  "fuelsystem" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap> ;
-        rr:predicate  dbo:pistonStroke .
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:cylinderBore .
 
 ### Function Term Map
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue> ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
 ### Function Value
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "pistonStroke" ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cylinderBore" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/unitParameterPOM>
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bore" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:compressionRatio .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "compressionRatio" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "compression" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:diameter .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "diameter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/pistonStroke/stroke/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "stroke" .
+        rml:reference  "diameter" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:blockAlloy .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "blockAlloy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "block" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:coolingSystem .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "coolingSystem" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coolingsystem" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:predecessor .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "predecessor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "predecessor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:successor .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "successor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "successor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:valvetrain .
+
+### Function Term Map
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_automobile_engine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_engine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_automobile_engine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "valvetrain" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_automobile_engine/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "valvetrain" .
 
 
 ######################
@@ -1302,5 +1302,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

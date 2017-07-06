@@ -34,19 +34,19 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7> ,
 			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap> .
 
 
@@ -83,6 +83,51 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:minimumElevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "minimumElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lowest_m" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap> ;
@@ -91,94 +136,94 @@
 ### Function Term Map
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_m" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "long_NS" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
-        rr:predicate  dbo:neighboringMunicipality .
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:populationTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "neighboringMunicipality" ;
+        rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "neighboring_municipalities" .
+        rml:reference  "population" .
 
 
 ### PredicateObjectMap
@@ -191,464 +236,419 @@
 ### Function Term Map
 <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_d" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_m" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_EW" .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
-        rr:predicate  dbo:demonym .
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:neighboringMunicipality .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "demonym" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "neighboringMunicipality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "demonym" .
+        rml:reference  "neighboring_municipalities" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
-        rr:predicate  dbo:populationTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "populationTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "population" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
-        rr:predicate  dbo:minimumElevation .
-
-### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "minimumElevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "metre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "lowest_m" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:postalCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "postalCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "postal_code" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
-        rr:predicate  dbo:areaTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
-
-### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "squareKilometre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "area" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:areaCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "areaCode" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "municipality_code" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
-        rr:predicate  dbo:elevation .
-
-### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "elevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "metre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "elevation" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:populationAsOf .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "populationAsOf" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "populationof" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
-        rr:predicate  dbo:maximumElevation .
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:elevation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue> ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
 ### Function Value
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "maximumElevation" ;
+        rr:object     "elevation" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:maximumElevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maximumElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "highest_m" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:demonym .
+
+### Function Term Map
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "demonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_former_Arab_villages_in_Palestine/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demonym" .
 
 
 ######################
@@ -685,5 +685,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

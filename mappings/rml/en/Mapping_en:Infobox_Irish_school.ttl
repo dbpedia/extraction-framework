@@ -34,18 +34,18 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7> ,
 			       <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap> .
 
 
@@ -85,304 +85,266 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "location" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "location" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
-        rr:predicate  dbo:foundingDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foundingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "established" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap> ;
-        rr:predicate  dbo:colour .
-
-### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "colour" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "colours" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap> ;
-        rr:predicate  dbo:principal .
-
-### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "principal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "keypname" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:motto .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "motto" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "motto" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:numberOfStudents .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfStudents" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "students" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "homepage" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap> ;
-        rr:predicate  dbo:officialSchoolColour .
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:principal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:object     "principal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+### References
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "keypname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colours" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:officialSchoolColour .
+
+### Function Term Map
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "officialSchoolColour" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "colours" .
 
@@ -397,116 +359,154 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "irish_name" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap> ;
-        rr:predicate  dbo:colourName .
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:colourName .
+
+### Function Term Map
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Value
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "colourName" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "colours" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfStudents .
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:foundingDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "numberOfStudents" ;
+        rr:object     "foundingDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "students" .
+        rml:reference  "established" .
 
 
 ######################
@@ -533,5 +533,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

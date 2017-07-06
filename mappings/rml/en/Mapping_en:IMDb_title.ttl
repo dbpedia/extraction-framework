@@ -34,7 +34,7 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:IMDb_title/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id> ;
+        rr:predicateObjectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/0> ;
         rr:subjectMap          <./Mapping_en:IMDb_title/SubjectMap> .
 
 
@@ -63,38 +63,38 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id>
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:imdbId .
 
 ### Function Term Map
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap>
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue>
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:IMDb_title/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:IMDb_title/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:IMDb_title/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "imdbId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:IMDb_title/SimplePropertyMapping/imdbId/id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:IMDb_title/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "id" .
 
@@ -123,5 +123,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

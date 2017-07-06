@@ -34,11 +34,11 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/2> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/3> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/4> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap> .
 
 
@@ -74,204 +74,204 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:language .
 
 ### Function Term Map
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_continent/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "language" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/language/languages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "languages" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:demonym .
 
 ### Function Term Map
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_continent/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "demonym" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "demonym" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:populationDensity .
 
 ### Function Term Map
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue> ;
+        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/PopulationDensity> .
 
 ### Function Value
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_continent/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "populationDensity" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "PopulationDensity" ;
         rr:predicate  dbf:unitParameter .
 
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationDensity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationDensity/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "density" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:populationTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_continent/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "populationTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "population" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:areaTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue> ;
+        fnml:functionValue  <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Area> .
 
 ### Function Value
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_continent/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_continent/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_continent/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Area" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "areaTotal" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_continent/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_continent/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area" .
 
@@ -300,5 +300,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

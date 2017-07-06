@@ -34,9 +34,9 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_biodatabase/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0> ,
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1> ,
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2> ;
         rr:subjectMap          <./Mapping_en:Infobox_biodatabase/SubjectMap> .
 
 
@@ -71,114 +71,114 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM> ;
         rr:predicate  foaf:homepage .
 
 ### Function Term Map
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_biodatabase/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_biodatabase/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_biodatabase/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:homepage" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "url" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:title .
 
 ### Function Term Map
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_biodatabase/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_biodatabase/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_biodatabase/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "title" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "title" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dc:description .
 
 ### Function Term Map
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_biodatabase/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_biodatabase/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_biodatabase/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "dc:description" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/dc:description/description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_biodatabase/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "description" .
 
@@ -207,5 +207,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-

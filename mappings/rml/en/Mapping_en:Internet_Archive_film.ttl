@@ -34,7 +34,7 @@
 ####################
 <>      a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Internet_Archive_film/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name> ;
+        rr:predicateObjectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0> ;
         rr:subjectMap          <./Mapping_en:Internet_Archive_film/SubjectMap> .
 
 
@@ -69,38 +69,38 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Value
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Internet_Archive_film/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Internet_Archive_film/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Internet_Archive_film/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "foaf:name" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
 ### References
-<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Internet_Archive_film/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
 
@@ -129,5 +129,3 @@
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-
