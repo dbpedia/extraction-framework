@@ -35,7 +35,8 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
+    val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + TemplateRMLMapper.simplePropertyCount)
+    TemplateRMLMapper.increaseSimplePropertyCount()
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
     simplePmPom.addDCTermsType(new RMLLiteral("simplePropertyMapping"))

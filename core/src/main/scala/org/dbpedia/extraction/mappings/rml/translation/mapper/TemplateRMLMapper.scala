@@ -10,6 +10,7 @@ import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLLi
 class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   def mapToModel() = {
+    TemplateRMLMapper.resetState()
     defineTriplesMap() //sets details of the triples map
     addPropertyMappings()
   }
@@ -83,6 +84,24 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
   private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping, state: MappingState) =
   {
     mapper.addMapping(mapping, state)
+  }
+
+}
+
+object TemplateRMLMapper {
+
+  private var _simplePropertyCount = 0
+
+  def simplePropertyCount : Int = {
+    _simplePropertyCount
+  }
+
+  def resetState(): Unit = {
+    _simplePropertyCount = 0
+  }
+
+  def increaseSimplePropertyCount(): Unit = {
+    _simplePropertyCount += 1
   }
 
 }

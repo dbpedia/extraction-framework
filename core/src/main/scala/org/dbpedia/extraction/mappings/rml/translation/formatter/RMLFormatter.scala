@@ -33,11 +33,23 @@ object RMLFormatter extends Formatter {
                           functionsPart,
                           subjectMapFunctionPart)
                           .reduce((first, second) => first.concat('\n' + second))
-      formatted
+      postProcess(formatted)
     } catch {
       case x : Exception => x.printStackTrace(); ""
     }
 
+  }
+
+  /**
+    * Post process formatting for a complete preformatted mapping string
+    * @param mapping
+    * @return
+    */
+  private def postProcess(mapping: String) : String = {
+    mapping.split("\n")
+           .map(line => line.replaceAll("/FunctionTermMap", "/FTM")
+                            .replaceAll("/FunctionValue", "/FV"))
+          .reduce((first, second) => first.concat("\n" + second))
   }
 
 
