@@ -9,7 +9,7 @@ import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.destinations.WriterDestination
+import org.dbpedia.extraction.destinations.{DestinationUtils, WriterDestination}
 import org.dbpedia.extraction.transform.QuadBuilder
 
 import scala.Console.err
@@ -69,16 +69,23 @@ object ResolveTransitiveLinks {
       val map = new LinkedHashMap[String, String]()
 
       val logfile = logDir match {
-        case Success(s) => new File(s, "resolveTransitiveLinks" + "_" + language.wikiCode + ".log")
+        case Success(s) => new RichFile(new File(s, "resolveTransitiveLinks" + "_" + language.wikiCode + ".log"))
         case Failure(f) => null
       }
+
+
+      val outputFile = finder.byName(output + suffix).get
+      err.println(language.wikiCode+": writing "+outputFile+" ...")
+      val suff = if(suffix.startsWith(".")) suffix.substring(1) else suffix
+      val destination = DestinationUtils.createWriterDestination(outputFile, Config.universalConfig.formats.getOrElse(suff, throw new IllegalArgumentException("no formatter found for suffix: " + suffix)))
 
       val wikidatamap = new ConcurrentHashMap[String, Int]().asScala
       wikidataSamaAs match {
         case Success(w) => new QuadMapper(logfile).readQuads(finder, w + suffix) { quad =>
           if (quad.predicate != "http://www.w3.org/2002/07/owl#sameAs")
             throw new IllegalArgumentException("none sameAs predicate found in wikidata sameAs file")
-          wikidatamap.put(quad.subject, 0)
+          if(quad.value.startsWith(Language.Wikidata.dbpediaUri))
+            wikidatamap.put(quad.subject, 0)
         }
         case Failure(e) =>
       }
@@ -97,9 +104,9 @@ object ResolveTransitiveLinks {
           }
         }
       }
-      err.println(language.wikiCode + ": " + count + " redirects were surpressed since they have a wikidata uri")
+      err.println(language.wikiCode + ": " + count + " redirects were suppressed since they have a wikidata uri")
 
-      val buildQuad = QuadBuilder.stringPredicate(language, DBpediaDatasets.RedirectsTransitive, predicate , null) _
+      val buildQuad = QuadBuilder.stringPredicate(language, DBpediaDatasets.RedirectsTransitive, predicate) _
 
       err.println("resolving "+map.size+" links...")
       val cycles = new TransitiveClosure(map).resolve()
@@ -108,14 +115,10 @@ object ResolveTransitiveLinks {
         err.println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
 
-      val outputFile = finder.byName(output + suffix).get
-      err.println(language.wikiCode+": writing "+outputFile+" ...")
-
-      val destination = new WriterDestination(() => IOUtils.writer(outputFile), new QuadMapperFormatter())
       try {
         destination.open()
         for ((subjUri, objUri) <- map) {
-          destination.write(Seq(buildQuad(subjUri, objUri, null)))
+          destination.write(Seq(buildQuad(subjUri, objUri, null, null)))
         }
       }
       finally destination.close

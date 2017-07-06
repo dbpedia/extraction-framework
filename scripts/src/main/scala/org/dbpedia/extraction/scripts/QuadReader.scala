@@ -28,12 +28,13 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
   def getRecorder = recorder
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
-    if(errorMsg == null && error == null)
+    if(quad == null)
+      recorder.record(new RecordEntry[Quad](null, "", RecordSeverity.Warning, lang, errorMsg, error))
+    else if(errorMsg == null && error == null)
       recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Info, lang, errorMsg, error))
     else if(error != null)
       recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Exception, lang, errorMsg, error))
-    else
-      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Warning, lang, errorMsg, error))
+
   }
 
   /**
