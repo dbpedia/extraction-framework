@@ -52,7 +52,7 @@ class RMLExtractor(
       case templateNode : TemplateNode =>
       {
 
-        val templateTitle = "Mapping_en%3A" + templateNode.title.encoded.toString
+        val templateTitle = "Mapping_en:" + templateNode.title.encoded.toString
 
         if (context.rmlMappings.contains(templateTitle)) {
 

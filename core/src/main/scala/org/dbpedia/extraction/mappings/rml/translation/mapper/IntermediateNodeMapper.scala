@@ -13,7 +13,8 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
   state.incrementInterMediateNodeMappingsDone()
 
   def mapToModel() : List[RMLPredicateObjectMap] = {
-    addIntermediateNodeMapping()
+    //addIntermediateNodeMapping() //TODO: enable these again
+    List()
   }
 
   def addIndependentIntermediateNodeMapping() : List[RMLPredicateObjectMap] =

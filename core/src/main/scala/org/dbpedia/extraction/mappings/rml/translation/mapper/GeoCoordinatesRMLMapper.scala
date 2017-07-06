@@ -25,6 +25,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
   def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
   {
     if(mapping.ontologyProperty != null) {
+      /**
       val pom = rmlModel.triplesMap.addPredicateObjectMap(uri)
       pom.addDCTermsType(new RMLLiteral("intermediateGeoMapping"))
       val triplesMap = addParentTriplesMapToPredicateObjectMap(pom)
@@ -35,6 +36,11 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
       parentSubjectMap.addRMLReference(new RMLLiteral(mapping.ontologyProperty.name))
       addGeoCoordinatesMappingToTriplesMap(triplesMap)
       List(pom)
+
+      TODO: enable these again
+
+        **/
+      List()
     } else {
       addGeoCoordinatesMappingToTriplesMap(rmlModel.triplesMap)
     }
