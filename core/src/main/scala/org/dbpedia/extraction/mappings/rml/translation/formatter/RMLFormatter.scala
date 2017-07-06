@@ -16,7 +16,7 @@ object RMLFormatter extends Formatter {
   override def format(model: RMLModel, base : String): String = {
 
     try {
-      val prefixes = getPrefixes(model.writeAsTurtle)
+      val prefixes = getPrefixes(model.writeAsTurtle(base))
       val triplesMapPart = getTriplesMapPart(model, base)
       val subjectMapPart = getSubjectMapPart(model, base)
       val mappingsPart = getAllMappings(model, base)
@@ -486,6 +486,10 @@ object RMLFormatter extends Formatter {
   private def getPrefixes(turtle : String) = {
     val result = turtle.split("\n")
                        .filter(line => line.contains("@"))
+                       .map(line => {
+                         val replace = if(line.indexOf(":") < 14) "\t\t<" else "\t<"
+                         line.replaceFirst("<", replace).replace("@base", "@base\t")
+                       })
                        .reduce((first, second) => first.concat("\n" + second))
     result + offset
   }
