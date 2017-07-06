@@ -1,0 +1,1019 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Cricketer_Infobox> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Cricketer_Infobox/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 ,
+		     dul:Agent ,
+		     dbo:Cricketer ,
+		     dbo:Agent ,
+		     dbo:Person ,
+		     owl:Thing ,
+		     schema:Person ,
+		     foaf:Person ,
+		     wikidata:Q5 ,
+		     dbo:Athlete ,
+		     dul:NaturalPerson ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Cricketer_Infobox/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Cricketer_Infobox?oldid=24712" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "playername" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "monthofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cricket team" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dayofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dayofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap> ;
+        rr:predicate  dbo:fc .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fc" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "FCs" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last year" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap> ;
+        rr:predicate  dbo:fcRuns .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fcRuns" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "FC runs" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "monthofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "countryofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartDate .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debut date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "countryofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Cricketer_Infobox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Cricketer_Infobox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Cricketer_Infobox/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debut year" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Cricketer_Infobox/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Cricketer_Infobox/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

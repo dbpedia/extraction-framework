@@ -1,0 +1,1422 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_U.S._county> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year> ,
+			       <./Mapping_en:Infobox_U.S._county/longitude> ,
+			       <./Mapping_en:Infobox_U.S._county/latitude> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date> ,
+			       <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_U.S._county/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q486972 ,
+		     dbo:AdministrativeRegion ,
+		     owl:Thing ,
+		     wikidata:Q3455524 ,
+		     dbo:Location ,
+		     dbo:PopulatedPlace ,
+		     dbo:Place ,
+		     schema:Place ,
+		     dbo:Region ,
+		     schema:AdministrativeArea ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_U.S._county/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_U.S._county?oldid=14647" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap> ;
+        rr:predicate  dbo:countySeat .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "countySeat" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "seat wl" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap> ;
+        rr:predicate  dbo:populationTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pop" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "web" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap> ;
+        rr:predicate  dbo:areaLand .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaLand" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_land_km2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap> ;
+        rr:predicate  dbo:congressionalDistrict .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "congressionalDistrict" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap> ;
+        rr:predicate  dbo:areaWater .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaWater" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_water_km2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:areaWater .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaWater" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_water_sq_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded year" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long deg" .
+
+<./Mapping_en:Infobox_U.S._county/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long min" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/LatitudeFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat deg" .
+
+<./Mapping_en:Infobox_U.S._county/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat min" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:populationDensity .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/inhabitantsPerSquareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "inhabitantsPerSquareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationDensity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "density_sq_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap> ;
+        rr:predicate  dbo:percentageOfAreaWater .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "percentageOfAreaWater" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area percentage" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "motto" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "motto" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_total_sq_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "county" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap> ;
+        rr:predicate  dbo:areaLand .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaLand" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_land_sq_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap> ;
+        rr:predicate  dbo:censusYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "censusYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "census estimate yr" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:object     dbr-en:United_States ;
+        rr:predicate  dbo:country .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap> ;
+        rr:predicate  dbo:timeZone .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "timeZone" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "time zone" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap> ;
+        rr:predicate  dbo:congressionalDistrict .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "congressionalDistrict" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap> ;
+        rr:predicate  dbo:largestCity .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "largestCity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "largest city wl" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "state" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "area_total_km2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap> ;
+        rr:predicate  dbo:countySeat .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "countySeat" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "seat" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap> ;
+        rr:predicate  dbo:cityType .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cityType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap> ;
+        rr:predicate  dbo:censusYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "censusYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "census yr" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap> ;
+        rr:predicate  dbo:congressionalDistrict .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "congressionalDistrict" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap> ;
+        rr:predicate  dbo:largestCity .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "largestCity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "largest city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap> ;
+        rr:predicate  dbo:populationDensity .
+
+### Function Term Map
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/inhabitantsPerSquareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "populationDensity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "inhabitantsPerSquareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "density_km2" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_U.S._county/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_U.S._county/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_U.S._county/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_U.S._county/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

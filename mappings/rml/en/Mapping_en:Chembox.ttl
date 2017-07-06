@@ -1,0 +1,836 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Chembox> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/density/Density> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Chembox/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:ChemicalCompound ,
+		     wikidata:Q11173 ,
+		     dbo:ChemicalSubstance ,
+		     dul:ChemicalObject ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Chembox/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Chembox?oldid=28751" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap> ;
+        rr:predicate  dbo:boilingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kelvin> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kelvin" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "boilingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "boiling point K" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kelvin> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kelvin" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20K/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "melting point K" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap> ;
+        rr:predicate  dbo:iupacName .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "iupacName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/iupacName/IUPACName/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "IUPACName" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap> ;
+        rr:predicate  dbo:casNumber .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "casNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/casNumber/CASNo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "CASNo" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap> ;
+        rr:predicate  dbo:smiles .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "smiles" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/smiles/SMILES/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "SMILES" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/MeltingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "MeltingPt" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap> ;
+        rr:predicate  dbo:pubchem .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pubchem" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "PubChem" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap> ;
+        rr:predicate  dbo:density .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Density> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "density" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Density" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/density/Density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Density" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap> ;
+        rr:predicate  foaf:thumbnail .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:thumbnail" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/foaf:thumbnail/ImageFile/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ImageFile" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap> ;
+        rr:predicate  dbo:boilingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "boilingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/BoilingPt/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "BoilingPt" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap> ;
+        rr:predicate  dbo:fdaUniiCode .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fdaUniiCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "UNII" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap> ;
+        rr:predicate  dbo:inchi .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "inchi" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/inchi/InChI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "InChI" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap> ;
+        rr:predicate  dbo:boilingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/degreeCelsius> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "degreeCelsius" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "boilingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "boiling point C" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap> ;
+        rr:predicate  dbo:boilingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/degreeFahrenheit> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "degreeFahrenheit" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "boilingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/boilingPoint/boiling%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "boiling point F" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/degreeCelsius> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "degreeCelsius" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20C/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "melting point C" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/degreeFahrenheit> .
+
+### Function Value
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Chembox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Chembox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Chembox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "degreeFahrenheit" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Chembox/SimplePropertyMapping/meltingPoint/melting%20point%20F/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "melting point F" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Chembox/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Chembox/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

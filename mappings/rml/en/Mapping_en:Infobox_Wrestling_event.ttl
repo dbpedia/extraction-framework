@@ -1,0 +1,417 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Wrestling_event> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Wrestling_event/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:WrestlingEvent ,
+		     schema:SportsEvent ,
+		     dbo:SocietalEvent ,
+		     dul:Event ,
+		     wikidata:Q1656682 ,
+		     dbo:SportsEvent ,
+		     schema:Event ,
+		     owl:Thing ,
+		     dbo:Event ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Wrestling_event/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Wrestling_event?oldid=7475" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap> ;
+        rr:predicate  dbo:followingEvent .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "followingEvent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/followingEvent/nextevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nextevent" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap> ;
+        rr:predicate  dbo:previousEvent .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousEvent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/previousEvent/lastevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lastevent" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap> ;
+        rr:predicate  dbo:date .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "date" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "venue" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap> ;
+        rr:predicate  dbo:promotion .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "promotion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/promotion/promotion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "promotion" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap> ;
+        rr:predicate  dbo:brand .
+
+### Function Term Map
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Wrestling_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "brand" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Wrestling_event/SimplePropertyMapping/brand/brand/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "brand" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Wrestling_event/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Wrestling_event/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

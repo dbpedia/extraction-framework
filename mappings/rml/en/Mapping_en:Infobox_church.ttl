@@ -1,0 +1,620 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_church> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname> ,
+			       <./Mapping_en:Infobox_church/latitude> ,
+			       <./Mapping_en:Infobox_church/longitude> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_church/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:HistoricBuilding ,
+		     dbo:Location ,
+		     dbo:Building ,
+		     owl:Thing ,
+		     dbo:ArchitecturalStructure ,
+		     schema:LandmarksOrHistoricalBuildings ,
+		     wikidata:Q41176 ,
+		     schema:Place ,
+		     dbo:Place ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_church/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_church?oldid=14129" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap> ;
+        rr:predicate  foaf:page .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:page" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:page/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap> ;
+        rr:predicate  dbo:architecturalStyle .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "architecturalStyle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/architectural%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architectural type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap> ;
+        rr:predicate  dbo:architect .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "architect" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architect" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/latitude/FunctionTermMap>
+        a                      fnml:FunctionTermMap , rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_church/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/LatitudeFunction> , <./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Function Value
+<./Mapping_en:Infobox_church/latitude/FunctionTermMap>
+        a                      fnml:FunctionTermMap ,
+			       rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_church/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/LatitudeFunction> ,
+			       <./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+### References
+<./Mapping_en:Infobox_church/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+### References
+<./Mapping_en:Infobox_church/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap> ;
+        rr:predicate  dbo:architecturalStyle .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "architecturalStyle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/architecturalStyle/style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "style" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "district" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/foaf:name/church%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "church name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap> ;
+        rr:predicate  dbo:pastor .
+
+### Function Term Map
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_church/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_church/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_church/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pastor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_church/SimplePropertyMapping/pastor/pastor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pastor" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_church/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_church/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_church/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_church/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

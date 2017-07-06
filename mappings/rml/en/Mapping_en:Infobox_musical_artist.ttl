@@ -1,0 +1,2363 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_musical_artist> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_musical_artist/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_musical_artist/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_musical_artist?oldid=14606" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/Born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Born" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/Born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Born" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Died" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap> ;
+        rr:predicate  dbo:background .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "background" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/background/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "background" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap> ;
+        rr:predicate  dbo:recordLabel .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "recordLabel" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "label" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap> ;
+        rr:predicate  dbo:genre .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "genre" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/Genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Genre" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap> ;
+        rr:predicate  dbo:formerBandMember .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerBandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/past_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "past_members" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alias" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/instrument/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "instrument" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap> ;
+        rr:predicate  dbo:occupation .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "occupation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/Occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Occupation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Notable_instruments" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Years_active" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/Years_active> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/Years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Years_active" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap> ;
+        rr:predicate  dbo:recordLabel .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "recordLabel" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/recordLabel/Label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Label" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap> ;
+        rr:predicate  foaf:givenName .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:givenName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/Birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Birth_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap> ;
+        rr:predicate  dbo:hometown .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hometown" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/Origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Origin" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap> ;
+        rr:predicate  dbo:formerBandMember .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerBandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/formerBandMember/Past_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Past_members" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap> ;
+        rr:predicate  dbo:associatedBand .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "associatedBand" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "associated_acts" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/Died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Died" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap> ;
+        rr:predicate  dbo:background .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "background" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/background/Background/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Background" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap> ;
+        rr:predicate  dbo:hometown .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hometown" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/hometown/origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "origin" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap> ;
+        rr:predicate  dbo:bandMember .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Members" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/notable_instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "notable_instruments" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
+        rr:predicate  dbo:genre .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "genre" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/genre/genre/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "genre" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap> ;
+        rr:predicate  foaf:givenName .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:givenName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:givenName/birth_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/alias/Alias/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Alias" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap> ;
+        rr:predicate  dbo:associatedBand .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "associatedBand" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedBand/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Associated_acts" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap> ;
+        rr:predicate  dbo:associatedMusicalArtist .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "associatedMusicalArtist" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "associated_acts" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/instrument/Instrument/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Instrument" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap> ;
+        rr:predicate  dbo:associatedMusicalArtist .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "associatedMusicalArtist" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/associatedMusicalArtist/Associated_acts/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Associated_acts" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap> ;
+        rr:predicate  dbo:bandMember .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/current_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "current_members" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
+        rr:predicate  dbo:occupation .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "occupation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/occupation/occupation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "occupation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap> ;
+        rr:predicate  dbo:bandMember .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/bandMember/Current_members/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Current_members" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_musical_artist/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "url" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_musical_artist/SimplePropertyMapping/foaf:homepage/URL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "URL" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1> ;
+        rr:object            schema:MusicGroup , dbo:Band , dul:SocialPerson , owl:Thing , dbo:Organisation , schema:Organization , wikidata:Q43229 , dbo:Agent , wikidata:Q215380 , dbo:Group , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/isSet> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Current_members" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2> ;
+        rr:object            wikidata:Q43229 , dul:Agent , dbo:Organisation , wikidata:Q215380 , dbo:Group , schema:MusicGroup , dbo:Band , dul:SocialPerson , owl:Thing , schema:Organization , dbo:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/isSet> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "current_members" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3> ;
+        rr:object            dul:Agent , schema:Organization , dul:SocialPerson , wikidata:Q43229 , dbo:Agent , owl:Thing , dbo:Group , dbo:Organisation , dbo:Band , schema:MusicGroup , wikidata:Q215380 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/isSet> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Members" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4> ;
+        rr:object            dul:Agent , schema:Organization , dbo:Agent , wikidata:Q43229 , dul:SocialPerson , owl:Thing , wikidata:Q215380 , schema:MusicGroup , dbo:Band , dbo:Group , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/isSet> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Past_members" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5> ;
+        rr:object            dbo:Band , dul:Agent , owl:Thing , schema:Organization , dbo:Organisation , dbo:Group , wikidata:Q43229 , schema:MusicGroup , dbo:Agent , dul:SocialPerson , wikidata:Q215380 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/isSet> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "past_members" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6> ;
+        rr:object            dul:Agent , dbo:Band , wikidata:Q43229 , schema:Organization , wikidata:Q215380 , dul:SocialPerson , dbo:Agent , dbo:Organisation , schema:MusicGroup , owl:Thing , dbo:Group ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "group_or_band" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7> ;
+        rr:object            schema:MusicGroup , owl:Thing , wikidata:Q43229 , schema:Organization , dbo:Organisation , dul:SocialPerson , dbo:Group , dbo:Band , dul:Agent , dbo:Agent , wikidata:Q215380 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "group_or_band" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8> ;
+        rr:object            schema:Organization , schema:MusicGroup , dbo:Band , dbo:Agent , dul:Agent , dul:SocialPerson , dbo:Group , wikidata:Q43229 , dbo:Organisation , owl:Thing , wikidata:Q215380 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cover_band" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9> ;
+        rr:object            wikidata:Q43229 , dbo:Group , schema:Organization , dul:SocialPerson , dbo:Agent , dbo:Band , owl:Thing , schema:MusicGroup , dbo:Organisation , wikidata:Q215380 , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cover_band" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10> ;
+        rr:object            schema:Organization , dbo:Organisation , wikidata:Q215380 , owl:Thing , dbo:Band , schema:MusicGroup , dbo:Group , dul:Agent , dbo:Agent , dul:SocialPerson , wikidata:Q43229 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "classical_ensemble" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/11> ;
+        rr:object            dul:Agent , dbo:Band , dbo:Organisation , schema:MusicGroup , owl:Thing , wikidata:Q43229 , dbo:Group , schema:Organization , dbo:Agent , dul:SocialPerson , wikidata:Q215380 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_musical_artist/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_musical_artist/Function/equals> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_musical_artist/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "classical_ensemble" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "background" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_musical_artist/ConditionalMapping/Current_members_isSet_null/1/2/3/4/5/6/7/8/9/10/11>
+        a             rr:PredicateObjectMap ;
+        rr:object     wikidata:Q483501 , dul:NaturalPerson , wikidata:Q215627 , dul:Agent , owl:Thing , wikidata:Q5 , foaf:Person , schema:MusicGroup , schema:Person , dbo:MusicalArtist , dbo:Agent , dbo:Artist , dbo:Person ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_musical_artist/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_musical_artist/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_musical_artist/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_musical_artist/Function/equals>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:equals ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_musical_artist/Function/isSet>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:isSet ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_musical_artist/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

@@ -1,0 +1,832 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Polish_Soldiers> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Polish_Soldiers/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Agent ,
+		     wikidata:Q215627 ,
+		     dul:NaturalPerson ,
+		     owl:Thing ,
+		     dul:Agent ,
+		     foaf:Person ,
+		     wikidata:Q5 ,
+		     dbo:Person ,
+		     dbo:MilitaryPerson ,
+		     schema:Person ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Polish_Soldiers/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Polish_Soldiers?oldid=10659" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap> ;
+        rr:predicate  dbo:noteOnPlaceOfBurial .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "noteOnPlaceOfBurial" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/noteOnPlaceOfBurial/placeofburial_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofburial_label" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofbirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap> ;
+        rr:predicate  dbo:occupation .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "occupation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/occupation/laterwork/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "laterwork" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap> ;
+        rr:predicate  dbo:allegiance .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "allegiance" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "allegiance" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap> ;
+        rr:predicate  dbo:serviceStartDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "serviceStartDate" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serviceyears" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartDate/serviceEndDate/serviceyears> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap> ;
+        rr:predicate   dbo:serviceEndDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "serviceEndDate" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartDate/serviceEndDate/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serviceyears" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/birthDate/born/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "born" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap> ;
+        rr:predicate  dbo:militaryBranch .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "militaryBranch" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "branch" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap> ;
+        rr:predicate  dbo:relation .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "relation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/relation/relations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "relations" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofdeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap> ;
+        rr:predicate  dbo:serviceStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "serviceStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serviceyears" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap> ;
+        rr:predicate  dbo:restingPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "restingPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofburial" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap> ;
+        rr:predicate  dbo:militaryRank .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "militaryRank" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/militaryRank/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "rank" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/SimplePropertyMapping/deathDate/died/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "died" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_Polish_Soldiers/StartDate/serviceStartYear/serviceEndYear/serviceyears> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap> ;
+        rr:predicate   dbo:serviceEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Polish_Soldiers/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Polish_Soldiers/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "serviceEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Polish_Soldiers/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serviceyears" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Polish_Soldiers/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Polish_Soldiers/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Polish_Soldiers/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Polish_Soldiers/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

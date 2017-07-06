@@ -1,0 +1,2030 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_sports_league> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_sports_league/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_sports_league/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_sports_league?oldid=48594" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:formationDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap> ;
+        rr:predicate  dbo:participant .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "participant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "teams" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap> ;
+        rr:predicate  dbo:participant .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "participant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/champion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "champion" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Director" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap> ;
+        rr:predicate  dbo:knownFor .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "knownFor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/knownFor/fame/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fame" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "motto" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "motto" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap> ;
+        rr:predicate  dbo:lastSeason .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastSeason" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/lastSeason/last_season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_season" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/inaugural/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "inaugural" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap> ;
+        rr:predicate  dbo:participant .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "participant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/participant/most_champs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "most_champs" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "title" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap> ;
+        rr:predicate  dbo:ceo .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "ceo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/ceo/ceo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ceo" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap> ;
+        rr:predicate  dbo:founder .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "founder" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founder" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap> ;
+        rr:predicate  dbo:currentSeason .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "currentSeason" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_league/SimplePropertyMapping/currentSeason/current_season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "current_season" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1> ;
+        rr:object            dbo:Agent , wikidata:Q623109 , dul:SocialPerson , dbo:SportsLeague , owl:Thing , wikidata:Q43229 , dbo:AmericanFootballLeague , dbo:Organisation , dul:Agent , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "American football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2> ;
+        rr:object            wikidata:Q43229 , dbo:SportsLeague , dul:SocialPerson , schema:Organization , dbo:AmericanFootballLeague , wikidata:Q623109 , dbo:Organisation , dul:Agent , dbo:Agent , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "American Professional Football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3> ;
+        rr:object            dul:Agent , owl:Thing , dul:SocialPerson , dbo:CanadianFootballLeague , dbo:Agent , dbo:SportsLeague , wikidata:Q623109 , schema:Organization , dbo:Organisation , wikidata:Q43229 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Canadian football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4> ;
+        rr:object            dul:Agent , wikidata:Q623109 , dbo:Agent , dbo:Organisation , wikidata:Q43229 , dbo:SportsLeague , dul:SocialPerson , owl:Thing , dbo:AustralianFootballLeague , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Australian football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5> ;
+        rr:object            dbo:Organisation , dbo:SportsLeague , owl:Thing , dul:Agent , dbo:Agent , schema:Organization , dul:SocialPerson , dbo:SoccerLeague , wikidata:Q43229 , wikidata:Q623109 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "soccer" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6> ;
+        rr:object            dul:SocialPerson , wikidata:Q43229 , dul:Agent , dbo:Agent , owl:Thing , schema:Organization , dbo:SoccerLeague , dbo:Organisation , dbo:SportsLeague , wikidata:Q623109 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Association football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7> ;
+        rr:object            wikidata:Q623109 , dbo:Agent , dul:SocialPerson , dbo:SportsLeague , wikidata:Q43229 , dbo:SoccerLeague , owl:Thing , schema:Organization , dbo:Organisation , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "football" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8> ;
+        rr:object            dbo:PoloLeague , wikidata:Q623109 , wikidata:Q43229 , dbo:Agent , dul:SocialPerson , owl:Thing , schema:Organization , dbo:SportsLeague , dul:Agent , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Polo" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9> ;
+        rr:object            owl:Thing , dbo:SportsLeague , wikidata:Q623109 , dbo:Agent , dbo:Organisation , dul:SocialPerson , dbo:AutoRacingLeague , dul:Agent , wikidata:Q43229 , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Auto" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10> ;
+        rr:object            dul:SocialPerson , dul:Agent , dbo:Organisation , wikidata:Q623109 , dbo:Agent , schema:Organization , dbo:BaseballLeague , dbo:SportsLeague , wikidata:Q6631808 , owl:Thing , wikidata:Q43229 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Baseball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11> ;
+        rr:object            dbo:Organisation , owl:Thing , dul:SocialPerson , dul:Agent , dbo:BasketballLeague , dbo:SportsLeague , dbo:Agent , wikidata:Q43229 , schema:Organization , wikidata:Q623109 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Basketball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12> ;
+        rr:object            dbo:BowlingLeague , wikidata:Q43229 , dbo:SportsLeague , dul:SocialPerson , schema:Organization , wikidata:Q623109 , dbo:Agent , dbo:Organisation , dul:Agent , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Bowling" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13> ;
+        rr:object            dbo:BoxingLeague , dbo:Organisation , schema:Organization , wikidata:Q623109 , owl:Thing , wikidata:Q43229 , dul:Agent , dbo:Agent , dbo:SportsLeague , dul:SocialPerson ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Boxing" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14> ;
+        rr:object            wikidata:Q623109 , dbo:Organisation , dul:SocialPerson , dbo:CricketLeague , owl:Thing , dul:Agent , dbo:Agent , dbo:SportsLeague , schema:Organization , wikidata:Q43229 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Cricket" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15> ;
+        rr:object            schema:Organization , dbo:SportsLeague , dul:Agent , wikidata:Q623109 , owl:Thing , dbo:Organisation , dbo:Agent , dbo:CurlingLeague , dul:SocialPerson , wikidata:Q43229 ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Curling" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16> ;
+        rr:object            dul:Agent , schema:Organization , dbo:Agent , dul:SocialPerson , dbo:Organisation , wikidata:Q623109 , dbo:SportsLeague , wikidata:Q43229 , dbo:CyclingLeague , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Cycling" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17> ;
+        rr:object            dbo:SportsLeague , dbo:Agent , wikidata:Q43229 , schema:Organization , dul:Agent , owl:Thing , wikidata:Q623109 , dbo:FieldHockeyLeague , dul:SocialPerson , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Field hockey" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18> ;
+        rr:object            dbo:GolfLeague , dbo:Agent , dbo:SportsLeague , dul:Agent , wikidata:Q43229 , owl:Thing , wikidata:Q623109 , schema:Organization , dbo:Organisation , dul:SocialPerson ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Golf" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19> ;
+        rr:object            dbo:Organisation , dbo:HandballLeague , dbo:Agent , wikidata:Q43229 , dul:Agent , schema:Organization , wikidata:Q623109 , owl:Thing , dbo:SportsLeague , dul:SocialPerson ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Handball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20> ;
+        rr:object            wikidata:Q43229 , dbo:Organisation , wikidata:Q623109 , owl:Thing , dul:SocialPerson , dbo:SportsLeague , dul:Agent , schema:Organization , dbo:IceHockeyLeague , dbo:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Ice hockey" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21> ;
+        rr:object            dbo:SportsLeague , wikidata:Q623109 , dbo:Agent , wikidata:Q43229 , dbo:InlineHockeyLeague , owl:Thing , dul:SocialPerson , dul:Agent , dbo:Organisation , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Inline hockey" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22> ;
+        rr:object            dbo:SportsLeague , dbo:LacrosseLeague , dul:SocialPerson , schema:Organization , wikidata:Q43229 , dbo:Organisation , dbo:Agent , dul:Agent , wikidata:Q623109 , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Lacrosse" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23> ;
+        rr:object            wikidata:Q623109 , owl:Thing , dbo:MixedMartialArtsLeague , dbo:Agent , schema:Organization , dul:Agent , wikidata:Q43229 , dbo:Organisation , dul:SocialPerson , dbo:SportsLeague ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Martial Arts" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24> ;
+        rr:object            owl:Thing , dbo:Organisation , dbo:Agent , wikidata:Q623109 , dul:Agent , dbo:SportsLeague , dbo:MotorcycleRacingLeague , schema:Organization , wikidata:Q43229 , dul:SocialPerson ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Motorcycle" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25> ;
+        rr:object            owl:Thing , dul:SocialPerson , dbo:SpeedwayLeague , wikidata:Q623109 , dbo:Organisation , schema:Organization , wikidata:Q43229 , dbo:SportsLeague , dul:Agent , dbo:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Speedway" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26> ;
+        rr:object            dbo:SportsLeague , dbo:PaintballLeague , schema:Organization , dul:Agent , owl:Thing , dul:SocialPerson , dbo:Agent , wikidata:Q623109 , wikidata:Q43229 , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Paintball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27> ;
+        rr:object            dul:Agent , owl:Thing , schema:Organization , dbo:RadioControlledRacingLeague , wikidata:Q623109 , dbo:SportsLeague , wikidata:Q43229 , dul:SocialPerson , dbo:Agent , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Radio controlled" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28> ;
+        rr:object            owl:Thing , wikidata:Q10962 , dbo:SportsLeague , wikidata:Q43229 , schema:Organization , dbo:RugbyLeague , dul:Agent , dbo:Agent , dul:SocialPerson , wikidata:Q623109 , dbo:Organisation ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Rugby" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29> ;
+        rr:object            wikidata:Q43229 , dbo:SportsLeague , dul:SocialPerson , dul:Agent , dbo:Organisation , dbo:SoftballLeague , owl:Thing , schema:Organization , wikidata:Q623109 , dbo:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Softball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30> ;
+        rr:object            dbo:Organisation , dul:SocialPerson , owl:Thing , dbo:Agent , schema:Organization , dbo:SportsLeague , wikidata:Q43229 , wikidata:Q623109 , dbo:TennisLeague , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Tennis" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31> ;
+        rr:object            dul:SocialPerson , wikidata:Q43229 , dul:Agent , dbo:Organisation , schema:Organization , dbo:Agent , dbo:SportsLeague , wikidata:Q623109 , owl:Thing , dbo:VideogamesLeague ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Videogame" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32> ;
+        rr:object            wikidata:Q43229 , dul:SocialPerson , dbo:Agent , dbo:Organisation , dul:Agent , dbo:VideogamesLeague , dbo:SportsLeague , wikidata:Q623109 , owl:Thing , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Electronic sports" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33> ;
+        rr:object            wikidata:Q623109 , schema:Organization , dbo:Organisation , dul:SocialPerson , dul:Agent , dbo:SportsLeague , dbo:Agent , wikidata:Q43229 , dbo:VolleyballLeague , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_league/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_league/Function/contains> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_league/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Volleyball" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_sports_league/ConditionalMapping/sport_contains_American%20football/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbo:Agent , dul:SocialPerson , dbo:SportsLeague , wikidata:Q43229 , dbo:Organisation , owl:Thing , wikidata:Q623109 , dul:Agent , schema:Organization ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_sports_league/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_sports_league/Function/contains>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:contains ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_sports_league/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

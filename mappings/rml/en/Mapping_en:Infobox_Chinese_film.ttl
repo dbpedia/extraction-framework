@@ -1,0 +1,956 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Chinese_film> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Chinese_film/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Film ,
+		     dbo:Work ,
+		     owl:Thing ,
+		     schema:CreativeWork ,
+		     schema:Movie ,
+		     <http://dbpedia.org/ontology/Wikidata:Q11424> ,
+		     wikidata:Q386724 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Chinese_film/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Chinese_film?oldid=22081" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap> ;
+        rr:predicate  dbo:editing .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "editing" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/editing/editing/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "editing" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap> ;
+        rr:predicate  dbo:writer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "writer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap> ;
+        rr:predicate  dbo:basedOn .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "basedOn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/basedOn/based%20on/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "based on" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap> ;
+        rr:predicate  dbo:gross .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Currency" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "gross" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/gross/gross/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gross" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap> ;
+        rr:predicate  dbo:budget .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "budget" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Currency" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/budget/budget/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "budget" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap> ;
+        rr:predicate  dbo:runtime .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Time> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "runtime" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Time" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/runtime/runtime/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "runtime" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "released" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap> ;
+        rr:predicate  dbo:narrator .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "narrator" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/narrator/narrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "narrator" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap> ;
+        rr:predicate  dbo:cinematography .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cinematography" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/cinematography/cinematography/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cinematography" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap> ;
+        rr:predicate  dbo:musicComposer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "musicComposer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/musicComposer/music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "music" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap> ;
+        rr:predicate  dbo:producer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "producer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap> ;
+        rr:predicate  dbo:writer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/writer/screenplay/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "screenplay" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap> ;
+        rr:predicate  dbo:amgid .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "amgid" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/amgid/amg_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "amg_id" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap> ;
+        rr:predicate  dbo:distributor .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "distributor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "distributor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap> ;
+        rr:predicate  dbo:imdbId .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "imdbId" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/imdbId/imdb_id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "imdb_id" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/director/director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "director" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap> ;
+        rr:predicate  dbo:starring .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "starring" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/starring/starring/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starring" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Chinese_film/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Chinese_film/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Chinese_film/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Chinese_film/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Chinese_film/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

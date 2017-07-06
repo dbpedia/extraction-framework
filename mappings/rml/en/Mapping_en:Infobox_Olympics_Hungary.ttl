@@ -1,0 +1,691 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Olympics_Hungary> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Olympics_Hungary/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:OlympicResult ,
+		     dbo:SportCompetitionResult ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Olympics_Hungary/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Olympics_Hungary?oldid=7383" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfCompetitors .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfCompetitors" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "competitors" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSports .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfSports" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sports" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap> ;
+        rr:predicate  dbo:flagBearer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "flagBearer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "flagbearer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap> ;
+        rr:predicate  dbo:nationalOlympicCommittee .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationalOlympicCommittee" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "NOC" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap> ;
+        rr:predicate  dbo:winterAppearances .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winterAppearances" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "winterappearances" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfGoldMedalsWon .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfGoldMedalsWon" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gold" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfBronzeMedalsWon .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfBronzeMedalsWon" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bronze" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSilverMedalsWon .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfSilverMedalsWon" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "silver" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap> ;
+        rr:predicate  dbo:summerAppearances .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "summerAppearances" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "summerappearances" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfOfficials .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfOfficials" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "officials" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap> ;
+        rr:predicate  dbo:oldcode .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "oldcode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "oldcode" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap> ;
+        rr:predicate  dbo:otherAppearances .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "otherAppearances" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "otherappearances" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap> ;
+        rr:predicate  dbo:rankInFinalMedalCount .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "rankInFinalMedalCount" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "rank" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap> ;
+        rr:predicate  dbo:games .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "games" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "games" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap> ;
+        rr:predicate  dbo:nationalOlympicCommittee .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_Hungary/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationalOlympicCommittee" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_Hungary/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "NOCname" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Olympics_Hungary/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Olympics_Hungary/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

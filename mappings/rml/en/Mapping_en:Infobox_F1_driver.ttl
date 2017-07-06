@@ -1,0 +1,902 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_F1_driver> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_F1_driver/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:RacingDriver ,
+		     foaf:Person ,
+		     dbo:MotorsportRacer ,
+		     schema:Person ,
+		     dbo:Athlete ,
+		     wikidata:Q215627 ,
+		     wikidata:Q5 ,
+		     dbo:FormulaOneRacer ,
+		     owl:Thing ,
+		     dbo:Person ,
+		     dul:NaturalPerson ,
+		     dbo:Agent ,
+		     dul:Agent ,
+		     wikidata:Q378622 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_F1_driver/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_F1_driver?oldid=20489" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap> ;
+        rr:predicate  dbo:lastSeason .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastSeason" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastSeason/Last%20season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Last season" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap> ;
+        rr:predicate  dbo:lastRace .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastRace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastRace/Last%20race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Last race" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap> ;
+        rr:predicate  dbo:firstWin .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstWin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstWin/First%20win/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First win" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap> ;
+        rr:predicate  dbo:races .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "races" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/races/Races/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Races" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap> ;
+        rr:predicate  dbo:lastWin .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastWin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastWin/Last%20win/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Last win" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap> ;
+        rr:predicate  dbo:lastPosition .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lastPosition" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/lastPosition/Last%20position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Last position" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap> ;
+        rr:predicate  dbo:wins .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "wins" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/wins/Wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Wins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap> ;
+        rr:predicate  dbo:podiums .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "podiums" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/podiums/Podiums/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Podiums" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/team/Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Team" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/formerTeam/Team%20for%202007/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Team for 2007" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap> ;
+        rr:predicate  dbo:careerPoints .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "careerPoints" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/careerPoints/Career%20points/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Career points" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap> ;
+        rr:predicate  dbo:championships .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "championships" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/championships/Championships/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Championships" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/nationality/Nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Nationality" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap> ;
+        rr:predicate  dbo:carNumber .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "carNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/carNumber/Carnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Carnumber" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap> ;
+        rr:predicate  dbo:poles .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "poles" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/poles/Poles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Poles" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap> ;
+        rr:predicate  dbo:fastestLap .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fastestLap" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/fastestLap/Fastest%20laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Fastest laps" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap> ;
+        rr:predicate  dbo:firstRace .
+
+### Function Term Map
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_F1_driver/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_F1_driver/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstRace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_F1_driver/SimplePropertyMapping/firstRace/First%20race/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First race" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_F1_driver/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_F1_driver/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

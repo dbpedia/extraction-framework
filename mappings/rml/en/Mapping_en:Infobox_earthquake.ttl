@@ -1,0 +1,415 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_earthquake> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_earthquake/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q1656682 ,
+		     dbo:Earthquake ,
+		     owl:Thing ,
+		     schema:Event ,
+		     dbo:NaturalEvent ,
+		     dbo:Event ,
+		     dul:Event ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_earthquake/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_earthquake?oldid=47891" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap> ;
+        rr:predicate  dbo:time .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "time" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/time/time/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "time" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap> ;
+        rr:predicate  dbo:duration .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "duration" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/duration/duration/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "duration" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap> ;
+        rr:predicate  dbo:casualties .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "casualties" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/casualties/casualties/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "casualties" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap> ;
+        rr:predicate  dbo:date .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "date" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap> ;
+        rr:predicate  foaf:depiction .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:depiction" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/foaf:depiction/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap> ;
+        rr:predicate  dbo:damage .
+
+### Function Term Map
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_earthquake/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_earthquake/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "damage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_earthquake/SimplePropertyMapping/damage/damages/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "damages" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_earthquake/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_earthquake/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

@@ -1,0 +1,695 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Research-Project> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/title/title> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Research-Project/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q1298668 ,
+		     dbo:Project ,
+		     dbo:UnitOfWork ,
+		     dbo:ResearchProject ,
+		     owl:Thing ,
+		     dul:PlanExecution ,
+		     dul:Situation ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Research-Project/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Research-Project?oldid=11413" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap> ;
+        rr:predicate  dbo:projectObjective .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectObjective" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectObjective/researchObjective/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "researchObjective" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "title" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap> ;
+        rr:predicate  dbo:projectBudgetTotal .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectBudgetTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetTotal/budget/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "budget" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap> ;
+        rr:predicate  dbo:projectKeyword .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectKeyword" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectKeyword/keywords/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "keywords" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap> ;
+        rr:predicate  dbo:projectType .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectType/projectType/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "projectType" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap> ;
+        rr:predicate  dbo:projectStartDate .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectStartDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectStartDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap> ;
+        rr:predicate  dbo:projectCoordinator .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectCoordinator" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectCoordinator/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinator" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap> ;
+        rr:predicate  dbo:projectReferenceID .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectReferenceID" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectReferenceID/projectReference/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "projectReference" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap> ;
+        rr:predicate  dbo:fundedBy .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fundedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/fundedBy/fundingAgency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fundingAgency" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap> ;
+        rr:predicate  dbo:projectEndDate .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectEndDate/end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "end" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap> ;
+        rr:predicate  dbo:projectParticipant .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectParticipant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/coordinator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinator" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap> ;
+        rr:predicate  dbo:projectParticipant .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectParticipant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectParticipant/participants/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "participants" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap> ;
+        rr:predicate  dbo:projectBudgetFunding .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "projectBudgetFunding" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/projectBudgetFunding/funding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "funding" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Research-Project/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Research-Project/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Research-Project/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Research-Project/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Research-Project/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Research-Project/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

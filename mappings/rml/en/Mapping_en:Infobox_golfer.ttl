@@ -1,0 +1,1700 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_golfer> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_golfer/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
+		     wikidata:Q13156709 ,
+		     schema:Person ,
+		     dbo:Athlete ,
+		     dbo:GolfPlayer ,
+		     owl:Thing ,
+		     dul:NaturalPerson ,
+		     dbo:Agent ,
+		     wikidata:Q215627 ,
+		     dbo:Person ,
+		     wikidata:Q5 ,
+		     dul:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_golfer/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_golfer?oldid=9402" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtChampionships .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtChampionships" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChampionships/champwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "champwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtChallenges .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtChallenges" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtChallenges/chalwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "chalwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtKLPGA .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtKLPGA" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtKLPGA/klpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "klpgawins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap> ;
+        rr:predicate  dbo:partner .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "partner" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/partner/partner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "partner" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award5" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtLET .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtLET" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLET/letwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "letwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award6/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award6" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtProTournaments .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtProTournaments" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtProTournaments/prowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prowins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award8/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award8" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtAsia .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtAsia" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAsia/asiawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "asiawins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap> ;
+        rr:predicate  dbo:winsInEurope .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsInEurope" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsInEurope/eurowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "eurowins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtPGA .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtPGA" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtPGA/pgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pgawins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtJLPGA .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtJLPGA" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJLPGA/jlpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "jlpgawins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award10/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award10" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtAus .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtAus" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAus/auswins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "auswins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtJapan .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtJapan" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtJapan/japwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "japwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtOtherTournaments .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtOtherTournaments" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtOtherTournaments/otherwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "otherwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtAlpg .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtAlpg" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtAlpg/alpgwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alpgwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtMajors .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtMajors" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtMajors/majorwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "majorwins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtSenEuro .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtSenEuro" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtSenEuro/seneurowins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "seneurowins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award7/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award7" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtLPGA .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtLPGA" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLPGA/lpgawins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lpgawins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtNWIDE .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtNWIDE" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtNWIDE/nwidewins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nwidewins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "award" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/award/award9/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "award9" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap> ;
+        rr:predicate  dbo:college .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/college/college/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "college" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap> ;
+        rr:predicate  dbo:winsAtLAGT .
+
+### Function Term Map
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_golfer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_golfer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "winsAtLAGT" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_golfer/SimplePropertyMapping/winsAtLAGT/lagtwins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lagtwins" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_golfer/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_golfer/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

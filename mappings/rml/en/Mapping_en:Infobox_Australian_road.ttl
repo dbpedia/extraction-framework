@@ -1,0 +1,834 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Australian_road> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est> ,
+			       <./Mapping_en:Infobox_Australian_road/ConstantMapping/country/Australia> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Australian_road/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:Place ,
+		     wikidata:Q34442 ,
+		     dbo:RouteOfTransportation ,
+		     dbo:Place ,
+		     dbo:ArchitecturalStructure ,
+		     owl:Thing ,
+		     dbo:Location ,
+		     dbo:Road ,
+		     dbo:Infrastructure ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Australian_road/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Australian_road?oldid=48664" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap> ;
+        rr:predicate  dbo:routeEnd .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeEnd" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeEnd/finish/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "finish" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "route_image2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:name/road_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "road_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap> ;
+        rr:predicate  dbo:routeJunction .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeJunction" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeJunction/exits/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "exits" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "route_image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap> ;
+        rr:predicate  dbo:isPartOfName .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isPartOfName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/isPartOfName/route/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "route" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "route_image3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/openingDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "est" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "state" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap> ;
+        rr:predicate  dbo:map .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "map" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/map/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/city/through/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "through" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap> ;
+        rr:predicate  dbo:routeDirection .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeDirection" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeDirection/direction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "direction" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap> ;
+        rr:predicate  dbo:routeStart .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeStart" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/routeStart/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/picture/photo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "photo" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/ConstantMapping/country/Australia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:object     dbr-en:Australia ;
+        rr:predicate  dbo:country .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/foaf:logo/route_image4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "route_image4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap> ;
+        rr:predicate  dbo:buildingEndDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Australian_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Australian_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "buildingEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Australian_road/SimplePropertyMapping/buildingEndDate/est/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "est" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Australian_road/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Australian_road/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

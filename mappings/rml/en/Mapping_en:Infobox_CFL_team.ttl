@@ -1,0 +1,618 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_CFL_team> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_CFL_team/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:CanadianFootballTeam ,
+		     owl:Thing ,
+		     dul:SocialPerson ,
+		     wikidata:Q43229 ,
+		     schema:Organization ,
+		     dul:Agent ,
+		     schema:SportsTeam ,
+		     dbo:SportsTeam ,
+		     dbo:Organisation ,
+		     dbo:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_CFL_team/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_CFL_team?oldid=48735" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap> ;
+        rr:predicate  dbo:homeStadium .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "homeStadium" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/homeStadium/field/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "field" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nicknames" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap> ;
+        rr:predicate  dbo:president .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "president" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "president" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owner" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap> ;
+        rr:predicate  dbo:chairman .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "chairman" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/chairman/chairman/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "chairman" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap> ;
+        rr:predicate  dbo:generalManager .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "generalManager" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/generalManager/general%20manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "general manager" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap> ;
+        rr:predicate  dbo:president .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "president" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/president/team_%20presidents/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team_ presidents" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owner" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/owner/team_owners/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team_owners" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
+        rr:predicate  dbo:coach .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "coach" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coach" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap> ;
+        rr:predicate  dbo:league .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "league" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/league/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "division" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_CFL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_CFL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_CFL_team/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_CFL_team/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_CFL_team/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

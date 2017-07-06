@@ -1,0 +1,1151 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_journal> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency> ,
+			       <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_journal/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q737498 ,
+		     wikidata:Q386724 ,
+		     schema:CreativeWork ,
+		     dbo:AcademicJournal ,
+		     owl:Thing ,
+		     dbo:WrittenWork ,
+		     wikidata:Q1092563 ,
+		     dbo:PeriodicalLiterature ,
+		     dbo:Work ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_journal/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_journal?oldid=13211" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap> ;
+        rr:predicate  dbo:firstPublicationDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstPublicationDate" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "history" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap> ;
+        rr:predicate   dbo:finalPublicationYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "finalPublicationYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "history" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap> ;
+        rr:predicate  dbo:issn .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "issn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ISSN" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap> ;
+        rr:predicate   dbo:finalPublicationDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "finalPublicationDate" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "history" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap> ;
+        rr:predicate  dbo:lccn .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lccn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "LCCN" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap> ;
+        rr:predicate  dbo:oclc .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "oclc" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "OCLC" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap> ;
+        rr:predicate  dbo:jstor .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "jstor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "JSTOR" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
+        rr:predicate  dbo:publisher .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "publisher" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "publisher" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap> ;
+        rr:predicate  dbo:issn .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "issn" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "eISSN" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap> ;
+        rr:predicate  dbo:license .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "license" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "license" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap> ;
+        rr:predicate  dbo:isPeerReviewed .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isPeerReviewed" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "peer-reviewed" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap> ;
+        rr:predicate  dbo:impactFactorAsOf .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "impactFactorAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "impact-year" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap> ;
+        rr:predicate  dbo:openAccessContent .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openAccessContent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "openaccess" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap> ;
+        rr:predicate  dbo:coden .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "coden" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "CODEN" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cover" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap> ;
+        rr:predicate  dbo:frequencyOfPublication .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "frequencyOfPublication" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "frequency" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap> ;
+        rr:predicate  dbo:firstPublicationYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "firstPublicationYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "history" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "former_names" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap> ;
+        rr:predicate  dbo:editor .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "editor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "editor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap> ;
+        rr:predicate  dbo:abbreviation .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "abbreviation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "abbreviation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap> ;
+        rr:predicate  dbo:impactFactor .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "impactFactor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "impact" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap> ;
+        rr:predicate  dbo:academicDiscipline .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "academicDiscipline" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discipline" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_journal/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_journal/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_journal/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_journal/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_journal/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_journal/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

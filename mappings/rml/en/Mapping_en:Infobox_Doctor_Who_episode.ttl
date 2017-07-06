@@ -1,0 +1,901 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Doctor_Who_episode> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:TelevisionEpisode ,
+		     schema:TVEpisode ,
+		     dbo:Work ,
+		     schema:CreativeWork ,
+		     wikidata:Q386724 ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Doctor_Who_episode?oldid=7293" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subsequentWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/following/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "following" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap> ;
+        rr:predicate  dbo:runtime .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Time> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Time" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "runtime" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subsequentWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Next" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap> ;
+        rr:predicate  dbo:episodeNumber .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "episodeNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Episode" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap> ;
+        rr:predicate  dbo:series .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "series" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Series" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap> ;
+        rr:predicate  dbo:photographer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "photographer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Photographer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/serial_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "serial_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap> ;
+        rr:predicate  dbo:show .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "show" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/show/show/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "show" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap> ;
+        rr:predicate  dbo:seasonNumber .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "seasonNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Season" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap> ;
+        rr:predicate  dbo:previousWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/preceding/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "preceding" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap> ;
+        rr:predicate  dbo:writer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Writer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap> ;
+        rr:predicate  dbo:previousWork .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Prev" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap> ;
+        rr:predicate  dbo:publicationDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "publicationDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/publicationDate/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap> ;
+        rr:predicate  dbo:musicComposer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "musicComposer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Music" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Airdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Director" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap> ;
+        rr:predicate  dbo:guest .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "guest" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Guests" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap> ;
+        rr:predicate  dbo:executiveProducer .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "executiveProducer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/executiveProducer/executive_producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "executive_producer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Doctor_Who_episode/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Doctor_Who_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Title" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Doctor_Who_episode/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Doctor_Who_episode/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

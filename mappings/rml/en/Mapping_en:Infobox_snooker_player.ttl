@@ -1,0 +1,912 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_snooker_player> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking> ,
+			       <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null> ,
+			       <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place> ,
+			       <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_snooker_player/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_snooker_player/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_snooker_player?oldid=48390" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap> ;
+        rr:predicate  dbo:highestRank .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "highestRank" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestRank/High%20ranking/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "High ranking" .
+
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap> ;
+        rr:predicate  dbo:otherWins .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "otherWins" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/otherWins/Other%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Other wins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Professional" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_snooker_player/StartDate/activeYearsStartYear/activeYearsEndYear/Professional> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/EndDate/activeYearsStartYear/activeYearsEndYear/Professional/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Professional" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap> ;
+        rr:predicate  dbo:bestFinish .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bestFinish" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/bestFinish/Best%20finish/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Best finish" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap> ;
+        rr:predicate  dbo:sportCountry .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sportCountry" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/sportCountry/Sport%20country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Sport country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/alias/Nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Nickname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap> ;
+        rr:predicate  dbo:rankingWins .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "rankingWins" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/rankingWins/Ranking%20wins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Ranking wins" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap> ;
+        rr:predicate  dbo:highestBreak .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "highestBreak" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/highestBreak/High%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "High break" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap> ;
+        rr:predicate  dbo:worldChampionTitleYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "worldChampionTitleYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/worldChampionTitleYear/World%20champ/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "World champ" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap> ;
+        rr:predicate  dbo:gross .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "gross" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/gross/Prize%20money/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Prize money" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap> ;
+        rr:predicate  dbo:centuryBreaks .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "centuryBreaks" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/centuryBreaks/Century%20break/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Century break" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap> ;
+        rr:predicate  dbo:currentRank .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "currentRank" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/currentRank/Current%20rank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Current rank" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_snooker_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1> ;
+        rr:object            dbo:Athlete , foaf:Person , dul:Agent , dbo:Person , schema:Person , wikidata:Q5 , dbo:SnookerPlayer , wikidata:Q215627 , dbo:SnookerChamp , dul:NaturalPerson , owl:Thing , dbo:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/isSet> ,
+			       <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "World champ" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap> ;
+        crml:fallbackMap     <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2> ;
+        rr:object            dbo:SnookerWorldRanking , dbo:SportCompetitionResult , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_snooker_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_snooker_player/Function/contains> ,
+			       <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/ValueParameterPOM> ,
+			       <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_snooker_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "No." ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_en:Infobox_snooker_player/ConditionalMapping/World%20champ_isSet_null/1/2>
+        a             rr:PredicateObjectMap ;
+        rr:object     wikidata:Q215627 , dbo:Person , owl:Thing , foaf:Person , dbo:Athlete , dul:Agent , dbo:Agent , schema:Person , wikidata:Q5 , dul:NaturalPerson , dbo:SnookerPlayer ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_snooker_player/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_snooker_player/Function/isSet>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:isSet ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_snooker_player/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_snooker_player/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_snooker_player/Function/contains>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:contains ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_snooker_player/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

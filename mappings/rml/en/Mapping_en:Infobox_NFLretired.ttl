@@ -1,0 +1,1555 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_NFLretired> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_NFLretired/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q14128148 ,
+		     schema:Person ,
+		     wikidata:Q215627 ,
+		     dbo:Athlete ,
+		     owl:Thing ,
+		     dbo:AmericanFootballPlayer ,
+		     dbo:Agent ,
+		     foaf:Person ,
+		     dul:NaturalPerson ,
+		     dbo:Person ,
+		     dbo:GridironFootballPlayer ,
+		     wikidata:Q5 ,
+		     dul:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_NFLretired/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_NFLretired?oldid=10339" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap> ;
+        rr:predicate  dbo:draftYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "draftyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentnumber" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/currentposition/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentposition" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "teams" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Deathplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Birthplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap> ;
+        rr:predicate  dbo:status .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "status" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "status" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap> ;
+        rr:predicate  dbo:draftRound .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "draftround" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debutyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap> ;
+        rr:predicate  dbo:debutTeam .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "debutTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debutteam" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "full_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap> ;
+        rr:predicate  dbo:supplementalDraftYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "supplementalDraftYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "suppdraftyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position5" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap> ;
+        rr:predicate  dbo:highschool .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "highschool" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "high_school" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/pound> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pound" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Weight_lbs" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap> ;
+        rr:predicate  dbo:college .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "College" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap> ;
+        rr:predicate  dbo:draftPick .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftPick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "draftpick" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DateOfDeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentteam" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "finalyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap> ;
+        rr:predicate  dbo:undraftedYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "undraftedYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "undraftedyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap> ;
+        rr:predicate  dbo:espnId .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "espnId" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "espn" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DateOfBirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pastteams" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/pound> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pound" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap> ;
+        rr:predicate  dbo:supplementalDraftRound .
+
+### Function Term Map
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NFLretired/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NFLretired/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "supplementalDraftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NFLretired/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "suppdraftround" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_NFLretired/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_NFLretired/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

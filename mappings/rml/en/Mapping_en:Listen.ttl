@@ -1,0 +1,199 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Listen> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10> ,
+			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2> ;
+        rr:subjectMap          <./Mapping_en:Listen/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Listen/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Listen/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Listen?oldid=45360" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap> ;
+        rr:predicate  dbo:soundRecording .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Listen/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Listen/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

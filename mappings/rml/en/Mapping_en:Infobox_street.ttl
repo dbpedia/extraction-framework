@@ -1,0 +1,1408 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_street> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code> ,
+			       <./Mapping_en:Infobox_street/latitude> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref> ,
+			       <./Mapping_en:Infobox_street/longitude> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_street/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Infrastructure ,
+		     wikidata:Q34442 ,
+		     dbo:RouteOfTransportation ,
+		     dbo:Place ,
+		     dbo:Location ,
+		     dbo:Road ,
+		     schema:Place ,
+		     owl:Thing ,
+		     dbo:ArchitecturalStructure ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_street/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_street?oldid=48663" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_m" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap> ;
+        rr:predicate  dbo:routeStartDirection .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeStartDirection" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStartDirection/direction_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "direction_a" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap> ;
+        rr:predicate  dbo:routeEndDirection .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeEndDirection" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEndDirection/direction_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "direction_b" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/formerName/former_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "former_names" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foot" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_ft" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap> ;
+        rr:predicate  dbo:buildingStartDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "buildingStartDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingStartDate/construction_start_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "construction_start_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap> ;
+        rr:predicate  dbo:isPartOfName .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isPartOfName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/isPartOfName/alternate_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alternate_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap> ;
+        rr:predicate  dbo:routeStart .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeStart" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeStart/terminus_a/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "terminus_a" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap> ;
+        rr:predicate  dbo:maintainedBy .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maintainedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maint" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_km" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap> ;
+        rr:predicate  dbo:routeJunction .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeJunction" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeJunction/junction/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "junction" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap> ;
+        rr:predicate  dbo:county .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "county" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/county/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "county" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "state" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap> ;
+        rr:predicate  dbo:buildingEndDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "buildingEndDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/buildingEndDate/completion_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "completion_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/mile> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap> ;
+        rr:predicate  dbo:routeEnd .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "routeEnd" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/routeEnd/terminus_b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "terminus_b" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap> ;
+        rr:predicate  dbo:county .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "county" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/county/counties/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "counties" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:logo/marker_image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "marker_image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/inauguration_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "inauguration_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap> ;
+        rr:predicate  dbo:demolitionDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "demolitionDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/demolitionDate/demolition_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demolition_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/latitude/FunctionTermMap>
+        a                      fnml:FunctionTermMap , rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_street/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/LatitudeFunction> , <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Function Value
+<./Mapping_en:Infobox_street/latitude/FunctionTermMap>
+        a                      fnml:FunctionTermMap ,
+			       rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_en:Infobox_street/latitude/FunctionTermMap> ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/LatitudeFunction> ,
+			       <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+### References
+<./Mapping_en:Infobox_street/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/openingDate/commissioning_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commissioning_date" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap> ;
+        rr:predicate  dbo:addressInRoad .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "addressInRoad" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/addressInRoad/addresses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "addresses" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap> ;
+        rr:predicate  dbo:lengthReference .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "lengthReference" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/lengthReference/length_ref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_ref" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+### References
+<./Mapping_en:Infobox_street/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
+        rr:predicate  dbo:postalCode .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postal_code" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_street/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_street/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_street/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_street/SimplePropertyMapping/city/cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cities" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_street/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_street/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_street/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_street/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

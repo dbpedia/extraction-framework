@@ -1,0 +1,714 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Drugbox> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Drugbox/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Drug ,
+		     wikidata:Q8386 ,
+		     dbo:ChemicalSubstance ,
+		     dul:ChemicalObject ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Drugbox/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Drugbox?oldid=22064" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap> ;
+        rr:predicate  dbo:casNumber .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "casNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/casNumber/CAS_number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "CAS_number" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap> ;
+        rr:predicate  dbo:atcSupplemental .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "atcSupplemental" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSupplemental/ATC_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ATC_supplemental" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/foaf:name/drug_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "drug_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_high/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "melting_high" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap> ;
+        rr:predicate  dbo:iupacName .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "iupacName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/iupacName/IUPAC_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "IUPAC_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap> ;
+        rr:predicate  dbo:pubchem .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pubchem" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/pubchem/PubChem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "PubChem" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap> ;
+        rr:predicate  dbo:atcSuffix .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "atcSuffix" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcSuffix/ATC_suffix/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ATC_suffix" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap> ;
+        rr:predicate  dbo:casSupplemental .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "casSupplemental" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/casSupplemental/CAS_supplemental/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "CAS_supplemental" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap> ;
+        rr:predicate  dbo:drugbank .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "drugbank" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/drugbank/DrugBank/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DrugBank" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap> ;
+        rr:predicate  dbo:boilingPoint .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "boilingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/boilingPoint/boiling_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "boiling_point" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap> ;
+        rr:predicate  dbo:bioavailability .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bioavailability" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/bioavailability/bioavailability/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bioavailability" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap> ;
+        rr:predicate  dbo:atcPrefix .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "atcPrefix" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/atcPrefix/ATC_prefix/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ATC_prefix" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap> ;
+        rr:predicate  dbo:fdaUniiCode .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fdaUniiCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/fdaUniiCode/UNII/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "UNII" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap> ;
+        rr:predicate  dbo:chEBI .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "chEBI" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/chEBI/ChEBI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ChEBI" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap> ;
+        rr:predicate  dbo:meltingPoint .
+
+### Function Term Map
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Value
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Drugbox/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Drugbox/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Drugbox/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "meltingPoint" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Drugbox/SimplePropertyMapping/meltingPoint/melting_point/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "melting_point" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Drugbox/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Drugbox/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

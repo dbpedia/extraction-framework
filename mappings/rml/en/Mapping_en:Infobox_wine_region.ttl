@@ -1,0 +1,747 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_wine_region> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_wine_region/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:WineRegion ,
+		     dbo:Place ,
+		     schema:Place ,
+		     dbo:Location ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_wine_region/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_wine_region?oldid=14206" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap> ;
+        rr:predicate  dbo:isPartOfWineRegion .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "isPartOfWineRegion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/isPartOfWineRegion/part%20of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "part of" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap> ;
+        rr:predicate  dbo:subregion .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "subregion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/subregion/sub%20regions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sub regions" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Area" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/total%20size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "total size" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfVineyards .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfVineyards" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfVineyards/vineyards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "vineyards" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap> ;
+        rr:predicate  dbo:wineYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "wineYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineYear/wine%20years/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "wine years" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap> ;
+        rr:predicate  dbo:wineProduced .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "wineProduced" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/wineProduced/wine%20produced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "wine produced" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap> ;
+        rr:predicate  dbo:varietals .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "varietals" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/varietals/varietals/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "varietals" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap> ;
+        rr:predicate  dbo:growingGrape .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "growingGrape" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/growingGrape/grapes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "grapes" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/location/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap> ;
+        rr:predicate  dbo:similar .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "similar" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/similar/similar/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "similar" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Area" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/areaTotal/planted/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "planted" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/foaf:name/other%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "other name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfWineries .
+
+### Function Term Map
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_wine_region/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_wine_region/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfWineries" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_wine_region/SimplePropertyMapping/numberOfWineries/wineries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "wineries" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_wine_region/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_wine_region/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

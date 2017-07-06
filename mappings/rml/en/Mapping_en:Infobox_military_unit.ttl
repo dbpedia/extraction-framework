@@ -1,0 +1,2069 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_military_unit> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4> ,
+			       <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron> ,
+			       <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_military_unit/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
+		     dbo:Organisation ,
+		     wikidata:Q43229 ,
+		     schema:Organization ,
+		     owl:Thing ,
+		     dul:SocialPerson ,
+		     wikidata:Q176799 ,
+		     dbo:MilitaryUnit ,
+		     dbo:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_military_unit/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_military_unit?oldid=13132" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "motto" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "motto" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap> ;
+        rr:predicate  dbo:disbanded .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "disbanded" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/disbanded/disbanded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "disbanded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colors" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftTrainer .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftTrainer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTrainer/aircraft_trainer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_trainer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterUtility .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterUtility" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterUtility/aircraft_helicopter_utility/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_utility" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap> ;
+        rr:predicate  dbo:colourName .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colourName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/colourName/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colors" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftRecon .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftRecon" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftRecon/aircraft_recon/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_recon" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap> ;
+        rr:predicate  dbo:mascot .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mascot" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mascot" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftInterceptor .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftInterceptor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftInterceptor/aircraft_interceptor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_interceptor" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftBomber .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftBomber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftBomber/aircraft_bomber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_bomber" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap> ;
+        rr:predicate  dbo:militaryUnitSize .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "militaryUnitSize" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryUnitSize/size/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "size" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopter .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopter/aircraft_helicopter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftElectronic .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftElectronic" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftElectronic/aircraft_electronic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_electronic" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap> ;
+        rr:predicate  dbo:identificationSymbol .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "identificationSymbol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "identification_symbol_2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterAttack .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterAttack" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterAttack/aircraft_helicopter_attack/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_attack" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap> ;
+        rr:predicate  dbo:fourthCommander .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "fourthCommander" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/fourthCommander/commander4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commander4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap> ;
+        rr:predicate  dbo:identificationSymbol .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "identificationSymbol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "identification_symbol_4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/EndDateFunction> ,
+			       <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap> ;
+        rr:predicate  dbo:flyingHours .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "flyingHours" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/flyingHours/flying_hours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "flying_hours" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap> ;
+        rr:predicate  dbo:militaryBranch .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "militaryBranch" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "branch" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterObservation .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterObservation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterObservation/aircraft_helicopter_observation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_observation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftTransport .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftTransport" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftTransport/aircraft_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_transport" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap> ;
+        rr:predicate  dbo:notableCommander .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "notableCommander" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/notableCommander/notable_commanders/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "notable_commanders" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:name/unit_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "unit_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftFighter .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftFighter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftFighter/aircraft_fighter/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_fighter" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftPatrol .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftPatrol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftPatrol/aircraft_patrol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_patrol" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterMultirole .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterMultirole" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterMultirole/aircraft_helicopter_multirole/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_multirole" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap> ;
+        rr:predicate  dbo:garrison .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "garrison" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/garrison/garrison/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "garrison" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap> ;
+        rr:predicate  dbo:role .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "role" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/role/role/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "role" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap> ;
+        rr:predicate  dbo:secondCommander .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "secondCommander" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/secondCommander/commander2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commander2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftAttack .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftAttack" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftAttack/aircraft_attack/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_attack" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap> ;
+        rr:predicate  dbo:identificationSymbol .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "identificationSymbol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol_3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "identification_symbol_3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap> ;
+        rr:predicate  dbo:commandStructure .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "commandStructure" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commandStructure/command_structure/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "command_structure" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterCargo .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterCargo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterCargo/aircraft_helicopter_cargo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_cargo" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/country/allegiance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "allegiance" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap> ;
+        rr:predicate  dbo:aircraftHelicopterTransport .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "aircraftHelicopterTransport" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/aircraftHelicopterTransport/aircraft_helicopter_transport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aircraft_helicopter_transport" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap> ;
+        rr:predicate  dbo:battleHonours .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "battleHonours" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battleHonours/battle_honours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "battle_honours" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_en:Infobox_military_unit/EndDate/activeYearsStartYear/activeYearsEndYear/dates> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/StartDateFunction> ,
+			       <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/StartDate/activeYearsStartYear/activeYearsEndYear/dates/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dates" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap> ;
+        rr:predicate  dbo:patron .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "patron" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/patron/patron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "patron" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap> ;
+        rr:predicate  dbo:identificationSymbol .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "identificationSymbol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/identificationSymbol/identification_symbol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "identification_symbol" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap> ;
+        rr:predicate  dbo:anniversary .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "anniversary" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/anniversary/anniversaries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "anniversaries" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap> ;
+        rr:predicate  dbo:thirdCommander .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "thirdCommander" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/thirdCommander/commander3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commander3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap> ;
+        rr:predicate  dbo:battle .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "battle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/battle/battles/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "battles" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap> ;
+        rr:predicate  dbo:march .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "march" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/march/march/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "march" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap> ;
+        rr:predicate  dbo:commander .
+
+### Function Term Map
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_military_unit/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_military_unit/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "commander" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_military_unit/SimplePropertyMapping/commander/commander1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commander1" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_military_unit/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_military_unit/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_military_unit/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_military_unit/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

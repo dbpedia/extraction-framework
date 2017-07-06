@@ -1,0 +1,1057 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_sports_team> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_sports_team/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:Organization ,
+		     dul:SocialPerson ,
+		     dbo:SportsTeam ,
+		     wikidata:Q43229 ,
+		     dul:Agent ,
+		     schema:SportsTeam ,
+		     owl:Thing ,
+		     dbo:Agent ,
+		     dbo:Organisation ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_sports_team/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_sports_team?oldid=47901" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap> ;
+        rr:predicate  dbo:manager .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "manager" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/gm/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gm" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap> ;
+        rr:predicate  dbo:manager .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "manager" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/manager/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap> ;
+        rr:predicate  dbo:stadium .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "stadium" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/stadium/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stadium" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foundingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:nick/nicknames/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nicknames" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap> ;
+        rr:predicate  dbo:division .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "division" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/division/division/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "division" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owner" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap> ;
+        rr:predicate  dbo:league .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "league" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/league/league/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "league" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap> ;
+        rr:predicate  dbo:stadium .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "stadium" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/ballpark/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ballpark" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap> ;
+        rr:predicate  dbo:coach .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "coach" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/coach/coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coach" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colors/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colors" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "color2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap> ;
+        rr:predicate  dbo:stadium .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "stadium" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/stadium/arena/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "arena" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap> ;
+        rr:predicate  dbo:sport .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sport" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/color1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "color1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap> ;
+        rr:predicate  dbo:president .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "president" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/president/president/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "president" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "colour" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/colour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colours" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap> ;
+        rr:predicate  dbo:logo .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "logo" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap> ;
+        rr:predicate  dbo:anthem .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "anthem" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/anthem/anthem/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "anthem" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap> ;
+        rr:predicate  dbo:mascot .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mascot" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mascot" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sports_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sports_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sports_team/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "full_name" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_sports_team/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_sports_team/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

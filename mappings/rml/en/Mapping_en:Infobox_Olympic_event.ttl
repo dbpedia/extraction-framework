@@ -1,0 +1,378 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Olympic_event> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_Olympic_event/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:Event ,
+		     schema:SportsEvent ,
+		     wikidata:Q1656682 ,
+		     dbo:SocietalEvent ,
+		     dbo:Event ,
+		     dbo:SportsEvent ,
+		     schema:Event ,
+		     dbo:OlympicEvent ,
+		     dbo:Olympics ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_Olympic_event/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Olympic_event?oldid=20580" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap> ;
+        rr:predicate  dbo:event .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "event" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/event/event/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "event" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap> ;
+        rr:predicate  dbo:nextEvent .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "nextEvent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/nextEvent/next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "next" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap> ;
+        rr:predicate  dbo:previousEvent .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousEvent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/previousEvent/prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prev" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap> ;
+        rr:predicate  dbo:silverMedalist .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "silverMedalist" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/silverMedalist/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "silver" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap> ;
+        rr:predicate  dbo:games .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "games" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/games/games/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "games" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap> ;
+        rr:predicate  dbo:bronzeMedalist .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "bronzeMedalist" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/bronzeMedalist/bronze/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bronze" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap> ;
+        rr:predicate  dbo:goldMedalist .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympic_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympic_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "goldMedalist" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympic_event/SimplePropertyMapping/goldMedalist/gold/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gold" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_Olympic_event/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_Olympic_event/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

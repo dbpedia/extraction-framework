@@ -1,0 +1,2307 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_river> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km> ,
+			       <./Mapping_en:Infobox_river/GeoCoordinatesMapping> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Infobox_river/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place ,
+		     wikidata:Q4022 ,
+		     schema:RiverBodyOfWater ,
+		     dbo:Stream ,
+		     schema:BodyOfWater ,
+		     schema:Place ,
+		     dbo:River ,
+		     dbo:BodyOfWater ,
+		     wikidata:Q47521 ,
+		     dbo:Location ,
+		     owl:Thing ,
+		     dbo:NaturalPlace ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Infobox_river/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_river?oldid=14689" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap> ;
+        rr:predicate  dbo:sourcePlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourcePlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourcePlace/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap> ;
+        rr:predicate  dbo:synonym .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "synonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "other_name1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap> ;
+        rr:predicate  dbo:mouthElevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_elevation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap> ;
+        rr:predicate  dbo:watershed .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "watershed" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "watershed_imperial" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap> ;
+        rr:predicate  dbo:sourceCountry .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceCountry" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/basin_countries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "basin_countries" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap> ;
+        rr:predicate  dbo:mouthRegion .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthRegion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthRegion/mouth_region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_region" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap> ;
+        rr:predicate  dbo:discharge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicFeetPerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "discharge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicFeetPerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_imperial" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap> ;
+        rr:predicate  dbo:watershed .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "watershed" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "watershed" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "state" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap> ;
+        rr:predicate  dbo:mouthMountain .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthMountain" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthMountain/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foot" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation_ft" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap> ;
+        rr:predicate  dbo:sourceDistrict .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceDistrict" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceDistrict/source_district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_district" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap> ;
+        rr:predicate  dbo:discharge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetrePerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "discharge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicMetrePerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap> ;
+        rr:predicate  dbo:maximumDischarge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicFeetPerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maximumDischarge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicFeetPerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_max_imperial" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap> ;
+        rr:predicate  dbo:minimumDischarge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetrePerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicMetrePerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "minimumDischarge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_min" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap> ;
+        rr:predicate  dbo:region .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "region" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap> ;
+        rr:predicate  dbo:mouthState .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthState" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthState/mouth_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap> ;
+        rr:predicate  dbo:synonym .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "synonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/synonym/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "other_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap> ;
+        rr:predicate  dbo:minimumDischarge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicFeetPerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicFeetPerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "minimumDischarge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/minimumDischarge/discharge_min_imperial/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_min_imperial" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap> ;
+        rr:predicate  dbo:maximumDischarge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetrePerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicMetrePerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "maximumDischarge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/maximumDischarge/discharge_max/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_max" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap> ;
+        rr:predicate  dbo:mouthElevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_elevation_m" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation_m" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/city/city1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "district" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap> ;
+        rr:predicate  dbo:watershed .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareMile> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareMile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "watershed" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_sqmi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "watershed_sqmi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap> ;
+        rr:predicate  dbo:riverMouth .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "riverMouth" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/riverMouth/mouth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap> ;
+        rr:predicate  dbo:sourceRegion .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceRegion" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceRegion/source_region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_region" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap> ;
+        rr:predicate  dbo:discharge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicFeetPerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "discharge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicFeetPerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_cuft/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_cuft/s" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap> ;
+        rr:predicate  dbo:origin .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "origin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/origin/origin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "origin" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/river_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "river_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap> ;
+        rr:predicate  dbo:sourceMountain .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceMountain" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceMountain/source_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap> ;
+        rr:predicate  dbo:mouthElevation .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foot" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthElevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthElevation/mouth_elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_elevation_ft" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap> ;
+        rr:predicate  dbo:mouthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthPlace/mouth_location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_location" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "district" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/district/district1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/mile> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mile" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_mi" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap> ;
+        rr:predicate  dbo:mouthDistrict .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthDistrict" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthDistrict/mouth_district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_district" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap> ;
+        rr:predicate  dbo:mouthCountry .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mouthCountry" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/mouthCountry/mouth_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mouth_country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap> ;
+        rr:predicate  dbo:region .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "region" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/region/region1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap> ;
+        rr:predicate  dbo:sourceState .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceState" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceState/source_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "country" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/country/country1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "kilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length_km" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/GeoCoordinatesMapping>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateGeoMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/GeoCoordinatesMapping/ObjectMap> ;
+        rr:predicate  dbo:sourcePosition , dbo:mouthPosition .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap> ;
+        rr:predicate  dbo:watershed .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "watershed" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/watershed/watershed_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "watershed_km2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "state" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap> ;
+        rr:predicate  dbo:discharge .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetrePerSecond> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "discharge" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "cubicMetrePerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/discharge/discharge_m3/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discharge_m3/s" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap> ;
+        rr:predicate  dbo:sourceCountry .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sourceCountry" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/sourceCountry/source_country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "source_country" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Value
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_river/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_river/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_river/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_river/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Infobox_river/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_river/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_river/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Infobox_river/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+

@@ -1,0 +1,817 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Persondata> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:Persondata/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Agent ,
+		     owl:Thing ,
+		     dbo:Person ,
+		     wikidata:Q215627 ,
+		     dul:Agent ,
+		     wikidata:Q5 ,
+		     schema:Person ,
+		     dul:NaturalPerson ,
+		     foaf:Person ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:Persondata/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Persondata?oldid=31466" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap> ;
+        rr:predicate  dc:description .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "dc:description" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/short%20description/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "short description" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/PLACE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "PLACE OF BIRTH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of death" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/NAME/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "NAME" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of birth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap> ;
+        rr:predicate  dbo:birthYear .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DATE OF BIRTH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/alternative%20names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alternative names" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "alias" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/alias/ALTERNATIVE%20NAMES/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ALTERNATIVE NAMES" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthPlace/place%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "place of birth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap> ;
+        rr:predicate  dc:description .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "dc:description" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/dc:description/SHORT%20DESCRIPTION/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "SHORT DESCRIPTION" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap> ;
+        rr:predicate  dbo:deathYear .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/date%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of death" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthDate/DATE%20OF%20BIRTH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DATE OF BIRTH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/place%20of%20death/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "place of death" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap> ;
+        rr:predicate  dbo:deathYear .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathYear/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DATE OF DEATH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathDate/DATE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DATE OF DEATH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/deathPlace/PLACE%20OF%20DEATH/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "PLACE OF DEATH" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap> ;
+        rr:predicate  dbo:birthYear .
+
+### Function Term Map
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Persondata/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Persondata/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Persondata/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Persondata/SimplePropertyMapping/birthYear/date%20of%20birth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date of birth" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:Persondata/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:Persondata/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+
