@@ -58,7 +58,7 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
   }
 
   def addDCTermsType(literal: RMLLiteral) = {
-    resource.addLiteral(createProperty(RdfNamespace.DCTERMS.namespace + "type"), literal.toString())
+    //resource.addLiteral(createProperty(RdfNamespace.DCTERMS.namespace + "type"), literal.toString())
   }
 
   def addDBFStartDate(predicateObjectMap: RMLPredicateObjectMap) =
