@@ -23,10 +23,19 @@ object RMLFormatter extends Formatter {
       val conditionalsPart = getAllConditionalMappings(model, base)
       val functionsPart = getFunctions(model, base)
       val logicalSourcePart = getLogicalSource(model, base)
-      val formatted = Seq(prefixes, triplesMapPart, subjectMapPart, logicalSourcePart, mappingsPart, conditionalsPart, functionsPart).reduce((first, second) => first.concat('\n' + second))
+      val subjectMapFunctionPart = if(!functionsPart.equals("")) getSubjectMapFunction(model, base) else ""
+      val formatted = Seq(prefixes,
+                          triplesMapPart,
+                          subjectMapPart,
+                          logicalSourcePart,
+                          mappingsPart,
+                          conditionalsPart,
+                          functionsPart,
+                          subjectMapFunctionPart)
+                          .reduce((first, second) => first.concat('\n' + second))
       formatted
     } catch {
-      case x : Exception => x.printStackTrace(); null
+      case x : Exception => x.printStackTrace(); ""
     }
 
   }
@@ -525,5 +534,11 @@ object RMLFormatter extends Formatter {
     _hashtags
   }
 
+  private def getSubjectMapFunction(rmlModel: RMLModel, base : String) : String = {
+    val resource = rmlModel.functionSubjectMap.resource
+    val subjectMapFunctionString = getResourceString(resource, base)
+    val heading = "### Functions SubjectMap\n" + hashtags(25) + "\n"
 
+    heading + subjectMapFunctionString + offset
+  }
 }
