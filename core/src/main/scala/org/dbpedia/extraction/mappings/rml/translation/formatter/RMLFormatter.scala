@@ -7,6 +7,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
   * Created by wmaroy on 03.07.17.
+  * //TODO: clean up this code, this was scripted
   */
 object RMLFormatter extends Formatter {
 
@@ -21,8 +22,9 @@ object RMLFormatter extends Formatter {
       val mappingsPart = getAllMappings(model, base)
       val conditionalsPart = getAllConditionalMappings(model, base)
       val functionsPart = getFunctions(model, base)
-      print(Seq(prefixes, triplesMapPart, subjectMapPart, functionsPart, mappingsPart, conditionalsPart).reduce((first, second) => first.concat('\n' + second)))
-      triplesMapPart
+      val logicalSourcePart = getLogicalSource(model, base)
+      val formatted = Seq(prefixes, triplesMapPart, subjectMapPart, logicalSourcePart, mappingsPart, conditionalsPart, functionsPart).reduce((first, second) => first.concat('\n' + second))
+      formatted
     } catch {
       case x : Exception => x.printStackTrace(); null
     }
@@ -44,8 +46,8 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(triplesMapResource.listProperties())
     val turtle = freshModel.writeAsTurtle(base)
-    val formatted = turtle.replaceAll(",", ",\n\t\t\t\t\t\t\t  ")
-    val heading = "### Main TriplesMap"
+    val formatted = turtle.replaceAll(",", ",\n\t\t\t      ")
+    val heading = hashtags(3) + " Main TriplesMap\n" + hashtags(20)
 
     heading + removePrefixes(formatted) + offset
 
@@ -65,8 +67,8 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(subjectMapResource.listProperties())
     val turtle = freshModel.writeAsTurtle(base)
-    val formatted = turtle.replaceAll(",", ",\n\t\t\t\t\t")
-    val heading = "### Main SubjectMap"
+    val formatted = turtle.replaceAll(",", ",\n\t\t    ")
+    val heading = hashtags(3) + " Main SubjectMap\n" + hashtags(20)
 
     heading + removePrefixes(formatted) + offset
   }
@@ -84,7 +86,7 @@ object RMLFormatter extends Formatter {
     val triplesMapResource = model.triplesMap.resource
     val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
 
-    statements.asScala.map(statement => {
+    val mappings = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
       if(!hasConditions(predicateObjectMap.asResource())) {
@@ -94,33 +96,41 @@ object RMLFormatter extends Formatter {
         "" // skip conditionals here
       }
 
-    }).reduce((first, second) => first.concat("\n" + second)) // so return all concatenated mappings
+    })
 
+    val mappingsString = if(mappings.nonEmpty) {
+      mappings.reduce((first, second) => first.concat("\n" + second)) // so return all concatenated mappings
+    } else ""
+
+    val heading = hashtags(11)+ "\n# Mappings\n" + hashtags(11) + offset
+
+    heading + mappingsString
   }
 
   private def getAllConditionalMappings(model: RMLModel, base : String) : String = {
 
-    // Get the normal (non-conditional) mappings first
     val triplesMapResource = model.triplesMap.resource
     val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
+    val heading = hashtags(22) + "\n# Conditional Mappings\n" + hashtags(22) + "\n"
 
-    val innerHeading = "\n### Conditional Mapping\n"
-    val heading = "#####################\nConditional Mappings\n#####################\n"
 
-    val conditionalString = statements.asScala.map(statement => {
+    val conditionals = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
       if(hasConditions(predicateObjectMap.asResource())) {
         val tuple = getConditionalMapping(predicateObjectMap.asResource(), base)
         tuple._1.concat(tuple._2)
       } else {
-        "" // skip conditionals here
+        "" // here
       }
 
     }).filter(conditionString => !conditionString.equals(""))
-      .reduce((first, second) => first.concat("\n" + innerHeading + second))
 
-    heading + innerHeading + conditionalString
+    val conditionalString = if(conditionals.nonEmpty) {
+      conditionals.reduce((first, second) => first.concat("\n" + second))
+    } else ""
+
+    heading + offset + conditionalString
 
   }
 
@@ -138,7 +148,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
-    val heading = "########\n\n### Property Mapping"
+    val heading = hashtags(3) + " PredicateObjectMap\n" + hashtags(23)
     val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
 
     /** The case if a function is used:
@@ -167,17 +177,18 @@ object RMLFormatter extends Formatter {
     * @return
     */
   private def getConditionalMapping(resource : Resource, base : String) : (String, String) = {
+    val heading = hashtags(3) + " Conditional PredicateObjectMap" + "\n" + hashtags(35)
     if(hasConditions(resource)) {
       val current_condition = getCondition(resource, base)
       if(hasFallback(resource)) {
         val fallbackMap = getFallbackMap(resource)
         val other_conditions = getConditionalMapping(fallbackMap, base)
-        (current_condition._1 + offset + other_conditions._1, current_condition._2 + offset + other_conditions._2)
+        (heading + current_condition._1 + offset + current_condition._2 , other_conditions._1  + other_conditions._2)
       } else {
-        (getResourceString(resource,base), "")
+        (heading + getResourceString(resource,base) + offset, "")
       }
     } else {
-      (getResourceString(resource,base), "")
+      (heading + getResourceString(resource,base) + offset, "")
     }
   }
 
@@ -192,13 +203,30 @@ object RMLFormatter extends Formatter {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "equalCondition")
     val functionPOM = resource.getPropertyResourceValue(property).asResource()
     val functionPOMString = getResourceString(functionPOM, base)
+    val heading = "### Function Term Map"
+
 
     val propertyFunctionValue = resource.getModel.getProperty(RdfNamespace.FNML.namespace + "functionValue")
     val functionValue = functionPOM.getPropertyResourceValue(propertyFunctionValue)
     val functionValueString = getFunctionValue(functionValue.listProperties(), base)
 
     val conditionPOM = getResourceString(resource, base)
-    (conditionPOM, functionPOMString.concat("\n" + functionValueString))
+    (conditionPOM, heading + functionPOMString.concat(offset + functionValueString))
+  }
+
+  /**
+    * Returns a formatted logical source
+    *
+    * @param model
+    * @param base
+    * @return
+    */
+  private def getLogicalSource(model: RMLModel, base : String) : String = {
+    val logicalSource = model.logicalSource.resource
+    val logicalSourceString = getResourceString(logicalSource, base)
+    val heading = "### LogicalSource\n" + hashtags(18) + "\n"
+
+    heading + logicalSourceString + offset
   }
 
   /**
@@ -242,15 +270,16 @@ object RMLFormatter extends Formatter {
       .toList.asScala
       .flatMap(statement => statement.getSubject.listProperties().toList.asScala)
 
+    if(properties.nonEmpty) {
+      val freshWrapper = new ModelWrapper
+      freshWrapper.insertRDFNamespacePrefixes()
+      freshWrapper.model.add(properties.toArray)
 
-    val freshWrapper = new ModelWrapper
-    freshWrapper.insertRDFNamespacePrefixes()
-    freshWrapper.model.add(properties.toArray)
+      val heading = hashtags(12) + "\n# Functions\n" + hashtags(12) + offset
+      val functionsString = removePrefixes(freshWrapper.writeAsTurtle(base))
 
-    val heading = "### Functions"
-    val functionsString = removePrefixes(freshWrapper.writeAsTurtle(base))
-
-    heading + functionsString + offset
+      heading + functionsString + offset
+    } else ""
   }
 
   /**
@@ -266,7 +295,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
-    val heading = "### Function Term Map"
+    val heading = hashtags(3) + " Function Term Map"
     val functionTermMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
 
     val functionValueProperty = freshModel.model.getProperty(RdfNamespace.FNML.namespace + "functionValue")
@@ -290,8 +319,8 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
-    val heading = "### Function Value"
-    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t\t\t\t\t  "))
+    val heading = hashtags(3) + " Function Value"
+    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t      "))
 
     val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
     val parameters = propertiesArray.head.getSubject.listProperties(predicateObjectMapProperty).toList.asScala.toArray
@@ -322,7 +351,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(properties)
 
-    val heading = "### Parameters"
+    val heading = hashtags(3) + " Parameters"
     val parameterString = removePrefixes(freshModel.writeAsTurtle(base))
 
     val referencesString = getReferences(paramStmtnsWithoutFunctions, base)
@@ -348,7 +377,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(properties)
 
-    val heading = "### References"
+    val heading = hashtags(3) + " References"
     val referencesString = removePrefixes(freshModel.writeAsTurtle(base))
 
     heading + referencesString + offset
@@ -358,6 +387,7 @@ object RMLFormatter extends Formatter {
 
   /**
     * Checks if a rr:PredicateObjectMap has parameters
+    *
     * @param resource
     * @return
     */
@@ -480,4 +510,20 @@ object RMLFormatter extends Formatter {
     freshModel.model.add(statements)
     freshModel
   }
+
+  /**
+    * Returns a string of hashtags
+    *
+    * @param amount
+    * @return
+    */
+  private def hashtags(amount : Integer) : String = {
+    var _hashtags = ""
+    for(x <- 1 to amount) {
+      _hashtags = _hashtags + "#"
+    }
+    _hashtags
+  }
+
+
 }

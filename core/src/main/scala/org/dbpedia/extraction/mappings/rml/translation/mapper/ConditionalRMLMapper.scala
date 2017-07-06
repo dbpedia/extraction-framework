@@ -79,7 +79,10 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     // adds all the related classes for this condition
     addRelatedClassesToPOM(mapToClassPom, templateMapping.mapToClass)
 
-    val conditionFunctionTermMap = addEqualCondition(condition, mapToClassPom)
+    val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
+       addEqualCondition(condition, mapToClassPom)
+    } else null
+
     val state = new MappingState
 
     for(propertyMapping <- templateMapping.mappings)
@@ -88,7 +91,9 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
       for(pom <- pomList)
       {
         val condPom = rmlFactory.transformToConditional(pom)
-        condPom.addEqualCondition(conditionFunctionTermMap)
+        if(index < mapping.cases.size-1) {
+          condPom.addEqualCondition(conditionFunctionTermMap)
+        }
         mapToClassPom.addFallbackMap(condPom)
       }
 
@@ -129,6 +134,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   /**
     * Adds the operator function to the mapping file
+    *
     * @param conditionMapping
     * @param pom
     * @return
@@ -165,6 +171,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   /**
     * Add related classes to the subject map
+    *
     * @param subjectMap
     */
   private def addExtraClassesToSubjectMap(subjectMap: RMLSubjectMap) =
@@ -184,6 +191,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   /**
     * Adds related classes of an ontology class to a pom
+    *
     * @param om
     * @param mapToClass
     */

@@ -26,7 +26,7 @@ class RMLTemplateMapping(val title: String, modelWrapper: RMLModel) extends RMLM
   def writeAsTurtle(base : String) =
   {
     RMLFormatter.format(modelWrapper, title)
-    modelWrapper.writeAsTurtle(base : String)
+    //modelWrapper.writeAsTurtle(base : String)
   }
 
   def writeAsNTriples: String =
